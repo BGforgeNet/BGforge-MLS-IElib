@@ -18,7 +18,7 @@ Infinity Engine library to be used with [BGforge MLS](https://github.com/BGforge
 
 __Note__: once you've added a submodule to your repo, new clones will require and additional step: `git submodule update --init --recursive`
 
-### Upgrade
+### Update
 
 ```
 git submodule update --init --recursive
