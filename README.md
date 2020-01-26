@@ -21,5 +21,5 @@ __Note__: once you've added a submodule to your repo, new clones will require an
 ### Update
 
 ```
-git submodule update --init --recursive
+git submodule update --remote
 ```
