@@ -28,7 +28,7 @@ __Note:__ it's in alpha, so backwards compatibility is not guaranteed for now.
 
 3. Use
 
-![usage example](resources/screenshot.png)
+![usage example](resources/example.png)
 
 ### Update
 
