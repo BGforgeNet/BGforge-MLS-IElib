@@ -1,8 +1,8 @@
 OUTER_PATCH ~bgforge-ielib~ BEGIN // to skip OUTER_SETs
-  PATCH_INCLUDE 
-    ~target_eff.tpp~
-    ~timing.tpp~
-    ~resist_dispel.tpp~
-    ~opcode.tpp~
-    ~icon.tpp~
+  PATCH_INCLUDE
+    ~%BGFORGE_LIB_DIR%/target_eff.tpp~
+    ~%BGFORGE_LIB_DIR%/timing.tpp~
+    ~%BGFORGE_LIB_DIR%/resist_dispel.tpp~
+    ~%BGFORGE_LIB_DIR%/opcode.tpp~
+    ~%BGFORGE_LIB_DIR%/icon.tpp~
 END

@@ -1,1 +1,1 @@
-INCLUDE ~mls.tpa~
+INCLUDE ~%BGFORGE_LIB_DIR%/mls.tpa~
