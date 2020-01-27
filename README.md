@@ -15,8 +15,7 @@ __Note:__ it's in alpha, so backwards compatibility is not guaranteed for now.
     git submodule add -b master https://github.com/BGforgeNet/BGforge-MLS-IElib.git lib/bgforge
     git commit -m "added BGforge IElib"
     ```
-
-  (__Note:__ once you've added a submodule to your repo, new clones will require an additional step: `git submodule update --init --recursive`.)
+    (__Note:__ once you've added a submodule to your repo, new clones will require an additional step: `git submodule update --init --recursive`.)
 
 2. Enable
     ```
