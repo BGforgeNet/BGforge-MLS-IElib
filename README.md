@@ -1,5 +1,9 @@
 # BGforge MLS IElib
-Infinity Engine library for [BGforge MLS](https://github.com/BGforgeNet/vscode-bgforge-mls). It can be used standalone as well.
+[![Discord chat](https://img.shields.io/discord/420268540700917760?logo=discord)](https://discord.gg/4Yqfggm)
+
+Infinity Engine library for [BGforge MLS](https://github.com/BGforgeNet/VScode-BGforge-MLS). It can be used standalone as well.
+
+Essentially, it defines various global variables: opcode numbers, icon numbers, etc, so that they could be used instead of magic numbers, improving overall code readability.
 
 Note: it's in alpha, so backwards compatibility is not guaranteed for now.
 
