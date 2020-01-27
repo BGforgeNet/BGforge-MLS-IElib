@@ -5,4 +5,5 @@ OUTER_PATCH ~bgforge-ielib~ BEGIN // to skip OUTER_SETs
     ~%BGFORGE_LIB_DIR%/resist_dispel.tpp~
     ~%BGFORGE_LIB_DIR%/opcode.tpp~
     ~%BGFORGE_LIB_DIR%/icon.tpp~
+    ~%BGFORGE_LIB_DIR%/savingthrow.tpp~
 END
