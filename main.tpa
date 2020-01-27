@@ -1,8 +1,1 @@
-OUTER_PATCH ~bgforge-ielib~ BEGIN // to skip OUTER_SETs
-  PATCH_INCLUDE 
-    ~target_eff.tpp~
-    ~timing.tpp~
-    ~resist_dispel.tpp~
-    ~opcode.tpp~
-    ~icon.tpp~
-END
+INCLUDE ~mls.tpa~
