@@ -17,6 +17,7 @@ __Note:__ it's in alpha, so backwards compatibility is not guaranteed for now.
     ```
 
   (__Note:__ once you've added a submodule to your repo, new clones will require an additional step: `git submodule update --init --recursive`.)
+
 2. Enable
     ```
     ALWAYS
@@ -24,6 +25,7 @@ __Note:__ it's in alpha, so backwards compatibility is not guaranteed for now.
       INCLUDE ~%BGFORGE_LIB_DIR%/main.tpa~
     END
     ```
+
 3. Use
 
 ![usage example](resources/screenshot.png)
