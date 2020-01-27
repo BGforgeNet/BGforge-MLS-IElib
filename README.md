@@ -1,6 +1,8 @@
 # BGforge MLS IElib
 Infinity Engine library for [BGforge MLS](https://github.com/BGforgeNet/vscode-bgforge-mls). It can be used standalone as well.
 
+Note: it's in alpha, so backwards compatibility is not guaranteed for now.
+
 ### Usage:
 
 1. Init submodule
@@ -17,7 +19,7 @@ Infinity Engine library for [BGforge MLS](https://github.com/BGforgeNet/vscode-b
   END
   ```
 
-__Note__: once you've added a submodule to your repo, new clones will require an additional step: `git submodule update --init --recursive`
+Once you've added a submodule to your repo, new clones will require an additional step: `git submodule update --init --recursive`
 
 ### Update
 
