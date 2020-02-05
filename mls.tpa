@@ -9,4 +9,14 @@ OUTER_PATCH ~bgforge-ielib~ BEGIN // to skip OUTER_SETs
     ~%BGFORGE_LIB_DIR%/depletion.tpp~
     ~%BGFORGE_LIB_DIR%/flag_ability.tpp~
     ~%BGFORGE_LIB_DIR%/spell_ids.tpp~
+    ~%BGFORGE_LIB_DIR%/align_ids.tpp~
+    ~%BGFORGE_LIB_DIR%/animate_ids.tpp~
+    ~%BGFORGE_LIB_DIR%/class_ids.tpp~
+    ~%BGFORGE_LIB_DIR%/ea_ids.tpp~
+    ~%BGFORGE_LIB_DIR%/gender_ids.tpp~
+    ~%BGFORGE_LIB_DIR%/general_ids.tpp~
+    ~%BGFORGE_LIB_DIR%/kit_ids.tpp~
+    ~%BGFORGE_LIB_DIR%/race_ids.tpp~
+    ~%BGFORGE_LIB_DIR%/specific_ids.tpp~
+    ~%BGFORGE_LIB_DIR%/splstate_ids.tpp~
 END
