@@ -3,7 +3,7 @@
 
 Infinity Engine library for [BGforge MLS](https://github.com/BGforgeNet/VScode-BGforge-MLS). It can be used standalone as well.
 
-Essentially, it defines various global variables: opcode numbers, icon numbers, etc, so that they could be used instead of magic numbers, improving overall code readability.
+Essentially, it defines various constants: opcode numbers, icon numbers, etc, so that they could be used instead of magic numbers, improving overall code readability. (Similarly to what WeiDU [does](https://weidu.org/~thebigg/README-WeiDU.html#sec58).)
 
 __Note:__ it's in alpha, so backwards compatibility is not guaranteed for now.
 
@@ -26,8 +26,9 @@ __Note:__ it's in alpha, so backwards compatibility is not guaranteed for now.
     ```
 
 3. Use
+  ![usage example](resources/example.png)
 
-![usage example](resources/example.png)
+Browse the code to see the available constants, use [BGforge MLS](https://github.com/BGforgeNet/VScode-BGforge-MLS) to get tips (completion and stuff).
 
 ### Update
 
