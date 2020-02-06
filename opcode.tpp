@@ -331,6 +331,7 @@ OPCODE_set_stat_tobex = 318
 
 // EE games
 
+OPCODE_immunity_to_spell_no_feedback = 318
 OPCODE_restrict_item = 319
 OPCODE_change_weather = 320
 OPCODE_remove_effects_by_resource = 321
