@@ -331,13 +331,13 @@ OPCODE_set_stat_tobex = 318
 
 // EE games
 
-OPCODE_immunity_to_spell_no_feedback = 318
+OPCODE_immunity_to_spell_or_item_no_feedback = 318
 OPCODE_restrict_item = 319
 OPCODE_change_weather = 320
 OPCODE_remove_effects_by_resource = 321
 // OPCODE_AoE_evade_check = 322 // Deprecated
 OPCODE_turn_undead_level = 323
-OPCODE_immunity_to_spell_and_message = 324
+OPCODE_immunity_to_spell_or_item_and_message = 324
 OPCODE_all_saving_throws_bonus = 325
 OPCODE_apply_effects_list = 326
 OPCODE_show_visual_effect = 327
