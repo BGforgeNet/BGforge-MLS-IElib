@@ -25,8 +25,7 @@ __Note:__ it's in alpha, so backwards compatibility is not guaranteed for now.
       INCLUDE ~%BGFORGE_LIB_DIR%/main.tpa~
     END
     ```
-3. Use
-  Browse the code to see the available constants, use [BGforge MLS](https://github.com/BGforgeNet/VScode-BGforge-MLS) to get tips (completion and stuff).
+3. Browse the code to see the available constants, use [BGforge MLS](https://github.com/BGforgeNet/VScode-BGforge-MLS) to get tips (completion and stuff).
 
 ### Update
 
