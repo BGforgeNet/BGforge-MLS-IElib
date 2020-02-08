@@ -1,20 +1,13 @@
 OUTER_PATCH ~bgforge-ielib~ BEGIN // to skip OUTER_SETs
   PATCH_INCLUDE
-    ~%BGFORGE_LIB_DIR%/target_eff.tpp~
-    ~%BGFORGE_LIB_DIR%/timing.tpp~
-    ~%BGFORGE_LIB_DIR%/resist_dispel.tpp~
-    ~%BGFORGE_LIB_DIR%/opcode.tpp~
-    ~%BGFORGE_LIB_DIR%/icon.tpp~
-    ~%BGFORGE_LIB_DIR%/savingthrow.tpp~
-    ~%BGFORGE_LIB_DIR%/depletion.tpp~
-    ~%BGFORGE_LIB_DIR%/flag_ability.tpp~
-    ~%BGFORGE_LIB_DIR%/spell_ids_bgee.tpp~
-    ~%BGFORGE_LIB_DIR%/spell_ids_bg2ee.tpp~
-    ~%BGFORGE_LIB_DIR%/spell_ids_iwdee.tpp~
     ~%BGFORGE_LIB_DIR%/cre.tpp~
-    ~%BGFORGE_LIB_DIR%/flag_cre.tpp~
-    ~%BGFORGE_LIB_DIR%/spell_ids.tpp~
+    ~%BGFORGE_LIB_DIR%/extended_header.tpp~
+    ~%BGFORGE_LIB_DIR%/feature_block.tpp~
+    ~%BGFORGE_LIB_DIR%/icon.tpp~
+    ~%BGFORGE_LIB_DIR%/itm.tpp~
+    ~%BGFORGE_LIB_DIR%/opcode.tpp~
     ~%BGFORGE_LIB_DIR%/spl.tpp~
+
   PATCH_IF (GAME_IS ~BG2 TOB~) BEGIN PATCH_INCLUDE ~%BGFORGE_LIB_DIR%/spell_ids_bg2.tpp~ END
   PATCH_IF (GAME_IS ~IWDEE~) BEGIN PATCH_INCLUDE ~%BGFORGE_LIB_DIR%/spell_ids_iwdee.tpp~ END
   PATCH_IF (GAME_IS ~BGEE~) BEGIN PATCH_INCLUDE ~%BGFORGE_LIB_DIR%/spell_ids_bgee.tpp~ END

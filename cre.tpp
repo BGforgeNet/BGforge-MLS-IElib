@@ -102,3 +102,5 @@ CRE_alignment = 0x27b
 CRE_global_identifier = 0x27c
 CRE_local_identifier = 0x27e
 CRE_script_name = 0x280
+
+PATCH_INCLUDE ~%BGFORGE_LIB_DIR%/flag_cre.tpp~
