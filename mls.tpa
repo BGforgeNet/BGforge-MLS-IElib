@@ -24,4 +24,7 @@ OUTER_PATCH ~bgforge-ielib~ BEGIN // to skip OUTER_SETs
     ~%BGFORGE_LIB_DIR%/splstate_ids.tpp~*/
     ~%BGFORGE_LIB_DIR%/cre.tpp~
     ~%BGFORGE_LIB_DIR%/flag_cre.tpp~
+    ~%BGFORGE_LIB_DIR%/spell_ids.tpp~
+    ~%BGFORGE_LIB_DIR%/spl_flag.tpp~
+    ~%BGFORGE_LIB_DIR%/spl.tpp~
 END
