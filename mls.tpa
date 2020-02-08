@@ -9,4 +9,5 @@ OUTER_PATCH ~bgforge-ielib~ BEGIN // to skip OUTER_SETs
     ~%BGFORGE_LIB_DIR%/depletion.tpp~
     ~%BGFORGE_LIB_DIR%/flag_ability.tpp~
     ~%BGFORGE_LIB_DIR%/spell_ids.tpp~
+    ~%BGFORGE_LIB_DIR%/spl_flag.tpp~
 END
