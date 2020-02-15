@@ -1,5 +1,6 @@
 OUTER_PATCH ~bgforge-ielib~ BEGIN // to skip OUTER_SETs
   PATCH_INCLUDE
+    ~%BGFORGE_LIB_DIR%/are.tpp~
     ~%BGFORGE_LIB_DIR%/cre.tpp~
     ~%BGFORGE_LIB_DIR%/extended_header.tpp~
     ~%BGFORGE_LIB_DIR%/feature_block.tpp~
