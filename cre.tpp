@@ -70,6 +70,9 @@ CRE_reputation_gain_loss_when_leaving_party = 0x81
 CRE_turn_undead_level = 0x82
 CRE_tracking = 0x83
 CRE_tracking_target = 0x84
+
+CRE_soundset_start = 0xa4
+
 CRE_level_first_class = 0x234
 CRE_level_second_class = 0x235
 CRE_level_third_class = 0x236
