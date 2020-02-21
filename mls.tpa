@@ -8,6 +8,7 @@ OUTER_PATCH ~bgforge-ielib~ BEGIN // to skip OUTER_SETs
     ~%BGFORGE_LIB_DIR%/itm.tpp~
     ~%BGFORGE_LIB_DIR%/opcode.tpp~
     ~%BGFORGE_LIB_DIR%/spl.tpp~
+    ~%BGFORGE_LIB_DIR%/effect_ids.tpp~
 
   PATCH_IF (GAME_IS ~IWDEE~) BEGIN PATCH_INCLUDE ~%BGFORGE_LIB_DIR%/spell_ids_iwdee.tpp~ END
   PATCH_IF (GAME_IS ~BGEE~) BEGIN PATCH_INCLUDE ~%BGFORGE_LIB_DIR%/spell_ids_bgee.tpp~ END
