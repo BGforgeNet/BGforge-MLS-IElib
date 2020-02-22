@@ -2,13 +2,6 @@
 # coding: utf-8
 
 import sys, os
-
-# import ruamel.yaml
-# yaml = ruamel.yaml.YAML(typ="rt")
-# yaml.width = 4096
-# yaml.indent(mapping=2, sequence=4, offset=2)
-# from ruamel.yaml.scalarstring import LiteralScalarString
-# import textwrap
 import frontmatter
 import argparse
 import re
