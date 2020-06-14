@@ -1,5 +1,6 @@
 TIMING_duration = 0
 TIMING_permanent = 1
+TIMING_instant = 1
 TIMING_while_equipped = 2
 TIMING_delayed_duration = 3
 TIMING_delayed = 4

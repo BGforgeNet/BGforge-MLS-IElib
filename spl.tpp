@@ -14,3 +14,4 @@ SPL_casting_feature_block_offset = 0x6e
 SPL_casting_feature_block_count = 0x70
 
 PATCH_INCLUDE ~%BGFORGE_LIB_DIR%/flag_spl.tpp~
+PATCH_INCLUDE ~%BGFORGE_LIB_DIR%/spl_header.tpp~
