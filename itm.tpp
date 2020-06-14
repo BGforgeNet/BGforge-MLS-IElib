@@ -32,3 +32,4 @@ ITM_equipping_feature_blocks_count = 0x70
 
 PATCH_INCLUDE ~%BGFORGE_LIB_DIR%/depletion.tpp~
 PATCH_INCLUDE ~%BGFORGE_LIB_DIR%/flag_itm_header.tpp~
+PATCH_INCLUDE ~%BGFORGE_LIB_DIR%/itm_type.tpp~
