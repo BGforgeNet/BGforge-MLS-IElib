@@ -1,7 +1,7 @@
 ITM_replacement_item = 0x10
 ITM_flags = 0x18
 ITM_type = 0x1c
-ITM_USABILITY = 0x1e
+ITM_usability_flags = 0x1e
 ITM_animation = 0x22
 ITM_min_level = 0x24
 ITM_min_strength = 0x26
