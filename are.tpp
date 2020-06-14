@@ -144,3 +144,9 @@ ARE_DOOR_lockpick_string = 0x98
 ARE_DOOR_travel_trigger_name = 0x9c
 ARE_DOOR_speaker_name = 0xb4
 ARE_DOOR_dialog = 0xb8
+
+
+FLAG_ARE_EDGE_party_required = 0
+FLAG_ARE_EDGE_party_enabled = 1
+
+PATCH_INCLUDE ~%BGFORGE_LIB_DIR%/flag_are_region.tpp~
