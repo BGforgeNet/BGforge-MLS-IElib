@@ -35,3 +35,4 @@ PATCH_INCLUDE ~%BGFORGE_LIB_DIR%/flag_itm_header.tpp~
 PATCH_INCLUDE ~%BGFORGE_LIB_DIR%/itm_type.tpp~
 PATCH_INCLUDE ~%BGFORGE_LIB_DIR%/itm_damage_type.tpp~
 PATCH_INCLUDE ~%BGFORGE_LIB_DIR%/itm_attack_type.tpp~
+PATCH_INCLUDE ~%BGFORGE_LIB_DIR%/itm_header.tpp~
