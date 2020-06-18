@@ -27,4 +27,4 @@ FEATURE_savingthrow_bonus = 0x28
 
 PATCH_INCLUDE ~%BGFORGE_LIB_DIR%/resist_dispel.tpp~
 PATCH_INCLUDE ~%BGFORGE_LIB_DIR%/timing.tpp~
-PATCH_INCLUDE ~%BGFORGE_LIB_DIR%/savingthrow.tpp~
+PATCH_INCLUDE ~%BGFORGE_LIB_DIR%/flag_saving_throw.tpp~
