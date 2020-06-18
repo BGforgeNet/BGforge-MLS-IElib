@@ -24,6 +24,7 @@ FEATURE_dicenum = 0x1c
 FEATURE_dicesize = 0x20
 FEATURE_savingthrow = 0x24
 FEATURE_savingthrow_bonus = 0x28
+FEATURE_stacking_id = 0x2c // tobex
 
 PATCH_INCLUDE ~%BGFORGE_LIB_DIR%/resist_dispel.tpp~
 PATCH_INCLUDE ~%BGFORGE_LIB_DIR%/timing.tpp~
