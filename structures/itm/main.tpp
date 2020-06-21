@@ -33,7 +33,7 @@ ITM_equipping_feature_blocks_count = 0x70
 
 TEXT_SPRINT BGFORGE_ITM_DIR ~%BGFORGE_STRUCTURES_DIR%/itm~
 PATCH_INCLUDE
-  ~%BGFORGE_ITM_DIR%/depletion.tpp~
+  ~%BGFORGE_LIB_DIR%/depletion.tpp~
   ~%BGFORGE_ITM_DIR%/flag_header.tpp~
   ~%BGFORGE_ITM_DIR%/type.tpp~
   ~%BGFORGE_ITM_DIR%/damage_type.tpp~
