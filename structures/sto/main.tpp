@@ -22,7 +22,10 @@ STO_price_of_a_merchant_room = 0x64
 STO_price_of_a_noble_room = 0x68
 STO_price_of_a_royal_room = 0x6c
 STO_cures_offset = 0x70
-STO_cures_conut = 0x74
+STO_cures_count = 0x74
 
-PATCH_INCLUDE ~%BGFORGE_LIB_DIR%/flag_sto.tpp~
-PATCH_INCLUDE ~%BGFORGE_LIB_DIR%/sto_items_sale.tpp~
+
+TEXT_SPRINT BGFORGE_STO_DIR ~%BGFORGE_STRUCTURES_DIR%/sto~
+PATCH_INCLUDE
+  ~%BGFORGE_STO_DIR%/flag.tpp~
+  ~%BGFORGE_STO_DIR%/items_sale.tpp~
