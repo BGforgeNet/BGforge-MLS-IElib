@@ -8,13 +8,11 @@ OUTER_PATCH ~bgforge-ielib~ BEGIN // to skip lots of OUTER_SETs
     ~%BGFORGE_LIB_DIR%/extended_header.tpp~
     ~%BGFORGE_LIB_DIR%/feature_block.tpp~
     ~%BGFORGE_LIB_DIR%/icon.tpp~
-    ~%BGFORGE_LIB_DIR%/itm.tpp~
 
     ~%BGFORGE_LIB_DIR%/opcode.tpp~
     ~%BGFORGE_LIB_DIR%/opcodes/main.tpp~
 
     ~%BGFORGE_LIB_DIR%/spl.tpp~
-    ~%BGFORGE_LIB_DIR%/sto.tpp~
 
     ~%BGFORGE_LIB_DIR%/2da/sectype.tpp~
 
