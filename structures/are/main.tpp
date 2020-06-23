@@ -149,4 +149,8 @@ ARE_DOOR_dialog = 0xb8
 FLAG_ARE_EDGE_party_required = 0
 FLAG_ARE_EDGE_party_enabled = 1
 
-PATCH_INCLUDE ~%BGFORGE_LIB_DIR%/flag_are_region.tpp~
+
+TEXT_SPRINT BGFORGE_ARE_DIR ~%BGFORGE_STRUCTURES_DIR%/are~
+PATCH_INCLUDE
+  ~%BGFORGE_ARE_DIR%/flag_region.tpp~
+  ~%BGFORGE_ARE_DIR%/region_type.tpp~
