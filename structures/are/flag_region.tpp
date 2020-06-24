@@ -1,5 +1,5 @@
 FLAG_ARE_REGION_key_required = BIT0
-FLAG_ARE_REGION_reset_trap = BIT1
+FLAG_ARE_REGION_trap_resets = BIT1
 FLAG_ARE_REGION_party_required = BIT2
 FLAG_ARE_REGION_detectable = BIT3
 FLAG_ARE_REGION_npc_activates = BIT4
