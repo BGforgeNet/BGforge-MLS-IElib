@@ -1,0 +1,6 @@
+- name: scripting
+  title: Scripting
+  desc: Various scripting-related functions
+- name: areas
+  title: Areas
+  desc: Area alterung functions

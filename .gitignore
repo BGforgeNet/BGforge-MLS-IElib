@@ -1,1 +1,4 @@
 external
+docs/_pages
+.vscode
+docs/_site

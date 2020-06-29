@@ -1,0 +1,32 @@
+dist: bionic
+language: ruby
+cache:
+  - bundler
+  - pip
+os: linux
+rvm:
+  - 2.3
+
+before_install:
+  - gem update --system
+  - gem install bundler
+  - pip install ruamel
+script: ./docs/generate.sh
+
+branches:
+  only:
+    - master
+
+env:
+  global:
+    JEKYLL_ENV: production
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  keep_history: false
+  on:
+    branch: master
+  local_dir: docs/_site
+  target_branch: gh-pages

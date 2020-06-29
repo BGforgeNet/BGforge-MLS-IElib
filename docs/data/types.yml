@@ -1,0 +1,4 @@
+- name: resref
+  desc: A string, 8 characters max.
+- name: ids
+  desc: A string containing an existing IDS symbol.
