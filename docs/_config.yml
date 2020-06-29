@@ -35,12 +35,12 @@ include:
   - _pages
 
 aux_links:
-  "Powered by BGforge":
-    - "https://bgforge.net"
   "Forum":
     - "https://forums.bgforge.net/viewforum.php?f=35"
   "GitHub":
     - "https://github.com/BGforgeNet/BGforge-MLS-IElib"
+  "BGforge":
+    - "https://bgforge.net"
 
 jekyll_analytics:
   Matomo:
