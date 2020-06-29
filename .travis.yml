@@ -10,7 +10,7 @@ rvm:
 before_install:
   - gem update --system
   - gem install bundler
-  - pip3 install ruamel
+  - pip install ruamel.yaml
 script: ./docs/generate.sh
 
 branches:
