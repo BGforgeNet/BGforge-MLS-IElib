@@ -63,6 +63,8 @@ def func_to_md(func):
     text += params_to_md(func, "int_params")
   if "string_params" in func:
     text += params_to_md(func, "string_params")
+  if "return" in func:
+    text += rets_to_md(func)
   return(text)
 
 def get_label(func):
@@ -85,6 +87,14 @@ def params_to_md(func, ptype):
       default = "_required_{: class='required'}"
     ptype = get_ptype(sp["type"])
     text = text + "\n| {} | {} | {} | {}".format(name, sp["desc"], ptype, default)
+  text = text + "\n"
+  return text
+
+def rets_to_md(func):
+  text = "| Return values | Description | Type |\n|:--------|:-----|:--------|"
+  for r in func["return"]:
+    rtype = get_ptype(r["type"])
+    text = text + "\n| {} | {} | {} |".format(r["name"], r["desc"], rtype)
   text = text + "\n"
   return text
 
