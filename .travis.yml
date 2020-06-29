@@ -6,7 +6,7 @@ cache:
   - pip
 os: linux
 rvm:
-  - 2.3
+  - 2.4
 
 addons:
   apt:
@@ -15,7 +15,7 @@ addons:
       - python3-pip
 
 before_install:
-  - gem i rubygems-update -v '<3' && update_rubygems
+  - gem update --system
   - gem install bundler
   - pip3 install ruamel.yaml
 script: ./docs/generate.sh
