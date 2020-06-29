@@ -1,11 +1,18 @@
 dist: bionic
 language: ruby
 cache:
+  - apt
   - bundler
   - pip
 os: linux
 rvm:
   - 2.3
+
+addons:
+  apt:
+    packages:
+      - python3
+      - python3-pip
 
 before_install:
   - gem update --system
