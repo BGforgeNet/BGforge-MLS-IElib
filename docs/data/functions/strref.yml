@@ -8,10 +8,10 @@
       required: 1
   string_params:
     - name: old_substring_traref
-      desc: text to be replaced
+      desc: traref of text to be replaced
       type: string
       required: 1
     - name: new_substring_traref
-      desc: replacing text
+      desc: traref of replacement text
       type: string
       required: 1

@@ -56,12 +56,22 @@ def find_files(path, ext, skip_dirs = []):
   return flist
 
 def func_to_md(func):
-  text = "### **{}**\n{}\n".format(func["name"], func["desc"])
+  text = "### **{}**\n".format(func["name"])
+  text += get_label(func)
+  text += "{}\n".format(func["desc"])
   if "int_params" in func:
-    text = text + params_to_md(func, "int_params")
+    text += params_to_md(func, "int_params")
   if "string_params" in func:
-    text = text + params_to_md(func, "string_params")
+    text += params_to_md(func, "string_params")
   return(text)
+
+def get_label(func):
+  if func["type"] == "patch":
+    return "{: .d-inline-block }\npatch\n{: .label .label-green }\n\n"
+  if func["type"] == "action":
+    return "{: .d-inline-block }\naction\n{: .label .label-blue }\n\n"
+  print("error: function {} has no type".format(func["name"]))
+  sys.exit(1)
 
 def params_to_md(func, ptype):
   type_map = {"string_params": "STR_VAR", "int_params": "INT_VAR"}
@@ -72,7 +82,6 @@ def params_to_md(func, ptype):
     default = get_default(sp, func)
     name = sp["name"]
     if "required" in sp and sp["required"] == 1:
-      name = "**{}**".format(name)
       default = "_required_{: class='required'}"
     ptype = get_ptype(sp["type"])
     text = text + "\n| {} | {} | {} | {}".format(name, sp["desc"], ptype, default)
