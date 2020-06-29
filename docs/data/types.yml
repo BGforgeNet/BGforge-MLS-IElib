@@ -1,4 +1,8 @@
-- name: resref
-  desc: A string, 8 characters max.
+- name: array
+  desc: An array. Could be [simple](https://weidu.org/~thebigg/README-WeiDU.html#DEFINE_ARRAY), or [associative](https://weidu.org/~thebigg/README-WeiDU.html#DEFINE_ASSOCIATIVE_ARRAY).
+- name: bool
+  desc: 0 or 1.
 - name: ids
   desc: A string containing an existing IDS symbol.
+- name: resref
+  desc: A string, 8 characters max.

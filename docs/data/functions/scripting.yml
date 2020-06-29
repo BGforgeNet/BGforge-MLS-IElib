@@ -1,13 +1,6 @@
 - name: CREATE_MINION
   desc: Creates a an invisible, invulnerable minion creature file to run your custom script.
   type: action
-  defaults:
-    string: ""
-    int: 0
-  int_params:
-    - name: test
-      desc: Test parameter
-      type: int
   string_params:
     - name: cre
       desc: cre filename
@@ -16,7 +9,6 @@
     - name: script
       desc: cre script
       type: resref
-      default: w
     - name: name
       desc: cre name
       type: string

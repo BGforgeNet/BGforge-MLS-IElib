@@ -1,6 +1,12 @@
-- name: scripting
-  title: Scripting
-  desc: Various scripting-related functions
+- name: 2da
+  title: 2DA
+  desc: Working with 2DAs.
 - name: areas
   title: Areas
-  desc: Area alterung functions
+  desc: Area altering functions.
+- name: scripting
+  title: Scripting
+  desc: Various scripting-related functions.
+- name: strref
+  title: String references
+  desc: Working with STRREFs.
