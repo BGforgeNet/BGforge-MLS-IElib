@@ -6,3 +6,5 @@
   desc: A string containing an existing IDS symbol.
 - name: resref
   desc: A string, 8 characters max.
+- name: int
+  desc: An integer value.

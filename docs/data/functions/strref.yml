@@ -6,12 +6,11 @@
       desc: strref offset
       type: int
       required: 1
-  string_params:
     - name: old_substring_traref
       desc: traref of text to be replaced
-      type: string
+      type: int
       required: 1
     - name: new_substring_traref
       desc: traref of replacement text
-      type: string
+      type: int
       required: 1

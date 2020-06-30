@@ -79,7 +79,8 @@ def params_to_md(func, ptype):
   type_map = {"string_params": "STR_VAR", "int_params": "INT_VAR"}
   text = '''| **{}** | **Description** | **Type** | **Default** |
 |:--------|:-----|:--------|:------------|'''.format(type_map[ptype])
-  for sp in func[ptype]:
+  params = sorted(func[ptype], key=lambda k: k['name'])
+  for sp in params:
     default = get_default(sp, func)
     name = sp["name"]
     if "required" in sp and sp["required"] == 1:
@@ -91,7 +92,8 @@ def params_to_md(func, ptype):
 
 def rets_to_md(func):
   text = "\n| Return values | Description | Type |\n|:--------|:-----|:--------|"
-  for r in func["return"]:
+  rets = sorted(func["return"], key=lambda k: k['name'])
+  for r in rets:
     rtype = get_ptype(r["type"])
     text = text + "\n| {} | {} | {} |".format(r["name"], r["desc"], rtype)
   text = text + "\n"
@@ -136,6 +138,7 @@ function_files = find_files(functions_dir, "yml")
 for f in function_files:
   with open(f) as yf:
     data = yaml.load(yf)
+  data = sorted(data, key=lambda k: k['name'])
   section_name = os.path.basename(f)
   section_name = os.path.splitext(section_name)[0]
   section = [s for s in sections if s["name"] == section_name][0]
