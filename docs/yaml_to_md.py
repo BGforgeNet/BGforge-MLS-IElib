@@ -77,8 +77,7 @@ def get_label(func):
 
 def params_to_md(func, ptype):
   type_map = {"string_params": "STR_VAR", "int_params": "INT_VAR"}
-  text = '''| **{}** | **Description** | **Type** | **Default** |
-|:--------|:-----|:--------|:------------|'''.format(type_map[ptype])
+  text = "| **{}** | **Description** | **Type** | **Default** |\n|:-|:-|:-|:-|".format(type_map[ptype])
   params = sorted(func[ptype], key=lambda k: k['name'])
   for sp in params:
     default = get_default(sp, func)
