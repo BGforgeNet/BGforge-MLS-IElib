@@ -19,3 +19,40 @@
       desc: only alter if script matches
       type: resref
       required: 1
+
+- name: GET_AREA_STRUCTURE_CENTER_POINT
+  desc: Returns coordinates of an area structure center point by averaging coordinates all of its vertices.
+  type: patch
+  int_params:
+    - name: index
+      desc: structure index
+      type: int
+      required: 1
+  string_params:
+    - name: type
+      type: string
+      required: 1
+      desc: |
+        - container
+        - door
+        - region
+  return:
+    - name: x_center
+      desc: x coordinate
+      type: int
+    - name: y_center
+      desc: y coordinate
+      type: int
+
+- name: ALTER_AREA_STRUCTURE_SCRIPT
+  desc: Writes new script to an area structure.
+  type: patch
+  int_params:
+    - name: index
+      desc: structure index
+      type: int
+      required: 1
+  string_params:
+    - name: script
+      type: resref
+      required: 1

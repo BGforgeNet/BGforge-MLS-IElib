@@ -1,4 +1,4 @@
-- name: STRREF_TRA_REPLACE
+- name: REPLACE_STRREF_TRA
   desc: Reads an strref at the given offset. In the string, replaces occurences of `old_substring_traref` with `new_substring_traref`. `SAY`s the new string back to the offset.
   type: patch
   int_params:
