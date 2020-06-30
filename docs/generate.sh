@@ -10,5 +10,5 @@ cd "$site_dir"
 mkdir -p "$pages_dir"
 ./yaml_to_md.py "$data_dir" "$pages_dir"
 
-bundle install
-bundle exec jekyll build
+#bundle install
+#bundle exec jekyll build

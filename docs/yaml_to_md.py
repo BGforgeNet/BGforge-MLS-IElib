@@ -56,9 +56,9 @@ def find_files(path, ext, skip_dirs = []):
   return flist
 
 def func_to_md(func):
-  text = "### **{}**\n".format(func["name"])
+  text = "\n---\n\n### **{}**\n".format(func["name"])
   text += get_label(func)
-  text += "{}\n".format(func["desc"])
+  text += "{}\n\n".format(func["desc"])
   if "int_params" in func:
     text += params_to_md(func, "int_params")
   if "string_params" in func:
@@ -77,8 +77,7 @@ def get_label(func):
 
 def params_to_md(func, ptype):
   type_map = {"string_params": "STR_VAR", "int_params": "INT_VAR"}
-  text = '''
-| {} | Description | Type | Default |
+  text = '''| **{}** | **Description** | **Type** | **Default** |
 |:--------|:-----|:--------|:------------|'''.format(type_map[ptype])
   for sp in func[ptype]:
     default = get_default(sp, func)
@@ -86,12 +85,12 @@ def params_to_md(func, ptype):
     if "required" in sp and sp["required"] == 1:
       default = "_required_{: class='required'}"
     ptype = get_ptype(sp["type"])
-    text = text + "\n| {} | {} | {} | {}".format(name, sp["desc"], ptype, default)
+    text = text + "\n| {} | {} | {} | {} |".format(name, sp["desc"], ptype, default)
   text = text + "\n"
   return text
 
 def rets_to_md(func):
-  text = "| Return values | Description | Type |\n|:--------|:-----|:--------|"
+  text = "\n| Return values | Description | Type |\n|:--------|:-----|:--------|"
   for r in func["return"]:
     rtype = get_ptype(r["type"])
     text = text + "\n| {} | {} | {} |".format(r["name"], r["desc"], rtype)

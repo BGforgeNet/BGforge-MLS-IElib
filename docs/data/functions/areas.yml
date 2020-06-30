@@ -32,15 +32,12 @@
     - name: type
       type: string
       required: 1
-      desc: |
-        - container
-        - door
-        - region
+      desc: container, door or region
   return:
-    - name: x_center
+    - name: x
       desc: x coordinate
       type: int
-    - name: y_center
+    - name: y
       desc: y coordinate
       type: int
 
@@ -55,4 +52,9 @@
   string_params:
     - name: script
       type: resref
+      desc: new script
       required: 1
+    - name: type
+      type: string
+      required: 1
+      desc: container, door or region
