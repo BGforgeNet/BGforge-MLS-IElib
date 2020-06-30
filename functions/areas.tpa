@@ -59,7 +59,7 @@ END
 DEFINE_PATCH_FUNCTION GET_AREA_STRUCTURE_CENTER_POINT
   INT_VAR index = 0
   STR_VAR type = ~~
-  RET x_center y_center
+  RET x y
 BEGIN
   PATCH_MATCH 1 WITH
     (~%type%~ STR_EQ ~region~)
@@ -90,6 +90,6 @@ BEGIN
     y_total+=y
     i+=1
   END
-  x_center = x_total / i
-  y_center = y_total / i
+  x = x_total / i
+  y = y_total / i
 END
