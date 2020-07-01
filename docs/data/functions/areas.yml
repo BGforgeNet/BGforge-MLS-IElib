@@ -21,7 +21,7 @@
       required: 1
 
 - name: GET_AREA_STRUCTURE_CENTER_POINT
-  desc: Returns coordinates of an area structure center point by averaging coordinates all of its vertices.
+  desc: Returns coordinates of an area structure center point by averaging coordinates of all of its vertices.
   type: patch
   int_params:
     - name: index
