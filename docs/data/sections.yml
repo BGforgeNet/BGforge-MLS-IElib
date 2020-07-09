@@ -10,6 +10,10 @@
   title: Creatures
   desc: Creatures functions.
 
+- name: dialogs
+  title: Dialogs
+  desc: Working with dialogs.
+
 - name: items
   title: Items
   desc: Items functions.
