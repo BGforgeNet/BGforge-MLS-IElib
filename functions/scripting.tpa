@@ -21,3 +21,12 @@ BEGIN
     LPF ADD_CRE_EFFECT INT_VAR opcode = OPCODE_selection_circle_removal timing = TIMING_permanent END
   BUT_ONLY
 END
+
+DEFINE_ACTION_FUNCTION IS_ITEM_GIVEN_OR_CREATED_IN_SCRIPT
+  STR_VAR
+    item = ~~
+    script = ~~
+  RET present
+BEGIN
+  LAF IS_ITEM_GIVEN_OR_CREATED_IN_DIALOG_OR_SCRIPT STR_VAR item = ~%item%~ filename = ~%script%.bcs~ RET present END
+END
