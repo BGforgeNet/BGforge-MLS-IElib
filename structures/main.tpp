@@ -1,7 +1,8 @@
 TEXT_SPRINT BGFORGE_STRUCTURES_DIR ~%BGFORGE_LIB_DIR%/structures~
 
 PATCH_INCLUDE
+  ~%BGFORGE_STRUCTURES_DIR%/are/main.tpp~
   ~%BGFORGE_STRUCTURES_DIR%/eff20/main.tpp~
   ~%BGFORGE_STRUCTURES_DIR%/itm/main.tpp~
   ~%BGFORGE_STRUCTURES_DIR%/sto/main.tpp~
-  ~%BGFORGE_STRUCTURES_DIR%/are/main.tpp~
+  ~%BGFORGE_STRUCTURES_DIR%/effect/main.tpp~
