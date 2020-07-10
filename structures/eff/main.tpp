@@ -29,7 +29,6 @@ EFF_tobex_stacking_id = 0x2c
 
 TEXT_SPRINT BGFORGE_EFF_DIR ~%BGFORGE_STRUCTURES_DIR%/EFF~
 PATCH_INCLUDE
-  ~%BGFORGE_EFF_DIR%/depletion.tpp~
   ~%BGFORGE_EFF_DIR%/resist_dispel.tpp~
   ~%BGFORGE_EFF_DIR%/timing.tpp~
   ~%BGFORGE_EFF_DIR%/flag_saving_throw.tpp~
