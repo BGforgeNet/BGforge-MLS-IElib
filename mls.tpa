@@ -7,7 +7,6 @@ OUTER_PATCH ~bgforge-ielib~ BEGIN // to skip lots of OUTER_SETs
 
     ~%BGFORGE_LIB_DIR%/cre.tpp~
     ~%BGFORGE_LIB_DIR%/extended_header.tpp~
-    ~%BGFORGE_LIB_DIR%/icon.tpp~
     ~%BGFORGE_LIB_DIR%/opcode.tpp~
     ~%BGFORGE_LIB_DIR%/spl.tpp~
 
