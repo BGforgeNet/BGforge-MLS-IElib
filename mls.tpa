@@ -4,14 +4,5 @@ OUTER_PATCH ~bgforge-ielib~ BEGIN // to skip lots of OUTER_SETs
     ~%BGFORGE_LIB_DIR%/opcodes/main.tpp~
     ~%BGFORGE_LIB_DIR%/structures/main.tpp~
     ~%BGFORGE_LIB_DIR%/misc/main.tpp~
-
-    ~%BGFORGE_LIB_DIR%/cre.tpp~
-    ~%BGFORGE_LIB_DIR%/extended_header.tpp~
-    ~%BGFORGE_LIB_DIR%/opcode.tpp~
-    ~%BGFORGE_LIB_DIR%/spl.tpp~
-
     ~%BGFORGE_LIB_DIR%/2da/sectype.tpp~
-
-    PATCH_IF (GAME_IS ~BGEE BG2EE EET IWDEE PSTEE~) BEGIN PATCH_INCLUDE ~%BGFORGE_LIB_DIR%/opcode_ee.tpp~ END
-
 END

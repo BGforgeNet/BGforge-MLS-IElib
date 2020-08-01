@@ -118,14 +118,29 @@ with open(opcode_file, 'w') as f:
 ### END OPCODES
 
 ### STRUCTURES
-def get_prefix(ff_name):
-  base = re.sub('_v.*', '', ff_name)
-  version = re.sub('.*_v', '', ff_name)
+def get_prefix(file_version, data_file_name): # eff_v2 / body.yml
+  base = re.sub('_v.*', '', file_version)
+  version = re.sub('.*_v', '', file_version)
   version = version.replace('.', '')
   if version == '1':
     version = ''
-  prefix = "{}{}".format(base, version)
-  prefix = prefix.upper() + '_'
+
+  # custom prefix for some data structures
+  fbase = data_file_name.replace('.yml', '')
+  fbase_map = {
+    'header': '',
+    'body': '',
+    'extended_header': 'head'
+  }
+  try:
+    suffix = fbase_map[fbase]
+  except:
+    suffix = fbase
+
+  prefix = "{}{}_".format(base, version)
+  if suffix != '':
+    prefix = prefix + "{}_".format(suffix)
+  prefix = prefix.upper()
   return prefix
 
 def get_id(item, prefix):
@@ -214,11 +229,11 @@ structures_dir = 'structures'
 formats = os.listdir(file_formats_dir)
 for ff in formats:
   ff_dir = os.path.join(file_formats_dir, ff)
-  prefix = get_prefix(ff)
   items = OrderedDict()
   for f in os.listdir(ff_dir):
     if f == 'feature_block.yml': # feature blocks handled separately
       continue
+    prefix = get_prefix(ff, f)
     fpath = os.path.join(ff_dir, f)
     new_items = load_datafile(fpath, prefix)
     items = {**items, **new_items}

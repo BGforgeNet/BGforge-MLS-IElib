@@ -152,7 +152,7 @@ FLAG_ARE_EDGE_party_enabled = 1
 
 TEXT_SPRINT BGFORGE_ARE_DIR ~%BGFORGE_STRUCTURES_DIR%/are~
 PATCH_INCLUDE
-  ~%BGFORGE_ARE_DIR%/flag_container.tpp~
-  ~%BGFORGE_ARE_DIR%/flag_door.tpp~
-  ~%BGFORGE_ARE_DIR%/flag_region.tpp~
+  ~%BGFORGE_ARE_DIR%/container_flags.tpp~
+  ~%BGFORGE_ARE_DIR%/door_flags.tpp~
+  ~%BGFORGE_ARE_DIR%/region_flags.tpp~
   ~%BGFORGE_ARE_DIR%/region_type.tpp~

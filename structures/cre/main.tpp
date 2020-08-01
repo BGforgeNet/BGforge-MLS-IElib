@@ -1,3 +1,7 @@
+TEXT_SPRINT BGFORGE_CRE_DIR ~%BGFORGE_STRUCTURES_DIR%/CRE~
+PATCH_INCLUDE
+  ~%BGFORGE_CRE_DIR%/flags.tpp~
+
 CRE_name = 0x8
 CRE_tooltip = 0xc
 CRE_flags = 0x10
@@ -105,5 +109,3 @@ CRE_alignment = 0x27b
 CRE_global_identifier = 0x27c
 CRE_local_identifier = 0x27e
 CRE_script_name = 0x280
-
-PATCH_INCLUDE ~%BGFORGE_LIB_DIR%/flag_cre.tpp~
