@@ -1,7 +1,8 @@
 # BGforge MLS IElib
 [![Discord chat](https://img.shields.io/discord/420268540700917760?logo=discord)](https://discord.gg/4Yqfggm)
 
-[__Forum__](https://forums.bgforge.net/viewforum.php?f=35)
+[__Documentation__](https://ielib.bgforge.net)
+| [__Forum__](https://forums.bgforge.net/viewforum.php?f=35)
 
 Infinity Engine library for [BGforge MLS](https://github.com/BGforgeNet/VScode-BGforge-MLS). It can be used standalone as well.
 
