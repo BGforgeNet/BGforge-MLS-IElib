@@ -1,5 +1,3 @@
-EFF2_signature = 0x0
-EFF2_version = 0x4
 EFF2_signature2 = 0x8
 EFF2_version2 = 0xc
 EFF2_opcode = 0x10
@@ -32,4 +30,6 @@ EFF2_target_y_coord = 0x8c
 EFF2_parent_resource = 0x94
 EFF2_variable = 0xa8
 EFF2_sectype = 0xd0
+EFF2_signature = 0x0
+EFF2_version = 0x4
 
