@@ -1,0 +1,134 @@
+{"0": {
+    "doc": "2DA",
+    "title": "2DA",
+    "content": "Working with 2DAs. | GET_2DA_INDEX | . GET_2DA_INDEX . patch . Returns arrays containing current 2DA row and column names, for usage in SET_2DA_ENTRY_LATER: . COPY_EXISTING ~clsrcreq.2da~ override LPF GET_2DA_INDEX RET_ARRAY row_index col_index END SET_2DA_ENTRY_LATER new_rows $row_index(CLERIC_MAGE) $col_index(ELF) 1 . | Return values | Description | Type | . | col_index | column name =&gt; index | array | . | row_index | row name =&gt; index | array | . ",
+    "url": "/2da/",
+    "relUrl": "/2da/"
+  },"1": {
+    "doc": "Areas",
+    "title": "Areas",
+    "content": "Area altering functions. | ALTER_AREA_REGION_MATCH | ALTER_AREA_STRUCTURE_SCRIPT | GET_AREA_STRUCTURE_CENTER_POINT | IS_ITEM_IN_AREA | REPLACE_AREA_ITEM_MATCH | . ALTER_AREA_REGION_MATCH . patch . Alters area regions which match all the match_* variables according to the non-match_ variables. | INT_VAR | Description | Type | Default | . | flag_trap_detectable | whether trap is detectable | bool |   | . | trap_detect | trap detection difficulty | int |   | . | trap_remove | trap removal difficulty | int |   | . | trapped | region trapped flag | bool |   | . | STR_VAR | Description | Type | Default | . | match_script | only alter if script matches | resref | required | . ALTER_AREA_STRUCTURE_SCRIPT . patch . Writes new script to an area structure. | INT_VAR | Description | Type | Default | . | index | structure index | int | required | . | STR_VAR | Description | Type | Default | . | script | new script | resref | required | . | type | container, door or region | string | required | . GET_AREA_STRUCTURE_CENTER_POINT . patch . Returns coordinates of an area structure center point by averaging coordinates of all of its vertices. | INT_VAR | Description | Type | Default | . | index | structure index | int | required | . | STR_VAR | Description | Type | Default | . | type | container, door or region | string | required | . | Return values | Description | Type | . | x | x coordinate | int | . | y | y coordinate | int | . IS_ITEM_IN_AREA . action . Returns 1 if item is sold in the store, 0 otherwise. | STR_VAR | Description | Type | Default | . | area | area resource | resref | required | . | item | item resource | resref | required | . | Return values | Description | Type | . | present | is item somewhere in the area? | bool | . REPLACE_AREA_ITEM_MATCH . patch . Replaces each occurrence of match_item with new_item. Doesn’t change charges, flags, etc. Does nothing if match_item wasn’t found. | STR_VAR | Description | Type | Default | . | match_item | old item | resref | required | . | new_item | new item | resref | required | . ",
+    "url": "/areas/",
+    "relUrl": "/areas/"
+  },"2": {
+    "doc": "Creatures",
+    "title": "Creatures",
+    "content": "Creatures functions. | IS_ITEM_ON_CREATURE | REPLACE_CRE_ITEM_MATCH | . IS_ITEM_ON_CREATURE . action . Returns 1 if the creature has the item, 0 otherwise. | STR_VAR | Description | Type | Default | . | creature | creature resource | resref | required | . | item | item resource | resref | required | . | Return values | Description | Type | . | present | does the creature posess the item? | bool | . REPLACE_CRE_ITEM_MATCH . patch . Replaces each occurrence of match_item with new_item. Doesn’t change charges, flags, etc. Does nothing if match_item wasn’t found. | STR_VAR | Description | Type | Default | . | match_item | old item | resref | required | . | new_item | new item | resref | required | . ",
+    "url": "/creatures/",
+    "relUrl": "/creatures/"
+  },"3": {
+    "doc": "Dialogs",
+    "title": "Dialogs",
+    "content": "Working with dialogs. | IS_ITEM_GIVEN_OR_CREATED_IN_DIALOG | . IS_ITEM_GIVEN_OR_CREATED_IN_DIALOG . action . Returns 1 if item is given or created in the dialog, 0 otherwise. | STR_VAR | Description | Type | Default | . | dialog | dialog resource | resref | required | . | item | item resource | resref | required | . | Return values | Description | Type | . | present | item is given or created in the dialog? | bool | . ",
+    "url": "/dialogs/",
+    "relUrl": "/dialogs/"
+  },"4": {
+    "doc": "Home",
+    "title": "IElib",
+    "content": ". | Usage | Questions and issues | . IElib is companion library for BGforge MLS, a VScode extension providing support for WeiDU syntaxes, as well as Infinity Engine script and dialog file formats. Essentially, it defines various constants: opcode numbers, icon numbers, etc, so that they could be used instead of magic numbers, improving overall code readability and simplifying development. (Similarly to what WeiDU does.) Most of the these are pulled from IESDP. It also provides some custom functions and macros that could be useful. The documentation on those is to the left. IElib’s primary purpose is to be used with MLS, but if you prefer, you can use it standalone as well. ",
+    "url": "/#ielib",
+    "relUrl": "/#ielib"
+  },"5": {
+    "doc": "Home",
+    "title": "Usage",
+    "content": ". | Init submodule cd mymod git submodule add -b master https://github.com/BGforgeNet/BGforge-MLS-IElib.git lib/bgforge git commit -m \"added BGforge IElib\" . (Note: once you’ve added a submodule to your repo, new clones will require an additional step: git submodule update --init --recursive.) . | Enable ALWAYS OUTER_SPRINT BGFORGE_LIB_DIR \"%MOD_FOLDER%/lib/bgforge\" INCLUDE ~%BGFORGE_LIB_DIR%/main.tpa~ END . Browse the code to see the available constants, use BGforge MLS to get tips (completion and stuff). | Update git submodule update --remote git add lib/bgforge git commit -m \"updated BGforge IElib\" . | . ",
+    "url": "/#usage",
+    "relUrl": "/#usage"
+  },"6": {
+    "doc": "Home",
+    "title": "Questions and issues",
+    "content": ". | Report bugs, suggest features, send pull requests to Github. | Ask questions and discuss on the forum. | . ",
+    "url": "/#questions-and-issues",
+    "relUrl": "/#questions-and-issues"
+  },"7": {
+    "doc": "Home",
+    "title": "Home",
+    "content": " ",
+    "url": "/",
+    "relUrl": "/"
+  },"8": {
+    "doc": "Items",
+    "title": "Items",
+    "content": "Items functions. | GET_ARMOR_BASE_AC | INFER_ARMOR_ENCHANTMENT | INFER_ARMOR_TYPE | . GET_ARMOR_BASE_AC . patch . Returns current armor’s base AC. If base AC is not found, defaults to 100. | Return values | Description | Type | . | base_ac | base AC | int | . INFER_ARMOR_ENCHANTMENT . patch . Returns current armor enchantment level (Leather Armor +1 will return 1). Ankeg armor and Red Dragon scales are considered +2. Defaults to -1 if enchantment couldn’t be determined. | Return values | Description | Type | . | enchantment | Armor enchantment | int | . INFER_ARMOR_TYPE . patch . Returns current armor type. | Return values | Description | Type | . | type | leather, studded_leather, chain, splint, plate, full_plate or unknown. | string | . ",
+    "url": "/items/",
+    "relUrl": "/items/"
+  },"9": {
+    "doc": "Miscellaneous",
+    "title": "Miscellaneous",
+    "content": "Various functions that didn’t fit into other categories. | IS_ITEM_GIVEN_OR_CREATED_IN_DIALOG_OR_SCRIPT | IS_ITEM_IN_RESOURCE | . IS_ITEM_GIVEN_OR_CREATED_IN_DIALOG_OR_SCRIPT . action . Returns 1 if item is given or created in the dialog or script, 0 otherwise. | STR_VAR | Description | Type | Default | . | dialog or script | filename of the dialog or script | filename | required | . | item | item resource | resref | required | . | Return values | Description | Type | . | present | is item given or created in the dialog or script | bool | . IS_ITEM_IN_RESOURCE . action . Returns 1 if item is present in area, store, on creature, or given/created in the dialog or script. 0 otherwise. | STR_VAR | Description | Type | Default | . | item | item resource | resref | required | . | resource file | filename | filename | required | . | Return values | Description | Type | . | present | is item present? | bool | . ",
+    "url": "/misc/",
+    "relUrl": "/misc/"
+  },"10": {
+    "doc": "Scripting",
+    "title": "Scripting",
+    "content": "Various scripting-related functions. | CREATE_MINION | IS_ITEM_GIVEN_OR_CREATED_IN_SCRIPT | . CREATE_MINION . action . Creates a an invisible, invulnerable minion creature file to run your custom script. | STR_VAR | Description | Type | Default | . | cre | cre filename | resref | required | . | ea | EA allegiance | ids | NEUTRAL | . | name | cre name | string |   | . | script | cre script | resref |   | . IS_ITEM_GIVEN_OR_CREATED_IN_SCRIPT . action . Returns 1 if item is given or created in the script, 0 otherwise. | STR_VAR | Description | Type | Default | . | item | item resource | resref | required | . | script | script resource | resref | required | . | Return values | Description | Type | . | present | is item given or created in the script? | bool | . ",
+    "url": "/scripting/",
+    "relUrl": "/scripting/"
+  },"11": {
+    "doc": "Stores",
+    "title": "Stores",
+    "content": "Stores functions. | IS_ITEM_IN_STORE | REPLACE_STORE_ITEM_MATCH | . IS_ITEM_IN_STORE . action . Returns 1 if item is sold in the store, 0 otherwise. | STR_VAR | Description | Type | Default | . | item | item resource | resref | required | . | store | store resource | resref | required | . | Return values | Description | Type | . | present | is item sold in the store? | bool | . REPLACE_STORE_ITEM_MATCH . patch . Replaces each occurrence of match_item with new_item. Doesn’t change charges, flags, etc. Does nothing if match_item wasn’t found. | STR_VAR | Description | Type | Default | . | match_item | old item | resref | required | . | new_item | new item | resref | required | . ",
+    "url": "/stores/",
+    "relUrl": "/stores/"
+  },"12": {
+    "doc": "String references",
+    "title": "String references",
+    "content": "Working with STRREFs. | REPLACE_STRREF_TRA | . REPLACE_STRREF_TRA . patch . Reads an strref at the given offset. In the string, replaces occurences of old_substring_traref with new_substring_traref. SAYs the new string back to the offset. | INT_VAR | Description | Type | Default | . | new_substring_traref | traref of replacement text | int | required | . | offset | strref offset | int | required | . | old_substring_traref | traref of text to be replaced | int | required | . ",
+    "url": "/strref/",
+    "relUrl": "/strref/"
+  },"13": {
+    "doc": "Variable types",
+    "title": "Types",
+    "content": "Description of parameter types used in functions and macros. | array | bool | ids | int | resref | filename | string | . ",
+    "url": "/types/#types",
+    "relUrl": "/types/#types"
+  },"14": {
+    "doc": "Variable types",
+    "title": "array",
+    "content": "A WeiDU array. Can be simple, or associative. ",
+    "url": "/types/#array",
+    "relUrl": "/types/#array"
+  },"15": {
+    "doc": "Variable types",
+    "title": "bool",
+    "content": "0 or 1. ",
+    "url": "/types/#bool",
+    "relUrl": "/types/#bool"
+  },"16": {
+    "doc": "Variable types",
+    "title": "ids",
+    "content": "A string containing an existing IDS symbol. ",
+    "url": "/types/#ids",
+    "relUrl": "/types/#ids"
+  },"17": {
+    "doc": "Variable types",
+    "title": "int",
+    "content": "Integer value. ",
+    "url": "/types/#int",
+    "relUrl": "/types/#int"
+  },"18": {
+    "doc": "Variable types",
+    "title": "resref",
+    "content": "An IE resource reference string. 8 characters max. Without extension. ",
+    "url": "/types/#resref",
+    "relUrl": "/types/#resref"
+  },"19": {
+    "doc": "Variable types",
+    "title": "filename",
+    "content": "A file name string. With extension. ",
+    "url": "/types/#filename",
+    "relUrl": "/types/#filename"
+  },"20": {
+    "doc": "Variable types",
+    "title": "string",
+    "content": "Just a string. ",
+    "url": "/types/#string",
+    "relUrl": "/types/#string"
+  },"21": {
+    "doc": "Variable types",
+    "title": "Variable types",
+    "content": " ",
+    "url": "/types/",
+    "relUrl": "/types/"
+  }
+}
