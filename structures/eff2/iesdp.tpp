@@ -21,6 +21,7 @@ EFF2_parameter3 = 0x60
 EFF2_parameter4 = 0x64
 EFF2_parameter5 = 0x68
 EFF2_time_applied = 0x6c
+EFF2_resource2 = 0x70
 EFF2_resource3 = 0x78
 EFF2_caster_x_coord = 0x80
 EFF2_caster_y_coord = 0x84
