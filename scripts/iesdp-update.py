@@ -192,6 +192,7 @@ def get_size(item):
   return size
 
 def load_datafile(fpath, prefix):
+  print("loading {}".format(fpath))
   with open(fpath) as yf:
     data = yaml.load(yf)
   cur_off = 0
