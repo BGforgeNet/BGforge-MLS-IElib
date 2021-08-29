@@ -11,7 +11,7 @@ nav_order: 1
 * TOC
 {: toc}
 
-IElib is companion library for [BGforge MLS](https://bgforge.net/mls/), a VScode extension providing support for [WeiDU](https://weidu.org/~thebigg/README-WeiDU.html) syntaxes, as well as Infinity Engine script and dialog file formats.
+IElib is a companion library for [BGforge MLS](https://bgforge.net/mls/), a VScode extension providing support for [WeiDU](https://weidu.org/~thebigg/README-WeiDU.html) syntaxes, as well as Infinity Engine script and dialog file formats.
 
 Essentially, it defines various constants: opcode numbers, icon numbers, etc, so that they could be used instead of magic numbers, improving overall code readability and simplifying development. (Similarly to what WeiDU does.) Most of the these are pulled from [IESDP](https://gibberlings3.github.io/iesdp/).
 
