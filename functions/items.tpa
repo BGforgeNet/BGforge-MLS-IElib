@@ -27,8 +27,6 @@ BEGIN
       SPRINT type $atype(~%udesc%~)
     END
     PATCH_PRINT ~INFER_ARMOR_TYPE: %SOURCE_FILE% => %type%~
-  END ELSE BEGIN
-    PATCH_PRINT ~INFER_ARMOR_TYPE: failed to determine type for %SOURCE_FILE%~
   END
 
 END
