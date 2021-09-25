@@ -26,7 +26,11 @@ BEGIN
     PATCH_IF VARIABLE_IS_SET $atype(~%udesc%~) BEGIN
       SPRINT type $atype(~%udesc%~)
     END
+    PATCH_PRINT ~INFER_ARMOR_TYPE: %SOURCE_FILE% => %type%~
+  END ELSE BEGIN
+    PATCH_PRINT ~INFER_ARMOR_TYPE: failed to determine type for %SOURCE_FILE%~
   END
+
 END
 
 DEFINE_PATCH_FUNCTION GET_ARMOR_BASE_AC
@@ -113,4 +117,5 @@ BEGIN
   PATCH_IF enchantment == "-1" BEGIN
     PATCH_WARN ~INFER_ARMOR_ENCHANTMENT: couldn't determine enchantment for %SOURCE_FILE%!~
   END
+  PATCH_PRINT ~INFER_ARMOR_ENCHANTMENT: %SOURCE_FILE% => %enchantment%~
 END
