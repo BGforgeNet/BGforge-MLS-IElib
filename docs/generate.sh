@@ -8,6 +8,7 @@ data_dir="data"
 
 cd "$site_dir"
 mkdir -p "$pages_dir"
+pip3 install ruamel.yaml
 ./yaml_to_md.py "$data_dir" "$pages_dir"
 
 bundle install
