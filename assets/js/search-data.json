@@ -25,7 +25,7 @@
   },"4": {
     "doc": "Home",
     "title": "IElib",
-    "content": ". | Usage | Questions and issues | . IElib is companion library for BGforge MLS, a VScode extension providing support for WeiDU syntaxes, as well as Infinity Engine script and dialog file formats. Essentially, it defines various constants: opcode numbers, icon numbers, etc, so that they could be used instead of magic numbers, improving overall code readability and simplifying development. (Similarly to what WeiDU does.) Most of the these are pulled from IESDP. It also provides some custom functions and macros that could be useful. The documentation on those is to the left. IElib’s primary purpose is to be used with MLS, but if you prefer, you can use it standalone as well. ",
+    "content": ". | Usage | Questions and issues | . IElib is a companion library for BGforge MLS, a VScode extension providing support for WeiDU syntaxes, as well as Infinity Engine script and dialog file formats. Essentially, it defines various constants: opcode numbers, icon numbers, etc, so that they could be used instead of magic numbers, improving overall code readability and simplifying development. (Similarly to what WeiDU does.) Most of the these are pulled from IESDP. It also provides some custom functions and macros that could be useful. The documentation on those is to the left. IElib’s primary purpose is to be used with MLS, but if you prefer, you can use it standalone as well. ",
     "url": "/#ielib",
     "relUrl": "/#ielib"
   },"5": {
