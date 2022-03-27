@@ -99,7 +99,7 @@ for f in files:
     opcodes.append(opcode)
 
 opcodes = sorted(opcodes, key=lambda k: k["n"])
-opcodes_unique = {}
+opcodes_unique = OrderedDict()
 for o in opcodes:
   name = opcode_name(o['name'])
   if name in skip_opcode_names:
@@ -107,6 +107,8 @@ for o in opcodes:
   name_count = len([i for i in opcodes_unique if i == name]) # some name collude, need to make unique
   if name_count > 0:
     name = name + '_{}'.format(name_count + 1)
+  if o['n'] == 175: # hold and hold graphic share the same name
+    name = "hold_graphic"
   opcodes_unique[name] = o['n']
 
 for o in opcodes_unique:
