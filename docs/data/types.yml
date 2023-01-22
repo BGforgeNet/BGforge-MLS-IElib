@@ -1,5 +1,5 @@
 - name: array
-  desc: Array, [simple](https://weidu.org/~thebigg/README-WeiDU.html#DEFINE_ARRAY), or [associative](https://weidu.org/~thebigg/README-WeiDU.html#DEFINE_ASSOCIATIVE_ARRAY).
+  desc: Array. [Simple](https://weidu.org/~thebigg/README-WeiDU.html#DEFINE_ARRAY), or [associative](https://weidu.org/~thebigg/README-WeiDU.html#DEFINE_ASSOCIATIVE_ARRAY).
 - name: bool
   desc: 0 or 1.
 - name: ids
@@ -7,9 +7,9 @@
 - name: int
   desc: Integer value.
 - name: list
-  desc: [Array](https://weidu.org/~thebigg/README-WeiDU.html#DEFINE_ARRAY).
+  desc: "[Array](https://weidu.org/~thebigg/README-WeiDU.html#DEFINE_ARRAY)."
 - name: map
-  desc: [Associative array](https://weidu.org/~thebigg/README-WeiDU.html#DEFINE_ASSOCIATIVE_ARRAY).
+  desc: "[Associative array](https://weidu.org/~thebigg/README-WeiDU.html#DEFINE_ASSOCIATIVE_ARRAY)."
 - name: resref
   desc: An IE resource reference string. 8 characters max. Without extension.
 - name: filename
