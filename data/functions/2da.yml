@@ -1,6 +1,6 @@
 - name: GET_2DA_INDEX
   desc: |
-    Returns arrays containing current 2DA row and column names, for usage in `SET_2DA_ENTRY_LATER`:
+    Returns associative arrays containing current 2DA row and column names, for usage in `SET_2DA_ENTRY_LATER`:
     ```
     COPY_EXISTING ~clsrcreq.2da~ override
       LPF GET_2DA_INDEX RET_ARRAY row_index col_index END
@@ -10,7 +10,7 @@
   return:
     - name: col_index
       desc: column name => index
-      type: array
+      type: map
     - name: row_index
       desc: row name => index
-      type: array
+      type: map
