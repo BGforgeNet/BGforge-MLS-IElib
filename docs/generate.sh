@@ -12,4 +12,4 @@ pip3 install ruamel.yaml
 ./yaml_to_md.py "$data_dir" "$pages_dir"
 
 bundle install
-bundle exec jekyll build
+JEKYLL_ENV=production bundle exec jekyll build
