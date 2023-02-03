@@ -18,6 +18,12 @@
 - name: INFER_ARMOR_TYPE
   desc: Returns current armor type.
   type: patch
+  int_params:
+    - name: warn
+      desc: Warn if the item is not an armor
+      type: bool
+      default: true
+
   return:
     - name: type
       type: string
