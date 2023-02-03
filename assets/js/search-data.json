@@ -57,7 +57,7 @@
   },"8": {
     "doc": "Items",
     "title": "Items",
-    "content": "Items functions. | GET_ARMOR_BASE_AC | INFER_ARMOR_ENCHANTMENT | INFER_ARMOR_TYPE | . GET_ARMOR_BASE_AC . patch . Returns current armor’s base AC. If base AC is not found, defaults to 100. | Return values | Description | Type | . | base_ac | base AC | int | . INFER_ARMOR_ENCHANTMENT . patch . Returns current armor enchantment level (Leather Armor +1 will return 1). Ankeg armor and Red Dragon scales are considered +2. Defaults to -1 if enchantment couldn’t be determined. | Return values | Description | Type | . | enchantment | Armor enchantment | int | . INFER_ARMOR_TYPE . patch . Returns current armor type. | Return values | Description | Type | . | type | leather, studded_leather, chain, splint, plate, full_plate or unknown. | string | . ",
+    "content": "Items functions. | GET_ARMOR_BASE_AC | INFER_ARMOR_ENCHANTMENT | INFER_ARMOR_TYPE | . GET_ARMOR_BASE_AC . patch . Returns current armor’s base AC. If base AC is not found, defaults to 100. | Return values | Description | Type | . | base_ac | base AC | int | . INFER_ARMOR_ENCHANTMENT . patch . Returns current armor enchantment level (Leather Armor +1 will return 1). Ankeg armor and Red Dragon scales are considered +2. Defaults to -1 if enchantment couldn’t be determined. | Return values | Description | Type | . | enchantment | Armor enchantment | int | . INFER_ARMOR_TYPE . patch . Returns current armor type. | INT_VAR | Description | Type | Default | . | warn | Warn if the item is not an armor | bool | True | . | Return values | Description | Type | . | type | leather, studded_leather, chain, splint, plate, full_plate or unknown. | string | . ",
     "url": "/items/",
     
     "relUrl": "/items/"
