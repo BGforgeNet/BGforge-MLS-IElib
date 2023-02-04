@@ -1,5 +1,5 @@
 DEFINE_PATCH_FUNCTION INFER_ARMOR_TYPE
-  STR_VAR warn = 1
+  INT_VAR warn = 1
   RET type
 BEGIN
   SPRINT type ~unknown~
