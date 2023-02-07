@@ -7,4 +7,3 @@ PATCH_INCLUDE
   ~%BGFORGE_ITM_DIR%/depletion.tpp~
   ~%BGFORGE_ITM_DIR%/header_flags.tpp~
   ~%BGFORGE_ITM_DIR%/header_target.tpp~
-  ~%BGFORGE_ITM_DIR%/type.tpp~

@@ -9,3 +9,4 @@ PATCH_INCLUDE
   ~%BGFORGE_STRUCTURES_DIR%/itm/main.tpp~
   ~%BGFORGE_STRUCTURES_DIR%/spl/main.tpp~
   ~%BGFORGE_STRUCTURES_DIR%/sto/main.tpp~
+  ~%BGFORGE_STRUCTURES_DIR%/item_types.tpp~
