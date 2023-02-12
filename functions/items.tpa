@@ -57,17 +57,17 @@ BEGIN
   enchantment = 0
 
   READ_SHORT ITM_type itype
-  PATCH_IF itype != ITM_TYPE_armor BEGIN
+  PATCH_IF itype != ITEM_TYPE_armor BEGIN
     PATCH_WARN ~INFER_ARMOR_ENCHANTMENT: %SOURCE_FILE% is not an armor, skipping!~
     skip = 1
   END
 
   // custom, no reliable way to infer
   DEFINE_ASSOCIATIVE_ARRAY custom BEGIN
-    ~npchan~ => 3 // Corthala
-    ~leat09~ => 3 // Karajah
-    ~plat06~ => 2 // ankheg
-    ~plat18~ => 2 // red dragon
+    ~npchan~ => 3  // Corthala
+    ~leat09~ => 3  // Karajah
+    ~plat06~ => 2  // ankheg
+    ~plat18~ => 2  // red dragon
   END
   SPRINT item ~%SOURCE_RES%~
   TO_LOWER item
