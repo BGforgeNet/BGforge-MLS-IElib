@@ -4,7 +4,7 @@ DEFINE_PATCH_FUNCTION INFER_ARMOR_TYPE
 BEGIN
   SPRINT type ~unknown~
   READ_SHORT ITM_type itype
-  PATCH_IF itype != ITM_TYPE_armor BEGIN
+  PATCH_IF itype != ITEM_TYPE_armor BEGIN
     PATCH_IF (warn == 1) BEGIN
       PATCH_WARN ~WARNING: INFER_ARMOR_TYPE - %SOURCE_FILE% is not an armor, skipping!~
     END
