@@ -15,6 +15,7 @@ SPL_casting_feature_blocks_count = 0x70
 SPL_casting_feature_blocks_offset = 0x6e
 SPL_casting_graphics = 0x22
 SPL_completion_sound = 0x10
+SPL_description = 0x50
 SPL_exclusion_flags = 0x1e
 SPL_extended_headers_count = 0x68
 SPL_extended_headers_offset = 0x64
@@ -26,7 +27,6 @@ SPL_sectype = 0x27
 SPL_signature = 0x0
 SPL_spellbook_icon = 0x3a
 SPL_type = 0x1c
-SPL_unidentified_description = 0x50
 SPL_unidentified_name = 0x8
 SPL_version = 0x4
 
