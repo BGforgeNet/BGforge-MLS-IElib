@@ -2,6 +2,7 @@ TEXT_SPRINT BGFORGE_IDS_DIR ~%BGFORGE_LIB_DIR%/IDS~
 
 PATCH_INCLUDE
   ~%BGFORGE_IDS_DIR%/effect_ids.tpp~
+  ~%BGFORGE_IDS_DIR%/gender_ids.tpp~
   ~%BGFORGE_IDS_DIR%/types.tpp~
 // ~%BGFORGE_IDS_DIR%/projectile_ids.tpp~ // not sure how to handle this best, see https://github.com/Gibberlings3/iesdp/pull/91
 
