@@ -1,4 +1,6 @@
 external
 docs/_pages
 .vscode
+docs/.bundle
 docs/_site
+docs/vendor
