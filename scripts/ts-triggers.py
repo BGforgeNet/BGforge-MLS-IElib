@@ -5,26 +5,30 @@ import sys
 from pathlib import Path
 from bs4 import BeautifulSoup
 
+
 def camel_case(line):
     return line[0].lower() + line[1:]
 
-'''
+
+"""
  Parses a parameter, returns param_name, param_type
-'''
+"""
+
+
 def parse_param(param):
     # Clean up input
     param = param.strip()
-    
+
     # Split on ':'
     param_type, param_name = param.split(":")
-    
+
     # Remove '*' from the param_name if present
-    param_name = param_name.rstrip('*')
-    
+    param_name = param_name.rstrip("*")
+
     # Special handling for 'I:Style*AStyles'
-    if '*' in param_name:
-        param_name, param_type = param_name.split('*', 1)  # Split by '*' and assign correctly
-    
+    if "*" in param_name:
+        param_name, param_type = param_name.split("*", 1)  # Split by '*' and assign correctly
+
     # Additional type mappings
     if param_name == "Object":
         param_name = "who"
@@ -53,25 +57,17 @@ def parse_param(param):
     if param_name == "ResRef":
         param_type = "Resref"
         param_name = "resource"
-    
+
     # Convert to camelCase (if you have a function for that)
     param_name = camel_case(param_name)
 
     if param_name == "class":
         param_name = "classID"
 
-    
     # Remove spaces from param_name
     param_name = param_name.replace(" ", "")
-    
-    # Print the results
-    print(param_name, param_type)
+
     return param_name, param_type
-
-
-
-
-
 
 
 def parse_declaration(lines):
@@ -123,9 +119,9 @@ def convert_to_declaration(input_file, output_file):
     if not input_path.exists():
         raise FileNotFoundError(f"Input file not found: {input_file}")
 
-    with open(input_path, 'r') as infile:
+    with open(input_path, "r") as infile:
         html = infile.read()
-    soup = BeautifulSoup(html, 'html.parser')
+    soup = BeautifulSoup(html, "html.parser")
     text = soup.get_text()
     lines = text.splitlines()
 
@@ -144,32 +140,32 @@ def convert_to_declaration(input_file, output_file):
     if current_block:
         declarations.append(current_block)
 
-    header = '''import type { ObjectPtr, Resref } from "../index";
-import { AStyles } from "./astyles.ids";
+    header = """import type { ObjectPtr, Resref } from "../index";
 import { Align } from "./align.ids";
-import { EA } from "./ea.ids";
-import { General } from "./general.ids";
-import { Specific } from "./specific.ids";
-import { Time } from "./time.ids";
-import { TimeODay } from "./timeoday.ids";
-import { SHOUTIDS } from "./shoutids.ids";
-import { DIFFLEV } from "./difflev.ids";
-import { Happy } from "./happy.ids";
-import { Damages } from "./damages.ids";
-import { HotKey } from "./hotkey.ids";
-import { SpellID } from "..";
+import { AStyles } from "./astyles.ids";
 import { AreaType } from "./areatype.ids";
-import { NPC } from "./npc.ids";
-import { Stats } from "./stats.ids";
-import { SLOTS } from "./slots.ids";
+import { Class } from "./class.ids";
+import { Damages } from "./damages.ids";
+import { DIFFLEV } from "./difflev.ids";
+import { EA } from "./ea.ids";
+import { Gender } from "./gender.ids";
+import { General } from "./general.ids";
+import { Happy } from "./happy.ids";
+import { HotKey } from "./hotkey.ids";
 import { KIT } from "./kit.ids";
 import { MODAL } from "./modal.ids";
+import { NPC } from "./npc.ids";
+import { SHOUTIDS } from "./shoutids.ids";
+import { SLOTS } from "./slots.ids";
+import { Specific } from "./specific.ids";
 import { State } from "./state.ids";
-import { Gender } from "./gender.ids";
-import { Reaction } from "./reaction.ids";
+import { Stats } from "./stats.ids";
+import { Time } from "./time.ids";
+import { TimeODay } from "./timeoday.ids";
+import { SpellID } from "..";
 import { Race } from "./race.ids";
-import { Class } from "./class.ids";
-'''
+import { Reaction } from "./reaction.ids";
+"""
     output = [header]
 
     for decl in declarations:
@@ -179,7 +175,9 @@ import { Class } from "./class.ids";
             for param_name, param_type in parameters:
                 jsdoc += f" * @param {param_name} {param_type}\n"
             jsdoc += "*/"
-            ts_function = f"declare function {func_name}({', '.join(f'{name}: {ptype}' for name, ptype in parameters)}): boolean;"
+            ts_function = (
+                f"declare function {func_name}({', '.join(f'{name}: {ptype}' for name, ptype in parameters)}): boolean;"
+            )
             if func_name == "Help":
                 print("skipping Help() function, it's both action and trigger")
             else:
@@ -187,12 +185,13 @@ import { Class } from "./class.ids";
         except ValueError as e:
             print(f"Warning: Skipping invalid declaration: {e}")
 
-    with open(output_path, 'w') as outfile:
+    with open(output_path, "w") as outfile:
         outfile.write("\n\n".join(output))
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print("Usage: python convert_script.py <input_file> <output_file>")
+        print("Usage: python ts-triggers.py <input_file> <output_file>")
         sys.exit(1)
 
     input_file = sys.argv[1]

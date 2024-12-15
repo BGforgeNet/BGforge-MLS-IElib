@@ -4,3 +4,4 @@ docs/_pages
 docs/.bundle
 docs/_site
 docs/vendor
+.venv

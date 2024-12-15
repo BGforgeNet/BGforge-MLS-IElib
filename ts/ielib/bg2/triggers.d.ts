@@ -1,28 +1,28 @@
 import type { ObjectPtr, Resref } from "../index";
-import { AStyles } from "./astyles.ids";
 import { Align } from "./align.ids";
-import { EA } from "./ea.ids";
-import { General } from "./general.ids";
-import { Specific } from "./specific.ids";
-import { Time } from "./time.ids";
-import { TimeODay } from "./timeoday.ids";
-import { SHOUTIDS } from "./shoutids.ids";
-import { DIFFLEV } from "./difflev.ids";
-import { Happy } from "./happy.ids";
-import { Damages } from "./damages.ids";
-import { HotKey } from "./hotkey.ids";
-import { SpellID } from "..";
+import { AStyles } from "./astyles.ids";
 import { AreaType } from "./areatype.ids";
-import { NPC } from "./npc.ids";
-import { Stats } from "./stats.ids";
-import { SLOTS } from "./slots.ids";
+import { Class } from "./class.ids";
+import { Damages } from "./damages.ids";
+import { DIFFLEV } from "./difflev.ids";
+import { EA } from "./ea.ids";
+import { Gender } from "./gender.ids";
+import { General } from "./general.ids";
+import { Happy } from "./happy.ids";
+import { HotKey } from "./hotkey.ids";
 import { KIT } from "./kit.ids";
 import { MODAL } from "./modal.ids";
+import { NPC } from "./npc.ids";
+import { SHOUTIDS } from "./shoutids.ids";
+import { SLOTS } from "./slots.ids";
+import { Specific } from "./specific.ids";
 import { State } from "./state.ids";
-import { Gender } from "./gender.ids";
-import { Reaction } from "./reaction.ids";
+import { Stats } from "./stats.ids";
+import { Time } from "./time.ids";
+import { TimeODay } from "./timeoday.ids";
+import { SpellID } from "..";
 import { Race } from "./race.ids";
-import { Class } from "./class.ids";
+import { Reaction } from "./reaction.ids";
 
 
 /**
