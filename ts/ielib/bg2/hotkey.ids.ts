@@ -1,3 +1,3 @@
-import { Branded } from "..";
+import { IE } from "..";
 
-export declare type HotKey = Branded<number, 'HotKey'>;
+export declare type HotKey = IE<number, 'HotKey'>;

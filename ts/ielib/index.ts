@@ -1,7 +1,13 @@
 /**
+ * Type branding
+ */
+type Brand<B> = { __brand: B }
+export type IE<T, B> = T & Brand<B>
+
+/**
  * Game Object
  */
-export interface ObjectPtr {}
+export declare type ObjectPtr = IE<number, 'ObjectPtr'>;
 
 /**
  * Area point/location.
@@ -18,21 +24,19 @@ export type SpellID = string & {};
 /**
  * Resource reference, up to 8 characters.
  */
-export type Resref = string & {};
+export type ResRef = IE<string, 'ResRef'>;
 
 /**
  * Variable and timers scope.
  * "GLOBAL" | "LOCAL" | "MYAREA" | Area RESREF
  */
-export type Scope = "GLOBAL" | "LOCALS" | "MYAREA" | Resref;
+export type Scope = "GLOBAL" | "LOCALS" | "MYAREA" | ResRef;
 
 export const GLOBAL: Scope = "GLOBAL";
 export const LOCALS: Scope = "LOCALS";
 export const MYAREA: Scope = "MYAREA";
 
-
 /**
- * Type branding
+ * ITM ResRef
  */
-type Brand<B> = { __brand: B }
-export type Branded<T, B> = T & Brand<B>
+export declare type ItmRef = IE<ResRef, 'ITM'>;

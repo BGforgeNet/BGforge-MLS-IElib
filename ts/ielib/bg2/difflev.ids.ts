@@ -1,3 +1,3 @@
-import { Branded } from "..";
+import { IE } from "..";
 
-export declare type DIFFLEV = Branded<number, 'DIFFLEV'>;
+export declare type DiffLev = IE<number, 'DiffLev'>;

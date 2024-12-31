@@ -1,0 +1,19 @@
+{
+	"name": "ielib",
+	"version": "1.0.0",
+	"type": "module",
+	"scripts": {
+		"ts-update": "tsx scripts/ts-update.ts external/iesdp/_data/actions ts/ielib/bg2/actions.d.ts external/iesdp/scripting/triggers/bg2triggers.htm ts/ielib/bg2/triggers.d.ts"
+	},
+	"dependencies": {
+		"js-yaml": "^4.1.0",
+		"jsdom": "^25.0.1",
+		"tsx": "^4.19.2",
+		"yargs": "^17.7.2"
+	},
+	"devDependencies": {
+		"@types/js-yaml": "^4.0.9",
+		"@types/node": "^22.10.2",
+		"@types/yargs": "^17.0.33"
+	}
+}

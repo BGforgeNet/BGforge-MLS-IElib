@@ -1,3 +1,3 @@
-import { Branded } from "..";
+import { IE } from "..";
 
-export declare type MODAL = Branded<number, 'MODAL'>;
+export declare type Modal = IE<number, 'Modal'>;

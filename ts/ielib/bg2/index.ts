@@ -4,6 +4,7 @@ export * from './actions';
 export * from './object';
 export * from './triggers';
 
+export * from './ea.ids';
 export * from './spell.ids';
 
 // Help() is both Action and Trigger. Exporting explicitly.

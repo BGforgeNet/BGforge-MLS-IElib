@@ -1,3 +1,3 @@
-import { Branded } from "..";
+import { IE } from "..";
 
-export declare type TimeODay = Branded<number, 'TimeODay'>;
+export declare type TimeODay = IE<number, 'TimeODay'>;

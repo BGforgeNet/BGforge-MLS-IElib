@@ -1,3 +1,3 @@
-import { Branded } from "..";
+import { IE } from "..";
 
-export declare type SLOTS = Branded<number, 'SLOTS'>;
+export declare type Slots = IE<number, 'Slots'>;

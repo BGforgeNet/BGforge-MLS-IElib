@@ -1,3 +1,4 @@
-import { Branded } from "..";
+import { IE } from "..";
 
-export declare type EA = Branded<number, 'EA'>;
+export declare type EA = IE<number, 'EA'>;
+export declare const ENEMY: EA;

@@ -1,5 +1,8 @@
 import { SpellID } from "../index";
 
-export const WIZARD_SLOW: SpellID = "slow";
-export const WIZARD_FIRE_SHIELD_RED = "fsr";
-export const WIZARD_FIRE_SHIELD_BLUE: SpellID = "fsb";
+/** slow */
+export declare const WIZARD_SLOW: SpellID;
+/** fsr */
+export declare const WIZARD_FIRE_SHIELD_RED: SpellID;
+/** fsb */
+export declare const WIZARD_FIRE_SHIELD_BLUE: SpellID;

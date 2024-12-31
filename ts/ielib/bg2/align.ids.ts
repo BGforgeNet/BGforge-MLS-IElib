@@ -1,3 +1,3 @@
-import { Branded } from "..";
+import { IE } from "..";
 
-export declare type Align = Branded<number, 'Align'>;
+export declare type Align = IE<number, 'Align'>;

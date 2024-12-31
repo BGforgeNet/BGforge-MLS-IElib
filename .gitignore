@@ -5,3 +5,4 @@ docs/.bundle
 docs/_site
 docs/vendor
 .venv
+node_modules/

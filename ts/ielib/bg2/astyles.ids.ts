@@ -1,6 +1,6 @@
-import { Branded } from "..";
+import { IE } from "..";
 
-export declare type AStyles = Branded<number, 'AStyles'>;
+export declare type AStyles = IE<number, 'AStyles'>;
 /** 0 */
 export declare const DEFAULT: AStyles;
 /** 1 */

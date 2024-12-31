@@ -13,8 +13,6 @@ Infinity Engine library for [BGforge MLS](https://github.com/BGforgeNet/VScode-B
 
 Essentially, it defines various constants: opcode numbers, icon numbers, etc, so that they could be used instead of magic numbers, improving overall code readability. (Similarly to what WeiDU [does](https://weidu.org/~thebigg/README-WeiDU.html#sec58).)
 
-__Note:__ it's in alpha, so backwards compatibility is not guaranteed for now.
-
 ### Usage
 
 1. Init submodule
