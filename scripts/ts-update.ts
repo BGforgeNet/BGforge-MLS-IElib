@@ -203,7 +203,7 @@ import type { TimeODay } from "./timeoday.ids";
 
 
 /**
- * 
+ * Convert trigger description declaration
  * @param block Trigger description block, starting with 0x
  * @returns TS declaration with JSdoc
  */
