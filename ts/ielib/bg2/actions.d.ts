@@ -1,4 +1,29 @@
-import type { Action, ObjectPtr, Point } from "../index";
+import type { Action, ObjectPtr, Point, SpellID, SplRef } from "../index";
+
+import type { Align } from "./align.ids";
+import type { Animate } from "./animate.ids";
+import type { AreaFlag } from "./areaflag.ids";
+import type { AreaType } from "./areatype.ids";
+import type { Class } from "./class.ids";
+import type { DMGtype } from "./dmgtype.ids";
+import type { EA } from "./ea.ids";
+import type { Gender } from "./gender.ids";
+import type { General } from "./general.ids";
+import type { GTimes } from "./gtimes.ids";
+import type { MFlags } from "./mflags.ids";
+import type { JourType } from "./jourtype.ids";
+import type { Kit } from "./kit.ids";
+import type { Race } from "./race.ids";
+import type { ScrLev } from "./scrlev.ids";
+import type { Scroll } from "./scroll.ids";
+import type { Seq } from "./seq.ids";
+import type { ShoutID } from "./shoutids.ids";
+import type { Slots } from "./slots.ids";
+import type { SndSlot } from "./sndslot.ids";
+import type { SoundOff } from "./soundoff.ids";
+import type { Specific } from "./specific.ids";
+import type { Time } from "./time.ids";
+import type { WeatherID } from "./weather.ids";
 
 
 
@@ -164,7 +189,7 @@ declare function AttackOneRound(target: ObjectPtr): void;
   END
 ```
  */
-declare function Shout(id: number): void;
+declare function Shout(id: ShoutID): void;
 
 /**
  * This action instructs the active creature to move a certain distance from its current location; i.e. the point is relative to the creatures current location.
@@ -295,7 +320,7 @@ declare function ForceSpellRES(res: string, target: ObjectPtr, castinglevel: num
 - If `CastingLevel = 0`, then the action will use Caster Level.
 {% endcapture %} {% include note.html %}
  */
-declare function ForceSpell(target: ObjectPtr, spell: number): void;
+declare function ForceSpell(target: ObjectPtr, spell: SpellID): void;
 
 /**
  * 
@@ -329,7 +354,7 @@ declare function ForceSpellPointRES(res: string, target: Point, castinglevel: nu
 - If `CastingLevel = 0`, then the action will use Caster Level.
 {% endcapture %} {% include note.html %}
  */
-declare function ForceSpellPoint(target: Point, spell: number): void;
+declare function ForceSpellPoint(target: Point, spell: SpellID): void;
 
 /**
  * This action sets a global timer. The timer is checked by the GlobalTimerExpired trigger or GlobalTimerNotExpired trigger.
@@ -346,7 +371,7 @@ declare function ForceSpellPoint(target: Point, spell: number): void;
   END
 ```
  */
-declare function SetGlobalTimer(name: string, area: string, time: number): void;
+declare function SetGlobalTimer(name: string, area: string, time: GTimes): void;
 
 /**
  * This action takes a single instance of the specified item from the party (unless the item exists in a stack, in which case the entire stack is taken). Characters are checked in current party order. The item is transferred to the inventory of the active creature. If there are multiple calls to TakePartyItem() in the same block, each with the same item specified, only one call will actually remove an item (on each execution of the block). If an item is found in a container on an earlier player and in the inventory of a later player, both item instances may be removed. All slots are checked; inventory slots are checked in the following order
@@ -635,7 +660,7 @@ declare function Kill(object: ObjectPtr): void;
   END
 ```
  */
-declare function VerbalConstant(object: ObjectPtr, constant: number): void;
+declare function VerbalConstant(object: ObjectPtr, constant: SoundOff): void;
 
 /**
  * This action clears the action list of the specified object (including ModalActions). The example script is from ar2400.bcs.
@@ -872,7 +897,7 @@ declare function PickLock(object: ObjectPtr): void;
   END
 ```
  */
-declare function Polymorph(animationtype: number): void;
+declare function Polymorph(animationtype: Animate): void;
 
 /**
  * 
@@ -899,12 +924,12 @@ Scripts can handle `RES` filenames with `+`, Dialogs and the console cannot. Sam
 - This action will default to a spell matching the first 7 characters in Dialogs/Console *IF* the 8<sup>th</sup> character isn't valid.
 {% endcapture %} {% include note.html %}
  */
-declare function RemoveSpell(spell: number): void;
+declare function RemoveSpell(spell: SpellID): void;
 
 /**
  * This action is miscoded in the default action.ids file (the number 0 should be the capital letter O). When corrected, this action causes the active creature to attempt to bash the specified door.
  */
-declare function BashDoor(object: 0): void;
+declare function BashDoor(object: ObjectPtr): void;
 
 /**
  * This action instructs the active creature to equip the most damaging melee weapon from those available in the quickslots. Damage is calculated on the THAC0 bonus and damage - special bonuses versus creature types and elemental damages are not checked.
@@ -997,7 +1022,7 @@ declare function ChangeAIType(object: ObjectPtr): void;
   END
 ```
  */
-declare function ChangeEnemyAlly(object: ObjectPtr, value: number): void;
+declare function ChangeEnemyAlly(object: ObjectPtr, value: EA): void;
 
 /**
  * This action changes the general status of the target creature to the specified value. Values are from [general.ids]({{ ids }}/general.htm).
@@ -1012,7 +1037,7 @@ declare function ChangeEnemyAlly(object: ObjectPtr, value: number): void;
   END
 ```
  */
-declare function ChangeGeneral(object: ObjectPtr, value: number): void;
+declare function ChangeGeneral(object: ObjectPtr, value: General): void;
 
 /**
  * This action changes the race of the target creature to the specified value. Values are from [race.ids]({{ ids }}/race.htm).
@@ -1027,7 +1052,7 @@ declare function ChangeGeneral(object: ObjectPtr, value: number): void;
   END
 ```
  */
-declare function ChangeRace(object: ObjectPtr, value: number): void;
+declare function ChangeRace(object: ObjectPtr, value: Race): void;
 
 /**
  * This action changes the class of the target creature to the specified value. Values are from [class.ids]({{ ids }}/class.htm).
@@ -1042,7 +1067,7 @@ declare function ChangeRace(object: ObjectPtr, value: number): void;
   END
 ```
  */
-declare function ChangeClass(object: ObjectPtr, value: number): void;
+declare function ChangeClass(object: ObjectPtr, value: Class): void;
 
 /**
  * This action changes the specific status of the target creature to the specified value. Values are from [specific.ids]({{ ids }}/specific.htm). The action produces inconsistent results when used on player characters in multiplayer games. The specific value is represented by one byte, and so is limited to values 0-255. The example script assigns a script to a newly created simulacrum.
@@ -1070,7 +1095,7 @@ declare function ChangeClass(object: ObjectPtr, value: number): void;
   END
 ```
  */
-declare function ChangeSpecifics(object: ObjectPtr, value: number): void;
+declare function ChangeSpecifics(object: ObjectPtr, value: Specific): void;
 
 /**
  * This action changes the gender of the target creature to the specified value. Values are from [gender.ids]({{ ids }}/gender.htm). The example script changes the gender of summoned creatures to neither, to bypass the 5 concurrent summoned creatures limit.
@@ -1088,7 +1113,7 @@ declare function ChangeSpecifics(object: ObjectPtr, value: number): void;
   END
 ```
  */
-declare function ChangeGender(object: ObjectPtr, value: number): void;
+declare function ChangeGender(object: ObjectPtr, value: Gender): void;
 
 /**
  * This action changes the alignment of the target creature to the specified value. Values are from [align.ids]({{ ids }}/align.htm).
@@ -1103,7 +1128,7 @@ declare function ChangeGender(object: ObjectPtr, value: number): void;
   END
 ```
  */
-declare function ChangeAlignment(object: ObjectPtr, value: number): void;
+declare function ChangeAlignment(object: ObjectPtr, value: Align): void;
 
 /**
  * This action is used in conjunction with the ReceivedOrder trigger, and works in a similar way to a global shout. The action passes a numeric order to the specified creature. Only one creature at a time responds to an order, and creatures to not detect their own orders.
@@ -1161,7 +1186,7 @@ Scripts can handle `RES` filenames with `+`, Dialogs and the console cannot. Sam
 - This action will default to a spell matching the first 7 characters in Dialogs/Console *IF* the 8<sup>th</sup> character isn't valid.
 {% endcapture %} {% include note.html %}
  */
-declare function ApplySpell(target: ObjectPtr, spell: number): void;
+declare function ApplySpell(target: ObjectPtr, spell: SpellID): void;
 
 /**
  * This action is used to increment the chapter, and display a text screen (specified by the resref parameter - a 2DA file). The example script is from ar1803.bcs.
@@ -1356,7 +1381,7 @@ declare function GiveGoldForce(amount: number): void;
 /**
  * This action sets the open/closed graphic of a tile in a WED file.
  */
-declare function ChangeTileState(tile: ObjectPtr, state: number): void;
+declare function ChangeTileState(tile: ObjectPtr, state: boolean): void;
 
 /**
  * This action adds an entry into the journal. The entry parameter is the strref to add, and the JourType is the type of entry (i.e. the location within the journal to add the entry to) - values are from [jourtype.ids]({{ ids }}/jourtype.htm). The example script is from ar0511.bcs.
@@ -1374,7 +1399,7 @@ declare function ChangeTileState(tile: ObjectPtr, state: number): void;
   END
 ```
  */
-declare function AddJournalEntry(entry: number, type: number): void;
+declare function AddJournalEntry(entry: number, type: JourType): void;
 
 /**
  * This action instructs the active creature to a ranged weapon from the weapons available in the quickslots.
@@ -1451,17 +1476,17 @@ declare function EscapeAreaDestroy(delay: number): void;
 /**
  * This action is used in conjunction with trigger region in ARE files. The action sets the activation state a trigger region (specified by the object parameter).
  */
-declare function TriggerActivation(object: ObjectPtr, state: number): void;
+declare function TriggerActivation(object: ObjectPtr, state: boolean): void;
 
 /**
  * 
  */
-declare function DialogueInterrupt(state: number): void;
+declare function DialogueInterrupt(state: boolean): void;
 
 /**
  * This action sets the interrupt state of the active creature. When set to false the creature cannot receive dialog requests or issue verbal constants. The interrupt state of a creature is not saved.
  */
-declare function DialogInterrupt(state: number): void;
+declare function DialogInterrupt(state: boolean): void;
 
 /**
  * This action instructs the active creature to attempt to Hide in Shadows. This action can be used for any creature (not just thieves) though success in hiding is dependent on points in the Stealth skill. A hidden creature is treated as STATE\_INVISIBLE.
@@ -1488,7 +1513,7 @@ declare function MoveToObjectFollow(object: ObjectPtr): void;
 /**
  * 
  */
-declare function ReallyForceSpellRES(res: string, target: ObjectPtr): void;
+declare function ReallyForceSpellRES(spell: SplRef, target: ObjectPtr): void;
 
 /**
  * This action causes the active creature to cast the specified spell at the target object. The spell need not currently be memorised by the caster, and will not be interrupted while being cast. The spell is cast instantly (i.e. with a casting time of 0). The caster must meet the level requirements of the spell. This action does not work in the script round where the active creature has died.
@@ -1498,7 +1523,7 @@ Scripts can handle `RES` filenames with `+`, Dialogs and the console cannot. Sam
 - This action will default to a spell matching the first 7 characters in Dialogs/Console *IF* the 8th character isn't valid.
 {% endcapture %} {% include note.html %}
  */
-declare function ReallyForceSpell(target: ObjectPtr, spell: number): void;
+declare function ReallyForceSpell(target: ObjectPtr, spell: SpellID): void;
 
 /**
  * This action changes the active creature's selection circle to purple - making it unselectable. Creatures made unselectable stop processing scripts.
@@ -1528,7 +1553,7 @@ declare function EndCredits(): void;
 /**
  * This action starts playing a music track. The slot parameter refers to the music slots contained in the ARE header. The flags parameter indicates how the music should be played - values are from [mflags.ids]({{ ids }}/mflags.htm).
  */
-declare function StartMusic(slot: number, flags: number): void;
+declare function StartMusic(slot: number, flags: MFlags): void;
 
 /**
  * This action removes all instances of the specified item from the party. The items are placed in the inventory of the active creature. Items contained in containers (e.g. Bag of Holding) are not taken.
@@ -1573,7 +1598,7 @@ Scripts can handle `RES` filenames with `+`, Dialogs and the console cannot. Sam
 - This action will default to a spell matching the first 7 characters in Dialogs/Console *IF* the 8th character isn't valid.
 {% endcapture %} {% include note.html %}
  */
-declare function SpellNoDec(target: ObjectPtr, spell: number): void;
+declare function SpellNoDec(target: ObjectPtr, spell: SpellID): void;
 
 /**
  * 
@@ -1588,7 +1613,7 @@ Scripts can handle `RES` filenames with `+`, Dialogs and the console cannot. Sam
 - This action will default to a spell matching the first 7 characters in Dialogs/Console *IF* the 8th character isn't valid.
 {% endcapture %} {% include note.html %}
  */
-declare function SpellPointNoDec(target: Point, spell: number): void;
+declare function SpellPointNoDec(target: Point, spell: SpellID): void;
 
 /**
  * This action instructs the active creature to take the specified item from the party, if they are nearby. A range for the action cannot be specified.
@@ -1709,7 +1734,7 @@ declare function SpawnPtSpawn(object: ObjectPtr): void;
 /**
  * This action acts like Shout() without the range limit.
  */
-declare function GlobalShout(id: number): void;
+declare function GlobalShout(id: ShoutID): void;
 
 /**
  * This action is used in conjunction with animations in ARE files. The action will start the specified animation.
@@ -1980,7 +2005,7 @@ Scripts can handle `RES` filenames with `+`, Dialogs and the console cannot. Sam
 - This action will default to a spell matching the first 7 characters in Dialogs/Console *IF* the 8th character isn't valid.
 {% endcapture %} {% include note.html %}
  */
-declare function ReallyForceSpellDead(target: ObjectPtr, spell: number): void;
+declare function ReallyForceSpellDead(target: ObjectPtr, spell: SpellID): void;
 
 /**
  * This action removes the berserking state and effect by applying the `Cure:Berserk` opcode.
@@ -2077,7 +2102,7 @@ declare function CreateCreatureObjectOffset(resref: string, object: ObjectPtr, o
 /**
  * This action is used in conjunction with containers in ARE files. The action sets the enabled state of a container (specified by the object parameter).
  */
-declare function ContainerEnable(object: ObjectPtr, bool: number): void;
+declare function ContainerEnable(object: ObjectPtr, bool: boolean): void;
 
 /**
  * This action shakes the game view. The point parameter dictates how far to shake the screen along the x and y axis. The duration parameter dictates how long the shaking lasts.
@@ -2128,7 +2153,7 @@ declare function PickUpItem(resref: string): void;
 /**
  * This action will attempt to fill a slot in the active creature's inventory with the appropriate item type. Using FillSlot(SLOT\_WEAPON) will look for any weapon in the inventory, and move the first such item into the weapon slot. Any item already in the slot is destroyed.
  */
-declare function FillSlot(slot: number): void;
+declare function FillSlot(slot: Slots): void;
 
 /**
  * This action adds the specified amount of XP onto the specified object.
@@ -2207,7 +2232,7 @@ declare function StartDialogueNoSetInterrupt(object: ObjectPtr): void;
 /**
  * This action sets a global timer measured in seconds (of real time).
  */
-declare function RealSetGlobalTimer(name: string, area: string, time: number): void;
+declare function RealSetGlobalTimer(name: string, area: string, time: GTimes): void;
 
 /**
  * This action displays the specified string over the head on the specified object (on the game-screen). The string may also be shown in the message log, depending on options specified in baldur.ini.
@@ -2249,7 +2274,7 @@ declare function PolymorphCopy(object: ObjectPtr): void;
 /**
  * This action plays the specified sound from the character's soundset.
  */
-declare function VerbalConstantHead(object: ObjectPtr, constant: number): void;
+declare function VerbalConstantHead(object: ObjectPtr, constant: SoundOff): void;
 
 /**
  * This action plays the animation specified by the object parameter at the specified location ([x.y]). Animation preference order is applied, i.e. the engine first looks to play a VVC file of the specified name, if no such a file exists, the engine looks to play a BAM file of the specified.
@@ -2264,7 +2289,7 @@ declare function CreateVisualEffectObject(dialogfile: string, target: ObjectPtr)
 /**
  * This action removes the active creature's current kit and adds the specified kit. Abilities from any previous kit are removed. AddKit(0) can be used to remove a creatures current kit without adding a new one. Class restrictions apply for kits. When attempting adding an invalid kit, the existing kit (if any) will be replied.
  */
-declare function AddKit(kit: number): void;
+declare function AddKit(kit: Kit): void;
 
 /**
  * This action can be used to manually start the combat counter.
@@ -2359,7 +2384,7 @@ declare function SetName(strRef: number): void;
 /**
  * This action sets the active creatures kit to the specified kit . Abilities from any previous kits are kept. Class restrictions apply for kits. When attempting adding an invalid kit, the existing kit (if any) will be replied.
  */
-declare function AddSuperKit(kit: number): void;
+declare function AddSuperKit(kit: Kit): void;
 
 /**
  * This action causes the active creature to run away from the specified creature, for the specified time. The time parameter is measured in AI updates, which default to 15 updates per second. Occasionally, fleeing creatures stop to attack another creature.
@@ -2439,7 +2464,7 @@ declare function MoveToSavedLocation(global: string, area: string): void;
 /**
  * This action inflicts the specified amount of damage (of the specified type) on the target creature.
  */
-declare function ApplyDamage(object: ObjectPtr, amount: number, type: number): void;
+declare function ApplyDamage(object: ObjectPtr, amount: number, type: DMGtype): void;
 
 /**
  * This action extends the time taken for the banter timer to expire. The banter timers are hardcoded and every time one expires an NPC's b****.dlg is called.
@@ -2480,12 +2505,12 @@ declare function SetGlobal(name: string, area: string, value: number): void;
 /**
  * This action dictates whether the banter timer can expire.
  */
-declare function BanterBlockFlag(state: number): void;
+declare function BanterBlockFlag(state: boolean): void;
 
 /**
  * This action is used in conjunction with animations in ARE files. The action sets the enabled state of an animation (specified by the object parameter).
  */
-declare function AmbientActivate(object: ObjectPtr, state: number): void;
+declare function AmbientActivate(object: ObjectPtr, state: boolean): void;
 
 /**
  * It is likely that the first parameter refers to a transition trigger and the second parameter refers to a door type in an area. In this manner, the trigger is activated and deactivated based on the open state of the door.
@@ -2495,7 +2520,7 @@ declare function AttachTransitionToDoor(global: string, object: ObjectPtr): void
 /**
  * This action applies a percentage damage (of the specified damage type) to the target object.
  */
-declare function ApplyDamagePercent(object: ObjectPtr, amount: number, type: number): void;
+declare function ApplyDamagePercent(object: ObjectPtr, amount: number, type: DMGtype): void;
 
 /**
  * This action acts as a shortcut for SetGlobal(). The action can only set global variables.
@@ -2544,7 +2569,7 @@ Scripts can handle `RES` filenames with `+`, Dialogs and the console cannot. Sam
 - This action will default to a spell matching the first 7 characters in Dialogs/Console **IF** the 8<sup>th</sup> character isn't valid.
 {% endcapture %} {% include note.html %}
  */
-declare function Spell(target: ObjectPtr, spell: number): void;
+declare function Spell(target: ObjectPtr, spell: SpellID): void;
 
 /**
  * It is likely to move all creatures present in the saved game that are currently in the FromArea parameter and move them to the Location in the ToArea parameter.
@@ -2584,7 +2609,7 @@ declare function StateOverrideTime(time: number): void;
 /**
  * 
  */
-declare function StateOverrideFlag(state: number): void;
+declare function StateOverrideFlag(state: boolean): void;
 
 /**
  * This action modifies the probability of a daytime rest interruption (by modifying fields in the ARE file).
@@ -2599,7 +2624,7 @@ declare function SetRestEncounterProbabilityNight(prob: number): void;
 /**
  * This action is used in conjunction with ambient sounds in ARE files. The action sets the enabled state of an ambient sound (specified by the object parameter).
  */
-declare function SoundActivate(object: ObjectPtr, state: number): void;
+declare function SoundActivate(object: ObjectPtr, state: boolean): void;
 
 /**
  * The action plays the specified song. Values are from [SONGLIST.2DA]({{ 2da }}/songlist.htm).
@@ -2619,7 +2644,7 @@ Scripts can handle `RES` filenames with `+`, Dialogs and the console cannot. Sam
 - This action will default to a spell matching the first 7 characters in Dialogs/Console *IF* the 8th character isn't valid.
 {% endcapture %} {% include note.html %}
  */
-declare function ForceSpellRange(target: ObjectPtr, spell: number): void;
+declare function ForceSpellRange(target: ObjectPtr, spell: SpellID): void;
 
 /**
  * 
@@ -2634,12 +2659,12 @@ Scripts can handle `RES` filenames with `+`, Dialogs and the console cannot. Sam
 - This action will default to a spell matching the first 7 characters in Dialogs/Console *IF* the 8th character isn't valid.
 {% endcapture %} {% include note.html %}
  */
-declare function ForceSpellPointRange(target: Point, spell: number): void;
+declare function ForceSpellPointRange(target: Point, spell: SpellID): void;
 
 /**
  * This action changes the specified sound reference (SndSlot) on the specified creature to the specified value. It should be noted that the biography can be changed by this action, as it is listed as a SoundSlot (EXISTANCE5).
  */
-declare function SetPlayerSound(object: ObjectPtr, strRef: number, slotnum: number): void;
+declare function SetPlayerSound(object: ObjectPtr, strRef: number, slotnum: SndSlot): void;
 
 /**
  * This action dictates whether resting is allowed in the current area.
@@ -2703,22 +2728,22 @@ declare function Turn(): void;
 /**
  * This action will add area type flags (e.g. outdoor, dungeon) to the current area. The areatype value is OR'd, so multiple values can be set. Values are from [areatype.ids]({{ ids }}/areatype.htm)
  */
-declare function AddAreaType(type: number): void;
+declare function AddAreaType(type: AreaType): void;
 
 /**
  * This action will remove area type flags (e.g. outdoor, dungeon) to the current area. Values are from [areatype.ids]({{ ids }}/areatype.htm)
  */
-declare function RemoveAreaType(type: number): void;
+declare function RemoveAreaType(type: AreaType): void;
 
 /**
  * This action will add area flags (e.g. save enabled, tutorial) to the current area. The area flags value is OR'd, so multiple values can be set. Values are from [areaflag.ids]({{ ids }}/areaflag.htm).
  */
-declare function AddAreaFlag(type: number): void;
+declare function AddAreaFlag(type: AreaFlag): void;
 
 /**
  * This action will remove area flags (e.g. save enabled, tutorial) to the current area. The area flags value is OR'd, so multiple values can be set. Values are from [areaflag.ids]({{ ids }}/areaflag.htm).
  */
-declare function RemoveAreaFlag(type: number): void;
+declare function RemoveAreaFlag(type: AreaFlag): void;
 
 /**
  * This action instructs the active creature to start the specified dialog with the specified target. The dialog can be initiated from a distance and must have at least one state with all its top level conditions true else it will not initiate. The active creature name will not appear as the dialog attribution.
@@ -2759,22 +2784,22 @@ Scripts can handle `RES` filenames with `+`, Dialogs and the console cannot. Sam
 - This action will default to a spell matching the first 7 characters in Dialogs/Console *IF* the 8<sup>th</sup> character isn't valid.
 {% endcapture %} {% include note.html %}
  */
-declare function ReallyForceSpellPoint(target: Point, spell: number): void;
+declare function ReallyForceSpellPoint(target: Point, spell: SpellID): void;
 
 /**
  * 
  */
-declare function CutAllowScripts(bool: number): void;
+declare function CutAllowScripts(bool: boolean): void;
 
 /**
  * 
  */
-declare function SetCursorState(bool: number): void;
+declare function SetCursorState(bool: boolean): void;
 
 /**
  * This action starts a cutscene. Player control is removed, though all scripts keep running. Note that actions already in the action list are not cleared without an explicit call to ClearAllActions. The example script is from are0507.bcs.
  */
-declare function SetCutSceneLite(bool: number): void;
+declare function SetCutSceneLite(bool: boolean): void;
 
 /**
  * This action instructs the active creature to play the swing weapon animation once. Note that some objects do not have this animation.
@@ -2851,7 +2876,7 @@ declare function StartRainNow(): void;
 /**
  * This action instructs the active creature to perform the specified animation sequence. Values are from [seq.ids]({{ ids }}/seq.htm).
  */
-declare function SetSequence(sequence: number): void;
+declare function SetSequence(sequence: Seq): void;
 
 /**
  * This action displays the specified string over the head on the specified object (on the game-screen), without displaying it in the message log.
@@ -3034,7 +3059,7 @@ declare function JumpToPoint(target: Point): void;
 /**
  * This action scrolls the view point (i.e. the area of the current map being displayed onscreen) to the target point ([x.y] at the specified speed. Speeds are taken from [scroll.ids]({{ ids }}/scroll.htm) (VERY\_FAST is equivalent to normal walking speed).
  */
-declare function MoveViewPoint(target: Point, scrollspeed: number): void;
+declare function MoveViewPoint(target: Point, scrollspeed: Scroll): void;
 
 /**
  * This action scrolls the view point (i.e. the area of the current map being displayed onscreen) to the target object ([x.y] at the specified speed. Speeds are taken from [scroll.ids]({{ ids }}/scroll.htm) (VERY\_FAST is equivalent to normal walking speed). The example script is from a cutscene; CUT03C.bcs.
@@ -3058,7 +3083,7 @@ declare function MoveViewPoint(target: Point, scrollspeed: number): void;
   END
 ```
  */
-declare function MoveViewObject(target: ObjectPtr, scrollspeed: number): void;
+declare function MoveViewObject(target: ObjectPtr, scrollspeed: Scroll): void;
 
 /**
  * This action changes the assigned script file for the active creature. The new script name is specified in the scriptfile parameter. The level parameter dictates the script level to change - values are from [scrlev.ids]({{ ids }}/scrlev.htm). Scripts can be set for any scriptable object (container, creature, door etc.), but are not persisted.
@@ -3072,7 +3097,7 @@ declare function MoveViewObject(target: ObjectPtr, scrollspeed: number): void;
   END
 ```
  */
-declare function ChangeAIScript(scriptfile: string, level: number): void;
+declare function ChangeAIScript(scriptfile: string, level: ScrLev): void;
 
 /**
  * This action starts a timer local to the active creature. The timer is measured in seconds, and the timer value is not saved in save games. The timer is checked with the TimerExpired trigger.
@@ -3166,7 +3191,7 @@ declare function Explore(): void;
   END
 ```
  */
-declare function DayNight(timeofday: number): void;
+declare function DayNight(timeofday: Time): void;
 
 /**
  * This action changes the weather. The action only works in outdoors areas that have weather enabled in the ARE file. Values for the weather parameter are from [weather.ids]({{ ids }}/weather.htm). Note that the fog weather type does not work.
@@ -3181,7 +3206,7 @@ declare function DayNight(timeofday: number): void;
   END
 ```
  */
-declare function Weather(weather: number): void;
+declare function Weather(weather: WeatherID): void;
 
 /**
  * This action calls lightning from the sky against the specified target, causing immediate death (unless the target has the MinHP effect applied). The lightning does not always show, and if it does, it is not always in the expected location.
@@ -3334,7 +3359,7 @@ declare function RandomWalk(): void;
   END
 ```
  */
-declare function SetInterrupt(state: number): void;
+declare function SetInterrupt(state: boolean): void;
 
 /**
  * This action instructs the active creature to protect the specified creature (i.e. attack any enemies of the creature), while staying within the specified range. The example script is from IWD, 4003bsg.bcs and controls the zombies guarding Presio.(4003BSG.bcs).
@@ -3410,7 +3435,7 @@ declare function LeaveArea(area: string, point: Point, face: number): void;
   END
 ```
  */
-declare function SelectWeaponAbility(weaponnum: number, abilitynum: number): void;
+declare function SelectWeaponAbility(weaponnum: Slots, abilitynum: number): void;
 
 /**
  * The signature of this action is not listed in the action.ids file provided with the game. This action causes the active creature to leave the area using the trigger region identified by the specified parameter. The parameter is the internal global ID of the region.
@@ -3448,7 +3473,7 @@ Scripts can handle `RES` filenames with `+`, Dialogs and the console cannot. Sam
 - This action will default to a spell matching the first 7 characters in Dialogs/Console *IF* the 8<sup>th</sup> character isn't valid.
 {% endcapture %} {% include note.html %}
  */
-declare function SpellPoint(target: Point, spell: number): void;
+declare function SpellPoint(target: Point, spell: SpellID): void;
 
 /**
  * This action applies the benefits of resting (i.e. healing, restoring spells and restoring abilities) to the active creature. The action does not play the rest movie or advance game time. The example script is from cut28a.bcs.

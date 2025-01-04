@@ -5,9 +5,29 @@ type Brand<B> = { __brand: B }
 export type IE<T, B> = T & Brand<B>
 
 /**
+ * Object specifier, e.g. [ENEMY.0.0.MAGE].
+ * 
+ * No validation for now.
+ */
+export class ObjectSpec {
+    id: string;
+    constructor(id: string,) {
+        this.id = id;
+    }
+}
+/**
+ * Object specifier, e.g. [ENEMY.0.0.MAGE].
+ *
+ * No validation for now.
+ */
+export function obj(spec: string) {
+    return new ObjectSpec(spec);
+}
+
+/**
  * Game Object
  */
-export declare type ObjectPtr = IE<number, 'ObjectPtr'>;
+export declare type ObjectPtr = IE<string, 'ObjectPtr'> | ObjectSpec;
 
 /**
  * Area point/location.
@@ -30,13 +50,17 @@ export type ResRef = IE<string, 'ResRef'>;
  * Variable and timers scope.
  * "GLOBAL" | "LOCAL" | "MYAREA" | Area RESREF
  */
-export type Scope = "GLOBAL" | "LOCALS" | "MYAREA" | ResRef;
-
-export const GLOBAL: Scope = "GLOBAL";
-export const LOCALS: Scope = "LOCALS";
-export const MYAREA: Scope = "MYAREA";
+export type Scope = "GLOBAL" | "LOCALS" | "MYAREA";
 
 /**
- * ITM ResRef
+ * "GLOBAL"
  */
-export declare type ItmRef = IE<ResRef, 'ITM'>;
+export const GLOBAL: Scope = "GLOBAL";
+/**
+ * "LOCALS"
+ */
+export const LOCALS: Scope = "LOCALS";
+/**
+ * "MYAREA"
+ */
+export const MYAREA: Scope = "MYAREA";

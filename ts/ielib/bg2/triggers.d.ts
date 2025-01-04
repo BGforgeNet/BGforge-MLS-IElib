@@ -16,7 +16,7 @@ import type { NPC } from "./npc.ids";
 import type { Modal } from "./modal.ids";
 import type { Race } from "./race.ids";
 import type { Reaction } from "./reaction.ids";
-import type { ShoutIDS } from "./shoutids.ids";
+import type { ShoutID } from "./shoutids.ids";
 import type { Slots } from "./slots.ids";
 import type { Specific } from "./specific.ids";
 import type { State } from "./state.ids";
@@ -260,7 +260,7 @@ declare function HPPercentGT(object: ObjectPtr, hitPoints: number): boolean;
 /**
  * Returns true only if the active CRE was within 30 feet of the specified object and the specified object shouted the specified number (which does not have to be in SHOUTIDS.ids) in the last script round. NB. If the object is specified as a death variable, the trigger will only return true if the corresponding object shouting also has an Enemy-Ally flag of NEUTRAL.
  */
-declare function Heard(object: ObjectPtr, id: ShoutIDS): boolean;
+declare function Heard(object: ObjectPtr, id: ShoutID): boolean;
 
 /**
  * Never returns true, i.e. is always false. A block of triggers containing this will never return true regardless of the other triggers in the block. The corresponding actions will never take place.

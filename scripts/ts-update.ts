@@ -15,6 +15,7 @@ type TypeMapping = { [key: string]: string };
 type Parameter = {
     name: string;
     type: string;
+    ids?: string;
 };
 
 type ParsedData = {
@@ -33,6 +34,7 @@ const typeMapping: TypeMapping = {
     p: "Point",
     a: "Action",
     itmref: "ItmRef",
+    splref: "SplRef",
 };
 
 /**
@@ -89,7 +91,20 @@ function generateTypeScriptDeclaration(yamlFilePath: string): string | null {
         paramName = paramName === "GLOBAL" ? "global" : paramName;
         paramName = paramName === "STRREF" ? "strRef" : paramName.toLowerCase();
 
-        const paramType = typeMapping[param.type] || param.type;
+        // Try IDS, then mapping, then just type
+        let paramType = param.ids ? param.ids : typeMapping[param.type];
+        // Spell is an Action
+        if (paramType == "Spell") {
+            paramType = "SpellID";
+        }
+        // Weather is an Action
+        if (paramType == "Weather") {
+            paramType = "WeatherID";
+        }
+        // Just consistency
+        if (paramType == "ShoutIDS") {
+            paramType = "ShoutID";
+        }
         paramLines.push(`${paramName}: ${paramType}`);
     }
 
@@ -104,7 +119,34 @@ function generateTypeScriptDeclaration(yamlFilePath: string): string | null {
  * @param outputFile Output file path.
  */
 function processFiles(directory: string, outputFile: string): void {
-    const header = `import type { Action, ObjectPtr, Point } from "../index";\n\n`;
+    const header = `import type { Action, ObjectPtr, Point, SpellID, SplRef } from "../index";
+
+import type { Align } from "./align.ids";
+import type { Animate } from "./animate.ids";
+import type { AreaFlag } from "./areaflag.ids";
+import type { AreaType } from "./areatype.ids";
+import type { Class } from "./class.ids";
+import type { DMGtype } from "./dmgtype.ids";
+import type { EA } from "./ea.ids";
+import type { Gender } from "./gender.ids";
+import type { General } from "./general.ids";
+import type { GTimes } from "./gtimes.ids";
+import type { MFlags } from "./mflags.ids";
+import type { JourType } from "./jourtype.ids";
+import type { Kit } from "./kit.ids";
+import type { Race } from "./race.ids";
+import type { ScrLev } from "./scrlev.ids";
+import type { Scroll } from "./scroll.ids";
+import type { Seq } from "./seq.ids";
+import type { ShoutID } from "./shoutids.ids";
+import type { Slots } from "./slots.ids";
+import type { SndSlot } from "./sndslot.ids";
+import type { SoundOff } from "./soundoff.ids";
+import type { Specific } from "./specific.ids";
+import type { Time } from "./time.ids";
+import type { WeatherID } from "./weather.ids";
+
+`;
     const tsOutput: string[] = [header];
 
     const files = fs.readdirSync(directory);
@@ -168,7 +210,7 @@ import type { NPC } from "./npc.ids";
 import type { Modal } from "./modal.ids";
 import type { Race } from "./race.ids";
 import type { Reaction } from "./reaction.ids";
-import type { ShoutIDS } from "./shoutids.ids";
+import type { ShoutID } from "./shoutids.ids";
 import type { Slots } from "./slots.ids";
 import type { Specific } from "./specific.ids";
 import type { State } from "./state.ids";
@@ -263,8 +305,13 @@ function parseTriggerParameters(params: string): string {
         if (!tsType) {
             throw new Error(`Unknown type: "${type}" or "${specificType}"`);
         }
+        // Spell is Action
         if (tsType == "Spell") {
             tsType = "SpellID";
+        }
+        // Just consistency
+        if (tsType == "ShoutIDS") {
+            tsType = "ShoutID";
         }
 
         // Format the parameter as "name: tsType"

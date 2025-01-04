@@ -1,3 +1,2 @@
-import { IE } from "..";
-
-export declare type GTimes = IE<number, 'GTimes'>;
+/** GTimes.ids */
+export declare type GTimes = number & {};
