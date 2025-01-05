@@ -1,27 +1,27 @@
 import type { ObjectPtr, SpellID, ItmRef } from "../index";
 
 import type { Align } from "./align.ids";
-import type { AreaType } from "./areatype.ids";
+import type { AreaTypeID as AreaType } from "./areatype.ids";
 import type { AStyles } from "./astyles.ids";
-import type { Class } from "./class.ids";
+import type { ClassID as Class } from "./class.ids";
 import type { Damages } from "./damages.ids";
 import type { DiffLev } from "./difflev.ids";
 import type { EA } from "./ea.ids";
-import type { Gender } from "./gender.ids";
-import type { General } from "./general.ids";
+import type { GenderID as Gender } from "./gender.ids";
+import type { GeneralID as General } from "./general.ids";
 import type { Happy } from "./happy.ids";
-import type { HotKey } from "./hotkey.ids";
-import type { Kit } from "./kit.ids";
+import type { HotKeyID as HotKey } from "./hotkey.ids";
+import type { KitID as Kit } from "./kit.ids";
 import type { NPC } from "./npc.ids";
 import type { Modal } from "./modal.ids";
-import type { Race } from "./race.ids";
-import type { Reaction } from "./reaction.ids";
+import type { RaceID as Race } from "./race.ids";
+import type { ReactionID as Reaction } from "./reaction.ids";
 import type { ShoutID } from "./shoutids.ids";
 import type { Slots } from "./slots.ids";
 import type { Specific } from "./specific.ids";
 import type { State } from "./state.ids";
 import type { Stats } from "./stats.ids";
-import type { Time } from "./time.ids";
+import type { TimeID as Time } from "./time.ids";
 import type { TimeODay } from "./timeoday.ids";
 
 

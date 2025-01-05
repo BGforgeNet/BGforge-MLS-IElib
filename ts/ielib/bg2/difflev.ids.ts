@@ -1,3 +1,2 @@
-import { IE } from "..";
-
-export declare type DiffLev = IE<number, 'DiffLev'>;
+/** DiffLev.ids */
+export declare type DiffLev = number & {};

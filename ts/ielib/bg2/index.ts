@@ -1,14 +1,49 @@
 import { ObjectPtr } from '..';
 
 export * from './actions';
+export * from './align.ids';
+export * from './animate.ids';
+export * from './areaflag.ids';
+export * from './areatype.ids';
+export * from './astyles.ids';
+export * from './class.ids';
+export * from './damages.ids';
+export * from './difflev.ids';
+export * from './dmgtype.ids';
+export * from './ea.ids';
+export * from './gender.ids';
+export * from './general.ids';
+export * from './gtimes.ids';
+export * from './happy.ids';
+export * from './hotkey.ids';
+export * from './jourtype.ids';
+export * from './kit.ids';
+export * from './mflags.ids';
+export * from './modal.ids';
+export * from './npc.ids';
+
 export * from './object.d';
 export * from './object';
+
+export * from './race.ids';
+export * from './reaction.ids';
+export * from './scrlev.ids';
+export * from './scroll.ids';
+export * from './seq.ids';
+export * from './shoutids.ids';
+export * from './slots.ids';
+export * from './sndslot.ids';
+export * from './soundoff.ids';
+export * from './specific.ids';
+export * from './spell.ids';
+export * from './state.ids';
+export * from './stats.ids';
+export * from './time.ids';
+export * from './timeoday.ids';
+
 export * from './triggers';
 
-export * from './ea.ids';
-export * from './gtimes.ids';
-export * from './shoutids.ids';
-export * from './spell.ids';
+export * from './weather.ids';
 
 // Help() is both Action and Trigger. Exporting explicitly.
 

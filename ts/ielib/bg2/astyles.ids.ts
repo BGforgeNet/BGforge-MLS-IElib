@@ -1,6 +1,6 @@
-import { IE } from "..";
+/** AStyles.ids */
+export declare type AStyles = number & {};
 
-export declare type AStyles = IE<number, 'AStyles'>;
 /** 0 */
 export declare const DEFAULT: AStyles;
 /** 1 */

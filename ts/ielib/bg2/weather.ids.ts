@@ -1,3 +1,2 @@
-import { IE } from "..";
-
-export declare type WeatherID = IE<number, 'Weather'>;
+/** Weather.ids */
+export declare type WeatherID = number & {};

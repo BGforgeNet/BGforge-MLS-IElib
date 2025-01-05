@@ -1,4 +1,3 @@
-import { IE } from "..";
-
-export declare type EA = IE<number, 'EA'>;
+/** EA.ids */
+export declare type EA = number & {};
 export declare const ENEMY: EA;

@@ -1,3 +1,2 @@
-import { IE } from "..";
-
-export declare type HotKey = IE<number, 'HotKey'>;
+/** HotKey.ids */
+export declare type HotKeyID = number & {};

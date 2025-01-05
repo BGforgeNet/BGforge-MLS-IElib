@@ -1,7 +1,5 @@
 import type { ObjectPtr } from "../index";
 
-export declare const NEUTRAL: ObjectPtr;
-
 /**
  * Nothing
  */

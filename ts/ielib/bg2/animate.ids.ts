@@ -1,3 +1,2 @@
-import { IE } from "..";
-
-export declare type Animate = IE<number, 'Animate'>;
+/** Animate.ids */
+export declare type Animate = number & {};

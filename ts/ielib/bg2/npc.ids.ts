@@ -1,3 +1,2 @@
-import { IE } from "..";
-
-export declare type NPC = IE<number, 'NPC'>;
+/** NPC.ids */
+export declare type NPC = number & {};

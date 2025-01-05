@@ -1,3 +1,2 @@
-import { IE } from "..";
-
-export declare type ScrLev = IE<number, 'ScrLev'>;
+/** ScrLev.ids */
+export declare type ScrLev = number & {};

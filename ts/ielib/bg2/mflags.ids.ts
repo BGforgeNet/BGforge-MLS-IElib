@@ -1,3 +1,2 @@
-import { IE } from "..";
-
-export declare type MFlags = IE<number, 'MFlags'>;
+/** MFlags.ids */
+export declare type MFlags = number & {};

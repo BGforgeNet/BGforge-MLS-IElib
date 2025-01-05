@@ -1,3 +1,2 @@
-import { IE } from "..";
-
-export declare type AreaType = IE<number, 'AreaType'>;
+/** AreaType.ids */
+export declare type AreaTypeID = number & {};

@@ -1,3 +1,2 @@
-import { IE } from "..";
-
-export declare type JourType = IE<number, 'JourType'>;
+/** JourType.ids */
+export declare type JourType = number & {};

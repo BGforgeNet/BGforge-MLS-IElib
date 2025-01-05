@@ -1,3 +1,2 @@
-import { IE } from "..";
-
-export declare type Modal = IE<number, 'Modal'>;
+/** Modal.ids */
+export declare type Modal = number & {};

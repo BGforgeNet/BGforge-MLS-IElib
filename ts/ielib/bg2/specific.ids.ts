@@ -1,3 +1,2 @@
-import { IE } from "..";
-
-export declare type Specific = IE<number, 'Specific'>;
+/** Specific.ids */
+export declare type Specific = number & {};

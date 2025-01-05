@@ -1,3 +1,2 @@
-import { IE } from "..";
-
-export declare type Class = IE<number, 'Class'>;
+/** Class.ids */
+export declare type ClassID = number & {};

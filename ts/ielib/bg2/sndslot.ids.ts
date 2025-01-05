@@ -1,3 +1,2 @@
-import { IE } from "..";
-
-export declare type SndSlot = IE<number, 'SndSlot'>;
+/** SndSlot.ids */
+export declare type SndSlot = number & {};

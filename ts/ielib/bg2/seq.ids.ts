@@ -1,3 +1,2 @@
-import { IE } from "..";
-
-export declare type Seq = IE<number, 'Seq'>;
+/** Seq.ids */
+export declare type Seq = number & {};

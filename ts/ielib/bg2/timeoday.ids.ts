@@ -1,3 +1,2 @@
-import { IE } from "..";
-
-export declare type TimeODay = IE<number, 'TimeODay'>;
+/** TimeODay.ids */
+export declare type TimeODay = number & {};

@@ -1,3 +1,2 @@
-import { IE } from "..";
-
-export declare type Reaction = IE<number, 'Reaction'>;
+/** Reaction.ids */
+export declare type ReactionID = number & {};

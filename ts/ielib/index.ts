@@ -39,12 +39,15 @@ export type Point = `[${number}.${number}]`;
  */
 export type Action = void;
 
-export type SpellID = string & {};
+/** Spell.ids */
+export type SpellID = number & {};
 
-/**
- * Resource reference, up to 8 characters.
- */
-export type ResRef = IE<string, 'ResRef'>;
+/** Resource reference, up to 8 characters. */
+export type ResRef = string & {};
+/** SPL resource reference, up to 8 characters. */
+export type SplRef = string & {};
+/** ITM resource reference, up to 8 characters. */
+export type ItmRef = string & {};
 
 /**
  * Variable and timers scope.

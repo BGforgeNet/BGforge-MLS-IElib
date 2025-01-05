@@ -1,3 +1,2 @@
-import { IE } from "..";
-
-export declare type SoundOff = IE<number, 'SoundOff'>;
+/** SoundOff.ids */
+export declare type SoundOff = number & {};

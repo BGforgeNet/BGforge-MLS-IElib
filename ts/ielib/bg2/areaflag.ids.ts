@@ -1,3 +1,2 @@
-import { IE } from "..";
-
-export declare type AreaFlag = IE<number, 'AreaFlag'>;
+/** AreaFlag.ids */
+export declare type AreaFlag = number & {};

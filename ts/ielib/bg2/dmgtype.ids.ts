@@ -1,3 +1,2 @@
-import { IE } from "..";
-
-export declare type DMGtype = IE<number, 'DMGtype'>;
+/** DMGtype.ids */
+export declare type DMGtype = number & {};

@@ -1,3 +1,2 @@
-import { IE } from "..";
-
-export declare type Align = IE<number, 'Align'>;
+/** Align.ids */
+export declare type Align = number & {};
