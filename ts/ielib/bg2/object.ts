@@ -2,8 +2,8 @@ import { ObjectPtr } from "..";
 
 
 declare const Myself: ObjectPtr; // dupe to avoid circular import
+// To keep declarations shorter
 function DefaultSelf(who: ObjectPtr = Myself): ObjectPtr { return who };
-
 
 /**
  * The nearest enemy of the target creature.

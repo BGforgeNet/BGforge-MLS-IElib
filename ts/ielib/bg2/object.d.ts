@@ -1,4 +1,4 @@
-import type { ObjectPtr } from "../index";
+import type { ObjectPtr, ObjectSpec } from "../index";
 
 /**
  * Nothing
@@ -188,102 +188,102 @@ export declare const LastSummonerOf: ObjectPtr;
 /**
  * Nearest enemy of a specific type.
  */
-export declare const NearestEnemyOfType: ObjectPtr;
+export declare function NearestEnemyOfType(enemyType: ObjectSpec): ObjectPtr;
 
 /**
  * Second nearest enemy of a specific type.
  */
-export declare const SecondNearestEnemyOfType: ObjectPtr;
+export declare function SecondNearestEnemyOfType(enemyType: ObjectSpec): ObjectPtr;
 
 /**
  * Third nearest enemy of a specific type.
  */
-export declare const ThirdNearestEnemyOfType: ObjectPtr;
+export declare function ThirdNearestEnemyOfType(enemyType: ObjectSpec): ObjectPtr;
 
 /**
  * Fourth nearest enemy of a specific type.
  */
-export declare const FourthNearestEnemyOfType: ObjectPtr;
+export declare function  FourthNearestEnemyOfType(enemyType: ObjectSpec): ObjectPtr;
 
 /**
  * Fifth nearest enemy of a specific type.
  */
-export declare const FifthNearestEnemyOfType: ObjectPtr;
+export declare function FifthNearestEnemyOfType(enemyType: ObjectSpec): ObjectPtr;
 
 /**
  * Sixth nearest enemy of a specific type.
  */
-export declare const SixthNearestEnemyOfType: ObjectPtr;
+export declare function SixthNearestEnemyOfType(enemyType: ObjectSpec): ObjectPtr;
 
 /**
  * Seventh nearest enemy of a specific type.
  */
-export declare const SeventhNearestEnemyOfType: ObjectPtr;
+export declare function SeventhNearestEnemyOfType(enemyType: ObjectSpec): ObjectPtr;
 
 /**
  * Eighth nearest enemy of a specific type.
  */
-export declare const EigthNearestEnemyOfType: ObjectPtr;
+export declare function EigthNearestEnemyOfType(enemyType: ObjectSpec): ObjectPtr;
 
 /**
  * Ninth nearest enemy of a specific type.
  */
-export declare const NinthNearestEnemyOfType: ObjectPtr;
+export declare function NinthNearestEnemyOfType(enemyType: ObjectSpec): ObjectPtr;
 
 /**
  * Tenth nearest enemy of a specific type.
  */
-export declare const TenthNearestEnemyOfType: ObjectPtr;
+export declare function TenthNearestEnemyOfType(enemyType: ObjectSpec): ObjectPtr;
 
 /**
  * Nearest group member of a specific type.
  */
-export declare const NearestMyGroupOfType: ObjectPtr;
+export declare function NearestMyGroupOfType(groupMemberType: ObjectSpec): ObjectPtr;
 
 /**
  * Second nearest group member of a specific type.
  */
-export declare const SecondNearestMyGroupOfType: ObjectPtr;
+export declare function SecondNearestMyGroupOfType(groupMemberType: ObjectSpec): ObjectPtr;
 
 /**
  * Third nearest group member of a specific type.
  */
-export declare const ThirdNearestMyGroupOfType: ObjectPtr;
+export declare function ThirdNearestMyGroupOfType(groupMemberType: ObjectSpec): ObjectPtr;
 
 /**
  * Fourth nearest group member of a specific type.
  */
-export declare const FourthNearestMyGroupOfType: ObjectPtr;
+export declare function FourthNearestMyGroupOfType(groupMemberType: ObjectSpec): ObjectPtr;
 
 /**
  * Fifth nearest group member of a specific type.
  */
-export declare const FifthNearestMyGroupOfType: ObjectPtr;
+export declare function FifthNearestMyGroupOfType(groupMemberType: ObjectSpec): ObjectPtr;
 
 /**
  * Sixth nearest group member of a specific type.
  */
-export declare const SixthNearestMyGroupOfType: ObjectPtr;
+export declare function SixthNearestMyGroupOfType(groupMemberType: ObjectSpec): ObjectPtr;
 
 /**
  * Seventh nearest group member of a specific type.
  */
-export declare const SeventhNearestMyGroupOfType: ObjectPtr;
+export declare function SeventhNearestMyGroupOfType(groupMemberType: ObjectSpec): ObjectPtr;
 
 /**
  * Eighth nearest group member of a specific type.
  */
-export declare const EigthNearestMyGroupOfType: ObjectPtr;
+export declare function EigthNearestMyGroupOfType(groupMemberType: ObjectSpec): ObjectPtr;
 
 /**
  * Ninth nearest group member of a specific type.
  */
-export declare const NinthNearestMyGroupOfType: ObjectPtr;
+export declare function NinthNearestMyGroupOfType(groupMemberType: ObjectSpec): ObjectPtr;
 
 /**
  * Tenth nearest group member of a specific type.
  */
-export declare const TenthNearestMyGroupOfType: ObjectPtr;
+export declare function TenthNearestMyGroupOfType(groupMemberType: ObjectSpec): ObjectPtr;
 
 /**
  * Player in the first portrait slot.
