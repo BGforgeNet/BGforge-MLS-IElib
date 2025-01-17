@@ -3205,6 +3205,11 @@ declare function DayNight(timeofday: Time): void;
       SetGlobal("KRSTORM","GLOBAL",1)
   END
 ```
+
+{% capture note %}
+In the EE's, the action has no effect if `Weather` has been disabled in the game options.
+In addition, Fog option needs `Enable Fog` to be enabled in the game options.
+{% endcapture %} {% include note.html %}
  */
 declare function Weather(weather: WeatherID): void;
 
