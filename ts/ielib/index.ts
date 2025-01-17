@@ -16,13 +16,26 @@ export class ObjectSpec {
     }
 }
 /**
- * Object specifier, e.g. [ENEMY.0.0.MAGE].
+ * Wrapper for object specifiers.
  *
+ * Allows using object specifier strings like `[ENEMY.0.0.MAGE]` in Typescript.
+ * 
  * No validation for now.
+ * @param spec Object specifier string
+ * @ret object specifier, compatible with `ObjectPtr` type
  */
-export function obj(spec: string) {
+export function $obj(spec: string) {
     return new ObjectSpec(spec);
 }
+
+
+/**
+ * Wrapper for TRA references. Use instead of `@`
+ * 
+ * @param index tra reference number
+ */
+export declare function $tra(index: number): number;
+
 
 /**
  * Game Object
