@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+    paths:
+      - ts/**
+      - .github/workflows/**
 
 jobs:
   publish:
@@ -17,4 +20,3 @@ jobs:
         with:
           token: ${{ secrets.NPM_TOKEN }}
           package: ts/ielib
-          dry-run: true
