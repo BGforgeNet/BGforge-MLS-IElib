@@ -4,5 +4,10 @@
 	"type": "module",
 	"scripts": {},
 	"dependencies": {},
-	"devDependencies": {}
+	"devDependencies": {},
+	"keywords": [
+        "Infinity Engine",
+        "Baldur's Gate",
+        "WeiDU"
+    ]
 }
