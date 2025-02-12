@@ -19,7 +19,9 @@ export class ObjectSpec {
  * Wrapper for object specifiers.
  *
  * Allows using object specifier strings like `[ENEMY.0.0.MAGE]` in Typescript.
- * 
+ *
+ * Also allows to use death variables (strings up to 17 characters - limited by SPRITE_IS_DEAD vars).
+ *
  * No validation for now.
  * @param spec Object specifier string
  * @ret object specifier, compatible with `ObjectPtr` type
