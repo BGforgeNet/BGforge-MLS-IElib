@@ -26,4 +26,4 @@
   return:
     - name: present
       type: bool
-      desc: does the creature posess the item?
+      desc: does the creature possess the item?
