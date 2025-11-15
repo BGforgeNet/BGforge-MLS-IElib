@@ -6,7 +6,7 @@
 		"ts-update": "tsx scripts/ts-update.ts external/iesdp/_data/actions ts/ielib/bg2/actions.d.ts external/iesdp/scripting/triggers/bg2triggers.htm ts/ielib/bg2/triggers.d.ts"
 	},
 	"dependencies": {
-		"js-yaml": "^4.1.0",
+		"js-yaml": "^4.1.1",
 		"jsdom": "^25.0.1",
 		"tsx": "^4.19.4",
 		"yargs": "^17.7.2"
