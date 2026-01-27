@@ -227,8 +227,10 @@ def load_datafile(fpath, prefix):
     return items
 
 
-def dump_items(prefix, items):
-    output_dir = os.path.join(structures_dir, prefix.lower().replace("_", ""))
+def dump_items(format_name, items):
+    # format_name is e.g. "sto_v1" -> output dir "sto"
+    base = re.sub(r"_v.*", "", format_name)
+    output_dir = os.path.join(structures_dir, base)
     output_file = os.path.join(output_dir, "iesdp.tpp")
     os.makedirs(output_dir, exist_ok=True)
     text = ""
@@ -252,10 +254,10 @@ for ff in formats:
         fpath = os.path.join(ff_dir, f)
         new_items = load_datafile(fpath, prefix)
         items = {**items, **new_items}
-    dump_items(prefix, items)
+    dump_items(ff, items)
 
-# feature block
+# feature block (output to fx/ directory)
 fpath = os.path.join(file_formats_dir, "itm_v1", "feature_block.yml")
 prefix = "FX_"
 items = load_datafile(fpath, prefix)
-dump_items(prefix, items)
+dump_items("fx_v1", items)
