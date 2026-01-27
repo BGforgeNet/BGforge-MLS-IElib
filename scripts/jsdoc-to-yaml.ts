@@ -2,7 +2,7 @@
  * JSDoc to YAML Converter
  *
  * Parses JSDoc comments from WeiDU .tpa files and generates YAML files
- * compatible with yaml_to_md.py for documentation generation.
+ * for Jekyll documentation generation.
  */
 
 import * as fs from 'fs';

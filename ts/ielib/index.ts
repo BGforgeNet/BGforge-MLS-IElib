@@ -11,7 +11,7 @@ export type IE<T, B> = T & Brand<B>
  */
 export class ObjectSpec {
     id: string;
-    constructor(id: string,) {
+    constructor(id: string) {
         this.id = id;
     }
 }
@@ -24,7 +24,7 @@ export class ObjectSpec {
  *
  * No validation for now.
  * @param spec Object specifier string
- * @ret object specifier, compatible with `ObjectPtr` type
+ * @returns object specifier, compatible with `ObjectPtr` type
  */
 export function $obj(spec: string) {
     return new ObjectSpec(spec);
