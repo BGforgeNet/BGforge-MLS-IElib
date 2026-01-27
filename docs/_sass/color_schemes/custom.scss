@@ -4,3 +4,6 @@ $link-color: $blue-100;
 .realtitle {
   @include fs-5;
 }
+#markdown-toc a {
+  font-weight: bold;
+}
