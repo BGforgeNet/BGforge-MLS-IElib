@@ -2,6 +2,8 @@
 
 set -xeu -o pipefail
 
+source .venv/bin/activate
+
 # launch from root repo dir
 ext_dir="external"
 iesdp_dir="$ext_dir/iesdp"

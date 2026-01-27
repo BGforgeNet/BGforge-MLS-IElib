@@ -117,7 +117,7 @@ for f in files:
 opcodes = sorted(opcodes, key=lambda k: k["n"])
 opcodes_unique = OrderedDict()
 for o in opcodes:
-    name = opcode_name(o["name"])
+    name = opcode_name(o["opname"])
     if name in skip_opcode_names:
         continue
     name_count = len([i for i in opcodes_unique if i == name])  # some name collude, need to make unique
@@ -171,7 +171,7 @@ def get_id(item, prefix):
 
     # strip links
     html = markdown(iid)
-    iid = "".join(BeautifulSoup(html, features="lxml").findAll(text=True))
+    iid = "".join(BeautifulSoup(html, features="html.parser").find_all(string=True))
 
     # custom replacements
     iid = iid.replace("probability ", "probability")
@@ -242,6 +242,8 @@ structures_dir = "structures"
 formats = os.listdir(file_formats_dir)
 for ff in formats:
     ff_dir = os.path.join(file_formats_dir, ff)
+    if not os.path.isdir(ff_dir):
+        continue
     items = OrderedDict()
     for f in os.listdir(ff_dir):
         if f == "feature_block.yml":  # feature blocks handled separately
