@@ -18,6 +18,58 @@ import matter from "gray-matter";
 // Constants
 const SKIP_OPCODE_NAMES = ["empty", "crash", "unknown"];
 
+const OPCODE_NAME_REPLACEMENTS: Record<string, string> = {
+  " ": "_",
+  ")": "_",
+  "(": "_",
+  ":": "",
+  "-": "_",
+  ",": "",
+  "&": "",
+  ".": "",
+  "'": "",
+  "/": "_",
+  modifier: "mod",
+  resistance: "resist",
+  removal_remove: "remove",
+  high_level_ability: "HLA",
+};
+
+const OPCODE_PREFIX_STRIP = [
+  "item_",
+  "graphics_",
+  "spell_effect_", // must be before spell_
+  "spell_",
+  "stat_",
+  "state_",
+  "summon_",
+];
+
+const TYPE_SIZE_MAP: Record<string, number> = {
+  byte: 1,
+  char: 1,
+  word: 2,
+  dword: 4,
+  resref: 8,
+  strref: 4,
+};
+
+const STRUCTURE_PREFIX_MAP: Record<string, string> = {
+  header: "",
+  body: "",
+  extended_header: "head",
+};
+
+const ID_REPLACEMENTS: Record<string, string> = {
+  "probability ": "probability",
+  "usability ": "usability",
+  "parameter ": "parameter",
+  "resource ": "resource",
+  alternative: "alt",
+  ".": "",
+  " ": "_",
+};
+
 // Types
 interface OpcodeFrontmatter {
   n: number;
@@ -35,6 +87,36 @@ interface StructureItem {
   mult?: number;
   unused?: boolean;
   unknown?: boolean;
+}
+
+// Custom error class for validation errors
+class ValidationError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "ValidationError";
+  }
+}
+
+/**
+ * Reads a file and returns its content, throwing descriptive errors.
+ */
+function readFile(filePath: string): string {
+  if (!fs.existsSync(filePath)) {
+    throw new Error(`File not found: ${filePath}`);
+  }
+  return fs.readFileSync(filePath, "utf-8");
+}
+
+/**
+ * Validates that a directory exists.
+ */
+function validateDirectory(dirPath: string, description: string): void {
+  if (!fs.existsSync(dirPath)) {
+    throw new Error(`${description} not found: ${dirPath}`);
+  }
+  if (!fs.statSync(dirPath).isDirectory()) {
+    throw new Error(`${description} is not a directory: ${dirPath}`);
+  }
 }
 
 /**
@@ -59,51 +141,19 @@ function findFiles(dirPath: string, ext: string): string[] {
 /**
  * Normalizes an opcode name for use as a WeiDU constant.
  */
-function opcodeName(name: string): string {
-  // Replacements applied anywhere in the string
-  const replacements: Record<string, string> = {
-    " ": "_",
-    ")": "_",
-    "(": "_",
-    ":": "",
-    "-": "_",
-    ",": "",
-    "&": "",
-    ".": "",
-    "'": "",
-    "/": "_",
-    modifier: "mod",
-    resistance: "resist",
-    removal_remove: "remove",
-    high_level_ability: "HLA",
-  };
-
-  // Prefixes to strip from the left
-  const lstripPrefixes = [
-    "item_",
-    "graphics_",
-    "spell_effect_", // should be before spell_
-    "spell_",
-    "stat_",
-    "state_",
-    "summon_",
-  ];
-
+function normalizeOpcodeName(name: string): string {
   let result = name.toLowerCase();
 
   // Apply replacements
-  for (const [from, to] of Object.entries(replacements)) {
+  for (const [from, to] of Object.entries(OPCODE_NAME_REPLACEMENTS)) {
     result = result.split(from).join(to);
   }
 
-  // Collapse multiple underscores
-  result = result.replace(/_{2,}/g, "_");
-
-  // Strip leading/trailing underscores
-  result = result.replace(/^_+|_+$/g, "");
+  // Collapse multiple underscores and strip leading/trailing
+  result = result.replace(/_{2,}/g, "_").replace(/^_+|_+$/g, "");
 
   // Strip known prefixes
-  for (const prefix of lstripPrefixes) {
+  for (const prefix of OPCODE_PREFIX_STRIP) {
     if (result.startsWith(prefix)) {
       result = result.slice(prefix.length);
       break;
@@ -117,15 +167,15 @@ function opcodeName(name: string): string {
  * Parses an opcode HTML file with YAML frontmatter.
  */
 function parseOpcodeFrontmatter(filePath: string): OpcodeFrontmatter | null {
-  const content = fs.readFileSync(filePath, "utf-8");
+  const content = readFile(filePath);
   const parsed = matter(content);
-  const data = parsed.data as OpcodeFrontmatter;
+  const data = parsed.data;
 
-  if (data.n === undefined || !data.opname) {
+  if (typeof data.n !== "number" || typeof data.opname !== "string") {
     return null;
   }
 
-  return data;
+  return data as OpcodeFrontmatter;
 }
 
 /**
@@ -133,10 +183,11 @@ function parseOpcodeFrontmatter(filePath: string): OpcodeFrontmatter | null {
  */
 function generateOpcodeFile(iesdpDir: string, outputFile: string): void {
   const opcodeDir = path.join(iesdpDir, "_opcodes");
+  validateDirectory(opcodeDir, "Opcode directory");
+
   const files = findFiles(opcodeDir, ".html");
   const opcodes: OpcodeFrontmatter[] = [];
 
-  // Parse all opcode files
   for (const file of files) {
     const opcode = parseOpcodeFrontmatter(file);
     if (opcode && opcode.bg2 === 1) {
@@ -150,7 +201,7 @@ function generateOpcodeFile(iesdpDir: string, outputFile: string): void {
   // Build unique opcode map (some names collide, need to make unique)
   const opcodesUnique = new Map<string, number>();
   for (const o of opcodes) {
-    let name = opcodeName(o.opname);
+    let name = normalizeOpcodeName(o.opname);
 
     if (SKIP_OPCODE_NAMES.includes(name)) {
       continue;
@@ -170,12 +221,12 @@ function generateOpcodeFile(iesdpDir: string, outputFile: string): void {
     opcodesUnique.set(name, o.n);
   }
 
-  // Generate output with trailing newline to match Python output
+  // Generate output with trailing newline
   let output = "";
   for (const [name, num] of opcodesUnique) {
     output += `OPCODE_${name} = ${num}\n`;
   }
-  output += "\n"; // Trailing newline
+  output += "\n";
 
   fs.writeFileSync(outputFile, output);
   console.log(`Generated ${outputFile} with ${opcodesUnique.size} opcodes`);
@@ -187,20 +238,13 @@ function generateOpcodeFile(iesdpDir: string, outputFile: string): void {
  */
 function getPrefix(fileVersion: string, dataFileName: string): string {
   const base = fileVersion.replace(/_v.*/, "");
-  let version = fileVersion.replace(/.*_v/, "");
-  version = version.replace(".", "");
+  let version = fileVersion.replace(/.*_v/, "").replace(".", "");
   if (version === "1") {
     version = "";
   }
 
-  // Custom prefix for some data structures
   const fbase = dataFileName.replace(".yml", "");
-  const fbaseMap: Record<string, string> = {
-    header: "",
-    body: "",
-    extended_header: "head",
-  };
-  const suffix = fbaseMap[fbase] ?? fbase;
+  const suffix = STRUCTURE_PREFIX_MAP[fbase] ?? fbase;
 
   let prefix = `${base}${version}_`;
   if (suffix !== "") {
@@ -211,47 +255,27 @@ function getPrefix(fileVersion: string, dataFileName: string): string {
 }
 
 /**
- * Strips markdown links and HTML tags from text, keeping only the text content.
- * E.g., "[flags](#header_flags)" -> "flags"
- * E.g., "<b><a name='x'>text</a></b>" -> "text"
+ * Strips markdown links and HTML tags from text.
  */
-function stripMarkupFromText(text: string): string {
-  // Replace markdown links [text](url) with just text
-  let result = text.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
-
-  // Strip HTML tags
-  result = result.replace(/<[^>]+>/g, "");
-
-  return result;
+function stripMarkup(text: string): string {
+  return text
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1") // Markdown links
+    .replace(/<[^>]+>/g, ""); // HTML tags
 }
 
 /**
  * Generates a constant ID from a structure item.
  */
-function getId(item: StructureItem, prefix: string): string {
-  // Custom IElib id
+function generateId(item: StructureItem, prefix: string): string {
+  // Use custom IElib id if provided
   if (item.id) {
     return prefix + item.id;
   }
 
-  // No custom id, constructing from description
-  let iid = item.desc.toLowerCase();
+  // Construct from description
+  let iid = stripMarkup(item.desc.toLowerCase());
 
-  // Strip markdown links and HTML tags
-  iid = stripMarkupFromText(iid);
-
-  // Custom replacements
-  const replacements: Record<string, string> = {
-    "probability ": "probability",
-    "usability ": "usability",
-    "parameter ": "parameter",
-    "resource ": "resource",
-    alternative: "alt",
-    ".": "",
-    " ": "_",
-  };
-
-  for (const [from, to] of Object.entries(replacements)) {
+  for (const [from, to] of Object.entries(ID_REPLACEMENTS)) {
     iid = iid.split(from).join(to);
   }
 
@@ -259,8 +283,7 @@ function getId(item: StructureItem, prefix: string): string {
 
   // Validate: id must be alnum + '_' only
   if (!/^[a-zA-Z0-9_]+$/.test(iid)) {
-    console.error(`Bad id: "${iid}". Aborting.`);
-    process.exit(1);
+    throw new ValidationError(`Invalid id generated: "${iid}" from desc: "${item.desc}"`);
   }
 
   return iid;
@@ -269,31 +292,24 @@ function getId(item: StructureItem, prefix: string): string {
 /**
  * Computes the size of a structure field.
  */
-function getSize(item: StructureItem): number {
+function getFieldSize(item: StructureItem): number {
   if (item.length !== undefined) {
     return item.length;
   }
 
-  const sizeMap: Record<string, number> = {
-    byte: 1,
-    char: 1,
-    word: 2,
-    dword: 4,
-    resref: 8,
-    strref: 4,
-  };
-
-  let size = sizeMap[item.type];
+  const size = TYPE_SIZE_MAP[item.type];
   if (size === undefined) {
-    console.error(`Unknown type: "${item.type}". Aborting.`);
-    process.exit(1);
+    throw new ValidationError(`Unknown type: "${item.type}"`);
   }
 
-  if (item.mult !== undefined) {
-    size = size * item.mult;
-  }
+  return item.mult !== undefined ? size * item.mult : size;
+}
 
-  return size;
+/**
+ * Validates that parsed YAML is an array of structure items.
+ */
+function isStructureItemArray(data: unknown): data is StructureItem[] {
+  return Array.isArray(data) && data.length > 0 && typeof data[0] === "object";
 }
 
 /**
@@ -301,22 +317,23 @@ function getSize(item: StructureItem): number {
  */
 function loadDatafile(fpath: string, prefix: string): Map<string, string> {
   console.log(`loading ${fpath}`);
-  const content = fs.readFileSync(fpath, "utf-8");
-  const data = yaml.load(content) as StructureItem[];
+  const content = readFile(fpath);
+  const parsed = yaml.load(content);
 
-  let curOff = 0;
-  if (data[0]?.offset !== undefined) {
-    curOff = data[0].offset;
+  if (!isStructureItemArray(parsed)) {
+    throw new ValidationError(`Invalid structure data in ${fpath}`);
   }
 
+  const data = parsed;
+  let curOff = data[0]?.offset ?? 0;
   const items = new Map<string, string>();
 
   for (const item of data) {
     if (item.offset !== undefined && item.offset !== curOff) {
-      console.log(`Error: offset mismatch. Expected ${curOff}, got ${item.offset} for ${JSON.stringify(item)}`);
+      console.warn(`Warning: offset mismatch in ${fpath}. Expected ${curOff}, got ${item.offset}`);
     }
 
-    const size = getSize(item);
+    const size = getFieldSize(item);
 
     // Skip unused/unknown fields
     if (item.unused || item.unknown) {
@@ -324,7 +341,7 @@ function loadDatafile(fpath: string, prefix: string): Map<string, string> {
       continue;
     }
 
-    const iid = getId(item, prefix);
+    const iid = generateId(item, prefix);
     items.set(iid, `0x${curOff.toString(16)}`);
     curOff += size;
   }
@@ -335,8 +352,7 @@ function loadDatafile(fpath: string, prefix: string): Map<string, string> {
 /**
  * Writes structure items to the appropriate output file.
  */
-function dumpItems(formatName: string, items: Map<string, string>, structuresDir: string): void {
-  // formatName is e.g. "sto_v1" -> output dir "sto"
+function writeStructureFile(formatName: string, items: Map<string, string>, structuresDir: string): void {
   const base = formatName.replace(/_v.*/, "");
   const outputDir = path.join(structuresDir, base);
   const outputFile = path.join(outputDir, "iesdp.tpp");
@@ -347,7 +363,7 @@ function dumpItems(formatName: string, items: Map<string, string>, structuresDir
   for (const [id, offset] of items) {
     text += `${id} = ${offset}\n`;
   }
-  text += "\n"; // Trailing newline
+  text += "\n";
 
   fs.writeFileSync(outputFile, text);
   console.log(`Generated ${outputFile}`);
@@ -358,11 +374,11 @@ function dumpItems(formatName: string, items: Map<string, string>, structuresDir
  */
 function processStructures(iesdpDir: string, structuresDir: string): void {
   const fileFormatsDir = path.join(iesdpDir, "_data", "file_formats");
+  validateDirectory(fileFormatsDir, "File formats directory");
+
   const formats = fs.readdirSync(fileFormatsDir);
 
   // Sort formats so higher versions come first, then v1 overwrites
-  // This matches the original Python behavior where filesystem order
-  // resulted in v1 being processed last
   formats.sort((a, b) => b.localeCompare(a));
 
   for (const ff of formats) {
@@ -372,7 +388,6 @@ function processStructures(iesdpDir: string, structuresDir: string): void {
     }
 
     const items = new Map<string, string>();
-    // Sort files alphabetically for deterministic output across systems
     const files = fs.readdirSync(ffDir).sort();
 
     for (const f of files) {
@@ -385,47 +400,60 @@ function processStructures(iesdpDir: string, structuresDir: string): void {
       const fpath = path.join(ffDir, f);
       const newItems = loadDatafile(fpath, prefix);
 
-      // Merge new items
       for (const [k, v] of newItems) {
         items.set(k, v);
       }
     }
 
-    dumpItems(ff, items, structuresDir);
+    writeStructureFile(ff, items, structuresDir);
   }
 
   // Feature block (output to fx/ directory)
   const featureBlockPath = path.join(fileFormatsDir, "itm_v1", "feature_block.yml");
   if (fs.existsSync(featureBlockPath)) {
     const fxItems = loadDatafile(featureBlockPath, "FX_");
-    dumpItems("fx_v1", fxItems, structuresDir);
+    writeStructureFile("fx_v1", fxItems, structuresDir);
   }
 }
 
 // Main entry point
-const argv = yargs(hideBin(process.argv))
-  .scriptName("iesdp-update")
-  .usage("Usage: $0 -s <iesdp_dir> --opcode_file <opcode_file>")
-  .option("s", {
-    alias: "iesdp_dir",
-    describe: "IESDP directory",
-    type: "string",
-    demandOption: true,
-  })
-  .option("opcode_file", {
-    describe: "Opcode definition file (WeiDU tpp)",
-    type: "string",
-    demandOption: true,
-  })
-  .help()
-  .parseSync();
+function main(): void {
+  const argv = yargs(hideBin(process.argv))
+    .scriptName("iesdp-update")
+    .usage("Usage: $0 -s <iesdp_dir> --opcode_file <opcode_file> [--structures_dir <dir>]")
+    .option("s", {
+      alias: "iesdp_dir",
+      describe: "IESDP directory",
+      type: "string",
+      demandOption: true,
+    })
+    .option("opcode_file", {
+      describe: "Opcode definition file (WeiDU tpp)",
+      type: "string",
+      demandOption: true,
+    })
+    .option("structures_dir", {
+      describe: "Output directory for structure definitions",
+      type: "string",
+      default: "structures",
+    })
+    .help()
+    .parseSync();
 
-const iesdpDir = argv.s;
-const opcodeFile = argv.opcode_file;
-const structuresDir = "structures";
+  const iesdpDir = argv.s;
+  const opcodeFile = argv.opcode_file;
+  const structuresDir = argv.structures_dir;
 
-// Generate opcodes
-generateOpcodeFile(iesdpDir, opcodeFile);
+  validateDirectory(iesdpDir, "IESDP directory");
 
-// Generate structures
-processStructures(iesdpDir, structuresDir);
+  generateOpcodeFile(iesdpDir, opcodeFile);
+  processStructures(iesdpDir, structuresDir);
+}
+
+try {
+  main();
+} catch (error) {
+  const message = error instanceof Error ? error.message : String(error);
+  console.error(`Error: ${message}`);
+  process.exit(1);
+}

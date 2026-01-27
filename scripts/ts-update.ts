@@ -1,125 +1,194 @@
-#!/usr/bin/env ts-node
-
-import * as fs from 'fs';
-import * as path from 'path';
-import * as yaml from 'js-yaml';
-import yargs from 'yargs';
-import { hideBin } from 'yargs/helpers';
-import { JSDOM } from 'jsdom';
+#!/usr/bin/env tsx
 
 /**
- * A mapping of short type identifiers to their corresponding TypeScript types.
+ * TypeScript Update Script
+ *
+ * Generates TypeScript declarations for BG2 scripting actions and triggers
+ * from IESDP YAML and HTML data.
  */
-type TypeMapping = { [key: string]: string };
 
-type Parameter = {
-    name: string;
-    type: string;
-    ids?: string;
+import * as fs from "fs";
+import * as path from "path";
+import * as yaml from "js-yaml";
+import yargs from "yargs";
+import { hideBin } from "yargs/helpers";
+import { JSDOM } from "jsdom";
+
+// Constants
+const SKIP_FUNCTION_NAMES = ["Help"]; // Help is both action and trigger
+
+const RESERVED_PARAM_NAMES: Record<string, string> = {
+  GLOBAL: "global",
+  STRREF: "strRef",
+  class: "classID",
+  iD: "id",
 };
 
-type ParsedData = {
-    bg2: number;
-    unknown?: boolean;
-    no_result?: boolean;
-    name: string;
-    desc?: string;
-    params?: Parameter[];
+const TYPE_ALIASES: Record<string, string> = {
+  Spell: "SpellID",
+  Weather: "WeatherID",
+  ShoutIDS: "ShoutID",
 };
 
-const typeMapping: TypeMapping = {
-    s: "string",
-    o: "ObjectPtr",
-    i: "number",
-    p: "Point",
-    a: "Action",
-    itmref: "ItmRef",
-    splref: "SplRef",
+const TYPE_MAPPING: Record<string, string> = {
+  s: "string",
+  o: "ObjectPtr",
+  i: "number",
+  p: "Point",
+  a: "Action",
+  itmref: "ItmRef",
+  splref: "SplRef",
 };
+
+// Types
+interface Parameter {
+  name: string;
+  type: string;
+  ids?: string;
+}
+
+interface ParsedActionData {
+  bg2: number;
+  unknown?: boolean;
+  no_result?: boolean;
+  name: string;
+  desc?: string;
+  params?: Parameter[];
+}
 
 /**
- * Prettifies code blocks
- * @param description function description
- * @returns updated description
+ * Normalizes a type name to its canonical form.
+ */
+function normalizeTypeName(typeName: string): string {
+  return TYPE_ALIASES[typeName] ?? typeName;
+}
+
+/**
+ * Normalizes an action parameter name (lowercases entire name).
+ */
+function normalizeActionParamName(name: string): string {
+  // Check for known reserved/special names first
+  if (RESERVED_PARAM_NAMES[name]) {
+    return RESERVED_PARAM_NAMES[name];
+  }
+
+  // Remove whitespace and lowercase entire name
+  const sanitized = name.replace(/\s+/g, "");
+  const normalized = sanitized.toLowerCase();
+
+  // Check again after normalization for reserved names
+  return RESERVED_PARAM_NAMES[normalized] ?? normalized;
+}
+
+/**
+ * Normalizes a trigger parameter name (lowercases first char only, keeps camelCase).
+ */
+function normalizeTriggerParamName(name: string): string {
+  // Check for known reserved/special names first
+  if (RESERVED_PARAM_NAMES[name]) {
+    return RESERVED_PARAM_NAMES[name];
+  }
+
+  // Remove whitespace and lowercase first character only (for camelCase)
+  const sanitized = name.replace(/\s+/g, "");
+  const normalized = sanitized.charAt(0).toLowerCase() + sanitized.slice(1);
+
+  // Check again after normalization for reserved names
+  return RESERVED_PARAM_NAMES[normalized] ?? normalized;
+}
+
+/**
+ * Validates that a value is a non-null object.
+ */
+function isValidObject(value: unknown): value is Record<string, unknown> {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+
+/**
+ * Reads a file and returns its content, throwing descriptive errors.
+ */
+function readFile(filePath: string): string {
+  if (!fs.existsSync(filePath)) {
+    throw new Error(`File not found: ${filePath}`);
+  }
+  return fs.readFileSync(filePath, "utf-8");
+}
+
+/**
+ * Prettifies code blocks in descriptions.
  */
 function processCodeBlocks(description: string): string {
-    return description.replace(/```(.*?)```/gs, (_, code) => {
-        const indentedCode = code
-            .trim()
-            .split("\n") // Split into lines
-            .map(line => `  ${line}`) // Add extra indentation to each line
-            .join("\n"); // Join back with line breaks
-        return `\`\`\`weidu-baf\n${indentedCode}\n\`\`\``;
-    });
+  return description.replace(/```(.*?)```/gs, (_, code) => {
+    const indentedCode = code
+      .trim()
+      .split("\n")
+      .map((line: string) => `  ${line}`)
+      .join("\n");
+    return `\`\`\`weidu-baf\n${indentedCode}\n\`\`\``;
+  });
 }
 
 /**
- * Read function yaml file, convert into a TS declaration
- * @param yamlFilePath action yaml file
- * @returns function declaration with JSDoc description
+ * Reads and parses a YAML action file, converting it to a TS declaration.
  */
 function generateTypeScriptDeclaration(yamlFilePath: string): string | null {
-    const fileContent = fs.readFileSync(yamlFilePath, 'utf-8');
-    const parsedData = yaml.load(fileContent) as ParsedData;
+  const fileContent = readFile(yamlFilePath);
+  const parsed = yaml.load(fileContent);
 
-    if (parsedData.bg2 !== 1) {
-        console.log(`${yamlFilePath} is missing BG2 data. Skipping.`);
-        return null;
-    }
+  if (!isValidObject(parsed)) {
+    console.warn(`Invalid YAML structure in ${yamlFilePath}. Skipping.`);
+    return null;
+  }
 
-    if (parsedData.unknown || parsedData.no_result) {
-        console.log(`Note: The file '${yamlFilePath}' is marked as unknown or has no result. Skipping.`);
-        return null;
-    }
+  const parsedData = parsed as unknown as ParsedActionData;
 
-    const functionName = parsedData.name;
-    if (functionName === "Help") {
-        console.log("Skipping Help() function, it's both action and trigger");
-        return null;
-    }
+  if (parsedData.bg2 !== 1) {
+    console.log(`${yamlFilePath} is missing BG2 data. Skipping.`);
+    return null;
+  }
 
-    let description = processCodeBlocks(parsedData.desc || "");
-    // Replace all block-style comments with single-line comments
-    description = description.replace(/\/\* (.*?) \*\//g, "// $1");
+  if (parsedData.unknown || parsedData.no_result) {
+    console.log(`Note: ${yamlFilePath} is marked as unknown or has no result. Skipping.`);
+    return null;
+  }
 
-    const params: Parameter[] = parsedData.params || [];
-    const paramLines: string[] = [];
-    let unusedCount = 0;
+  const functionName = parsedData.name;
+  if (SKIP_FUNCTION_NAMES.includes(functionName)) {
+    console.log(`Skipping ${functionName}() function (special case)`);
+    return null;
+  }
 
-    for (const param of params) {
-        let paramName = param.name.toLowerCase() === "unused" ? `unused${unusedCount++}` : param.name;
-        paramName = paramName === "GLOBAL" ? "global" : paramName;
-        paramName = paramName === "STRREF" ? "strRef" : paramName.toLowerCase();
+  let description = processCodeBlocks(parsedData.desc || "");
+  // Replace block-style comments with single-line comments
+  description = description.replace(/\/\* (.*?) \*\//g, "// $1");
 
-        // Try IDS, then mapping, then just type
-        let paramType = param.ids ? param.ids : typeMapping[param.type];
-        // Spell is an Action
-        if (paramType == "Spell") {
-            paramType = "SpellID";
-        }
-        // Weather is an Action
-        if (paramType == "Weather") {
-            paramType = "WeatherID";
-        }
-        // Just consistency
-        if (paramType == "ShoutIDS") {
-            paramType = "ShoutID";
-        }
-        paramLines.push(`${paramName}: ${paramType}`);
-    }
+  const params: Parameter[] = parsedData.params || [];
+  const paramLines: string[] = [];
+  let unusedCount = 0;
 
-    const paramsStr = paramLines.join(", ");
-    const output = `/**\n * ${description.trim()}\n */\ndeclare function ${functionName}(${paramsStr}): void;`;
-    return output;
+  for (const param of params) {
+    let paramName = param.name.toLowerCase() === "unused" ? `unused${unusedCount++}` : param.name;
+    paramName = normalizeActionParamName(paramName);
+
+    // Use || instead of ?? because ids can be empty string
+    let paramType = param.ids || TYPE_MAPPING[param.type];
+    paramType = normalizeTypeName(paramType);
+    paramLines.push(`${paramName}: ${paramType}`);
+  }
+
+  const paramsStr = paramLines.join(", ");
+  return `/**\n * ${description.trim()}\n */\ndeclare function ${functionName}(${paramsStr}): void;`;
 }
 
 /**
- * Processes a directory of YAML files and generates TypeScript declarations.
- * @param directory Path to the YAML directory.
- * @param outputFile Output file path.
+ * Processes a directory of YAML action files and generates TypeScript declarations.
  */
 function processActionFiles(directory: string, outputFile: string): void {
-    const header = `import type { Action, ObjectPtr, Point, SpellID, SplRef } from "../index";
+  if (!fs.existsSync(directory)) {
+    throw new Error(`Actions directory not found: ${directory}`);
+  }
+
+  const header = `import type { Action, ObjectPtr, Point, SpellID, SplRef } from "../index";
 
 import type { Align } from "./align.ids";
 import type { Animate } from "./animate.ids";
@@ -147,52 +216,110 @@ import type { TimeID as Time } from "./time.ids";
 import type { WeatherID } from "./weather.ids";
 
 `;
-    const tsOutput: string[] = [header];
+  const tsOutput: string[] = [header];
 
-    const files = fs.readdirSync(directory);
-    for (const file of files) {
-        if (!file.toLowerCase().endsWith('.yml')) continue;
-
-        const yamlFilePath = path.join(directory, file);
-        const declaration = generateTypeScriptDeclaration(yamlFilePath);
-
-        if (declaration) {
-            tsOutput.push(declaration);
-            console.log(`Processed: ${yamlFilePath}`);
-        }
+  const files = fs.readdirSync(directory);
+  for (const file of files) {
+    if (!file.toLowerCase().endsWith(".yml")) {
+      continue;
     }
 
-    fs.writeFileSync(outputFile, tsOutput.join("\n\n"), 'utf-8');
-    console.log(`Output written to ${outputFile}`);
+    const yamlFilePath = path.join(directory, file);
+    const declaration = generateTypeScriptDeclaration(yamlFilePath);
+
+    if (declaration) {
+      tsOutput.push(declaration);
+      console.log(`Processed: ${yamlFilePath}`);
+    }
+  }
+
+  fs.writeFileSync(outputFile, tsOutput.join("\n\n"), "utf-8");
+  console.log(`Output written to ${outputFile}`);
 }
 
 /**
- * Parse trigger definitions and generate TS declarations
- * @param triggerFilePath Path to the triggers file
- * @param triggerOutputFilePath Path to save the TypeScript declarations
+ * Parses HTML trigger file and extracts trigger blocks.
  */
+function extractTriggerBlocks(fileContent: string): string[] {
+  const dom = new JSDOM(fileContent);
+  const textContent = dom.window.document.body.textContent || "";
+
+  // Split text content into blocks based on lines starting with '0x'
+  // Filter out any content before the first trigger (frontmatter, headers, etc.)
+  return textContent
+    .split(/\s+(?=0x[0-9A-Fa-f]{4})/)
+    .map((block) => block.trim())
+    .filter((block) => block.startsWith("0x"));
+}
+
 /**
- * Parse trigger definitions and generate TS declarations
- * @param triggerFilePath Path to the triggers file
- * @param triggerOutputFilePath Path to save the TypeScript declarations
+ * Converts a trigger block to a TypeScript declaration.
+ * Block format: "0xNNNN TriggerName(params)\nDescription..."
+ */
+function convertTriggerBlockToDeclaration(block: string): string {
+  const lines = block.split("\n").map((line) => line.trim());
+  const header = lines[0];
+  const description = lines.slice(1).join(" ");
+
+  // Expected format: 0xNNNN FunctionName(params)
+  const headerMatch = header.match(/^0x[0-9A-Fa-f]+ (\w+)\((.*?)\)$/);
+  if (!headerMatch) {
+    throw new Error(`Invalid trigger header format: "${header}"`);
+  }
+
+  const [, triggerName, params] = headerMatch;
+  const paramsStr = parseTriggerParameters(params);
+
+  return `/**\n * ${description.trim()}\n */\ndeclare function ${triggerName}(${paramsStr}): boolean;`;
+}
+
+/**
+ * Parses trigger parameter string to TypeScript format.
+ * Input format: "I:Name*IDS,O:Target,S:String"
+ */
+function parseTriggerParameters(params: string): string {
+  if (params === "") {
+    return params;
+  }
+
+  return params
+    .split(",")
+    .map((param) => {
+      const [type, nameWithDetails] = param.split(":").map((part) => part.trim());
+      if (!type || !nameWithDetails) {
+        throw new Error(`Invalid parameter format: "${param}"`);
+      }
+
+      // Extract name and specific type (e.g., "Style*AStyles" -> name="Style", specificType="AStyles")
+      const [name, specificType] = nameWithDetails.split("*").map((part) => part.trim());
+      const formattedName = normalizeTriggerParamName(name);
+
+      // Use || instead of ?? because specificType can be empty string
+      let tsType = specificType || TYPE_MAPPING[type.toLowerCase()];
+      if (!tsType) {
+        throw new Error(`Unknown type: "${type}" or "${specificType}"`);
+      }
+      tsType = normalizeTypeName(tsType);
+
+      return `${formattedName}: ${tsType}`;
+    })
+    .join(", ");
+}
+
+/**
+ * Processes trigger HTML file and generates TypeScript declarations.
  */
 function processTriggers(triggerFilePath: string, triggerOutputFilePath: string): void {
-    const fileContent = fs.readFileSync(triggerFilePath, 'utf-8');
+  if (!fs.existsSync(triggerFilePath)) {
+    throw new Error(`Triggers file not found: ${triggerFilePath}`);
+  }
 
-    console.log("Debug: Loaded triggers file.");
+  const fileContent = readFile(triggerFilePath);
+  const triggerBlocks = extractTriggerBlocks(fileContent);
 
-    // Parse the HTML content
-    const dom = new JSDOM(fileContent);
-    const textContent = dom.window.document.body.textContent || '';
+  console.log(`Found ${triggerBlocks.length} trigger blocks`);
 
-    console.log("Debug: Extracted full text content from HTML.");
-
-    // Split the text content into blocks based on lines starting with '0x'
-    const triggerBlocks = textContent.split(/\s+(?=0x[0-9A-Fa-f]{4})/).map(block => block.trim()).filter(Boolean);
-
-    console.log(`Debug: Found ${triggerBlocks.length} trigger blocks.`);
-
-    const header = `import type { ObjectPtr, SpellID, ItmRef } from "../index";
+  const header = `import type { ObjectPtr, SpellID, ItmRef } from "../index";
 
 import type { Align } from "./align.ids";
 import type { AreaTypeID as AreaType } from "./areatype.ids";
@@ -221,112 +348,53 @@ import type { TimeODay } from "./timeoday.ids";
 
 `;
 
-    const tsOutput: string[] = [header];
+  const tsOutput: string[] = [header];
+  let errorCount = 0;
 
-    triggerBlocks.forEach((block, index) => {
-        try {
-            const declaration = convertTriggerBlockToDeclaration(block);
-            tsOutput.push(declaration);
-        } catch (error) {
-            console.warn(`Warning: Failed to process block #${index + 1}:`, error.message);
-            console.warn(block);
-        }
-    });
-
-    if (tsOutput.length === 1) { // Only the header exists
-        console.error("Error: No valid trigger blocks were processed.");
-    } else {
-        console.log(`Debug: Successfully generated ${tsOutput.length - 1} declarations.`);
+  for (let i = 0; i < triggerBlocks.length; i++) {
+    try {
+      const declaration = convertTriggerBlockToDeclaration(triggerBlocks[i]);
+      tsOutput.push(declaration);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      console.warn(`Warning: Failed to process block #${i + 1}: ${message}`);
+      console.warn(triggerBlocks[i]);
+      errorCount++;
     }
+  }
 
-    fs.writeFileSync(triggerOutputFilePath, tsOutput.join("\n\n"), 'utf-8');
-    console.log(`Trigger declarations written to ${triggerOutputFilePath}`);
+  if (tsOutput.length === 1) {
+    throw new Error("No valid trigger blocks were processed");
+  }
+
+  fs.writeFileSync(triggerOutputFilePath, tsOutput.join("\n\n"), "utf-8");
+  console.log(`Trigger declarations written to ${triggerOutputFilePath} (${errorCount} errors)`);
 }
 
-
-/**
- * Convert trigger description declaration
- * @param block Trigger description block, starting with 0x
- * @returns TS declaration with JSdoc
- */
-function convertTriggerBlockToDeclaration(block: string): string {
-    const lines = block.split("\n").map(line => line.trim());
-
-    const header = lines[0];
-    const description = lines.slice(1).join(" ");
-
-    // Extract the function name and parameters from the header
-    const headerMatch = header.match(/^0x[0-9A-Fa-f]+ (\w+)\((.*?)\)$/);
-    if (!headerMatch) {
-        throw new Error(`Invalid header format: "${header}"`);
-    }
-
-    const [_, triggerName, params] = headerMatch;
-    const paramsStr = parseTriggerParameters(params);
-
-    return `/**\n * ${description.trim()}\n */\ndeclare function ${triggerName}(${paramsStr}): boolean;`;
-}
-
-/**
- * Convert trigger parameters string to TS format
- * @param params trigger parameters string
- * @returns parameters string in TS format
- */
-function parseTriggerParameters(params: string): string {
-    // no parameters
-    if (params == "") {
-        return params;
-    }
-    // some parameters
-    return params.split(",").map(param => {
-        // Split each parameter into 'type' and 'name'
-        const [type, nameWithDetails] = param.split(":").map(part => part.trim());
-        if (!type || !nameWithDetails) {
-            throw new Error(`Invalid parameter format: "${param}"`);
-        }
-
-        // Extract name and specific type if present (e.g., "I:Style*AStyles")
-        const [name, specificType] = nameWithDetails.split("*").map(part => part.trim());
-
-        // Ensure the parameter name starts with a lowercase letter
-        const sanitizedName = name.replace(/\s+/g, ""); // Remove whitespace
-        let formattedName = sanitizedName.charAt(0).toLowerCase() + sanitizedName.slice(1);
-        // class is a reserved name
-        if (formattedName == "class") {
-            formattedName = "classID";
-        }
-        // iD => ID
-        if (formattedName == "iD") {
-            formattedName = "id";
-        }
-
-        // Use the specific type if present, otherwise map from typeMapping
-        let tsType = specificType ? specificType : typeMapping[type.toLowerCase()];
-        if (!tsType) {
-            throw new Error(`Unknown type: "${type}" or "${specificType}"`);
-        }
-        // Spell is Action
-        if (tsType == "Spell") {
-            tsType = "SpellID";
-        }
-        // Just consistency
-        if (tsType == "ShoutIDS") {
-            tsType = "ShoutID";
-        }
-
-        // Format the parameter as "name: tsType"
-        return `${formattedName}: ${tsType}`;
-    }).join(", ");
-}
-
-const argv = yargs(hideBin(process.argv))
+// Main entry point
+function main(): void {
+  const argv = yargs(hideBin(process.argv))
     .scriptName("ts-update")
     .usage("Usage: $0 <actions_directory> <actions_output_file> <triggers_file> <triggers_output_file>")
     .demandCommand(4)
     .help()
-    .parseSync(); // Enforce synchronous parsing
+    .parseSync();
 
-const [actionsDirectory, actionsOutputFile, triggersFile, triggersOutputFile] = argv._ as [string, string, string, string];
+  const [actionsDirectory, actionsOutputFile, triggersFile, triggersOutputFile] = argv._ as [
+    string,
+    string,
+    string,
+    string,
+  ];
 
-processActionFiles(actionsDirectory, actionsOutputFile);
-processTriggers(triggersFile, triggersOutputFile);
+  processActionFiles(actionsDirectory, actionsOutputFile);
+  processTriggers(triggersFile, triggersOutputFile);
+}
+
+try {
+  main();
+} catch (error) {
+  const message = error instanceof Error ? error.message : String(error);
+  console.error(`Error: ${message}`);
+  process.exit(1);
+}

@@ -1,19 +1,15 @@
 #!/bin/bash
 
+# Runs the TypeScript update script to generate action/trigger declarations.
+
 set -xeu -o pipefail
 
-# launch from root repo dir
-ext_dir="external"
-iesdp_dir="$ext_dir/iesdp"
-repo="BGforgeNet/iesdp"
+source "$(dirname "$0")/ensure-iesdp.sh"
 
-if [[ ! -d "$iesdp_dir" ]]; then
-  mkdir -p "$ext_dir"
-  cd "$ext_dir"
-  git clone https://github.com/$repo/
-  cd iesdp
-  git checkout ielib
-  cd ../..
-fi
+iesdp_dir=$(ensure_iesdp)
 
-pnpm run ts-update
+pnpm exec tsx scripts/ts-update.ts \
+    "$iesdp_dir/_data/actions" \
+    ts/ielib/bg2/actions.d.ts \
+    "$iesdp_dir/scripting/triggers/bg2triggers.htm" \
+    ts/ielib/bg2/triggers.d.ts
