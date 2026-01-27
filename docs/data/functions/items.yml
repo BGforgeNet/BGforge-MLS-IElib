@@ -1,6 +1,5 @@
 - name: GET_ARMOR_BASE_AC
-  desc: |
-    Returns current armor's base AC. If base AC is not found, defaults to 100.
+  desc: Returns current armor's base AC. If base AC is not found, defaults to 100.
   type: patch
   return:
     - name: base_ac
@@ -22,9 +21,8 @@
     - name: warn
       desc: Warn if the item is not an armor
       type: bool
-      default: true
-
+      default: 1
   return:
     - name: type
-      type: string
       desc: leather, studded_leather, chain, splint, plate, full_plate or unknown.
+      type: string

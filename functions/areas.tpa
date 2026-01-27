@@ -1,3 +1,11 @@
+/**
+ * Alters area regions which match all the `match_*` variables according to the non-`match_` variables.
+ * @param {bool} trapped - region trapped flag
+ * @param {int} trap_detect - trap detection difficulty
+ * @param {int} trap_remove - trap removal difficulty
+ * @param {bool} flag_trap_detectable - whether trap is detectable
+ * @param {resref} match_script! - only alter if script matches
+ */
 DEFINE_PATCH_FUNCTION ALTER_AREA_REGION_MATCH
   INT_VAR
     trapped = "-1"
@@ -24,6 +32,12 @@ BEGIN
   END
 END
 
+/**
+ * Writes new script to an area structure.
+ * @param {int} index! - structure index
+ * @param {resref} script! - new script
+ * @param {string} type! - container, door or region
+ */
 DEFINE_PATCH_FUNCTION ALTER_AREA_STRUCTURE_SCRIPT
   INT_VAR index = 0
   STR_VAR
@@ -56,6 +70,13 @@ BEGIN
   WRITE_ASCIIE off ~%script%~ #8
 END
 
+/**
+ * Returns coordinates of an area structure center point by averaging coordinates of all of its vertices.
+ * @param {int} index! - structure index
+ * @param {string} type! - container, door or region
+ * @return x {int} - x coordinate
+ * @return y {int} - y coordinate
+ */
 DEFINE_PATCH_FUNCTION GET_AREA_STRUCTURE_CENTER_POINT
   INT_VAR index = 0
   STR_VAR type = ~~
@@ -94,6 +115,11 @@ BEGIN
   y = y_total / i
 END
 
+/**
+ * Replaces each occurrence of `match_item` with `new_item`. Doesn't change charges, flags, etc. Does nothing if `match_item` wasn't found.
+ * @param {resref} match_item! - old item
+ * @param {resref} new_item! - new item
+ */
 DEFINE_PATCH_FUNCTION REPLACE_AREA_ITEM_MATCH
   STR_VAR match_item = ~~ new_item = ~~
 BEGIN
@@ -109,6 +135,12 @@ BEGIN
   END
 END
 
+/**
+ * Returns 1 if item is sold in the store, 0 otherwise.
+ * @param {resref} item! - item resource
+ * @param {resref} area! - area resource
+ * @return present {bool} - is item somewhere in the area?
+ */
 DEFINE_ACTION_FUNCTION IS_ITEM_IN_AREA
   STR_VAR
     item = ~~

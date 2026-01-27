@@ -3,31 +3,31 @@
   type: action
   string_params:
     - name: item
+      desc: item resource
       type: resref
       required: 1
-      desc: item resource
-    - name: dialog or script
+    - name: filename
+      desc: filename of the dialog or script
       type: filename
       required: 1
-      desc: filename of the dialog or script
   return:
     - name: present
-      type: bool
       desc: is item given or created in the dialog or script
+      type: bool
 
 - name: IS_ITEM_IN_RESOURCE
   desc: Returns 1 if item is present in area, store, on creature, or given/created in the dialog or script. 0 otherwise.
   type: action
   string_params:
     - name: item
+      desc: item resource
       type: resref
       required: 1
-      desc: item resource
-    - name: resource file
+    - name: resource
+      desc: filename
       type: filename
       required: 1
-      desc: filename
   return:
     - name: present
-      type: bool
       desc: is item present?
+      type: bool

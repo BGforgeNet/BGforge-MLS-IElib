@@ -1,9 +1,16 @@
+/**
+ * Creates a an invisible, invulnerable minion creature file to run your custom script.
+ * @param {resref} cre! - cre filename
+ * @param {resref} script - cre script
+ * @param {string} name - cre name
+ * @param {ids} ea - EA allegiance
+ */
 DEFINE_ACTION_FUNCTION CREATE_MINION
   STR_VAR
     cre = ~~
     script = ~~
     name = ~-1~
-    ea = ~~
+    ea = ~NEUTRAL~
 BEGIN
   COPY_EXISTING ~cutspy.cre~ ~override/%cre%.cre~
     PATCH_IF NOT ~%name%~ STR_EQ ~-1~ BEGIN
@@ -27,6 +34,12 @@ BEGIN
   BUT_ONLY
 END
 
+/**
+ * Returns 1 if item is given or created in the script, 0 otherwise.
+ * @param {resref} item! - item resource
+ * @param {resref} script! - script resource
+ * @return present {bool} - is item given or created in the script?
+ */
 DEFINE_ACTION_FUNCTION IS_ITEM_GIVEN_OR_CREATED_IN_SCRIPT
   STR_VAR
     item = ~~

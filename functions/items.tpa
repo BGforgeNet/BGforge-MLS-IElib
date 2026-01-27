@@ -1,39 +1,7 @@
-DEFINE_PATCH_FUNCTION INFER_ARMOR_TYPE
-  INT_VAR warn = 1
-  RET type
-BEGIN
-  SPRINT type ~unknown~
-  READ_SHORT ITM_type itype
-  PATCH_IF itype != ITEM_TYPE_armor BEGIN
-    PATCH_IF (warn == 1) BEGIN
-      PATCH_WARN ~WARNING: INFER_ARMOR_TYPE - %SOURCE_FILE% is not an armor, skipping!~
-    END
-  END ELSE BEGIN
-    DEFINE_ASSOCIATIVE_ARRAY armor_types BEGIN
-      leat01 => ~leather~
-      leat04 => ~studded_leather~
-      chan01 => ~chain~
-      chan04 => ~splint~
-      plat01 => ~plate~
-      plat04 => ~full_plate~
-    END
-    PHP_EACH armor_types AS item => type BEGIN
-      INNER_ACTION BEGIN
-        COPY_EXISTING ~%item%.itm~ override
-          READ_SHORT UNIDENTIFIED_DESC udesc
-          SPRINT $atype(~%udesc%~) $armor_types(~%item%~)
-        BUT_ONLY
-      END
-    END
-    READ_SHORT UNIDENTIFIED_DESC udesc
-    PATCH_IF VARIABLE_IS_SET $atype(~%udesc%~) BEGIN
-      SPRINT type $atype(~%udesc%~)
-    END
-    PATCH_PRINT ~INFER_ARMOR_TYPE: %SOURCE_FILE% => %type%~
-  END
-
-END
-
+/**
+ * Returns current armor's base AC. If base AC is not found, defaults to 100.
+ * @return base_ac {int} - base AC
+ */
 DEFINE_PATCH_FUNCTION GET_ARMOR_BASE_AC
   RET base_ac
 BEGIN
@@ -50,6 +18,10 @@ BEGIN
   END
 END
 
+/**
+ * Returns current armor enchantment level (Leather Armor +1 will return 1). Ankeg armor and Red Dragon scales are considered +2. Defaults to -1 if enchantment couldn't be determined.
+ * @return enchantment {int} - Armor enchantment
+ */
 DEFINE_PATCH_FUNCTION INFER_ARMOR_ENCHANTMENT
   RET enchantment
 BEGIN
@@ -119,4 +91,45 @@ BEGIN
     PATCH_WARN ~INFER_ARMOR_ENCHANTMENT: couldn't determine enchantment for %SOURCE_FILE%!~
   END
   PATCH_PRINT ~INFER_ARMOR_ENCHANTMENT: %SOURCE_FILE% => %enchantment%~
+END
+
+/**
+ * Returns current armor type.
+ * @param {bool} warn - Warn if the item is not an armor
+ * @return type {string} - leather, studded_leather, chain, splint, plate, full_plate or unknown.
+ */
+DEFINE_PATCH_FUNCTION INFER_ARMOR_TYPE
+  INT_VAR warn = 1
+  RET type
+BEGIN
+  SPRINT type ~unknown~
+  READ_SHORT ITM_type itype
+  PATCH_IF itype != ITEM_TYPE_armor BEGIN
+    PATCH_IF (warn == 1) BEGIN
+      PATCH_WARN ~WARNING: INFER_ARMOR_TYPE - %SOURCE_FILE% is not an armor, skipping!~
+    END
+  END ELSE BEGIN
+    DEFINE_ASSOCIATIVE_ARRAY armor_types BEGIN
+      leat01 => ~leather~
+      leat04 => ~studded_leather~
+      chan01 => ~chain~
+      chan04 => ~splint~
+      plat01 => ~plate~
+      plat04 => ~full_plate~
+    END
+    PHP_EACH armor_types AS item => type BEGIN
+      INNER_ACTION BEGIN
+        COPY_EXISTING ~%item%.itm~ override
+          READ_SHORT UNIDENTIFIED_DESC udesc
+          SPRINT $atype(~%udesc%~) $armor_types(~%item%~)
+        BUT_ONLY
+      END
+    END
+    READ_SHORT UNIDENTIFIED_DESC udesc
+    PATCH_IF VARIABLE_IS_SET $atype(~%udesc%~) BEGIN
+      SPRINT type $atype(~%udesc%~)
+    END
+    PATCH_PRINT ~INFER_ARMOR_TYPE: %SOURCE_FILE% => %type%~
+  END
+
 END

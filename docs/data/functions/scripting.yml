@@ -14,22 +14,22 @@
       type: string
     - name: ea
       desc: EA allegiance
-      default: NEUTRAL
       type: ids
+      default: NEUTRAL
 
 - name: IS_ITEM_GIVEN_OR_CREATED_IN_SCRIPT
   desc: Returns 1 if item is given or created in the script, 0 otherwise.
   type: action
   string_params:
     - name: item
-      type: resref
-      required: 1
       desc: item resource
-    - name: script
       type: resref
       required: 1
+    - name: script
       desc: script resource
+      type: resref
+      required: 1
   return:
     - name: present
-      type: bool
       desc: is item given or created in the script?
+      type: bool

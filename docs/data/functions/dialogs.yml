@@ -3,14 +3,14 @@
   type: action
   string_params:
     - name: item
-      type: resref
-      required: 1
       desc: item resource
-    - name: dialog
       type: resref
       required: 1
+    - name: dialog
       desc: dialog resource
+      type: resref
+      required: 1
   return:
     - name: present
-      type: bool
       desc: item is given or created in the dialog?
+      type: bool

@@ -1,3 +1,9 @@
+/**
+ * Returns 1 if item is given or created in the dialog, 0 otherwise.
+ * @param {resref} item! - item resource
+ * @param {resref} dialog! - dialog resource
+ * @return present {bool} - item is given or created in the dialog?
+ */
 DEFINE_ACTION_FUNCTION IS_ITEM_GIVEN_OR_CREATED_IN_DIALOG
   STR_VAR
     item = ~~

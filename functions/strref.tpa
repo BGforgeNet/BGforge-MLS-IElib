@@ -1,3 +1,9 @@
+/**
+ * Reads an strref at the given offset. In the string, replaces occurences of `old_substring_traref` with `new_substring_traref`. `SAY`s the new string back to the offset.
+ * @param {int} offset! - strref offset
+ * @param {int} old_substring_traref! - traref of text to be replaced
+ * @param {int} new_substring_traref! - traref of replacement text
+ */
 DEFINE_PATCH_FUNCTION REPLACE_STRREF_TRA
   INT_VAR
     offset = 0

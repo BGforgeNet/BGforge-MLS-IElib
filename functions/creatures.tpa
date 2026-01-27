@@ -1,3 +1,8 @@
+/**
+ * Replaces each occurrence of `match_item` with `new_item`. Doesn't change charges, flags, etc. Does nothing if `match_item` wasn't found.
+ * @param {resref} match_item! - old item
+ * @param {resref} new_item! - new item
+ */
 DEFINE_PATCH_FUNCTION REPLACE_CRE_ITEM_MATCH
   STR_VAR match_item = ~~ new_item = ~~
 BEGIN
@@ -10,6 +15,12 @@ BEGIN
   END
 END
 
+/**
+ * Returns 1 if the creature has the item, 0 otherwise.
+ * @param {resref} item! - item resource
+ * @param {resref} creature! - creature resource
+ * @return present {bool} - does the creature possess the item?
+ */
 DEFINE_ACTION_FUNCTION IS_ITEM_ON_CREATURE
   STR_VAR
     item = ~~

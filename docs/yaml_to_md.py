@@ -123,6 +123,12 @@ def get_ptype(tname):
 def get_default(param, func):
     if "default" in param:
         default = param["default"]
+        # Display boolean values as True/False
+        if param.get("type") == "bool":
+            if default == 1 or default == "1":
+                return "True"
+            elif default == 0 or default == "0":
+                return "False"
         return default
     ptype = param["type"]
     if "defaults" in func and ptype in func["defaults"]:
