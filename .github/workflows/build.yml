@@ -9,23 +9,34 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install Python
-        uses: actions/setup-python@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v4
         with:
-          python-version: "3.x"
+          node-version: "22"
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
 
       - name: Install Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.6
+          ruby-version: "3.3"
           bundler-cache: true
+          working-directory: docs
 
-      - name: Install and Build
-        run: ./docs/generate.sh
+      - name: Install Node dependencies
+        run: pnpm install
+
+      - name: Build site
+        run: pnpm build-site
+        env:
+          JEKYLL_ENV: production
 
       - name: Deploy gh-pages
-        if: github.ref == 'ref/heads/master'
-        uses: JamesIves/github-pages-deploy-action@v4.2.5
+        if: github.ref == 'refs/heads/master'
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: docs/_site
