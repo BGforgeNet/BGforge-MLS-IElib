@@ -168,7 +168,9 @@ declare function MoraleDec(target: ObjectPtr, morale: number): void;
 declare function AttackOneRound(target: ObjectPtr): void;
 
 /**
- * This action is used to shout the specified number. The action is used in conjunction with the Heard trigger. A silenced creature cannot shout. Shout can be Heard() throughout the current area.
+ * This action is used to shout the specified number. The action is used in conjunction with the
+{% assign text = "<code>Heard()</code>" -%} {%- assign anchor = "0x002F" -%} {%- include trigger_link.html %}
+trigger. Shouts can be heard within a radius of 1.5x the script runner's current visual range, which by default evaluates to 42 feet (672 pixels).
 
 ```weidu-baf
   IF
@@ -1732,9 +1734,9 @@ declare function SpawnPtDeactivate(object: ObjectPtr): void;
 declare function SpawnPtSpawn(object: ObjectPtr): void;
 
 /**
- * This action acts like Shout() without the range limit.
+ * This action acts like <a href="#106"><code>Shout()</code></a> without the range limit.
  */
-declare function GlobalShout(id: ShoutID): void;
+declare function GlobalShout(id: number): void;
 
 /**
  * This action is used in conjunction with animations in ARE files. The action will start the specified animation.

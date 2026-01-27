@@ -178,7 +178,7 @@ declare function Specifics(object: ObjectPtr, specifics: Specific): boolean;
 declare function Time(time: Time): boolean;
 
 /**
- * As above but less specific and uses TimeODay.ids.
+ * As above but less specific and uses TimeODay.ids at the following times: MORNING: at 6 hours, DAY: from 7 to 20 hours, DUSK: at 21 hours, NIGHT: from 22 hours to 5 hours.
  */
 declare function TimeOfDay(timeOfDay: TimeODay): boolean;
 
@@ -258,7 +258,7 @@ declare function HPPercentLT(object: ObjectPtr, hitPoints: number): boolean;
 declare function HPPercentGT(object: ObjectPtr, hitPoints: number): boolean;
 
 /**
- * Returns true only if the active CRE was within 30 feet of the specified object and the specified object shouted the specified number (which does not have to be in SHOUTIDS.ids) in the last script round. NB. If the object is specified as a death variable, the trigger will only return true if the corresponding object shouting also has an Enemy-Ally flag of NEUTRAL.
+ * Returns true only if the active CRE was within shouting range (see Shout/GlobalShout) of the specified object and the specified object shouted the specified number (which does not have to be in SHOUTIDS.IDS) in the last script round.
  */
 declare function Heard(object: ObjectPtr, id: ShoutID): boolean;
 
