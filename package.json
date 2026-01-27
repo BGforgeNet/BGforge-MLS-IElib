@@ -4,11 +4,13 @@
 	"type": "module",
 	"scripts": {
 		"ts-update": "tsx scripts/ts-update.ts external/iesdp/_data/actions ts/ielib/bg2/actions.d.ts external/iesdp/scripting/triggers/bg2triggers.htm ts/ielib/bg2/triggers.d.ts",
+		"iesdp-update": "tsx scripts/iesdp-update.ts -s external/iesdp --opcode_file opcode.tpp",
 		"test": "vitest run",
 		"build-site": "tsx scripts/jsdoc-to-yaml.ts && cd docs && bundle exec jekyll build",
 		"serve": "tsx scripts/jsdoc-to-yaml.ts && cd docs && bundle exec jekyll serve"
 	},
 	"dependencies": {
+		"gray-matter": "^4.0.3",
 		"js-yaml": "^4.1.1",
 		"jsdom": "^25.0.1",
 		"tsx": "^4.21.0",
@@ -16,6 +18,7 @@
 	},
 	"devDependencies": {
 		"@types/js-yaml": "^4.0.9",
+		"@types/jsdom": "^21.1.7",
 		"@types/node": "^22.19.3",
 		"@types/yargs": "^17.0.35",
 		"vitest": "^4.0.18"

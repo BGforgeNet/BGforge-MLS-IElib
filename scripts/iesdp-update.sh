@@ -2,8 +2,6 @@
 
 set -xeu -o pipefail
 
-source .venv/bin/activate
-
 # launch from root repo dir
 ext_dir="external"
 iesdp_dir="$ext_dir/iesdp"
@@ -17,6 +15,6 @@ if [[ ! -d "$iesdp_dir" ]]; then
   cd iesdp
   git checkout ielib
   cd ../..
-  # cd ..
 fi
-./scripts/iesdp-update.py -s "$iesdp_dir" --opcode_file "$opcode_file"
+
+pnpm exec tsx scripts/iesdp-update.ts -s "$iesdp_dir" --opcode_file "$opcode_file"
