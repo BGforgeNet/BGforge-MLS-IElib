@@ -1,9 +1,9 @@
 // used opcodes parameters
-IDS_ea = 2
-IDS_general = 3
-IDS_race = 4
-IDS_class = 5
-IDS_specific = 6
-IDS_gender = 7
-IDS_align = 8
-IDS_kit_ee = 9
+OUTER_SET IDS_ea = 2
+OUTER_SET IDS_general = 3
+OUTER_SET IDS_race = 4
+OUTER_SET IDS_class = 5
+OUTER_SET IDS_specific = 6
+OUTER_SET IDS_gender = 7
+OUTER_SET IDS_align = 8
+OUTER_SET IDS_kit_ee = 9

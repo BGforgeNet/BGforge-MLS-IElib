@@ -4,22 +4,22 @@ For use with the ChangeGender() action.
 For use with the Gender() trigger.
 */
 
-GENDER_male = 1
-GENDER_female = 2
-GENDER_other = 3
-GENDER_niether = 4
-GENDER_both = 5
-GENDER_summoned = 6
-GENDER_illusionary = 7
-GENDER_extra = 8
-GENDER_summoned_demon = 9
-GENDER_extra2 = 10
-GENDER_extra3 = 11
-GENDER_extra4 = 12
-GENDER_extra5 = 13
-GENDER_extra6 = 14
-GENDER_extra7 = 15
-GENDER_extra8 = 16
-GENDER_extra9 = 17
-GENDER_extra10 = 18
-GENDER_imprisoned_summoned = 66
+OUTER_SET GENDER_male = 1
+OUTER_SET GENDER_female = 2
+OUTER_SET GENDER_other = 3
+OUTER_SET GENDER_niether = 4
+OUTER_SET GENDER_both = 5
+OUTER_SET GENDER_summoned = 6
+OUTER_SET GENDER_illusionary = 7
+OUTER_SET GENDER_extra = 8
+OUTER_SET GENDER_summoned_demon = 9
+OUTER_SET GENDER_extra2 = 10
+OUTER_SET GENDER_extra3 = 11
+OUTER_SET GENDER_extra4 = 12
+OUTER_SET GENDER_extra5 = 13
+OUTER_SET GENDER_extra6 = 14
+OUTER_SET GENDER_extra7 = 15
+OUTER_SET GENDER_extra8 = 16
+OUTER_SET GENDER_extra9 = 17
+OUTER_SET GENDER_extra10 = 18
+OUTER_SET GENDER_imprisoned_summoned = 66

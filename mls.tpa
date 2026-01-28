@@ -1,6 +1,0 @@
-INCLUDE
-    ~%BGFORGE_LIB_DIR%/ids/main.tpa~
-    ~%BGFORGE_LIB_DIR%/opcodes/main.tpa~
-    ~%BGFORGE_LIB_DIR%/structures/main.tpa~
-    ~%BGFORGE_LIB_DIR%/misc/main.tpa~
-    ~%BGFORGE_LIB_DIR%/2da/sectype.tph~

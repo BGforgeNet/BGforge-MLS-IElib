@@ -1,2 +1,2 @@
-CASTING_TYPE_normal = 0
-CASTING_TYPE_instant = 1
+OUTER_SET CASTING_TYPE_normal = 0
+OUTER_SET CASTING_TYPE_instant = 1

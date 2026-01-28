@@ -26,7 +26,7 @@ Essentially, it defines various constants: opcode numbers, icon numbers, etc, so
     ```
     ALWAYS
       OUTER_SPRINT BGFORGE_LIB_DIR "%MOD_FOLDER%/lib/bgforge"
-      INCLUDE ~%BGFORGE_LIB_DIR%/main.tpa~
+      INCLUDE ~%BGFORGE_LIB_DIR%/main.tph~
     END
     ```
 3. Browse the code to see the available constants, use [BGforge MLS](https://github.com/BGforgeNet/VScode-BGforge-MLS) to get tips (completion and stuff).

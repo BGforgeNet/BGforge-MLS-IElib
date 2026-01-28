@@ -1,0 +1,12 @@
+OUTER_SPRINT BGFORGE_STRUCTURES_DIR ~%BGFORGE_LIB_DIR%/structures~
+
+INCLUDE
+  ~%BGFORGE_STRUCTURES_DIR%/are/main.tph~
+  ~%BGFORGE_STRUCTURES_DIR%/cre/main.tph~
+  ~%BGFORGE_STRUCTURES_DIR%/eff/main.tph~
+  ~%BGFORGE_STRUCTURES_DIR%/eff2/main.tph~
+  ~%BGFORGE_STRUCTURES_DIR%/fx/main.tph~
+  ~%BGFORGE_STRUCTURES_DIR%/itm/main.tph~
+  ~%BGFORGE_STRUCTURES_DIR%/spl/main.tph~
+  ~%BGFORGE_STRUCTURES_DIR%/sto/main.tph~
+  ~%BGFORGE_STRUCTURES_DIR%/item_types.tph~
