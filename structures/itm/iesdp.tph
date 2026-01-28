@@ -64,4 +64,3 @@ OUTER_SET ITM_extended_headers_count = 0x68
 OUTER_SET ITM_feature_blocks_offset = 0x6a
 OUTER_SET ITM_feature_blocks_index = 0x6e
 OUTER_SET ITM_feature_blocks_count = 0x70
-

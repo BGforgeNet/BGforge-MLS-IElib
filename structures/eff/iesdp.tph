@@ -13,4 +13,3 @@ OUTER_SET EFF_dice_thrown = 0x1c
 OUTER_SET EFF_dice_sides = 0x20
 OUTER_SET EFF_save_type = 0x24
 OUTER_SET EFF_save_bonus = 0x28
-

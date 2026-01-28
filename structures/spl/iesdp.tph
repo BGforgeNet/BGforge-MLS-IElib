@@ -29,4 +29,3 @@ OUTER_SET SPL_extended_headers_count = 0x68
 OUTER_SET SPL_feature_blocks_offset = 0x6a
 OUTER_SET SPL_casting_feature_blocks_offset = 0x6e
 OUTER_SET SPL_casting_feature_blocks_count = 0x70
-

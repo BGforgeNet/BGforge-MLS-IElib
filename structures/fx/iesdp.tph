@@ -14,4 +14,3 @@ OUTER_SET FX_min_level = 0x20
 OUTER_SET FX_save_type = 0x24
 OUTER_SET FX_save_bonus = 0x28
 OUTER_SET FX_stacking_id_Ex = 0x2c
-

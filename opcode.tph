@@ -310,4 +310,3 @@ OUTER_SET OPCODE_animation_removal = 315
 OUTER_SET OPCODE_magical_rest = 316
 OUTER_SET OPCODE_haste_2 = 317
 OUTER_SET OPCODE_set_stat_tobex = 318
-

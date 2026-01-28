@@ -40,4 +40,3 @@ OUTER_SET STO_ITEM_charges3 = 0xe
 OUTER_SET STO_ITEM_flags = 0x10
 OUTER_SET STO_ITEM_amount = 0x14
 OUTER_SET STO_ITEM_infinite = 0x18
-

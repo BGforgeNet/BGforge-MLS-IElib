@@ -221,12 +221,11 @@ function generateOpcodeFile(iesdpDir: string, outputFile: string): void {
     opcodesUnique.set(name, o.n);
   }
 
-  // Generate output with trailing newline
+  // Generate output
   let output = "";
   for (const [name, num] of opcodesUnique) {
     output += `OUTER_SET OPCODE_${name} = ${num}\n`;
   }
-  output += "\n";
 
   fs.writeFileSync(outputFile, output);
   console.log(`Generated ${outputFile} with ${opcodesUnique.size} opcodes`);
@@ -374,7 +373,6 @@ function writeStructureFile(formatName: string, items: Map<string, string>, stru
   for (const [id, offset] of items) {
     text += `OUTER_SET ${id} = ${offset}\n`;
   }
-  text += "\n";
 
   fs.writeFileSync(outputFile, text);
   console.log(`Generated ${outputFile}`);
