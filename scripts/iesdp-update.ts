@@ -54,6 +54,19 @@ const TYPE_SIZE_MAP: Record<string, number> = {
   strref: 4,
 };
 
+// Known types for JSDoc output
+const KNOWN_TYPES = new Set([
+  "byte",
+  "char",
+  "word",
+  "dword",
+  "resref",
+  "strref",
+  "bytes",
+  "char array",
+  "byte array",
+]);
+
 const STRUCTURE_PREFIX_MAP: Record<string, string> = {
   header: "",
   body: "",
@@ -311,10 +324,25 @@ function isStructureItemArray(data: unknown): data is StructureItem[] {
   return Array.isArray(data) && data.length > 0 && typeof data[0] === "object";
 }
 
+interface StructureField {
+  offset: number;
+  type: string;
+}
+
+/**
+ * Validates that a type is known.
+ */
+function validateType(type: string): string {
+  if (!KNOWN_TYPES.has(type)) {
+    throw new ValidationError(`Unknown type: "${type}"`);
+  }
+  return type;
+}
+
 /**
  * Loads a structure data file and computes offsets.
  */
-function loadDatafile(fpath: string, prefix: string): Map<string, string> {
+function loadDatafile(fpath: string, prefix: string): Map<string, StructureField> {
   console.log(`loading ${fpath}`);
   const content = readFile(fpath);
   const parsed = yaml.load(content);
@@ -325,7 +353,7 @@ function loadDatafile(fpath: string, prefix: string): Map<string, string> {
 
   const data = parsed;
   let curOff = data[0]?.offset ?? 0;
-  const items = new Map<string, string>();
+  const items = new Map<string, StructureField>();
 
   for (const item of data) {
     if (item.offset !== undefined && item.offset !== curOff) {
@@ -341,7 +369,10 @@ function loadDatafile(fpath: string, prefix: string): Map<string, string> {
     }
 
     const iid = generateId(item, prefix);
-    items.set(iid, `0x${curOff.toString(16)}`);
+    items.set(iid, {
+      offset: curOff,
+      type: validateType(item.type),
+    });
     curOff += size;
   }
 
@@ -362,7 +393,7 @@ function getOutputDirName(formatName: string): string {
 /**
  * Writes structure items to the appropriate output file.
  */
-function writeStructureFile(formatName: string, items: Map<string, string>, structuresDir: string): void {
+function writeStructureFile(formatName: string, items: Map<string, StructureField>, structuresDir: string): void {
   const dirName = getOutputDirName(formatName);
   const outputDir = path.join(structuresDir, dirName);
   const outputFile = path.join(outputDir, "iesdp.tph");
@@ -370,8 +401,9 @@ function writeStructureFile(formatName: string, items: Map<string, string>, stru
   fs.mkdirSync(outputDir, { recursive: true });
 
   let text = "";
-  for (const [id, offset] of items) {
-    text += `OUTER_SET ${id} = ${offset}\n`;
+  for (const [id, field] of items) {
+    text += `/** @type ${field.type} */\n`;
+    text += `OUTER_SET ${id} = 0x${field.offset.toString(16)}\n`;
   }
 
   fs.writeFileSync(outputFile, text);
@@ -396,7 +428,7 @@ function processStructures(iesdpDir: string, structuresDir: string): void {
       continue;
     }
 
-    const items = new Map<string, string>();
+    const items = new Map<string, StructureField>();
     const files = fs.readdirSync(ffDir).sort();
 
     for (const f of files) {
