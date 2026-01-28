@@ -231,6 +231,7 @@ title: ${section.title}
 layout: functions
 section: ${section.name}
 nav_order: ${navOrder + 1}
+permalink: /${section.name}/
 description: ${section.desc}
 ---
 `;
