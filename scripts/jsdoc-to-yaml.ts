@@ -10,10 +10,16 @@
 import * as fs from "fs";
 import * as path from "path";
 import { fileURLToPath } from "url";
+import * as yaml from "js-yaml";
 import { parseWeiduJsDoc, WeiduFunction, JsDocParam } from "./weidu-jsdoc-parser.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+/** Logs a message to stdout. */
+function log(message: string): void {
+  process.stdout.write(`${message}\n`);
+}
 
 // Types
 interface YamlParam {
@@ -185,40 +191,90 @@ function serializeYaml(functions: YamlFunction[]): string {
   return lines.join("\n");
 }
 
+interface SectionInfo {
+  name: string;
+  title: string;
+  desc: string;
+}
+
 /**
- * Processes all .tpa files and generates YAML documentation.
+ * Parses sections.yml to get section metadata.
+ */
+function parseSections(content: string): SectionInfo[] {
+  const parsed = yaml.load(content);
+  if (!Array.isArray(parsed)) {
+    throw new Error("sections.yml must be an array");
+  }
+  return parsed.map((item: unknown, index: number) => {
+    if (typeof item !== "object" || item === null) {
+      throw new Error(`Invalid section entry at index ${index} in sections.yml`);
+    }
+    const obj = item as Record<string, unknown>;
+    if (typeof obj.name !== "string" || typeof obj.title !== "string") {
+      throw new Error(`Section at index ${index} must have 'name' and 'title' string fields`);
+    }
+    const desc = typeof obj.desc === "string" ? obj.desc : "";
+    return {
+      name: obj.name,
+      title: obj.title,
+      desc,
+    };
+  });
+}
+
+/**
+ * Generates a markdown page for a section.
+ */
+function generateSectionPage(section: SectionInfo, navOrder: number): string {
+  return `---
+title: ${section.title}
+layout: functions
+section: ${section.name}
+parent: Home
+nav_order: ${navOrder}
+description: ${section.desc}
+---
+`;
+}
+
+/**
+ * Processes all .tpa files and generates YAML documentation and pages.
  */
 function main(): void {
   const projectRoot = path.resolve(__dirname, "..");
   const functionsDir = path.join(projectRoot, "functions");
-  const outputDir = path.join(projectRoot, "docs", "_data", "functions");
-  fs.mkdirSync(outputDir, { recursive: true });
+  const dataOutputDir = path.join(projectRoot, "docs", "_data", "functions");
+  const pagesOutputDir = path.join(projectRoot, "docs", "_pages");
+  fs.mkdirSync(dataOutputDir, { recursive: true });
+  fs.mkdirSync(pagesOutputDir, { recursive: true });
 
   // Read sections.yml to get the list of expected files
   const sectionsPath = path.join(projectRoot, "docs", "_data", "sections.yml");
   const sectionsContent = readFile(sectionsPath);
-  const sectionNames = [...sectionsContent.matchAll(/^- name: (\w+)/gm)].map((m) => m[1]);
+  const sections = parseSections(sectionsContent);
 
-  console.log(`Processing sections: ${sectionNames.join(", ")}`);
+  log(`Processing sections: ${sections.map((s) => s.name).join(", ")}`);
 
   let processedCount = 0;
 
-  for (const section of sectionNames) {
-    const tpaPath = path.join(functionsDir, `${section}.tpa`);
-    const yamlPath = path.join(outputDir, `${section}.yml`);
+  for (let i = 0; i < sections.length; i++) {
+    const section = sections[i];
+    const tpaPath = path.join(functionsDir, `${section.name}.tpa`);
+    const yamlPath = path.join(dataOutputDir, `${section.name}.yml`);
+    const pagePath = path.join(pagesOutputDir, `${section.name}.md`);
 
     if (!fs.existsSync(tpaPath)) {
-      console.log(`  Skipping ${section}: ${tpaPath} not found`);
+      log(`  Skipping ${section.name}: ${tpaPath} not found`);
       continue;
     }
 
-    console.log(`  Processing ${section}.tpa...`);
+    log(`  Processing ${section.name}.tpa...`);
 
     const content = readFile(tpaPath);
     const functions = parseWeiduJsDoc(content);
 
     if (functions.length === 0) {
-      console.log(`    No documented functions found in ${section}.tpa`);
+      log(`    No documented functions found in ${section.name}.tpa`);
       continue;
     }
 
@@ -226,11 +282,17 @@ function main(): void {
     const yamlContent = serializeYaml(yamlFunctions);
 
     fs.writeFileSync(yamlPath, yamlContent);
-    console.log(`    Generated ${yamlPath} with ${functions.length} functions`);
+    log(`    Generated ${yamlPath} with ${functions.length} functions`);
+
+    // Generate page
+    const pageContent = generateSectionPage(section, i + 1);
+    fs.writeFileSync(pagePath, pageContent);
+    log(`    Generated ${pagePath}`);
+
     processedCount++;
   }
 
-  console.log(`Done! Processed ${processedCount} sections.`);
+  log(`Done! Processed ${processedCount} sections.`);
 }
 
 // Run main when executed directly
