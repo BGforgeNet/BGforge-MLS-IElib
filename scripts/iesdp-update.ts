@@ -350,11 +350,22 @@ function loadDatafile(fpath: string, prefix: string): Map<string, string> {
 }
 
 /**
+ * Gets the output directory name for a format.
+ * E.g., "eff_v1" -> "eff", "eff_v2" -> "eff2"
+ */
+function getOutputDirName(formatName: string): string {
+  const base = formatName.replace(/_v.*/, "");
+  const version = formatName.replace(/.*_v/, "");
+  // For version 1, use just the base name; for v2+, append version number
+  return version === "1" ? base : `${base}${version}`;
+}
+
+/**
  * Writes structure items to the appropriate output file.
  */
 function writeStructureFile(formatName: string, items: Map<string, string>, structuresDir: string): void {
-  const base = formatName.replace(/_v.*/, "");
-  const outputDir = path.join(structuresDir, base);
+  const dirName = getOutputDirName(formatName);
+  const outputDir = path.join(structuresDir, dirName);
   const outputFile = path.join(outputDir, "iesdp.tph");
 
   fs.mkdirSync(outputDir, { recursive: true });
