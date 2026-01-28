@@ -4,8 +4,8 @@
  * IESDP Update Script
  *
  * Generates WeiDU constant definitions from IESDP data:
- * 1. Opcodes from HTML files with YAML frontmatter -> opcode.tpp
- * 2. Structure offsets from YAML files -> structures/<type>/iesdp.tpp
+ * 1. Opcodes from HTML files with YAML frontmatter -> opcode.tph
+ * 2. Structure offsets from YAML files -> structures/<type>/iesdp.tph
  */
 
 import * as fs from "fs";
@@ -179,7 +179,7 @@ function parseOpcodeFrontmatter(filePath: string): OpcodeFrontmatter | null {
 }
 
 /**
- * Generates the opcode.tpp file from IESDP opcode definitions.
+ * Generates the opcode.tph file from IESDP opcode definitions.
  */
 function generateOpcodeFile(iesdpDir: string, outputFile: string): void {
   const opcodeDir = path.join(iesdpDir, "_opcodes");
@@ -224,7 +224,7 @@ function generateOpcodeFile(iesdpDir: string, outputFile: string): void {
   // Generate output with trailing newline
   let output = "";
   for (const [name, num] of opcodesUnique) {
-    output += `OPCODE_${name} = ${num}\n`;
+    output += `OUTER_SET OPCODE_${name} = ${num}\n`;
   }
   output += "\n";
 
@@ -355,13 +355,13 @@ function loadDatafile(fpath: string, prefix: string): Map<string, string> {
 function writeStructureFile(formatName: string, items: Map<string, string>, structuresDir: string): void {
   const base = formatName.replace(/_v.*/, "");
   const outputDir = path.join(structuresDir, base);
-  const outputFile = path.join(outputDir, "iesdp.tpp");
+  const outputFile = path.join(outputDir, "iesdp.tph");
 
   fs.mkdirSync(outputDir, { recursive: true });
 
   let text = "";
   for (const [id, offset] of items) {
-    text += `${id} = ${offset}\n`;
+    text += `OUTER_SET ${id} = ${offset}\n`;
   }
   text += "\n";
 

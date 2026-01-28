@@ -1,0 +1,6 @@
+OUTER_SPRINT BGFORGE_SPL_DIR ~%BGFORGE_STRUCTURES_DIR%/spl~
+INCLUDE
+  ~%BGFORGE_SPL_DIR%/iesdp.tph~
+
+  ~%BGFORGE_SPL_DIR%/flags.tph~
+  ~%BGFORGE_SPL_DIR%/spell_form.tph~

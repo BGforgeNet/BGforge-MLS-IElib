@@ -1,0 +1,13 @@
+OUTER_SPRINT BGFORGE_IDS_DIR ~%BGFORGE_LIB_DIR%/IDS~
+
+INCLUDE
+  ~%BGFORGE_IDS_DIR%/animate_ids.tph~
+  ~%BGFORGE_IDS_DIR%/effect_ids.tph~
+  ~%BGFORGE_IDS_DIR%/gender_ids.tph~
+  ~%BGFORGE_IDS_DIR%/slots_ids.tph~
+  ~%BGFORGE_IDS_DIR%/types.tph~
+// ~%BGFORGE_IDS_DIR%/projectile_ids.tph~ // not sure how to handle this best, see https://github.com/Gibberlings3/iesdp/pull/91
+
+ACTION_IF (GAME_IS ~IWDEE~) BEGIN INCLUDE ~%BGFORGE_IDS_DIR%/spell_ids_iwdee.tph~ END
+ACTION_IF (GAME_IS ~BGEE~) BEGIN INCLUDE ~%BGFORGE_IDS_DIR%/spell_ids_bgee.tph~ END
+ACTION_IF (GAME_INCLUDES ~SOA~) BEGIN INCLUDE ~%BGFORGE_IDS_DIR%/spell_ids_bg2ee.tph~ END

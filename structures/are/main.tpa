@@ -150,9 +150,9 @@ FLAG_ARE_EDGE_party_required = 0
 FLAG_ARE_EDGE_party_enabled = 1
 
 
-TEXT_SPRINT BGFORGE_ARE_DIR ~%BGFORGE_STRUCTURES_DIR%/are~
-PATCH_INCLUDE
-  ~%BGFORGE_ARE_DIR%/container_flags.tpp~
-  ~%BGFORGE_ARE_DIR%/door_flags.tpp~
-  ~%BGFORGE_ARE_DIR%/region_flags.tpp~
-  ~%BGFORGE_ARE_DIR%/region_type.tpp~
+OUTER_SPRINT BGFORGE_ARE_DIR ~%BGFORGE_STRUCTURES_DIR%/are~
+INCLUDE
+  ~%BGFORGE_ARE_DIR%/container_flags.tph~
+  ~%BGFORGE_ARE_DIR%/door_flags.tph~
+  ~%BGFORGE_ARE_DIR%/region_flags.tph~
+  ~%BGFORGE_ARE_DIR%/region_type.tph~

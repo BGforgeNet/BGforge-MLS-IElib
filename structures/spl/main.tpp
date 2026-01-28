@@ -1,6 +1,0 @@
-TEXT_SPRINT BGFORGE_SPL_DIR ~%BGFORGE_STRUCTURES_DIR%/spl~
-PATCH_INCLUDE
-  ~%BGFORGE_SPL_DIR%/iesdp.tpp~
-
-  ~%BGFORGE_SPL_DIR%/flags.tpp~
-  ~%BGFORGE_SPL_DIR%/spell_form.tpp~

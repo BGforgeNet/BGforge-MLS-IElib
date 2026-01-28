@@ -1,0 +1,5 @@
+OUTER_SPRINT BGFORGE_STO_DIR ~%BGFORGE_STRUCTURES_DIR%/sto~
+INCLUDE
+  ~%BGFORGE_STO_DIR%/iesdp.tph~
+  ~%BGFORGE_STO_DIR%/flags.tph~
+  ~%BGFORGE_STO_DIR%/item_flags.tph~

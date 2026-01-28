@@ -3,7 +3,7 @@
 /**
  * JSDoc to YAML Converter
  *
- * Parses JSDoc comments from WeiDU .tpa files and generates YAML files
+ * Parses JSDoc comments from WeiDU .tph files and generates YAML files
  * for Jekyll documentation generation.
  */
 
@@ -238,7 +238,7 @@ description: ${section.desc}
 }
 
 /**
- * Processes all .tpa files and generates YAML documentation and pages.
+ * Processes all .tph files and generates YAML documentation and pages.
  */
 function main(): void {
   const projectRoot = path.resolve(__dirname, "..");
@@ -259,7 +259,7 @@ function main(): void {
 
   for (let i = 0; i < sections.length; i++) {
     const section = sections[i];
-    const tpaPath = path.join(functionsDir, `${section.name}.tpa`);
+    const tpaPath = path.join(functionsDir, `${section.name}.tph`);
     const yamlPath = path.join(dataOutputDir, `${section.name}.yml`);
     const pagePath = path.join(pagesOutputDir, `${section.name}.md`);
 
@@ -268,13 +268,13 @@ function main(): void {
       continue;
     }
 
-    log(`  Processing ${section.name}.tpa...`);
+    log(`  Processing ${section.name}.tph...`);
 
     const content = readFile(tpaPath);
     const functions = parseWeiduJsDoc(content);
 
     if (functions.length === 0) {
-      log(`    No documented functions found in ${section.name}.tpa`);
+      log(`    No documented functions found in ${section.name}.tph`);
       continue;
     }
 

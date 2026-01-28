@@ -1,0 +1,7 @@
+OUTER_SPRINT SCROLL_protection_from_acid ~scrl03~
+OUTER_SPRINT SCROLL_protection_from_cold ~scrl04~
+OUTER_SPRINT SCROLL_protection_from_electricity ~scrl05~
+OUTER_SPRINT SCROLL_protection_from_fire ~scrl06~
+OUTER_SPRINT SCROLL_protection_from_magic ~scrl07~
+OUTER_SPRINT SCROLL_protection_from_poison ~scrl08~
+OUTER_SPRINT SCROLL_protection_from_undead ~scrl09~

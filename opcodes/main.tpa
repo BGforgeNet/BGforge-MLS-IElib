@@ -1,0 +1,10 @@
+OUTER_SPRINT BGFORGE_OPCODES_DIR ~%BGFORGE_LIB_DIR%/opcodes~
+INCLUDE
+  ~%BGFORGE_OPCODES_DIR%/mod_type.tph~
+  ~%BGFORGE_OPCODES_DIR%/0_ac_modifier.tph~
+  ~%BGFORGE_OPCODES_DIR%/12_damage.tph~
+  ~%BGFORGE_OPCODES_DIR%/17_current_hp_mod_type.tph~
+  ~%BGFORGE_OPCODES_DIR%/82_script_type.tph~
+  ~%BGFORGE_OPCODES_DIR%/144_279_button_type.tph~
+  ~%BGFORGE_OPCODES_DIR%/146_cast_spell_type.tph~
+  ~%BGFORGE_OPCODES_DIR%/236_project_image.tph~

@@ -1,0 +1,8 @@
+OUTER_SPRINT BGFORGE_FX_DIR ~%BGFORGE_STRUCTURES_DIR%/fx~
+INCLUDE
+  ~%BGFORGE_FX_DIR%/iesdp.tph~
+
+  ~%BGFORGE_FX_DIR%/resist_dispel.tph~
+  ~%BGFORGE_FX_DIR%/saving_throw.tph~
+  ~%BGFORGE_FX_DIR%/target.tph~
+  ~%BGFORGE_FX_DIR%/timing.tph~

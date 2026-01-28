@@ -1,0 +1,17 @@
+OUTER_SET FX_opcode = 0x0
+OUTER_SET FX_target = 0x2
+OUTER_SET FX_power = 0x3
+OUTER_SET FX_parameter1 = 0x4
+OUTER_SET FX_parameter2 = 0x8
+OUTER_SET FX_timing = 0xc
+OUTER_SET FX_resistance = 0xd
+OUTER_SET FX_duration = 0xe
+OUTER_SET FX_probability1 = 0x12
+OUTER_SET FX_probability2 = 0x13
+OUTER_SET FX_resource = 0x14
+OUTER_SET FX_max_level = 0x1c
+OUTER_SET FX_min_level = 0x20
+OUTER_SET FX_save_type = 0x24
+OUTER_SET FX_save_bonus = 0x28
+OUTER_SET FX_stacking_id_Ex = 0x2c
+

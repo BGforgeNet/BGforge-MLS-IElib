@@ -1,0 +1,9 @@
+OUTER_SPRINT BGFORGE_ITM_DIR ~%BGFORGE_STRUCTURES_DIR%/itm~
+INCLUDE
+  ~%BGFORGE_ITM_DIR%/iesdp.tph~
+
+  ~%BGFORGE_ITM_DIR%/attack_type.tph~
+  ~%BGFORGE_ITM_DIR%/damage_type.tph~
+  ~%BGFORGE_ITM_DIR%/depletion.tph~
+  ~%BGFORGE_ITM_DIR%/header_flags.tph~
+  ~%BGFORGE_ITM_DIR%/header_target.tph~
