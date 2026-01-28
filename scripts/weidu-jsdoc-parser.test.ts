@@ -9,10 +9,14 @@ import {
     parseWeiduJsDoc,
     parseJsDocBlock,
     parseFunctionSignature,
-    type WeiduFunction,
-    type JsDocParam,
-    type JsDocReturn,
 } from './weidu-jsdoc-parser';
+
+/** Type-narrowing assertion for test results. */
+function assertDefined<T>(value: T | null | undefined): asserts value is T {
+    if (value === null || value === undefined) {
+        throw new Error('Expected value to be defined');
+    }
+}
 
 describe('parseJsDocBlock', () => {
     it('parses description from comment block', () => {
@@ -134,6 +138,7 @@ describe('parseFunctionSignature', () => {
 BEGIN
 END`;
         const result = parseFunctionSignature(code);
+        assertDefined(result);
         expect(result.name).toBe('GET_CENTER');
         expect(result.type).toBe('patch');
     });
@@ -143,6 +148,7 @@ END`;
 BEGIN
 END`;
         const result = parseFunctionSignature(code);
+        assertDefined(result);
         expect(result.name).toBe('IS_ITEM_IN_AREA');
         expect(result.type).toBe('action');
     });
@@ -155,6 +161,7 @@ END`;
 BEGIN
 END`;
         const result = parseFunctionSignature(code);
+        assertDefined(result);
         expect(result.intVars).toEqual({
             index: '0',
             offset: '0',
@@ -169,6 +176,7 @@ END`;
 BEGIN
 END`;
         const result = parseFunctionSignature(code);
+        assertDefined(result);
         expect(result.strVars).toEqual({
             filter: '""',
             name: '"default"',
@@ -183,6 +191,7 @@ END`;
 BEGIN
 END`;
         const result = parseFunctionSignature(code);
+        assertDefined(result);
         expect(result.ret).toEqual(['x', 'y']);
     });
 
@@ -193,6 +202,7 @@ END`;
 BEGIN
 END`;
         const result = parseFunctionSignature(code);
+        assertDefined(result);
         expect(result.retArray).toEqual(['items']);
     });
 
@@ -211,6 +221,7 @@ END`;
 BEGIN
 END`;
         const result = parseFunctionSignature(code);
+        assertDefined(result);
         expect(result.name).toBe('GET_CENTER');
         expect(result.type).toBe('patch');
         expect(result.intVars).toEqual({ index: '0', offset: '0' });
@@ -225,6 +236,7 @@ END`;
 BEGIN
 END`;
         const result = parseFunctionSignature(code);
+        assertDefined(result);
         expect(result.ret).toEqual(['base_ac']);
     });
 
@@ -236,6 +248,7 @@ END`;
 BEGIN
 END`;
         const result = parseFunctionSignature(code);
+        assertDefined(result);
         expect(result.intVars).toEqual({
             trapped: '"-1"',
             trap_detect: '"-1"',
@@ -533,6 +546,7 @@ describe('parseFunctionSignature edge cases', () => {
 BEGIN
 END`;
         const result = parseFunctionSignature(code);
+        assertDefined(result);
         expect(result.ret).toEqual(['value']);
     });
 
@@ -546,6 +560,7 @@ END`;
 BEGIN
 END`;
         const result = parseFunctionSignature(code);
+        assertDefined(result);
         expect(result.intVars).toEqual({ index: '0' });
         expect(result.strVars).toEqual({ name: '""', type: '"default"' });
         expect(result.ret).toEqual(['result']);
@@ -559,6 +574,7 @@ END`;
 BEGIN
 END`;
         const result = parseFunctionSignature(code);
+        assertDefined(result);
         expect(result.strVars).toEqual({ name: '~~', type: '~default~' });
     });
 
@@ -569,6 +585,7 @@ END`;
 BEGIN
 END`;
         const result = parseFunctionSignature(code);
+        assertDefined(result);
         expect(result.strVars).toEqual({ path: '~%MOD_FOLDER%/file~' });
     });
 
@@ -581,6 +598,7 @@ END`;
 BEGIN
 END`;
         const result = parseFunctionSignature(code);
+        assertDefined(result);
         expect(result.ret).toEqual(['a', 'b', 'c']);
     });
 
@@ -591,6 +609,7 @@ END`;
 BEGIN
 END`;
         const result = parseFunctionSignature(code);
+        assertDefined(result);
         expect(result.ret).toEqual(['value']);
         expect(result.retArray).toEqual(['items']);
     });
@@ -603,6 +622,7 @@ END`;
 BEGIN
 END`;
         const result = parseFunctionSignature(code);
+        assertDefined(result);
         expect(result.intVars).toEqual({ index: '0', offset: '10' });
     });
 

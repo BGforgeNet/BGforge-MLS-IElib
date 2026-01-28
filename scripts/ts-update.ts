@@ -118,11 +118,11 @@ function readFile(filePath: string): string {
  * Prettifies code blocks in descriptions.
  */
 function processCodeBlocks(description: string): string {
-  return description.replace(/```(.*?)```/gs, (_, code) => {
+  return description.replace(/```(.*?)```/gs, (_match, code: string) => {
     const indentedCode = code
       .trim()
       .split("\n")
-      .map((line: string) => `  ${line}`)
+      .map((line) => `  ${line}`)
       .join("\n");
     return `\`\`\`weidu-baf\n${indentedCode}\n\`\`\``;
   });

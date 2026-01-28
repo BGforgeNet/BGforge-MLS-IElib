@@ -297,10 +297,10 @@ function getFieldSize(item: StructureItem): number {
     return item.length;
   }
 
-  const size = TYPE_SIZE_MAP[item.type];
-  if (size === undefined) {
+  if (!(item.type in TYPE_SIZE_MAP)) {
     throw new ValidationError(`Unknown type: "${item.type}"`);
   }
+  const size = TYPE_SIZE_MAP[item.type];
 
   return item.mult !== undefined ? size * item.mult : size;
 }
