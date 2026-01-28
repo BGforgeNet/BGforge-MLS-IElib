@@ -192,6 +192,7 @@ function main(): void {
   const projectRoot = path.resolve(__dirname, "..");
   const functionsDir = path.join(projectRoot, "functions");
   const outputDir = path.join(projectRoot, "docs", "_data", "functions");
+  fs.mkdirSync(outputDir, { recursive: true });
 
   // Read sections.yml to get the list of expected files
   const sectionsPath = path.join(projectRoot, "docs", "_data", "sections.yml");
