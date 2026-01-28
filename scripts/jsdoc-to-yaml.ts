@@ -230,8 +230,7 @@ function generateSectionPage(section: SectionInfo, navOrder: number): string {
 title: ${section.title}
 layout: functions
 section: ${section.name}
-parent: Home
-nav_order: ${navOrder}
+nav_order: ${navOrder + 1}
 description: ${section.desc}
 ---
 `;
