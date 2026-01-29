@@ -13,6 +13,7 @@ import * as yaml from "js-yaml";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import { JSDOM } from "jsdom";
+import { readFile, log } from "./utils.js";
 
 // Constants
 const SKIP_FUNCTION_NAMES = ["Help"]; // Help is both action and trigger
@@ -105,16 +106,6 @@ function isValidObject(value: unknown): value is Record<string, unknown> {
 }
 
 /**
- * Reads a file and returns its content, throwing descriptive errors.
- */
-function readFile(filePath: string): string {
-  if (!fs.existsSync(filePath)) {
-    throw new Error(`File not found: ${filePath}`);
-  }
-  return fs.readFileSync(filePath, "utf-8");
-}
-
-/**
  * Prettifies code blocks in descriptions.
  */
 function processCodeBlocks(description: string): string {
@@ -136,25 +127,25 @@ function generateTypeScriptDeclaration(yamlFilePath: string): string | null {
   const parsed = yaml.load(fileContent);
 
   if (!isValidObject(parsed)) {
-    console.warn(`Invalid YAML structure in ${yamlFilePath}. Skipping.`);
+    log(`Warning: Invalid YAML structure in ${yamlFilePath}. Skipping.`);
     return null;
   }
 
   const parsedData = parsed as unknown as ParsedActionData;
 
   if (parsedData.bg2 !== 1) {
-    console.log(`${yamlFilePath} is missing BG2 data. Skipping.`);
+    log(`${yamlFilePath} is missing BG2 data. Skipping.`);
     return null;
   }
 
   if (parsedData.unknown || parsedData.no_result) {
-    console.log(`Note: ${yamlFilePath} is marked as unknown or has no result. Skipping.`);
+    log(`Note: ${yamlFilePath} is marked as unknown or has no result. Skipping.`);
     return null;
   }
 
   const functionName = parsedData.name;
   if (SKIP_FUNCTION_NAMES.includes(functionName)) {
-    console.log(`Skipping ${functionName}() function (special case)`);
+    log(`Skipping ${functionName}() function (special case)`);
     return null;
   }
 
@@ -229,12 +220,12 @@ import type { WeatherID } from "./weather.ids";
 
     if (declaration) {
       tsOutput.push(declaration);
-      console.log(`Processed: ${yamlFilePath}`);
+      log(`Processed: ${yamlFilePath}`);
     }
   }
 
   fs.writeFileSync(outputFile, tsOutput.join("\n\n"), "utf-8");
-  console.log(`Output written to ${outputFile}`);
+  log(`Output written to ${outputFile}`);
 }
 
 /**
@@ -317,7 +308,7 @@ function processTriggers(triggerFilePath: string, triggerOutputFilePath: string)
   const fileContent = readFile(triggerFilePath);
   const triggerBlocks = extractTriggerBlocks(fileContent);
 
-  console.log(`Found ${triggerBlocks.length} trigger blocks`);
+  log(`Found ${triggerBlocks.length} trigger blocks`);
 
   const header = `import type { ObjectPtr, SpellID, ItmRef } from "../index";
 
@@ -357,8 +348,8 @@ import type { TimeODay } from "./timeoday.ids";
       tsOutput.push(declaration);
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
-      console.warn(`Warning: Failed to process block #${i + 1}: ${message}`);
-      console.warn(triggerBlocks[i]);
+      log(`Warning: Failed to process block #${i + 1}: ${message}`);
+      log(triggerBlocks[i]);
       errorCount++;
     }
   }
@@ -368,7 +359,7 @@ import type { TimeODay } from "./timeoday.ids";
   }
 
   fs.writeFileSync(triggerOutputFilePath, tsOutput.join("\n\n"), "utf-8");
-  console.log(`Trigger declarations written to ${triggerOutputFilePath} (${errorCount} errors)`);
+  log(`Trigger declarations written to ${triggerOutputFilePath} (${errorCount} errors)`);
 }
 
 // Main entry point

@@ -6,6 +6,7 @@
  * Generates WeiDU constant definitions from IESDP data:
  * 1. Opcodes from HTML files with YAML frontmatter -> opcode.tph
  * 2. Structure offsets from YAML files -> structures/<type>/iesdp.tph
+ * 3. Item types from YAML -> structures/item_types.tph
  */
 
 import * as fs from "fs";
@@ -14,6 +15,7 @@ import * as yaml from "js-yaml";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import matter from "gray-matter";
+import { readFile, validateDirectory, log } from "./utils.js";
 
 // Constants
 const SKIP_OPCODE_NAMES = ["empty", "crash", "unknown"];
@@ -110,33 +112,16 @@ interface StructureItem {
   unknown?: boolean;
 }
 
+interface StructureField {
+  offset: number;
+  type: string;
+}
+
 // Custom error class for validation errors
 class ValidationError extends Error {
   constructor(message: string) {
     super(message);
     this.name = "ValidationError";
-  }
-}
-
-/**
- * Reads a file and returns its content, throwing descriptive errors.
- */
-function readFile(filePath: string): string {
-  if (!fs.existsSync(filePath)) {
-    throw new Error(`File not found: ${filePath}`);
-  }
-  return fs.readFileSync(filePath, "utf-8");
-}
-
-/**
- * Validates that a directory exists.
- */
-function validateDirectory(dirPath: string, description: string): void {
-  if (!fs.existsSync(dirPath)) {
-    throw new Error(`${description} not found: ${dirPath}`);
-  }
-  if (!fs.statSync(dirPath).isDirectory()) {
-    throw new Error(`${description} is not a directory: ${dirPath}`);
   }
 }
 
@@ -167,7 +152,7 @@ function normalizeOpcodeName(name: string): string {
 
   // Apply replacements
   for (const [from, to] of Object.entries(OPCODE_NAME_REPLACEMENTS)) {
-    result = result.split(from).join(to);
+    result = result.replaceAll(from, to);
   }
 
   // Collapse multiple underscores and strip leading/trailing
@@ -228,10 +213,9 @@ function generateOpcodeFile(iesdpDir: string, outputFile: string): void {
       continue;
     }
 
-    // Check for name collisions
-    const existingCount = [...opcodesUnique.keys()].filter((k) => k === name).length;
-    if (existingCount > 0) {
-      name = `${name}_${existingCount + 1}`;
+    // Check for name collisions -- O(1) Map lookup
+    if (opcodesUnique.has(name)) {
+      name = `${name}_2`;
     }
 
     // Special case: opcode 175 (hold and hold_graphic share the same name)
@@ -243,13 +227,12 @@ function generateOpcodeFile(iesdpDir: string, outputFile: string): void {
   }
 
   // Generate output
-  let output = "";
-  for (const [name, num] of opcodesUnique) {
-    output += `OUTER_SET OPCODE_${name} = ${num}\n`;
-  }
+  const lines = [...opcodesUnique.entries()].map(
+    ([name, num]) => `OUTER_SET OPCODE_${name} = ${num}`,
+  );
 
-  fs.writeFileSync(outputFile, output);
-  console.log(`Generated ${outputFile} with ${opcodesUnique.size} opcodes`);
+  fs.writeFileSync(outputFile, lines.join("\n") + "\n");
+  log(`Generated ${outputFile} with ${opcodesUnique.size} opcodes`);
 }
 
 /**
@@ -284,6 +267,17 @@ function stripMarkup(text: string): string {
 }
 
 /**
+ * Applies ID_REPLACEMENTS to a string.
+ */
+function applyIdReplacements(input: string): string {
+  let result = input;
+  for (const [from, to] of Object.entries(ID_REPLACEMENTS)) {
+    result = result.replaceAll(from, to);
+  }
+  return result;
+}
+
+/**
  * Generates a constant ID from a structure item.
  */
 function generateId(item: StructureItem, prefix: string): string {
@@ -293,13 +287,7 @@ function generateId(item: StructureItem, prefix: string): string {
   }
 
   // Construct from description
-  let iid = stripMarkup(item.desc.toLowerCase());
-
-  for (const [from, to] of Object.entries(ID_REPLACEMENTS)) {
-    iid = iid.split(from).join(to);
-  }
-
-  iid = prefix + iid;
+  const iid = prefix + applyIdReplacements(stripMarkup(item.desc.toLowerCase()));
 
   // Validate: id must be alnum + '_' only
   if (!/^[a-zA-Z0-9_]+$/.test(iid)) {
@@ -329,12 +317,11 @@ function getFieldSize(item: StructureItem): number {
  * Validates that parsed YAML is an array of structure items.
  */
 function isStructureItemArray(data: unknown): data is StructureItem[] {
-  return Array.isArray(data) && data.length > 0 && typeof data[0] === "object";
-}
-
-interface StructureField {
-  offset: number;
-  type: string;
+  if (!Array.isArray(data) || data.length === 0) {
+    return false;
+  }
+  const first: unknown = data[0];
+  return typeof first === "object" && first !== null && "desc" in first && "type" in first;
 }
 
 /**
@@ -351,7 +338,7 @@ function validateType(type: string): string {
  * Loads a structure data file and computes offsets.
  */
 function loadDatafile(fpath: string, prefix: string): Map<string, StructureField> {
-  console.log(`loading ${fpath}`);
+  log(`loading ${fpath}`);
   const content = readFile(fpath);
   const parsed = yaml.load(content);
 
@@ -365,7 +352,7 @@ function loadDatafile(fpath: string, prefix: string): Map<string, StructureField
 
   for (const item of data) {
     if (item.offset !== undefined && item.offset !== curOff) {
-      console.warn(`Warning: offset mismatch in ${fpath}. Expected ${curOff}, got ${item.offset}`);
+      log(`Warning: offset mismatch in ${fpath}. Expected ${curOff}, got ${item.offset}`);
     }
 
     const size = getFieldSize(item);
@@ -408,23 +395,18 @@ function writeStructureFile(formatName: string, items: Map<string, StructureFiel
 
   fs.mkdirSync(outputDir, { recursive: true });
 
-  let text = "";
-  for (const [id, field] of items) {
-    text += `/** @type ${field.type} */\n`;
-    text += `OUTER_SET ${id} = 0x${field.offset.toString(16)}\n`;
-  }
+  const lines = [...items.entries()].map(
+    ([id, field]) => `/** @type ${field.type} */\nOUTER_SET ${id} = 0x${field.offset.toString(16)}`,
+  );
 
-  fs.writeFileSync(outputFile, text);
-  console.log(`Generated ${outputFile}`);
+  fs.writeFileSync(outputFile, lines.join("\n") + "\n");
+  log(`Generated ${outputFile}`);
 }
 
 /**
- * Processes all structure definitions from IESDP.
+ * Processes format directories and generates structure offset files.
  */
-function processStructures(iesdpDir: string, structuresDir: string): void {
-  const fileFormatsDir = path.join(iesdpDir, "_data", "file_formats");
-  validateDirectory(fileFormatsDir, "File formats directory");
-
+function processFormatDirectories(fileFormatsDir: string, structuresDir: string): void {
   const formats = fs.readdirSync(fileFormatsDir);
 
   // Sort formats so higher versions come first, then v1 overwrites
@@ -456,26 +438,29 @@ function processStructures(iesdpDir: string, structuresDir: string): void {
 
     writeStructureFile(ff, items, structuresDir);
   }
+}
 
-  // Feature block (output to fx/ directory)
+/**
+ * Processes the feature block (output to fx/ directory).
+ */
+function processFeatureBlock(fileFormatsDir: string, structuresDir: string): void {
   const featureBlockPath = path.join(fileFormatsDir, "itm_v1", "feature_block.yml");
-  if (fs.existsSync(featureBlockPath)) {
-    const fxItems = loadDatafile(featureBlockPath, "FX_");
-    writeStructureFile("fx_v1", fxItems, structuresDir);
+  if (!fs.existsSync(featureBlockPath)) {
+    return;
   }
-
-  // Item types
-  const itemTypesPath = path.join(fileFormatsDir, "item_types.yml");
-  if (fs.existsSync(itemTypesPath)) {
-    generateItemTypesFile(itemTypesPath, structuresDir);
-  }
+  const fxItems = loadDatafile(featureBlockPath, "FX_");
+  writeStructureFile("fx_v1", fxItems, structuresDir);
 }
 
 /**
  * Validates that parsed YAML is an array of item type entries.
  */
 function isItemTypeArray(data: unknown): data is ItemTypeRaw[] {
-  return Array.isArray(data) && data.length > 0 && typeof data[0] === "object";
+  if (!Array.isArray(data) || data.length === 0) {
+    return false;
+  }
+  const first: unknown = data[0];
+  return typeof first === "object" && first !== null && "code" in first && "type" in first;
 }
 
 /**
@@ -487,11 +472,7 @@ function getItemTypeId(item: ItemTypeRaw): string {
     return ITEM_TYPE_PREFIX + item.id;
   }
 
-  let id = stripMarkup(item.type.toLowerCase());
-  for (const [from, to] of Object.entries(ID_REPLACEMENTS)) {
-    id = id.split(from).join(to);
-  }
-  id = ITEM_TYPE_PREFIX + id;
+  const id = ITEM_TYPE_PREFIX + applyIdReplacements(stripMarkup(item.type.toLowerCase()));
 
   if (!/^[a-zA-Z0-9_]+$/.test(id)) {
     throw new ValidationError(`Invalid item type id generated: "${id}" from type: "${item.type}"`);
@@ -504,7 +485,7 @@ function getItemTypeId(item: ItemTypeRaw): string {
  * Generates structures/item_types.tph from IESDP item_types.yml.
  */
 function generateItemTypesFile(itemTypesPath: string, structuresDir: string): void {
-  console.log(`loading ${itemTypesPath}`);
+  log(`loading ${itemTypesPath}`);
   const content = readFile(itemTypesPath);
   const parsed = yaml.load(content);
 
@@ -512,7 +493,7 @@ function generateItemTypesFile(itemTypesPath: string, structuresDir: string): vo
     throw new ValidationError(`Invalid item types data in ${itemTypesPath}`);
   }
 
-  let text = "";
+  const lines: string[] = [];
   for (const item of parsed) {
     if (item.type.toLowerCase() === "unknown") {
       continue;
@@ -524,12 +505,28 @@ function generateItemTypesFile(itemTypesPath: string, structuresDir: string): vo
     }
 
     const id = getItemTypeId(item);
-    text += `OUTER_SET ${id} = 0x${code.toString(16).padStart(2, "0")}\n`;
+    lines.push(`OUTER_SET ${id} = 0x${code.toString(16).padStart(2, "0")}`);
   }
 
   const outputFile = path.join(structuresDir, "item_types.tph");
-  fs.writeFileSync(outputFile, text);
-  console.log(`Generated ${outputFile}`);
+  fs.writeFileSync(outputFile, lines.join("\n") + "\n");
+  log(`Generated ${outputFile}`);
+}
+
+/**
+ * Processes all structure definitions from IESDP.
+ */
+function processStructures(iesdpDir: string, structuresDir: string): void {
+  const fileFormatsDir = path.join(iesdpDir, "_data", "file_formats");
+  validateDirectory(fileFormatsDir, "File formats directory");
+
+  processFormatDirectories(fileFormatsDir, structuresDir);
+  processFeatureBlock(fileFormatsDir, structuresDir);
+
+  const itemTypesPath = path.join(fileFormatsDir, "item_types.yml");
+  if (fs.existsSync(itemTypesPath)) {
+    generateItemTypesFile(itemTypesPath, structuresDir);
+  }
 }
 
 // Main entry point
@@ -544,7 +541,7 @@ function main(): void {
       demandOption: true,
     })
     .option("opcode_file", {
-      describe: "Opcode definition file (WeiDU tpp)",
+      describe: "Opcode definition file (WeiDU tph)",
       type: "string",
       demandOption: true,
     })

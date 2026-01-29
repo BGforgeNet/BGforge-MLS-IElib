@@ -12,14 +12,10 @@ import * as path from "path";
 import { fileURLToPath } from "url";
 import * as yaml from "js-yaml";
 import { parseWeiduJsDoc, WeiduFunction, JsDocParam } from "./weidu-jsdoc-parser.js";
+import { readFile, log } from "./utils.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-/** Logs a message to stdout. */
-function log(message: string): void {
-  process.stdout.write(`${message}\n`);
-}
 
 // Types
 interface YamlParam {
@@ -43,16 +39,6 @@ interface YamlFunction {
   int_params?: YamlParam[];
   string_params?: YamlParam[];
   return?: YamlReturn[];
-}
-
-/**
- * Reads a file and returns its content, throwing descriptive errors.
- */
-function readFile(filePath: string): string {
-  if (!fs.existsSync(filePath)) {
-    throw new Error(`File not found: ${filePath}`);
-  }
-  return fs.readFileSync(filePath, "utf-8");
 }
 
 /**
@@ -123,6 +109,24 @@ function paramToYaml(param: JsDocParam): YamlParam {
 }
 
 /**
+ * Serializes a list of params into YAML lines.
+ */
+function serializeParams(lines: string[], label: string, params: YamlParam[]): void {
+  lines.push(`  ${label}:`);
+  for (const param of params) {
+    lines.push(`    - name: ${param.name}`);
+    lines.push(`      desc: ${param.desc}`);
+    lines.push(`      type: ${param.type}`);
+    if (param.required !== undefined) {
+      lines.push(`      required: ${param.required}`);
+    }
+    if (param.default !== undefined) {
+      lines.push(`      default: ${param.default}`);
+    }
+  }
+}
+
+/**
  * Serializes YAML manually to match the original format exactly.
  */
 function serializeYaml(functions: YamlFunction[]): string {
@@ -147,33 +151,11 @@ function serializeYaml(functions: YamlFunction[]): string {
     lines.push(`  type: ${func.type}`);
 
     if (func.int_params) {
-      lines.push("  int_params:");
-      for (const param of func.int_params) {
-        lines.push(`    - name: ${param.name}`);
-        lines.push(`      desc: ${param.desc}`);
-        lines.push(`      type: ${param.type}`);
-        if (param.required !== undefined) {
-          lines.push(`      required: ${param.required}`);
-        }
-        if (param.default !== undefined) {
-          lines.push(`      default: ${param.default}`);
-        }
-      }
+      serializeParams(lines, "int_params", func.int_params);
     }
 
     if (func.string_params) {
-      lines.push("  string_params:");
-      for (const param of func.string_params) {
-        lines.push(`    - name: ${param.name}`);
-        lines.push(`      desc: ${param.desc}`);
-        lines.push(`      type: ${param.type}`);
-        if (param.required !== undefined) {
-          lines.push(`      required: ${param.required}`);
-        }
-        if (param.default !== undefined) {
-          lines.push(`      default: ${param.default}`);
-        }
-      }
+      serializeParams(lines, "string_params", func.string_params);
     }
 
     if (func.return) {

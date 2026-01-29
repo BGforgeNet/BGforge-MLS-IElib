@@ -12,8 +12,8 @@ ensure_iesdp() {
 
     if [[ ! -d "$iesdp_dir" ]]; then
         mkdir -p "$ext_dir"
-        git clone "https://github.com/$repo/" "$iesdp_dir" >&2
-        git -C "$iesdp_dir" checkout ielib >&2
+        git clone "https://github.com/$repo/" "$iesdp_dir" >&2 || { echo "Failed to clone IESDP repository" >&2; exit 1; }
+        git -C "$iesdp_dir" checkout ielib >&2 || { echo "Failed to checkout ielib branch" >&2; exit 1; }
     fi
 
     echo "$iesdp_dir"
