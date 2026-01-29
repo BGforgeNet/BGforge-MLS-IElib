@@ -7,6 +7,6 @@ set -xeu -o pipefail
 source "$(dirname "$0")/ensure-iesdp.sh"
 
 iesdp_dir=$(ensure_iesdp)
-opcode_file="opcode.tph"
+opcode_file="misc/opcode.tph"
 
 pnpm exec tsx scripts/iesdp-update.ts -s "$iesdp_dir" --opcode_file "$opcode_file"
