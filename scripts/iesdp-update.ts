@@ -83,7 +83,15 @@ const ID_REPLACEMENTS: Record<string, string> = {
   " ": "_",
 };
 
+const ITEM_TYPE_PREFIX = "ITEM_TYPE_";
+
 // Types
+interface ItemTypeRaw {
+  code: string;
+  type: string;
+  id?: string;
+}
+
 interface OpcodeFrontmatter {
   n: number;
   opname: string;
@@ -455,6 +463,73 @@ function processStructures(iesdpDir: string, structuresDir: string): void {
     const fxItems = loadDatafile(featureBlockPath, "FX_");
     writeStructureFile("fx_v1", fxItems, structuresDir);
   }
+
+  // Item types
+  const itemTypesPath = path.join(fileFormatsDir, "item_types.yml");
+  if (fs.existsSync(itemTypesPath)) {
+    generateItemTypesFile(itemTypesPath, structuresDir);
+  }
+}
+
+/**
+ * Validates that parsed YAML is an array of item type entries.
+ */
+function isItemTypeArray(data: unknown): data is ItemTypeRaw[] {
+  return Array.isArray(data) && data.length > 0 && typeof data[0] === "object";
+}
+
+/**
+ * Generates an ID for an item type entry.
+ * Uses custom 'id' field if present, otherwise derives from description.
+ */
+function getItemTypeId(item: ItemTypeRaw): string {
+  if (item.id !== undefined) {
+    return ITEM_TYPE_PREFIX + item.id;
+  }
+
+  let id = stripMarkup(item.type.toLowerCase());
+  for (const [from, to] of Object.entries(ID_REPLACEMENTS)) {
+    id = id.split(from).join(to);
+  }
+  id = ITEM_TYPE_PREFIX + id;
+
+  if (!/^[a-zA-Z0-9_]+$/.test(id)) {
+    throw new ValidationError(`Invalid item type id generated: "${id}" from type: "${item.type}"`);
+  }
+
+  return id;
+}
+
+/**
+ * Generates structures/item_types.tph from IESDP item_types.yml.
+ */
+function generateItemTypesFile(itemTypesPath: string, structuresDir: string): void {
+  console.log(`loading ${itemTypesPath}`);
+  const content = readFile(itemTypesPath);
+  const parsed = yaml.load(content);
+
+  if (!isItemTypeArray(parsed)) {
+    throw new ValidationError(`Invalid item types data in ${itemTypesPath}`);
+  }
+
+  let text = "";
+  for (const item of parsed) {
+    if (item.type.toLowerCase() === "unknown") {
+      continue;
+    }
+
+    const code = parseInt(item.code, 16);
+    if (Number.isNaN(code)) {
+      throw new ValidationError(`Invalid item type code '${item.code}' for '${item.type}' in ${itemTypesPath}`);
+    }
+
+    const id = getItemTypeId(item);
+    text += `OUTER_SET ${id} = 0x${code.toString(16).padStart(2, "0")}\n`;
+  }
+
+  const outputFile = path.join(structuresDir, "item_types.tph");
+  fs.writeFileSync(outputFile, text);
+  console.log(`Generated ${outputFile}`);
 }
 
 // Main entry point
