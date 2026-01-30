@@ -250,7 +250,8 @@ export function writeStructureFile(formatName: string, items: Map<string, Struct
     ([id, field]) => formatStructureEntry(id, field),
   );
 
-  fs.writeFileSync(outputFile, lines.join("\n") + "\n");
+  // Separate entries with blank lines for readability
+  fs.writeFileSync(outputFile, lines.join("\n\n") + "\n");
   log(`Generated ${outputFile}`);
 }
 

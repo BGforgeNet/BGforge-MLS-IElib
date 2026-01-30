@@ -190,6 +190,7 @@ export function generateOpcodeFile(iesdpDir: string, outputFile: string): void {
     ([name, entry]) => formatOpcodeJsDoc(name, entry),
   );
 
-  fs.writeFileSync(outputFile, lines.join("\n") + "\n");
+  // Separate entries with blank lines for readability
+  fs.writeFileSync(outputFile, lines.join("\n\n") + "\n");
   log(`Generated ${outputFile} with ${opcodesUnique.size} opcodes`);
 }
