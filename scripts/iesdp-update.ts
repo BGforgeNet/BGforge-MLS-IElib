@@ -346,11 +346,15 @@ function walkNode(node: Node, formatName: string, listDepth: number = 0): string
     case "a": {
       const children = walkChildren(el, formatName, listDepth);
       const href = el.getAttribute("href");
-      // Named anchors or empty href (e.g. after Liquid stripping) pass through children
-      if (!href) {
-        return children;
+      if (href) {
+        return `[${children}](${resolveIesdpUrl(href, formatName)})`;
       }
-      return `[${children}](${resolveIesdpUrl(href, formatName)})`;
+      // Named anchor: <a name="effv2_Body_0x14">text</a> → link to that anchor
+      const name = el.getAttribute("name");
+      if (name) {
+        return `[${children}](${resolveIesdpUrl(`#${name}`, formatName)})`;
+      }
+      return children;
     }
     case "code":
       return `\`${walkChildren(el, formatName, listDepth)}\``;
