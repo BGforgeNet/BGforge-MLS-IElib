@@ -115,6 +115,7 @@ interface StructureItem {
 interface StructureField {
   offset: number;
   type: string;
+  desc: string;
 }
 
 // Custom error class for validation errors
@@ -258,12 +259,21 @@ function getPrefix(fileVersion: string, dataFileName: string): string {
 }
 
 /**
- * Strips markdown links and HTML tags from text.
+ * Strips HTML tags and Jekyll liquid tags from text, preserving markdown.
  */
-function stripMarkup(text: string): string {
+function stripHtml(text: string): string {
   return text
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1") // Markdown links
-    .replace(/<[^>]+>/g, ""); // HTML tags
+    .replace(/\{%.*?%\}/g, "") // Jekyll liquid tags
+    .replace(/<[^>]+>/g, "") // HTML tags
+    .trim();
+}
+
+/**
+ * Strips all markup (HTML, markdown links) from text. Used for ID generation.
+ */
+function stripAllMarkup(text: string): string {
+  return stripHtml(text)
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1"); // Markdown links
 }
 
 /**
@@ -287,7 +297,7 @@ function generateId(item: StructureItem, prefix: string): string {
   }
 
   // Construct from description
-  const iid = prefix + applyIdReplacements(stripMarkup(item.desc.toLowerCase()));
+  const iid = prefix + applyIdReplacements(stripAllMarkup(item.desc.toLowerCase()));
 
   // Validate: id must be alnum + '_' only
   if (!/^[a-zA-Z0-9_]+$/.test(iid)) {
@@ -367,6 +377,7 @@ function loadDatafile(fpath: string, prefix: string): Map<string, StructureField
     items.set(iid, {
       offset: curOff,
       type: validateType(item.type),
+      desc: stripHtml(item.desc),
     });
     curOff += size;
   }
@@ -386,6 +397,25 @@ function getOutputDirName(formatName: string): string {
 }
 
 /**
+ * Formats a structure entry as a multiline JSDoc comment + OUTER_SET line.
+ */
+function formatStructureEntry(id: string, field: StructureField): string {
+  const descLines = field.desc
+    .split("\n")
+    .map((line) => line.trimEnd())
+    .filter((line) => line !== "");
+
+  const jsdocLines = [
+    "/**",
+    ` * @type ${field.type}`,
+    ...descLines.map((line) => ` * ${line}`),
+    " */",
+  ];
+
+  return `${jsdocLines.join("\n")}\nOUTER_SET ${id} = 0x${field.offset.toString(16)}`;
+}
+
+/**
  * Writes structure items to the appropriate output file.
  */
 function writeStructureFile(formatName: string, items: Map<string, StructureField>, structuresDir: string): void {
@@ -396,7 +426,7 @@ function writeStructureFile(formatName: string, items: Map<string, StructureFiel
   fs.mkdirSync(outputDir, { recursive: true });
 
   const lines = [...items.entries()].map(
-    ([id, field]) => `/** @type ${field.type} */\nOUTER_SET ${id} = 0x${field.offset.toString(16)}`,
+    ([id, field]) => formatStructureEntry(id, field),
   );
 
   fs.writeFileSync(outputFile, lines.join("\n") + "\n");
@@ -472,7 +502,7 @@ function getItemTypeId(item: ItemTypeRaw): string {
     return ITEM_TYPE_PREFIX + item.id;
   }
 
-  const id = ITEM_TYPE_PREFIX + applyIdReplacements(stripMarkup(item.type.toLowerCase()));
+  const id = ITEM_TYPE_PREFIX + applyIdReplacements(stripAllMarkup(item.type.toLowerCase()));
 
   if (!/^[a-zA-Z0-9_]+$/.test(id)) {
     throw new ValidationError(`Invalid item type id generated: "${id}" from type: "${item.type}"`);
