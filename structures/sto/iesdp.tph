@@ -66,7 +66,7 @@ OUTER_SET STO_name = 0xc
  * - bit 12: Buy Fenced Goods
  * - bit 13: Reputation doesn't affect prices (BGEE)
  * - bit 14: Toggle item recharge (TobEx)
- * - bit 15: **User allowed to sell [critical]({{ "/file_formats/ie_formats/itm_v1.htm#Header_Flags_BIT0" | prepend: relurl }}) items** (BGEE)
+ * - bit 15: **User allowed to sell [critical](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#Header_Flags_BIT0) items** (BGEE)
  */
 OUTER_SET STO_flags = 0x10
 /**
@@ -101,22 +101,22 @@ OUTER_SET STO_capacity = 0x22
 OUTER_SET STO_unknown = 0x78
 /**
  * @type dword
- * Offset to [items purchased](#storv1_0_Buy) section
+ * Offset to [items purchased](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/sto_v1.htm#storv1_0_Buy) section
  */
 OUTER_SET STO_buy_offset = 0x2c
 /**
  * @type dword
- * Count of items in [items purchased](#storv1_0_Buy) section
+ * Count of items in [items purchased](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/sto_v1.htm#storv1_0_Buy) section
  */
 OUTER_SET STO_buy_count = 0x30
 /**
  * @type dword
- * Offset to [items for sale](#storv1_0_Sale) section
+ * Offset to [items for sale](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/sto_v1.htm#storv1_0_Sale) section
  */
 OUTER_SET STO_items_offset = 0x34
 /**
  * @type dword
- * Count of [items for sale](#storv1_0_Sale)
+ * Count of [items for sale](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/sto_v1.htm#storv1_0_Sale)
  */
 OUTER_SET STO_items_count = 0x38
 /**
@@ -136,12 +136,12 @@ OUTER_SET STO_identification_price = 0x40
 OUTER_SET STO_rumors_tavern = 0x44
 /**
  * @type dword
- * Offset to [drinks](#storv1_0_Drink) section
+ * Offset to [drinks](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/sto_v1.htm#storv1_0_Drink) section
  */
 OUTER_SET STO_drinks_offset = 0x4c
 /**
  * @type dword
- * Count of [drinks](#storv1_0_Drink)
+ * Count of [drinks](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/sto_v1.htm#storv1_0_Drink)
  */
 OUTER_SET STO_drinks_counts = 0x50
 /**
@@ -180,12 +180,12 @@ OUTER_SET STO_room_price_noble = 0x68
 OUTER_SET STO_room_price_royal = 0x6c
 /**
  * @type dword
- * Offset to [cures](#storv1_0_Cure) section
+ * Offset to [cures](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/sto_v1.htm#storv1_0_Cure) section
  */
 OUTER_SET STO_cures_offset = 0x70
 /**
  * @type dword
- * Count of [cures](#storv1_0_Cure)
+ * Count of [cures](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/sto_v1.htm#storv1_0_Cure)
  */
 OUTER_SET STO_cures_count = 0x74
 /**
