@@ -15,9 +15,11 @@ import * as yaml from "js-yaml";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import matter from "gray-matter";
+import { JSDOM } from "jsdom";
 import { readFile, validateDirectory, log } from "./utils.js";
 
 // Constants
+const IESDP_BASE_URL = "https://gibberlings3.github.io/iesdp";
 const SKIP_OPCODE_NAMES = ["empty", "crash", "unknown"];
 
 const OPCODE_NAME_REPLACEMENTS: Record<string, string> = {
@@ -259,21 +261,179 @@ function getPrefix(fileVersion: string, dataFileName: string): string {
 }
 
 /**
- * Strips HTML tags and Jekyll liquid tags from text, preserving markdown.
+ * Map from anchor ID prefix to IESDP page path.
+ * Used to resolve same-page anchors like #effv1_Header_0x2 to full URLs.
  */
-function stripHtml(text: string): string {
-  return text
-    .replace(/\{%.*?%\}/g, "") // Jekyll liquid tags
-    .replace(/<[^>]+>/g, "") // HTML tags
-    .trim();
+const ANCHOR_PREFIX_TO_PAGE: Record<string, string> = {
+  effv1_: "file_formats/ie_formats/eff_v1.htm",
+  effv2_: "file_formats/ie_formats/eff_v2.htm",
+  itmv1_: "file_formats/ie_formats/itm_v1.htm",
+  splv1_: "file_formats/ie_formats/spl_v1.htm",
+  storv1_: "file_formats/ie_formats/sto_v1.htm",
+};
+
+/**
+ * Map from format directory name to IESDP page path.
+ */
+const FORMAT_TO_PAGE: Record<string, string> = {
+  eff_v1: "file_formats/ie_formats/eff_v1.htm",
+  eff_v2: "file_formats/ie_formats/eff_v2.htm",
+  itm_v1: "file_formats/ie_formats/itm_v1.htm",
+  spl_v1: "file_formats/ie_formats/spl_v1.htm",
+  sto_v1: "file_formats/ie_formats/sto_v1.htm",
+  fx_v1: "file_formats/ie_formats/itm_v1.htm",
+};
+
+/**
+ * Resolves an IESDP URL (relative, anchor-only, or absolute) to a full URL.
+ * All IESDP format pages live under file_formats/ie_formats/.
+ */
+function resolveIesdpUrl(href: string, formatName: string): string {
+  // Already absolute
+  if (href.startsWith("http://") || href.startsWith("https://")) {
+    return href;
+  }
+
+  // Absolute site path (from Liquid extraction): /opcodes/bgee.htm#op190
+  if (href.startsWith("/")) {
+    return `${IESDP_BASE_URL}${href}`;
+  }
+
+  // Same-page anchor: #effv1_Header_0x2_3
+  if (href.startsWith("#")) {
+    const anchor = href.slice(1);
+    // Try to match a known prefix to find the correct page
+    for (const [prefix, page] of Object.entries(ANCHOR_PREFIX_TO_PAGE)) {
+      if (anchor.startsWith(prefix)) {
+        return `${IESDP_BASE_URL}/${page}${href}`;
+      }
+    }
+    // No known prefix — resolve against the current format's page
+    const page = FORMAT_TO_PAGE[formatName];
+    if (page) {
+      return `${IESDP_BASE_URL}/${page}${href}`;
+    }
+    // Cannot resolve — return as-is
+    return href;
+  }
+
+  // Relative path: resolve against file_formats/ie_formats/
+  // ../ie_formats/X → file_formats/ie_formats/X
+  // ../../opcodes/X → opcodes/X
+  const baseDir = "file_formats/ie_formats/";
+  const resolved = new URL(href, `${IESDP_BASE_URL}/${baseDir}placeholder.htm`);
+  return resolved.href;
 }
 
 /**
- * Strips all markup (HTML, markdown links) from text. Used for ID generation.
+ * Recursively walks a DOM node tree, converting HTML elements to markdown.
+ * listDepth tracks nesting level for list indentation.
+ */
+function walkNode(node: Node, formatName: string, listDepth: number = 0): string {
+  // Text node: return content as-is (whitespace handled per-element)
+  if (node.nodeType === 3) {
+    return node.textContent ?? "";
+  }
+  // Skip non-element nodes (comments, etc.)
+  if (node.nodeType !== 1) {
+    return "";
+  }
+
+  const el = node as Element;
+  const tag = el.tagName.toLowerCase();
+
+  switch (tag) {
+    case "a": {
+      const children = walkChildren(el, formatName, listDepth);
+      const href = el.getAttribute("href");
+      // Named anchors or empty href (e.g. after Liquid stripping) pass through children
+      if (!href) {
+        return children;
+      }
+      return `[${children}](${resolveIesdpUrl(href, formatName)})`;
+    }
+    case "code":
+      return `\`${walkChildren(el, formatName, listDepth)}\``;
+    case "b":
+    case "strong":
+      return `**${walkChildren(el, formatName, listDepth)}**`;
+    case "br":
+      return "\n";
+    case "ul":
+    case "ol":
+      return walkChildren(el, formatName, listDepth + 1);
+    case "li": {
+      const indent = "  ".repeat(Math.max(0, listDepth - 1));
+      const content = walkChildrenCollapsed(el, formatName, listDepth).trim();
+      return `\n${indent}- ${content}`;
+    }
+    case "div": {
+      const content = walkChildrenCollapsed(el, formatName, listDepth).trim();
+      return `\n${content}`;
+    }
+    // Pass through content for unsupported tags (small, sup, sub, etc.)
+    default:
+      return walkChildren(el, formatName, listDepth);
+  }
+}
+
+/**
+ * Walks all child nodes, concatenating their markdown output.
+ */
+function walkChildren(node: Node, formatName: string, listDepth: number): string {
+  return Array.from(node.childNodes)
+    .map((child) => walkNode(child, formatName, listDepth))
+    .join("");
+}
+
+/**
+ * Walks child nodes, collapsing whitespace in text nodes.
+ * Used for block-level elements (li, div) where HTML indentation is not meaningful.
+ */
+function walkChildrenCollapsed(node: Node, formatName: string, listDepth: number): string {
+  return Array.from(node.childNodes)
+    .map((child) => {
+      if (child.nodeType === 3) {
+        return (child.textContent ?? "").replace(/\s+/g, " ");
+      }
+      return walkNode(child, formatName, listDepth);
+    })
+    .join("");
+}
+
+/**
+ * Converts HTML to markdown using DOM parsing. Handles nested tags correctly.
+ * Resolves all URLs to absolute IESDP links.
+ * Also strips Jekyll liquid tags (both {{ }} and {% %}).
+ */
+function htmlToMarkdown(text: string, formatName: string): string {
+  const cleaned = text
+    // Jekyll liquid expressions: extract quoted path from {{ "path" | prepend: relurl }}
+    .replace(/\{\{\s*"([^"]+)"\s*\|\s*prepend:\s*relurl\s*\}\}/g, "$1")
+    // Strip remaining liquid tags ({{ }} and {% %})
+    .replace(/\{\{.*?\}\}/gs, "")
+    .replace(/\{%.*?%\}/gs, "");
+
+  const dom = new JSDOM(`<body>${cleaned}</body>`);
+  const markdown = walkNode(dom.window.document.body, formatName).trim();
+
+  // Also resolve URLs in markdown links that were already in the source text
+  // (not converted from HTML, so the DOM walker didn't process them)
+  return markdown.replace(
+    /\[([^\]]+)\]\(([^)]+)\)/g,
+    (_, linkText: string, href: string) => `[${linkText}](${resolveIesdpUrl(href, formatName)})`,
+  );
+}
+
+/**
+ * Strips all markup (HTML, markdown, liquid) from text. Used for ID generation.
  */
 function stripAllMarkup(text: string): string {
-  return stripHtml(text)
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1"); // Markdown links
+  // Format name irrelevant — URLs are stripped anyway
+  return htmlToMarkdown(text, "")
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1") // Markdown links
+    .replace(/\*\*([^*]+)\*\*/g, "$1") // Markdown bold
+    .replace(/`([^`]+)`/g, "$1"); // Markdown code
 }
 
 /**
@@ -347,7 +507,7 @@ function validateType(type: string): string {
 /**
  * Loads a structure data file and computes offsets.
  */
-function loadDatafile(fpath: string, prefix: string): Map<string, StructureField> {
+function loadDatafile(fpath: string, prefix: string, formatName: string): Map<string, StructureField> {
   log(`loading ${fpath}`);
   const content = readFile(fpath);
   const parsed = yaml.load(content);
@@ -377,7 +537,7 @@ function loadDatafile(fpath: string, prefix: string): Map<string, StructureField
     items.set(iid, {
       offset: curOff,
       type: validateType(item.type),
-      desc: stripHtml(item.desc),
+      desc: htmlToMarkdown(item.desc, formatName),
     });
     curOff += size;
   }
@@ -459,7 +619,7 @@ function processFormatDirectories(fileFormatsDir: string, structuresDir: string)
 
       const prefix = getPrefix(ff, f);
       const fpath = path.join(ffDir, f);
-      const newItems = loadDatafile(fpath, prefix);
+      const newItems = loadDatafile(fpath, prefix, ff);
 
       for (const [k, v] of newItems) {
         items.set(k, v);
@@ -478,7 +638,7 @@ function processFeatureBlock(fileFormatsDir: string, structuresDir: string): voi
   if (!fs.existsSync(featureBlockPath)) {
     return;
   }
-  const fxItems = loadDatafile(featureBlockPath, "FX_");
+  const fxItems = loadDatafile(featureBlockPath, "FX_", "fx_v1");
   writeStructureFile("fx_v1", fxItems, structuresDir);
 }
 
