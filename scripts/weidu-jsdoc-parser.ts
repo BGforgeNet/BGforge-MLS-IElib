@@ -96,8 +96,8 @@ export function parseJsDocBlock(comment: string): JsDocBlock {
             // Process previous tag if any
             processCurrentTag();
 
-            currentTag = tagMatch[1];
-            currentTagContent = [tagMatch[2]];
+            currentTag = tagMatch[1] ?? null;
+            currentTagContent = [tagMatch[2] ?? ''];
         } else if (currentTag) {
             // Continue previous tag (multi-line)
             currentTagContent.push(line.trim());
@@ -126,12 +126,17 @@ function parseParamTag(content: string): JsDocParam | null {
 
     if (!match) return null;
 
-    const [, type, name, required, description] = match;
+    const type = match[1];
+    const name = match[2];
+    const required = match[3];
+    const description = match[4];
+
+    if (!name) return null;
 
     return {
         name,
-        type: type || 'string',
-        description: (description || '').trim(),
+        type: type ?? 'string',
+        description: (description ?? '').trim(),
         required: required === '!',
     };
 }
@@ -146,12 +151,16 @@ function parseReturnTag(content: string): JsDocReturn | null {
 
     if (!match) return null;
 
-    const [, name, type, description] = match;
+    const name = match[1];
+    const type = match[2];
+    const description = match[3];
+
+    if (!name) return null;
 
     return {
         name,
-        type: type || 'string',
-        description: (description || '').trim(),
+        type: type ?? 'string',
+        description: (description ?? '').trim(),
     };
 }
 
@@ -169,9 +178,16 @@ export function parseFunctionSignature(code: string): FunctionSignature | null {
 
     if (!funcMatch) return null;
 
+    const kindStr = funcMatch[1]?.toLowerCase();
+    const funcName = funcMatch[2];
+
+    if (!funcName || (kindStr !== 'patch' && kindStr !== 'action')) {
+        return null;
+    }
+
     const result: FunctionSignature = {
-        name: funcMatch[2],
-        type: funcMatch[1].toLowerCase() as 'patch' | 'action',
+        name: funcName,
+        type: kindStr,
         intVars: {},
         strVars: {},
         ret: [],
@@ -183,32 +199,31 @@ export function parseFunctionSignature(code: string): FunctionSignature | null {
         /DEFINE_(?:PATCH|ACTION)_FUNCTION\s+\w+([\s\S]*?)BEGIN/i
     );
 
-    if (!headerMatch) return result;
-
-    const header = headerMatch[1];
+    const header = headerMatch?.[1];
+    if (!header) return result;
 
     // Parse INT_VAR section
-    const intVarMatch = header.match(/INT_VAR([\s\S]*?)(?=STR_VAR|RET(?:_ARRAY)?|BEGIN|$)/i);
-    if (intVarMatch) {
-        result.intVars = parseVarSection(intVarMatch[1]);
+    const intVarContent = header.match(/INT_VAR([\s\S]*?)(?=STR_VAR|RET(?:_ARRAY)?|BEGIN|$)/i)?.[1];
+    if (intVarContent) {
+        result.intVars = parseVarSection(intVarContent);
     }
 
     // Parse STR_VAR section
-    const strVarMatch = header.match(/STR_VAR([\s\S]*?)(?=INT_VAR|RET(?:_ARRAY)?|BEGIN|$)/i);
-    if (strVarMatch) {
-        result.strVars = parseVarSection(strVarMatch[1]);
+    const strVarContent = header.match(/STR_VAR([\s\S]*?)(?=INT_VAR|RET(?:_ARRAY)?|BEGIN|$)/i)?.[1];
+    if (strVarContent) {
+        result.strVars = parseVarSection(strVarContent);
     }
 
     // Parse RET section (but not RET_ARRAY)
-    const retMatch = header.match(/\bRET\b(?!_ARRAY)([\s\S]*?)(?=RET_ARRAY|BEGIN|$)/i);
-    if (retMatch) {
-        result.ret = parseRetSection(retMatch[1]);
+    const retContent = header.match(/\bRET\b(?!_ARRAY)([\s\S]*?)(?=RET_ARRAY|BEGIN|$)/i)?.[1];
+    if (retContent) {
+        result.ret = parseRetSection(retContent);
     }
 
     // Parse RET_ARRAY section
-    const retArrayMatch = header.match(/RET_ARRAY([\s\S]*?)(?=RET\b(?!_)|BEGIN|$)/i);
-    if (retArrayMatch) {
-        result.retArray = parseRetSection(retArrayMatch[1]);
+    const retArrayContent = header.match(/RET_ARRAY([\s\S]*?)(?=RET\b(?!_)|BEGIN|$)/i)?.[1];
+    if (retArrayContent) {
+        result.retArray = parseRetSection(retArrayContent);
     }
 
     return result;
@@ -229,7 +244,11 @@ function parseVarSection(section: string): Record<string, string> {
     let match;
 
     while ((match = pattern.exec(cleaned)) !== null) {
-        vars[match[1]] = match[2];
+        const varName = match[1];
+        const varValue = match[2];
+        if (varName && varValue) {
+            vars[varName] = varValue;
+        }
     }
 
     return vars;
@@ -287,9 +306,8 @@ export function parseWeiduJsDoc(code: string): WeiduFunction[] {
             /(DEFINE_(?:PATCH|ACTION)_FUNCTION[\s\S]*?^END)/im
         );
 
-        if (!funcMatch) continue;
-
-        const functionCode = funcMatch[1];
+        const functionCode = funcMatch?.[1];
+        if (!functionCode) continue;
 
         const jsDoc = parseJsDocBlock(jsDocBlock);
         const signature = parseFunctionSignature(functionCode);
@@ -305,15 +323,102 @@ export function parseWeiduJsDoc(code: string): WeiduFunction[] {
 }
 
 /**
+ * Merges INT_VAR and STR_VAR params from the function signature with JSDoc documentation.
+ * Returns the merged params array and removes matched entries from docParamMap.
+ */
+function mergeVarParams(
+    signature: FunctionSignature,
+    docParamMap: Map<string, JsDocParam>,
+): JsDocParam[] {
+    const params: JsDocParam[] = [];
+
+    // Process INT_VAR params (in order from signature)
+    for (const [name, defaultValue] of Object.entries(signature.intVars)) {
+        const docParam = docParamMap.get(name);
+        // Use JSDoc type if specified and not default 'string', otherwise infer 'int' from INT_VAR
+        const inferredType = docParam?.type && docParam.type !== 'string' ? docParam.type : 'int';
+        params.push({
+            name,
+            type: inferredType,
+            description: docParam?.description ?? '',
+            required: docParam?.required ?? false,
+            default: defaultValue,
+            varType: 'INT_VAR',
+        });
+        docParamMap.delete(name);
+    }
+
+    // Process STR_VAR params (in order from signature)
+    for (const [name, defaultValue] of Object.entries(signature.strVars)) {
+        const docParam = docParamMap.get(name);
+        params.push({
+            name,
+            type: docParam?.type ?? 'string',
+            description: docParam?.description ?? '',
+            required: docParam?.required ?? false,
+            default: defaultValue,
+            varType: 'STR_VAR',
+        });
+        docParamMap.delete(name);
+    }
+
+    // Add any remaining documented params not in signature
+    for (const param of docParamMap.values()) {
+        params.push(param);
+    }
+
+    return params;
+}
+
+/**
+ * Merges RET and RET_ARRAY returns from the function signature with JSDoc documentation.
+ * Returns the merged returns array and removes matched entries from docReturnMap.
+ */
+function mergeReturnValues(
+    signature: FunctionSignature,
+    docReturnMap: Map<string, JsDocReturn>,
+): JsDocReturn[] {
+    const returns: JsDocReturn[] = [];
+
+    // Process RET returns
+    for (const name of signature.ret) {
+        const docReturn = docReturnMap.get(name);
+        returns.push({
+            name,
+            type: docReturn?.type ?? 'string',
+            description: docReturn?.description ?? '',
+            isArray: false,
+        });
+        docReturnMap.delete(name);
+    }
+
+    // Process RET_ARRAY returns
+    for (const name of signature.retArray) {
+        const docReturn = docReturnMap.get(name);
+        returns.push({
+            name,
+            type: docReturn?.type ?? 'array',
+            description: docReturn?.description ?? '',
+            isArray: true,
+        });
+        docReturnMap.delete(name);
+    }
+
+    // Add any remaining documented returns not in signature
+    for (const ret of docReturnMap.values()) {
+        returns.push(ret);
+    }
+
+    return returns;
+}
+
+/**
  * Merges parsed JSDoc information with function signature.
  */
 function mergeJsDocWithSignature(
     jsDoc: JsDocBlock,
     signature: FunctionSignature
 ): WeiduFunction {
-    const params: JsDocParam[] = [];
-    const returns: JsDocReturn[] = [];
-
     // Create a map of documented params by name
     const docParamMap = new Map<string, JsDocParam>();
     for (const param of jsDoc.params) {
@@ -326,76 +431,12 @@ function mergeJsDocWithSignature(
         docReturnMap.set(ret.name, ret);
     }
 
-    // Process INT_VAR params (in order from signature)
-    for (const [name, defaultValue] of Object.entries(signature.intVars)) {
-        const docParam = docParamMap.get(name);
-        // Use JSDoc type if specified and not default 'string', otherwise infer 'int' from INT_VAR
-        const inferredType = docParam?.type && docParam.type !== 'string' ? docParam.type : 'int';
-        params.push({
-            name,
-            type: inferredType,
-            description: docParam?.description || '',
-            required: docParam?.required || false,
-            default: defaultValue,
-            varType: 'INT_VAR',
-        });
-        docParamMap.delete(name);
-    }
-
-    // Process STR_VAR params (in order from signature)
-    for (const [name, defaultValue] of Object.entries(signature.strVars)) {
-        const docParam = docParamMap.get(name);
-        params.push({
-            name,
-            type: docParam?.type || 'string',
-            description: docParam?.description || '',
-            required: docParam?.required || false,
-            default: defaultValue,
-            varType: 'STR_VAR',
-        });
-        docParamMap.delete(name);
-    }
-
-    // Add any remaining documented params not in signature
-    for (const param of docParamMap.values()) {
-        params.push(param);
-    }
-
-    // Process RET returns
-    for (const name of signature.ret) {
-        const docReturn = docReturnMap.get(name);
-        returns.push({
-            name,
-            type: docReturn?.type || 'string',
-            description: docReturn?.description || '',
-            isArray: false,
-        });
-        docReturnMap.delete(name);
-    }
-
-    // Process RET_ARRAY returns
-    for (const name of signature.retArray) {
-        const docReturn = docReturnMap.get(name);
-        returns.push({
-            name,
-            type: docReturn?.type || 'array',
-            description: docReturn?.description || '',
-            isArray: true,
-        });
-        docReturnMap.delete(name);
-    }
-
-    // Add any remaining documented returns not in signature
-    for (const ret of docReturnMap.values()) {
-        returns.push(ret);
-    }
-
     return {
         name: signature.name,
         type: signature.type,
         description: jsDoc.description,
-        params,
-        returns,
+        params: mergeVarParams(signature, docParamMap),
+        returns: mergeReturnValues(signature, docReturnMap),
         deprecated: jsDoc.deprecated,
     };
 }

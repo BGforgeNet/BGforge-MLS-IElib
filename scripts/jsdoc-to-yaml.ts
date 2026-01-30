@@ -17,6 +17,12 @@ import { readFile, log } from "./utils.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+/**
+ * Offset added to section index for nav_order in generated pages.
+ * Accounts for fixed pages (home, about, etc.) that precede sections.
+ */
+const NAV_ORDER_OFFSET = 3;
+
 // Types
 interface YamlParam {
   name: string;
@@ -44,7 +50,7 @@ interface YamlFunction {
 /**
  * Converts a WeiduFunction to YAML-compatible format.
  */
-function functionToYaml(func: WeiduFunction): YamlFunction {
+export function functionToYaml(func: WeiduFunction): YamlFunction {
   const result: YamlFunction = {
     name: func.name,
     desc: func.description,
@@ -76,7 +82,7 @@ function functionToYaml(func: WeiduFunction): YamlFunction {
 /**
  * Converts a JsDocParam to YAML param format.
  */
-function paramToYaml(param: JsDocParam): YamlParam {
+export function paramToYaml(param: JsDocParam): YamlParam {
   const result: YamlParam = {
     name: param.name,
     desc: param.description,
@@ -110,9 +116,10 @@ function paramToYaml(param: JsDocParam): YamlParam {
 
 /**
  * Serializes a list of params into YAML lines.
+ * Returns a new array of lines (pure function, no mutation).
  */
-function serializeParams(lines: string[], label: string, params: YamlParam[]): void {
-  lines.push(`  ${label}:`);
+function serializeParams(label: string, params: readonly YamlParam[]): string[] {
+  const lines: string[] = [`  ${label}:`];
   for (const param of params) {
     lines.push(`    - name: ${param.name}`);
     lines.push(`      desc: ${param.desc}`);
@@ -124,51 +131,51 @@ function serializeParams(lines: string[], label: string, params: YamlParam[]): v
       lines.push(`      default: ${param.default}`);
     }
   }
+  return lines;
 }
 
 /**
  * Serializes YAML manually to match the original format exactly.
  */
-function serializeYaml(functions: YamlFunction[]): string {
-  const lines: string[] = [];
-
+export function serializeYaml(functions: readonly YamlFunction[]): string {
   // Sort functions alphabetically by name
   const sorted = [...functions].sort((a, b) => a.name.localeCompare(b.name));
 
-  for (const func of sorted) {
-    lines.push(`- name: ${func.name}`);
+  const lines = sorted.flatMap((func) => {
+    const funcLines: string[] = [`- name: ${func.name}`];
 
     // Handle multi-line descriptions with YAML block scalar
     if (func.desc.includes("\n")) {
-      lines.push("  desc: |");
+      funcLines.push("  desc: |");
       for (const line of func.desc.split("\n")) {
-        lines.push(`    ${line}`);
+        funcLines.push(`    ${line}`);
       }
     } else {
-      lines.push(`  desc: ${func.desc}`);
+      funcLines.push(`  desc: ${func.desc}`);
     }
 
-    lines.push(`  type: ${func.type}`);
+    funcLines.push(`  type: ${func.type}`);
 
     if (func.int_params) {
-      serializeParams(lines, "int_params", func.int_params);
+      funcLines.push(...serializeParams("int_params", func.int_params));
     }
 
     if (func.string_params) {
-      serializeParams(lines, "string_params", func.string_params);
+      funcLines.push(...serializeParams("string_params", func.string_params));
     }
 
     if (func.return) {
-      lines.push("  return:");
+      funcLines.push("  return:");
       for (const ret of func.return) {
-        lines.push(`    - name: ${ret.name}`);
-        lines.push(`      desc: ${ret.desc}`);
-        lines.push(`      type: ${ret.type}`);
+        funcLines.push(`    - name: ${ret.name}`);
+        funcLines.push(`      desc: ${ret.desc}`);
+        funcLines.push(`      type: ${ret.type}`);
       }
     }
 
-    lines.push("");
-  }
+    funcLines.push("");
+    return funcLines;
+  });
 
   return lines.join("\n");
 }
@@ -212,7 +219,7 @@ function generateSectionPage(section: SectionInfo, navOrder: number): string {
 title: ${section.title}
 layout: functions
 section: ${section.name}
-nav_order: ${navOrder + 3}
+nav_order: ${navOrder + NAV_ORDER_OFFSET}
 permalink: /${section.name}/
 description: ${section.desc}
 ---
@@ -239,8 +246,7 @@ function main(): void {
 
   let processedCount = 0;
 
-  for (let i = 0; i < sections.length; i++) {
-    const section = sections[i];
+  for (const [i, section] of sections.entries()) {
     const tpaPath = path.join(functionsDir, `${section.name}.tph`);
     const yamlPath = path.join(dataOutputDir, `${section.name}.yml`);
     const pagePath = path.join(pagesOutputDir, `${section.name}.md`);

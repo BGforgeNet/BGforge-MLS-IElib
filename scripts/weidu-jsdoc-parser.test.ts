@@ -43,7 +43,9 @@ describe('parseJsDocBlock', () => {
  */`;
         const result = parseJsDocBlock(comment);
         expect(result.params).toHaveLength(1);
-        expect(result.params[0]).toEqual({
+        const param0 = result.params[0];
+        assertDefined(param0);
+        expect(param0).toEqual({
             name: 'index',
             type: 'int',
             description: 'Structure index',
@@ -57,8 +59,10 @@ describe('parseJsDocBlock', () => {
  * @param {int} index! - Structure index (required)
  */`;
         const result = parseJsDocBlock(comment);
-        expect(result.params[0].required).toBe(true);
-        expect(result.params[0].name).toBe('index');
+        const param0 = result.params[0];
+        assertDefined(param0);
+        expect(param0.required).toBe(true);
+        expect(param0.name).toBe('index');
     });
 
     it('parses @param without explicit type (defaults to string)', () => {
@@ -67,8 +71,10 @@ describe('parseJsDocBlock', () => {
  * @param filter - Filter pattern
  */`;
         const result = parseJsDocBlock(comment);
-        expect(result.params[0].type).toBe('string');
-        expect(result.params[0].name).toBe('filter');
+        const param0 = result.params[0];
+        assertDefined(param0);
+        expect(param0.type).toBe('string');
+        expect(param0.name).toBe('filter');
     });
 
     it('parses multiple @param tags', () => {
@@ -80,9 +86,9 @@ describe('parseJsDocBlock', () => {
  */`;
         const result = parseJsDocBlock(comment);
         expect(result.params).toHaveLength(3);
-        expect(result.params[0].name).toBe('index');
-        expect(result.params[1].name).toBe('offset');
-        expect(result.params[2].name).toBe('filter');
+        expect(result.params[0]?.name).toBe('index');
+        expect(result.params[1]?.name).toBe('offset');
+        expect(result.params[2]?.name).toBe('filter');
     });
 
     it('parses @return with name and type', () => {
@@ -92,7 +98,9 @@ describe('parseJsDocBlock', () => {
  */`;
         const result = parseJsDocBlock(comment);
         expect(result.returns).toHaveLength(1);
-        expect(result.returns[0]).toEqual({
+        const ret0 = result.returns[0];
+        assertDefined(ret0);
+        expect(ret0).toEqual({
             name: 'x',
             type: 'int',
             description: 'X coordinate of center',
@@ -108,9 +116,9 @@ describe('parseJsDocBlock', () => {
  */`;
         const result = parseJsDocBlock(comment);
         expect(result.returns).toHaveLength(3);
-        expect(result.returns[0].name).toBe('x');
-        expect(result.returns[1].name).toBe('y');
-        expect(result.returns[2].name).toBe('items');
+        expect(result.returns[0]?.name).toBe('x');
+        expect(result.returns[1]?.name).toBe('y');
+        expect(result.returns[2]?.name).toBe('items');
     });
 
     it('parses @deprecated tag', () => {
@@ -286,6 +294,7 @@ END`;
         expect(result).toHaveLength(1);
 
         const func = result[0];
+        assertDefined(func);
         expect(func.name).toBe('GET_CENTER');
         expect(func.type).toBe('patch');
         expect(func.description).toBe('Returns coordinates of center point and matched items.');
@@ -334,8 +343,8 @@ BEGIN
 END`;
         const result = parseWeiduJsDoc(code);
         expect(result).toHaveLength(2);
-        expect(result[0].name).toBe('FUNC_ONE');
-        expect(result[1].name).toBe('FUNC_TWO');
+        expect(result[0]?.name).toBe('FUNC_ONE');
+        expect(result[1]?.name).toBe('FUNC_TWO');
     });
 
     it('skips functions without JSDoc', () => {
@@ -351,7 +360,7 @@ BEGIN
 END`;
         const result = parseWeiduJsDoc(code);
         expect(result).toHaveLength(1);
-        expect(result[0].name).toBe('HAS_DOCS');
+        expect(result[0]?.name).toBe('HAS_DOCS');
     });
 
     it('infers param type from INT_VAR/STR_VAR if not in JSDoc', () => {
@@ -368,10 +377,12 @@ DEFINE_PATCH_FUNCTION TEST_FUNC
 BEGIN
 END`;
         const result = parseWeiduJsDoc(code);
+        const func = result[0];
+        assertDefined(func);
         // index is in INT_VAR, so should be int
-        expect(result[0].params[0].type).toBe('int');
+        expect(func.params[0]?.type).toBe('int');
         // name is in STR_VAR, so should be string
-        expect(result[0].params[1].type).toBe('string');
+        expect(func.params[1]?.type).toBe('string');
     });
 
     it('handles functions with no params or returns', () => {
@@ -382,8 +393,10 @@ DEFINE_PATCH_FUNCTION SIMPLE_FUNC
 BEGIN
 END`;
         const result = parseWeiduJsDoc(code);
-        expect(result[0].params).toHaveLength(0);
-        expect(result[0].returns).toHaveLength(0);
+        const func = result[0];
+        assertDefined(func);
+        expect(func.params).toHaveLength(0);
+        expect(func.returns).toHaveLength(0);
     });
 
     it('handles real-world example from areas.tpa', () => {
@@ -407,9 +420,11 @@ BEGIN
 END`;
         const result = parseWeiduJsDoc(code);
         expect(result).toHaveLength(1);
-        expect(result[0].name).toBe('ALTER_AREA_REGION_MATCH');
-        expect(result[0].params).toHaveLength(5);
-        expect(result[0].params[4]).toMatchObject({
+        const func = result[0];
+        assertDefined(func);
+        expect(func.name).toBe('ALTER_AREA_REGION_MATCH');
+        expect(func.params).toHaveLength(5);
+        expect(func.params[4]).toMatchObject({
             name: 'match_script',
             type: 'string',
             required: true,
@@ -424,7 +439,9 @@ describe('parseJsDocBlock edge cases', () => {
  * @param {int} index
  */`;
         const result = parseJsDocBlock(comment);
-        expect(result.params[0]).toEqual({
+        const param0 = result.params[0];
+        assertDefined(param0);
+        expect(param0).toEqual({
             name: 'index',
             type: 'int',
             description: '',
@@ -438,7 +455,9 @@ describe('parseJsDocBlock edge cases', () => {
  * @return x {int}
  */`;
         const result = parseJsDocBlock(comment);
-        expect(result.returns[0]).toEqual({
+        const ret0 = result.returns[0];
+        assertDefined(ret0);
+        expect(ret0).toEqual({
             name: 'x',
             type: 'int',
             description: '',
@@ -451,8 +470,10 @@ describe('parseJsDocBlock edge cases', () => {
  * @return result - The result
  */`;
         const result = parseJsDocBlock(comment);
-        expect(result.returns[0].type).toBe('string');
-        expect(result.returns[0].name).toBe('result');
+        const ret0 = result.returns[0];
+        assertDefined(ret0);
+        expect(ret0.type).toBe('string');
+        expect(ret0.name).toBe('result');
     });
 
     it('handles description with special characters', () => {
@@ -470,7 +491,7 @@ describe('parseJsDocBlock edge cases', () => {
  *   that spans multiple lines
  */`;
         const result = parseJsDocBlock(comment);
-        expect(result.params[0].description).toBe('Structure index that spans multiple lines');
+        expect(result.params[0]?.description).toBe('Structure index that spans multiple lines');
     });
 
     it('handles @param with resref type', () => {
@@ -479,7 +500,7 @@ describe('parseJsDocBlock edge cases', () => {
  * @param {resref} item - Item resource reference
  */`;
         const result = parseJsDocBlock(comment);
-        expect(result.params[0].type).toBe('resref');
+        expect(result.params[0]?.type).toBe('resref');
     });
 
     it('handles @param with ids type', () => {
@@ -488,7 +509,7 @@ describe('parseJsDocBlock edge cases', () => {
  * @param {ids} alignment - Alignment IDS value
  */`;
         const result = parseJsDocBlock(comment);
-        expect(result.params[0].type).toBe('ids');
+        expect(result.params[0]?.type).toBe('ids');
     });
 
     it('handles @return with array type', () => {
@@ -497,7 +518,7 @@ describe('parseJsDocBlock edge cases', () => {
  * @return items {array} - Array of items
  */`;
         const result = parseJsDocBlock(comment);
-        expect(result.returns[0].type).toBe('array');
+        expect(result.returns[0]?.type).toBe('array');
     });
 
     it('handles @return with map type', () => {
@@ -506,7 +527,7 @@ describe('parseJsDocBlock edge cases', () => {
  * @return mapping {map} - Associative array
  */`;
         const result = parseJsDocBlock(comment);
-        expect(result.returns[0].type).toBe('map');
+        expect(result.returns[0]?.type).toBe('map');
     });
 
     it('handles @return with bool type', () => {
@@ -515,7 +536,7 @@ describe('parseJsDocBlock edge cases', () => {
  * @return found {bool} - Whether item was found
  */`;
         const result = parseJsDocBlock(comment);
-        expect(result.returns[0].type).toBe('bool');
+        expect(result.returns[0]?.type).toBe('bool');
     });
 
     it('handles empty @deprecated', () => {
@@ -666,9 +687,11 @@ DEFINE_PATCH_FUNCTION TEST
 BEGIN
 END`;
         const result = parseWeiduJsDoc(code);
+        const func = result[0];
+        assertDefined(func);
         // Should still include the documented param
-        expect(result[0].params).toHaveLength(1);
-        expect(result[0].params[0].name).toBe('extra');
+        expect(func.params).toHaveLength(1);
+        expect(func.params[0]?.name).toBe('extra');
     });
 
     it('handles param in signature but not documented', () => {
@@ -681,9 +704,11 @@ DEFINE_PATCH_FUNCTION TEST
 BEGIN
 END`;
         const result = parseWeiduJsDoc(code);
+        const func = result[0];
+        assertDefined(func);
         // Should include undocumented param with inferred type
-        expect(result[0].params).toHaveLength(1);
-        expect(result[0].params[0]).toMatchObject({
+        expect(func.params).toHaveLength(1);
+        expect(func.params[0]).toMatchObject({
             name: 'undocumented',
             type: 'int',
             default: '0',
@@ -699,9 +724,11 @@ DEFINE_PATCH_FUNCTION TEST
 BEGIN
 END`;
         const result = parseWeiduJsDoc(code);
+        const func = result[0];
+        assertDefined(func);
         // Should include undocumented return
-        expect(result[0].returns).toHaveLength(1);
-        expect(result[0].returns[0].name).toBe('result');
+        expect(func.returns).toHaveLength(1);
+        expect(func.returns[0]?.name).toBe('result');
     });
 
     it('marks RET_ARRAY returns with isArray flag', () => {
@@ -714,14 +741,18 @@ DEFINE_PATCH_FUNCTION TEST
 BEGIN
 END`;
         const result = parseWeiduJsDoc(code);
-        expect(result[0].returns[0].isArray).toBe(true);
+        const func = result[0];
+        assertDefined(func);
+        expect(func.returns[0]?.isArray).toBe(true);
     });
 
     it('handles Windows line endings (CRLF)', () => {
         const code = "/**\r\n * Description.\r\n */\r\nDEFINE_PATCH_FUNCTION TEST\r\nBEGIN\r\nEND";
         const result = parseWeiduJsDoc(code);
         expect(result).toHaveLength(1);
-        expect(result[0].description).toBe('Description.');
+        const func = result[0];
+        assertDefined(func);
+        expect(func.description).toBe('Description.');
     });
 
     it('handles tabs in indentation', () => {
@@ -734,8 +765,10 @@ DEFINE_PATCH_FUNCTION TEST
 BEGIN
 END`;
         const result = parseWeiduJsDoc(code);
-        expect(result[0].params).toHaveLength(1);
-        expect(result[0].params[0].name).toBe('index');
+        const func = result[0];
+        assertDefined(func);
+        expect(func.params).toHaveLength(1);
+        expect(func.params[0]?.name).toBe('index');
     });
 
     it('orders params by their appearance in signature', () => {
@@ -752,8 +785,10 @@ DEFINE_PATCH_FUNCTION TEST
 BEGIN
 END`;
         const result = parseWeiduJsDoc(code);
+        const func = result[0];
+        assertDefined(func);
         // Should follow signature order: INT_VAR first, then STR_VAR
-        expect(result[0].params[0].name).toBe('index');
-        expect(result[0].params[1].name).toBe('name');
+        expect(func.params[0]?.name).toBe('index');
+        expect(func.params[1]?.name).toBe('name');
     });
 });

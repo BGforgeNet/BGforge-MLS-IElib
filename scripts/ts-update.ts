@@ -18,20 +18,20 @@ import { readFile, log } from "./utils.js";
 // Constants
 const SKIP_FUNCTION_NAMES = ["Help"]; // Help is both action and trigger
 
-const RESERVED_PARAM_NAMES: Record<string, string> = {
+const RESERVED_PARAM_NAMES: Readonly<Record<string, string>> = {
   GLOBAL: "global",
   STRREF: "strRef",
   class: "classID",
   iD: "id",
 };
 
-const TYPE_ALIASES: Record<string, string> = {
+const TYPE_ALIASES: Readonly<Record<string, string>> = {
   Spell: "SpellID",
   Weather: "WeatherID",
   ShoutIDS: "ShoutID",
 };
 
-const TYPE_MAPPING: Record<string, string> = {
+const TYPE_MAPPING: Readonly<Record<string, string>> = {
   s: "string",
   o: "ObjectPtr",
   i: "number",
@@ -40,6 +40,63 @@ const TYPE_MAPPING: Record<string, string> = {
   itmref: "ItmRef",
   splref: "SplRef",
 };
+
+const ACTION_FILE_HEADER = `import type { Action, ObjectPtr, Point, SpellID, SplRef } from "../index";
+
+import type { Align } from "./align.ids";
+import type { Animate } from "./animate.ids";
+import type { AreaFlag } from "./areaflag.ids";
+import type { AreaTypeID as AreaType } from "./areatype.ids";
+import type { ClassID as Class } from "./class.ids";
+import type { DMGtype } from "./dmgtype.ids";
+import type { EA } from "./ea.ids";
+import type { GenderID as Gender } from "./gender.ids";
+import type { GeneralID as General } from "./general.ids";
+import type { GTimes } from "./gtimes.ids";
+import type { MFlags } from "./mflags.ids";
+import type { JourType } from "./jourtype.ids";
+import type { KitID as Kit } from "./kit.ids";
+import type { RaceID as Race } from "./race.ids";
+import type { ScrLev } from "./scrlev.ids";
+import type { Scroll } from "./scroll.ids";
+import type { Seq } from "./seq.ids";
+import type { ShoutID } from "./shoutids.ids";
+import type { Slots } from "./slots.ids";
+import type { SndSlot } from "./sndslot.ids";
+import type { SoundOff } from "./soundoff.ids";
+import type { Specific } from "./specific.ids";
+import type { TimeID as Time } from "./time.ids";
+import type { WeatherID } from "./weather.ids";
+
+`;
+
+const TRIGGER_FILE_HEADER = `import type { ObjectPtr, SpellID, ItmRef } from "../index";
+
+import type { Align } from "./align.ids";
+import type { AreaTypeID as AreaType } from "./areatype.ids";
+import type { AStyles } from "./astyles.ids";
+import type { ClassID as Class } from "./class.ids";
+import type { Damages } from "./damages.ids";
+import type { DiffLev } from "./difflev.ids";
+import type { EA } from "./ea.ids";
+import type { GenderID as Gender } from "./gender.ids";
+import type { GeneralID as General } from "./general.ids";
+import type { Happy } from "./happy.ids";
+import type { HotKeyID as HotKey } from "./hotkey.ids";
+import type { KitID as Kit } from "./kit.ids";
+import type { NPC } from "./npc.ids";
+import type { Modal } from "./modal.ids";
+import type { RaceID as Race } from "./race.ids";
+import type { ReactionID as Reaction } from "./reaction.ids";
+import type { ShoutID } from "./shoutids.ids";
+import type { Slots } from "./slots.ids";
+import type { Specific } from "./specific.ids";
+import type { State } from "./state.ids";
+import type { Stats } from "./stats.ids";
+import type { TimeID as Time } from "./time.ids";
+import type { TimeODay } from "./timeoday.ids";
+
+`;
 
 // Types
 interface Parameter {
@@ -58,6 +115,17 @@ interface ParsedActionData {
 }
 
 /**
+ * Validates that parsed YAML matches the expected ParsedActionData shape.
+ */
+function isValidActionData(data: unknown): data is ParsedActionData {
+  if (data === null || typeof data !== "object" || Array.isArray(data)) {
+    return false;
+  }
+  const obj = data as Record<string, unknown>;
+  return typeof obj.bg2 === "number" && typeof obj.name === "string";
+}
+
+/**
  * Normalizes a type name to its canonical form.
  */
 function normalizeTypeName(typeName: string): string {
@@ -65,34 +133,22 @@ function normalizeTypeName(typeName: string): string {
 }
 
 /**
- * Normalizes an action parameter name (lowercases entire name).
+ * Normalizes a parameter name with a given case strategy.
+ * - 'lower': lowercases entire name (used for action params)
+ * - 'camelCase': lowercases first char only, keeps rest (used for trigger params)
  */
-function normalizeActionParamName(name: string): string {
+export function normalizeParamName(name: string, caseStrategy: "lower" | "camelCase"): string {
   // Check for known reserved/special names first
-  if (RESERVED_PARAM_NAMES[name]) {
-    return RESERVED_PARAM_NAMES[name];
+  const reserved = RESERVED_PARAM_NAMES[name];
+  if (reserved) {
+    return reserved;
   }
 
-  // Remove whitespace and lowercase entire name
+  // Remove whitespace and apply case strategy
   const sanitized = name.replace(/\s+/g, "");
-  const normalized = sanitized.toLowerCase();
-
-  // Check again after normalization for reserved names
-  return RESERVED_PARAM_NAMES[normalized] ?? normalized;
-}
-
-/**
- * Normalizes a trigger parameter name (lowercases first char only, keeps camelCase).
- */
-function normalizeTriggerParamName(name: string): string {
-  // Check for known reserved/special names first
-  if (RESERVED_PARAM_NAMES[name]) {
-    return RESERVED_PARAM_NAMES[name];
-  }
-
-  // Remove whitespace and lowercase first character only (for camelCase)
-  const sanitized = name.replace(/\s+/g, "");
-  const normalized = sanitized.charAt(0).toLowerCase() + sanitized.slice(1);
+  const normalized = caseStrategy === "lower"
+    ? sanitized.toLowerCase()
+    : sanitized.charAt(0).toLowerCase() + sanitized.slice(1);
 
   // Check again after normalization for reserved names
   return RESERVED_PARAM_NAMES[normalized] ?? normalized;
@@ -131,39 +187,43 @@ function generateTypeScriptDeclaration(yamlFilePath: string): string | null {
     return null;
   }
 
-  const parsedData = parsed as unknown as ParsedActionData;
+  if (!isValidActionData(parsed)) {
+    log(`Warning: YAML missing required fields in ${yamlFilePath}. Skipping.`);
+    return null;
+  }
 
-  if (parsedData.bg2 !== 1) {
+  if (parsed.bg2 !== 1) {
     log(`${yamlFilePath} is missing BG2 data. Skipping.`);
     return null;
   }
 
-  if (parsedData.unknown || parsedData.no_result) {
+  if (parsed.unknown || parsed.no_result) {
     log(`Note: ${yamlFilePath} is marked as unknown or has no result. Skipping.`);
     return null;
   }
 
-  const functionName = parsedData.name;
+  const functionName = parsed.name;
   if (SKIP_FUNCTION_NAMES.includes(functionName)) {
     log(`Skipping ${functionName}() function (special case)`);
     return null;
   }
 
-  let description = processCodeBlocks(parsedData.desc || "");
+  let description = processCodeBlocks(parsed.desc ?? "");
   // Replace block-style comments with single-line comments
   description = description.replace(/\/\* (.*?) \*\//g, "// $1");
 
-  const params: Parameter[] = parsedData.params || [];
+  const params: Parameter[] = parsed.params ?? [];
   const paramLines: string[] = [];
   let unusedCount = 0;
 
   for (const param of params) {
     let paramName = param.name.toLowerCase() === "unused" ? `unused${unusedCount++}` : param.name;
-    paramName = normalizeActionParamName(paramName);
+    paramName = normalizeParamName(paramName, "lower");
 
-    // Use || instead of ?? because ids can be empty string
-    let paramType = param.ids || TYPE_MAPPING[param.type];
-    paramType = normalizeTypeName(paramType);
+    // Use explicit empty-string check: ids may be "" which should fall through to TYPE_MAPPING
+    const paramType = normalizeTypeName(
+      param.ids !== undefined && param.ids !== "" ? param.ids : TYPE_MAPPING[param.type] ?? param.type,
+    );
     paramLines.push(`${paramName}: ${paramType}`);
   }
 
@@ -179,35 +239,7 @@ function processActionFiles(directory: string, outputFile: string): void {
     throw new Error(`Actions directory not found: ${directory}`);
   }
 
-  const header = `import type { Action, ObjectPtr, Point, SpellID, SplRef } from "../index";
-
-import type { Align } from "./align.ids";
-import type { Animate } from "./animate.ids";
-import type { AreaFlag } from "./areaflag.ids";
-import type { AreaTypeID as AreaType } from "./areatype.ids";
-import type { ClassID as Class } from "./class.ids";
-import type { DMGtype } from "./dmgtype.ids";
-import type { EA } from "./ea.ids";
-import type { GenderID as Gender } from "./gender.ids";
-import type { GeneralID as General } from "./general.ids";
-import type { GTimes } from "./gtimes.ids";
-import type { MFlags } from "./mflags.ids";
-import type { JourType } from "./jourtype.ids";
-import type { KitID as Kit } from "./kit.ids";
-import type { RaceID as Race } from "./race.ids";
-import type { ScrLev } from "./scrlev.ids";
-import type { Scroll } from "./scroll.ids";
-import type { Seq } from "./seq.ids";
-import type { ShoutID } from "./shoutids.ids";
-import type { Slots } from "./slots.ids";
-import type { SndSlot } from "./sndslot.ids";
-import type { SoundOff } from "./soundoff.ids";
-import type { Specific } from "./specific.ids";
-import type { TimeID as Time } from "./time.ids";
-import type { WeatherID } from "./weather.ids";
-
-`;
-  const tsOutput: string[] = [header];
+  const tsOutput: string[] = [ACTION_FILE_HEADER];
 
   const files = fs.readdirSync(directory);
   for (const file of files) {
@@ -231,9 +263,9 @@ import type { WeatherID } from "./weather.ids";
 /**
  * Parses HTML trigger file and extracts trigger blocks.
  */
-function extractTriggerBlocks(fileContent: string): string[] {
+export function extractTriggerBlocks(fileContent: string): string[] {
   const dom = new JSDOM(fileContent);
-  const textContent = dom.window.document.body.textContent || "";
+  const textContent = dom.window.document.body.textContent;
 
   // Split text content into blocks based on lines starting with '0x'
   // Filter out any content before the first trigger (frontmatter, headers, etc.)
@@ -250,6 +282,9 @@ function extractTriggerBlocks(fileContent: string): string[] {
 function convertTriggerBlockToDeclaration(block: string): string {
   const lines = block.split("\n").map((line) => line.trim());
   const header = lines[0];
+  if (!header) {
+    throw new Error(`Empty trigger block`);
+  }
   const description = lines.slice(1).join(" ");
 
   // Expected format: 0xNNNN FunctionName(params)
@@ -258,7 +293,11 @@ function convertTriggerBlockToDeclaration(block: string): string {
     throw new Error(`Invalid trigger header format: "${header}"`);
   }
 
-  const [, triggerName, params] = headerMatch;
+  const triggerName = headerMatch[1];
+  const params = headerMatch[2];
+  if (!triggerName || params === undefined) {
+    throw new Error(`Failed to parse trigger name/params from: "${header}"`);
+  }
   const paramsStr = parseTriggerParameters(params);
 
   return `/**\n * ${description.trim()}\n */\ndeclare function ${triggerName}(${paramsStr}): boolean;`;
@@ -268,7 +307,7 @@ function convertTriggerBlockToDeclaration(block: string): string {
  * Parses trigger parameter string to TypeScript format.
  * Input format: "I:Name*IDS,O:Target,S:String"
  */
-function parseTriggerParameters(params: string): string {
+export function parseTriggerParameters(params: string): string {
   if (params === "") {
     return params;
   }
@@ -282,15 +321,22 @@ function parseTriggerParameters(params: string): string {
       }
 
       // Extract name and specific type (e.g., "Style*AStyles" -> name="Style", specificType="AStyles")
-      const [name, specificType] = nameWithDetails.split("*").map((part) => part.trim());
-      const formattedName = normalizeTriggerParamName(name);
+      const parts = nameWithDetails.split("*").map((part) => part.trim());
+      const name = parts[0];
+      if (!name) {
+        throw new Error(`Empty parameter name in: "${param}"`);
+      }
+      const specificType = parts.length > 1 ? parts[1] : undefined;
+      const formattedName = normalizeParamName(name, "camelCase");
 
-      // Use || instead of ?? because specificType can be empty string
-      let tsType = specificType || TYPE_MAPPING[type.toLowerCase()];
-      if (!tsType) {
+      // Use specific IDS type if present and non-empty, otherwise fall through to TYPE_MAPPING
+      const rawType = specificType !== undefined && specificType !== ""
+        ? specificType
+        : TYPE_MAPPING[type.toLowerCase()];
+      if (!rawType) {
         throw new Error(`Unknown type: "${type}" or "${specificType}"`);
       }
-      tsType = normalizeTypeName(tsType);
+      const tsType = normalizeTypeName(rawType);
 
       return `${formattedName}: ${tsType}`;
     })
@@ -310,46 +356,17 @@ function processTriggers(triggerFilePath: string, triggerOutputFilePath: string)
 
   log(`Found ${triggerBlocks.length} trigger blocks`);
 
-  const header = `import type { ObjectPtr, SpellID, ItmRef } from "../index";
-
-import type { Align } from "./align.ids";
-import type { AreaTypeID as AreaType } from "./areatype.ids";
-import type { AStyles } from "./astyles.ids";
-import type { ClassID as Class } from "./class.ids";
-import type { Damages } from "./damages.ids";
-import type { DiffLev } from "./difflev.ids";
-import type { EA } from "./ea.ids";
-import type { GenderID as Gender } from "./gender.ids";
-import type { GeneralID as General } from "./general.ids";
-import type { Happy } from "./happy.ids";
-import type { HotKeyID as HotKey } from "./hotkey.ids";
-import type { KitID as Kit } from "./kit.ids";
-import type { NPC } from "./npc.ids";
-import type { Modal } from "./modal.ids";
-import type { RaceID as Race } from "./race.ids";
-import type { ReactionID as Reaction } from "./reaction.ids";
-import type { ShoutID } from "./shoutids.ids";
-import type { Slots } from "./slots.ids";
-import type { Specific } from "./specific.ids";
-import type { State } from "./state.ids";
-import type { Stats } from "./stats.ids";
-import type { TimeID as Time } from "./time.ids";
-import type { TimeODay } from "./timeoday.ids";
-
-
-`;
-
-  const tsOutput: string[] = [header];
+  const tsOutput: string[] = [TRIGGER_FILE_HEADER];
   let errorCount = 0;
 
-  for (let i = 0; i < triggerBlocks.length; i++) {
+  for (const [i, block] of triggerBlocks.entries()) {
     try {
-      const declaration = convertTriggerBlockToDeclaration(triggerBlocks[i]);
+      const declaration = convertTriggerBlockToDeclaration(block);
       tsOutput.push(declaration);
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       log(`Warning: Failed to process block #${i + 1}: ${message}`);
-      log(triggerBlocks[i]);
+      log(block);
       errorCount++;
     }
   }
@@ -371,21 +388,28 @@ function main(): void {
     .help()
     .parseSync();
 
-  const [actionsDirectory, actionsOutputFile, triggersFile, triggersOutputFile] = argv._ as [
-    string,
-    string,
-    string,
-    string,
-  ];
+  const args = argv._.map(String);
+  const actionsDirectory = args[0];
+  const actionsOutputFile = args[1];
+  const triggersFile = args[2];
+  const triggersOutputFile = args[3];
+
+  if (!actionsDirectory || !actionsOutputFile || !triggersFile || !triggersOutputFile) {
+    throw new Error("Expected 4 positional arguments");
+  }
 
   processActionFiles(actionsDirectory, actionsOutputFile);
   processTriggers(triggersFile, triggersOutputFile);
 }
 
-try {
-  main();
-} catch (error) {
-  const message = error instanceof Error ? error.message : String(error);
-  console.error(`Error: ${message}`);
-  process.exit(1);
+// Only run CLI when executed directly (not imported as a module for testing)
+const isDirectExecution = process.argv[1]?.endsWith("ts-update.ts") ?? false;
+if (isDirectExecution) {
+  try {
+    main();
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.error(`Error: ${message}`);
+    process.exit(1);
+  }
 }
