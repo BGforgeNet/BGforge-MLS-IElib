@@ -183,28 +183,37 @@ function generateTypeScriptDeclaration(yamlFilePath: string): string | null {
   const parsed = yaml.load(fileContent);
 
   if (!isValidObject(parsed)) {
-    log(`Warning: Invalid YAML structure in ${yamlFilePath}. Skipping.`);
+    log(`Warning: ${yamlFilePath}: invalid YAML structure (expected object, got ${typeof parsed})`);
     return null;
   }
 
   if (!isValidActionData(parsed)) {
-    log(`Warning: YAML missing required fields in ${yamlFilePath}. Skipping.`);
+    const obj = parsed as Record<string, unknown>;
+    // Files for other game variants (bg1, bgee, pst, iwd) lack bg2 field -- expected, skip silently
+    if (!("bg2" in obj)) {
+      return null;
+    }
+    const missing = [
+      typeof obj.bg2 !== "number" ? "bg2 (number)" : "",
+      typeof obj.name !== "string" ? "name (string)" : "",
+    ].filter(Boolean);
+    log(`Warning: ${yamlFilePath}: missing required fields: ${missing.join(", ")}`);
     return null;
   }
 
+  // bg2 field exists but is not 1 (e.g. 0 = not applicable to BG2)
   if (parsed.bg2 !== 1) {
-    log(`${yamlFilePath} is missing BG2 data. Skipping.`);
     return null;
   }
 
+  // unknown/no_result actions have no usable signature
   if (parsed.unknown || parsed.no_result) {
-    log(`Note: ${yamlFilePath} is marked as unknown or has no result. Skipping.`);
     return null;
   }
 
   const functionName = parsed.name;
   if (SKIP_FUNCTION_NAMES.includes(functionName)) {
-    log(`Skipping ${functionName}() function (special case)`);
+    log(`Skipping ${yamlFilePath}: ${functionName}() is in skip list`);
     return null;
   }
 
@@ -240,6 +249,8 @@ function processActionFiles(directory: string, outputFile: string): void {
   }
 
   const tsOutput: string[] = [ACTION_FILE_HEADER];
+  let processedCount = 0;
+  let skippedCount = 0;
 
   const files = fs.readdirSync(directory);
   for (const file of files) {
@@ -252,12 +263,14 @@ function processActionFiles(directory: string, outputFile: string): void {
 
     if (declaration) {
       tsOutput.push(declaration);
-      log(`Processed: ${yamlFilePath}`);
+      processedCount++;
+    } else {
+      skippedCount++;
     }
   }
 
   fs.writeFileSync(outputFile, tsOutput.join("\n\n"), "utf-8");
-  log(`Output written to ${outputFile}`);
+  log(`Actions: ${processedCount} processed, ${skippedCount} skipped. Output: ${outputFile}`);
 }
 
 /**
