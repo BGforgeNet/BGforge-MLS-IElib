@@ -175,7 +175,7 @@ function normalizeOpcodeName(name: string): string {
 /**
  * Parses an opcode HTML file with YAML frontmatter.
  */
-function parseOpcodeFrontmatter(filePath: string): OpcodeFrontmatter | null {
+function parseOpcodeFrontmatter(filePath: string): { frontmatter: OpcodeFrontmatter; body: string } | null {
   const content = readFile(filePath);
   const parsed = matter(content);
   const data = parsed.data;
@@ -184,7 +184,13 @@ function parseOpcodeFrontmatter(filePath: string): OpcodeFrontmatter | null {
     return null;
   }
 
-  return data as OpcodeFrontmatter;
+  return { frontmatter: data as OpcodeFrontmatter, body: parsed.content };
+}
+
+interface OpcodeEntry {
+  num: number;
+  opname: string;
+  body: string;
 }
 
 /**
@@ -195,21 +201,16 @@ function generateOpcodeFile(iesdpDir: string, outputFile: string): void {
   validateDirectory(opcodeDir, "Opcode directory");
 
   const files = findFiles(opcodeDir, ".html");
-  const opcodes: OpcodeFrontmatter[] = [];
-
-  for (const file of files) {
-    const opcode = parseOpcodeFrontmatter(file);
-    if (opcode && opcode.bg2 === 1) {
-      opcodes.push(opcode);
-    }
-  }
+  const parsed = files
+    .map(parseOpcodeFrontmatter)
+    .filter((r): r is NonNullable<typeof r> => r !== null && r.frontmatter.bg2 === 1);
 
   // Sort by opcode number
-  opcodes.sort((a, b) => a.n - b.n);
+  parsed.sort((a, b) => a.frontmatter.n - b.frontmatter.n);
 
   // Build unique opcode map (some names collide, need to make unique)
-  const opcodesUnique = new Map<string, number>();
-  for (const o of opcodes) {
+  const opcodesUnique = new Map<string, OpcodeEntry>();
+  for (const { frontmatter: o, body } of parsed) {
     let name = normalizeOpcodeName(o.opname);
 
     if (SKIP_OPCODE_NAMES.includes(name)) {
@@ -226,13 +227,27 @@ function generateOpcodeFile(iesdpDir: string, outputFile: string): void {
       name = "hold_graphic";
     }
 
-    opcodesUnique.set(name, o.n);
+    opcodesUnique.set(name, { num: o.n, opname: o.opname, body });
   }
 
-  // Generate output
-  const lines = [...opcodesUnique.entries()].map(
-    ([name, num]) => `OUTER_SET OPCODE_${name} = ${num}`,
-  );
+  // Generate output with full JSDoc from opcode HTML body
+  const lines = [...opcodesUnique.entries()].map(([name, { num, opname, body }]) => {
+    const url = `${IESDP_BASE_URL}/opcodes/bgee.htm#op${num}`;
+    const bodyMarkdown = htmlToMarkdown(body, "opcode").trim();
+    // Collapse runs of blank lines into a single blank line
+    const descLines = bodyMarkdown
+      .replace(/\n{3,}/g, "\n\n")
+      .split("\n")
+      .map((line) => ` * ${line}`.trimEnd());
+    return [
+      "/**",
+      ` * [${opname}](${url})`,
+      " *",
+      ...descLines,
+      " */",
+      `OUTER_SET OPCODE_${name} = ${num}`,
+    ].join("\n");
+  });
 
   fs.writeFileSync(outputFile, lines.join("\n") + "\n");
   log(`Generated ${outputFile} with ${opcodesUnique.size} opcodes`);
@@ -282,6 +297,7 @@ const FORMAT_TO_PAGE: Record<string, string> = {
   spl_v1: "file_formats/ie_formats/spl_v1.htm",
   sto_v1: "file_formats/ie_formats/sto_v1.htm",
   fx_v1: "file_formats/ie_formats/itm_v1.htm",
+  opcode: "opcodes/bgee.htm",
 };
 
 /**
@@ -317,10 +333,9 @@ function resolveIesdpUrl(href: string, formatName: string): string {
     return href;
   }
 
-  // Relative path: resolve against file_formats/ie_formats/
-  // ../ie_formats/X → file_formats/ie_formats/X
-  // ../../opcodes/X → opcodes/X
-  const baseDir = "file_formats/ie_formats/";
+  // Relative path: resolve against the current format's directory
+  // Opcode files live at opcodes/, structure files at file_formats/ie_formats/
+  const baseDir = formatName === "opcode" ? "opcodes/" : "file_formats/ie_formats/";
   const resolved = new URL(href, `${IESDP_BASE_URL}/${baseDir}placeholder.htm`);
   return resolved.href;
 }
@@ -365,20 +380,68 @@ function walkNode(node: Node, formatName: string, listDepth: number = 0): string
       return "\n";
     case "ul":
     case "ol":
-      return walkChildren(el, formatName, listDepth + 1);
+      // Use collapsed walker to discard whitespace text nodes between <li> elements
+      return walkChildrenCollapsed(el, formatName, listDepth + 1);
     case "li": {
       const indent = "  ".repeat(Math.max(0, listDepth - 1));
       const content = walkChildrenCollapsed(el, formatName, listDepth).trim();
       return `\n${indent}- ${content}`;
     }
-    case "div": {
+    case "div":
+    case "p": {
       const content = walkChildrenCollapsed(el, formatName, listDepth).trim();
       return `\n${content}`;
     }
+    case "table":
+      return "\n" + walkTable(el, formatName);
+    // Skip table sub-elements handled by walkTable
+    case "thead":
+    case "tbody":
+    case "tfoot":
+    case "colgroup":
+    case "col":
+    case "tr":
+    case "th":
+    case "td":
+      return walkChildren(el, formatName, listDepth);
     // Pass through content for unsupported tags (small, sup, sub, etc.)
     default:
       return walkChildren(el, formatName, listDepth);
   }
+}
+
+/**
+ * Converts an HTML table to a markdown pipe table.
+ * Extracts rows from thead/tbody, formats as | col1 | col2 | ... |
+ */
+function walkTable(table: Element, formatName: string): string {
+  const rows = Array.from(table.querySelectorAll("tr"));
+  if (rows.length === 0) {
+    return "";
+  }
+
+  const matrix = rows.map((row) =>
+    Array.from(row.querySelectorAll("th, td")).map((cell) =>
+      walkChildrenCollapsed(cell, formatName, 0).trim(),
+    ),
+  );
+
+  // Determine column widths for alignment
+  const colCount = Math.max(...matrix.map((r) => r.length));
+  const widths = Array.from({ length: colCount }, (_, i) =>
+    Math.max(3, ...matrix.map((r) => (r[i] ?? "").length)),
+  );
+
+  const formatRow = (cells: string[]): string => {
+    const padded = widths.map((w, i) => (cells[i] ?? "").padEnd(w));
+    return `| ${padded.join(" | ")} |`;
+  };
+
+  const separator = `| ${widths.map((w) => "-".repeat(w)).join(" | ")} |`;
+
+  // First row is header (whether it was th or td)
+  const [header, ...body] = matrix;
+  return [formatRow(header), separator, ...body.map(formatRow)].join("\n");
 }
 
 /**
