@@ -6,11 +6,13 @@
  * This field matters only for [`ITM`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x0), SPL files shouldn't function any different based on their type (even `0`).
  */
 OUTER_SET SPL_HEAD_form = 0x0
+
 /**
  * @type char
  * - bit 2: 'Friendly' ability (PST only)
  */
 OUTER_SET SPL_HEAD_friendly = 0x1
+
 /**
  * @type word
  * **[Location](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0x2)**
@@ -28,11 +30,13 @@ OUTER_SET SPL_HEAD_friendly = 0x1
  * Subspells don't require an [`Ability Location`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0x2).
  */
 OUTER_SET SPL_HEAD_location = 0x2
+
 /**
  * @type resref
  * Memorised icon (BAM). The engine replaces the last character of this filename with a B.
  */
 OUTER_SET SPL_HEAD_memorised_icon = 0x4
+
 /**
  * @type char
  * **[Target](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0xC)**
@@ -58,6 +62,7 @@ OUTER_SET SPL_HEAD_memorised_icon = 0x4
  * - Subspells don't require an [`Ability Target`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0xC).
  */
 OUTER_SET SPL_HEAD_target = 0xc
+
 /**
  * @type char
  * **[Target count](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0xD)**
@@ -69,18 +74,21 @@ OUTER_SET SPL_HEAD_target = 0xc
  *   - Scripts will treat this field as if it's always `1`.
  */
 OUTER_SET SPL_HEAD_target_count = 0xd
+
 /**
  * @type word
  * **[Range](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0xE)**
  * As far as subspells are concerned, their [`Range`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0xE) is only checked if cast through [opcode #148](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op148), [opcode #232](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op232), [opcode #258](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op258), or [opcode #260](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op260).
  */
 OUTER_SET SPL_HEAD_range = 0xe
+
 /**
  * @type word
  * **[Level Required](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0x10)**
  * Standard spellcasting only utilizes the first byte (`0 – 255`), but opcodes that specify Casting Level ([`146`](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op146)/[`326`](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op326)/[`333`](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op333)) have access to the entire range (`0 – 65535`).
  */
 OUTER_SET SPL_HEAD_level_required = 0x10
+
 /**
  * @type word
  * **[Casting Time](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0x12)**
@@ -90,51 +98,61 @@ OUTER_SET SPL_HEAD_level_required = 0x10
  * - As far as subspells are concerned, their speed is only used if cast through [opcode #146](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op146)/[opcode #148](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op148) with the `Cast normally` option.
  */
 OUTER_SET SPL_HEAD_casting_time = 0x12
+
 /**
  * @type word
  * Times per day
  */
 OUTER_SET SPL_HEAD_times_per_day = 0x14
+
 /**
  * @type word
  * Count of feature blocks
  */
 OUTER_SET SPL_HEAD_feature_blocks_count = 0x1e
+
 /**
  * @type word
  * Offset to feature blocks
  */
 OUTER_SET SPL_HEAD_feature_blocks_offset = 0x20
+
 /**
  * @type word
  * **[Projectile](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0x26)** (BG2: [projectl.ids](https://gibberlings3.github.io/iesdp/ids/bg2/projectl.htm). **Note:** in BG2, this value is off-by-one from projectl.ids value. I.e. binary value of `2` corresponds to `0x1 - ARROW`)
  */
 OUTER_SET SPL_HEAD_projectile = 0x26
+
 /**
  * @type char array
  * Signature ('SPL  ')
  */
 OUTER_SET SPL_signature = 0x0
+
 /**
  * @type char array
  * Version ('V1  ')
  */
 OUTER_SET SPL_version = 0x4
+
 /**
  * @type dword
  * **[Spell Name](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x8)** - Unidentified (strref)
  */
 OUTER_SET SPL_unidentified_name = 0x8
+
 /**
  * @type resref
  * Completion Sound
  */
 OUTER_SET SPL_completion_sound = 0x10
+
 /**
  * @type dword
  * [Flags](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#Header_Flags)
  */
 OUTER_SET SPL_flags = 0x18
+
 /**
  * @type word
  * **[Spell type](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C)**:
@@ -160,28 +178,33 @@ OUTER_SET SPL_flags = 0x18
  *   - It also doesn't matter when they are applied through [opcode #146](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op146)`*p2=2`/[opcode #326](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op326)/[opcode #333](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op333).
  */
 OUTER_SET SPL_type = 0x1c
+
 /**
  * @type dword
  * [Exclusion Flags](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#Exclusion_Flags)
  */
 OUTER_SET SPL_exclusion_flags = 0x1e
+
 /**
  * @type word
  * [Casting Graphics](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#Header_Casting_Graphics)
  */
 OUTER_SET SPL_casting_graphics = 0x22
+
 /**
  * @type byte
  * **[Primary Type (School)](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x25)** (IWD: school.2da, BG2:mschool.2da)
  * For subspells, [`Primary Type`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x25) should always match parent spell, both for interaction with opcodes [#220](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op220)/[#229](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op229), and with the specialists save bonus/penalty (and [opcode #346](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op346)).
  */
 OUTER_SET SPL_school = 0x25
+
 /**
  * @type char
  * **[Secondary Type](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x27)** (BG2:msectype.2da)
  * For subspells, [`Secondary Type`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x27) should always match parent spell, for interaction with opcodes [#221](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op221)/[#230](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op230).
  */
 OUTER_SET SPL_sectype = 0x27
+
 /**
  * @type dword
  * **[Spell Level](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x34)**
@@ -189,36 +212,43 @@ OUTER_SET SPL_sectype = 0x27
  * - If the SPL is never [learned](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op147)/[gained](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op171) (only force-cast by script/opcode), [`Spell level`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x34) doesn't matter, but there may be some niche cases that check it (f.i. [`HaveSpell()`](https://gibberlings3.github.io/iesdp/scripting/triggers/bgeetriggers.htm#0x4031)).
  */
 OUTER_SET SPL_level = 0x34
+
 /**
  * @type resref
  * Spellbook icon (BAM). The engine replaces the last character of this filename with a C.
  */
 OUTER_SET SPL_spellbook_icon = 0x3a
+
 /**
  * @type dword
  * Spell Description
  */
 OUTER_SET SPL_description = 0x50
+
 /**
  * @type dword
  * Extended Header offset
  */
 OUTER_SET SPL_extended_headers_offset = 0x64
+
 /**
  * @type word
  * Extended Header count
  */
 OUTER_SET SPL_extended_headers_count = 0x68
+
 /**
  * @type dword
  * Feature Block Table offset
  */
 OUTER_SET SPL_feature_blocks_offset = 0x6a
+
 /**
  * @type word
  * Casting Feature Block offset (these feature blocks may not use target type 2)
  */
 OUTER_SET SPL_casting_feature_blocks_offset = 0x6e
+
 /**
  * @type word
  * Casting Feature Block count

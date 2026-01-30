@@ -42,6 +42,7 @@
  *   - With `Timing Mode`s `1/4/7`, alters target's base [`Armor Class`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x48), still subject to "only if better/lower", checked against base value, not current effective value.
  */
 OUTER_SET OPCODE_ac_vs_damage_type_mod = 0
+
 /**
  * [Stat: Attacks Per Round Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op1)
  *
@@ -80,6 +81,7 @@ OUTER_SET OPCODE_ac_vs_damage_type_mod = 0
  * Timing Modes 1/4/7 alters the creature's base APR stat, leaving behind no removable effect.
  */
 OUTER_SET OPCODE_attacks_per_round_mod = 1
+
 /**
  * [Cure: Sleep](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op2)
  *
@@ -92,6 +94,7 @@ OUTER_SET OPCODE_attacks_per_round_mod = 1
  * At least in EEs, it can remove [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177) effects targeting an EFF with [opcode #39](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op39). Does not always work when delayed.
  */
 OUTER_SET OPCODE_cure_sleep = 2
+
 /**
  * [State: Berserking](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op3)
  *
@@ -131,6 +134,7 @@ OUTER_SET OPCODE_cure_sleep = 2
  * "Morale Failure: Berserk" does NOT use this or any of the other berserk opcodes, nor does it set [STATE_BERSERK](https://gibberlings3.github.io/iesdp/files/ids/bgee/state.htm#BIT1).
  */
 OUTER_SET OPCODE_berserking = 3
+
 /**
  * [Cure: Berserking](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op4)
  *
@@ -145,6 +149,7 @@ OUTER_SET OPCODE_berserking = 3
  * At least in BG2 and EEs, this effect can remove [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177) effects targeting an EFF with [opcode #3](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op3).
  */
 OUTER_SET OPCODE_cure_berserking = 4
+
 /**
  * [Charm: Charm Specific Creature](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op5)
  *
@@ -214,6 +219,7 @@ OUTER_SET OPCODE_cure_berserking = 4
  * In EEs, the `Dice Thrown` parameter can be used to override the maintained `EA` Value. It is used in all but the first application of the effect.
  */
 OUTER_SET OPCODE_charm_charm_specific_creature = 5
+
 /**
  * [Stat: Charisma Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op6)
  *
@@ -247,6 +253,7 @@ OUTER_SET OPCODE_charm_charm_specific_creature = 5
  * Final values are capped to the bound range `(0,25)` in game (`40` in IWD2).
  */
 OUTER_SET OPCODE_charisma_mod = 6
+
 /**
  * [Colour: Set Character colours by Palette](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op7)
  *
@@ -322,6 +329,7 @@ OUTER_SET OPCODE_charisma_mod = 6
  *  (21 groups of 8 indexes, each shared by a different combination of two locations)
  */
 OUTER_SET OPCODE_colour_set_character_colours_by_palette = 7
+
 /**
  * [Colour: Change by RGB](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op8)
  *
@@ -365,6 +373,7 @@ OUTER_SET OPCODE_colour_set_character_colours_by_palette = 7
  * See [opcode #7](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op7) for further details about this topic.
  */
 OUTER_SET OPCODE_colour_change_by_rgb = 8
+
 /**
  * [Colour: Glow Pulse](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op9)
  *
@@ -415,6 +424,7 @@ OUTER_SET OPCODE_colour_change_by_rgb = 8
  * See [opcode #7](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op7) for further details about this topic.
  */
 OUTER_SET OPCODE_colour_glow_pulse = 9
+
 /**
  * [Stat: Constitution Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op10)
  *
@@ -448,6 +458,7 @@ OUTER_SET OPCODE_colour_glow_pulse = 9
  * Final values are capped to the bound range `(0,25)` in game (`40` in IWD2).
  */
 OUTER_SET OPCODE_constitution_mod = 10
+
 /**
  * [Cure: Poison](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op11)
  *
@@ -458,6 +469,7 @@ OUTER_SET OPCODE_constitution_mod = 10
  * At least in EEs, this effect can remove [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177) effects targeting an EFF with [opcode #25](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op25).
  */
 OUTER_SET OPCODE_cure_poison = 11
+
 /**
  * [HP: Damage](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op12)
  *
@@ -594,6 +606,7 @@ OUTER_SET OPCODE_cure_poison = 11
  * Using 'Magic Fire' or 'Magic Cold' as a damage type will result the game to crash if the damage kills the target.
  */
 OUTER_SET OPCODE_hp_damage = 12
+
 /**
  * [Death: Instant Death](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op13)
  *
@@ -660,12 +673,14 @@ OUTER_SET OPCODE_hp_damage = 12
  * - Any ⟶ Removes death states that they do not set (e.g, a normal Death will remove [STATE_FROZEN_DEATH](https://gibberlings3.github.io/iesdp/files/ids/bgee/state.htm#BIT6)).
  */
 OUTER_SET OPCODE_death_instant_death = 13
+
 /**
  * [Graphics: Defrost](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op14)
  *
  * Removes [STATE_FROZEN_DEATH](https://gibberlings3.github.io/iesdp/files/ids/bgee/state.htm#BIT6) from the targeted creatures and restores them to 1 HP. Does not affect creatures without [STATE_FROZEN_DEATH](https://gibberlings3.github.io/iesdp/files/ids/bgee/state.htm#BIT6).
  */
 OUTER_SET OPCODE_defrost = 14
+
 /**
  * [Stat: Dexterity Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op15)
  *
@@ -710,6 +725,7 @@ OUTER_SET OPCODE_defrost = 14
  * Final values are capped to the bound range `(0,25)` in game (`40` in IWD2).
  */
 OUTER_SET OPCODE_dexterity_mod = 15
+
 /**
  * [State: Haste](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op16)
  *
@@ -741,6 +757,7 @@ OUTER_SET OPCODE_dexterity_mod = 15
  * This only works when applying `Normal/Improved` haste (there's no difference, since the `STAT` for `Improved` haste doesn't get set this way), `Weak` haste does not do anything with `Timing Mode 1`.
  */
 OUTER_SET OPCODE_haste = 16
+
 /**
  * [HP: Current HP Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op17)
  *
@@ -766,6 +783,7 @@ OUTER_SET OPCODE_haste = 16
  * Unlike [opcode #12](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op12), this opcode does not apply any death effect ([opcode #13](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op13)) to the creature if it reduces their hit points to zero or less. The creature will remain in a bugged state (no HP but not dead) until they take further damage, or the game is saved & reloaded, at which point they will die properly.
  */
 OUTER_SET OPCODE_hp_current_hp_mod = 17
+
 /**
  * [HP: Maximum HP Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op18)
  *
@@ -801,6 +819,7 @@ OUTER_SET OPCODE_hp_current_hp_mod = 17
  * - It is still able to reduce current HP below the creature's level/HD, and has the same bugged death as [opcode #17](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op17) if it reduces a creature to zero or less HP.
  */
 OUTER_SET OPCODE_hp_maximum_hp_mod = 18
+
 /**
  * [Stat: Intelligence Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op19)
  *
@@ -834,6 +853,7 @@ OUTER_SET OPCODE_hp_maximum_hp_mod = 18
  * Final values are capped to the bound range `(0,25)` in game (`40` in IWD2).
  */
 OUTER_SET OPCODE_intelligence_mod = 19
+
 /**
  * [State: Invisibility](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op20)
  *
@@ -907,6 +927,7 @@ OUTER_SET OPCODE_intelligence_mod = 19
  * This opcode itself just sets or maintains (with a duration) the relevant STATEs. Everything else is a feature of [STATE_INVISIBLE](https://gibberlings3.github.io/iesdp/files/ids/bgee/state.htm#BIT4) and/or [STATE_IMPROVEDINVISIBILITY](https://gibberlings3.github.io/iesdp/files/ids/bgee/state.htm#BIT22).
  */
 OUTER_SET OPCODE_invisibility = 20
+
 /**
  * [Stat: Lore Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op21)
  *
@@ -925,6 +946,7 @@ OUTER_SET OPCODE_invisibility = 20
  * This effect does not work with `Timing Mode 1`.
  */
 OUTER_SET OPCODE_lore_mod = 21
+
 /**
  * [Stat: Cumulative Luck Bonus](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op22)
  *
@@ -965,6 +987,7 @@ OUTER_SET OPCODE_lore_mod = 21
  * - Also, every creature rolls for their own delay when they go to target a creature.
  */
 OUTER_SET OPCODE_cumulative_luck_bonus = 22
+
 /**
  * [Stat: Morale Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op23)
  *
@@ -973,6 +996,7 @@ OUTER_SET OPCODE_cumulative_luck_bonus = 22
  * this is a gimped effect in bg2, unlike the rest of the games!
  */
 OUTER_SET OPCODE_morale_mod = 23
+
 /**
  * [State: Horror](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op24)
  *
@@ -984,6 +1008,7 @@ OUTER_SET OPCODE_morale_mod = 23
  * - Non-zero ⟶ Bypass [opcode #101](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op101) (Immunity to effect)
  */
 OUTER_SET OPCODE_horror = 24
+
 /**
  * [State: Poison](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op25)
  *
@@ -1006,12 +1031,14 @@ OUTER_SET OPCODE_horror = 24
  * The 'Damage Amount' parameter should be set to a positive value.
  */
 OUTER_SET OPCODE_poison = 25
+
 /**
  * [Item: Remove Curse](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op26)
  *
  * Removes [`Cursed`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#Header_Flags_BIT4) items in addition to all [opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effects from the targeted creature(s).
  */
 OUTER_SET OPCODE_remove_curse = 26
+
 /**
  * [Stat: Acid Resistance Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op27)
  *
@@ -1028,6 +1055,7 @@ OUTER_SET OPCODE_remove_curse = 26
  * The effect modifies [RESISTACID](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#17).
  */
 OUTER_SET OPCODE_acid_resist_mod = 27
+
 /**
  * [Stat: Cold Resistance Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op28)
  *
@@ -1044,6 +1072,7 @@ OUTER_SET OPCODE_acid_resist_mod = 27
  * The effect modifies [RESISTCOLD](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#15).
  */
 OUTER_SET OPCODE_cold_resist_mod = 28
+
 /**
  * [Stat: Electricity Resistance Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op29)
  *
@@ -1060,6 +1089,7 @@ OUTER_SET OPCODE_cold_resist_mod = 28
  * The effect modifies [RESISTELECTRICITY](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#16).
  */
 OUTER_SET OPCODE_electricity_resist_mod = 29
+
 /**
  * [Stat: Fire Resistance Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op30)
  *
@@ -1076,6 +1106,7 @@ OUTER_SET OPCODE_electricity_resist_mod = 29
  * The effect modifies [RESISTFIRE](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#14).
  */
 OUTER_SET OPCODE_fire_resist_mod = 30
+
 /**
  * [Stat: Magic Damage Resistance Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op31)
  *
@@ -1092,6 +1123,7 @@ OUTER_SET OPCODE_fire_resist_mod = 30
  * The effect modifies [MAGICDAMAGERESISTANCE](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#73).
  */
 OUTER_SET OPCODE_magic_damage_resist_mod = 31
+
 /**
  * [Cure: Death (Raise Dead)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op32)
  *
@@ -1133,6 +1165,7 @@ OUTER_SET OPCODE_magic_damage_resist_mod = 31
  * The presence of this opcode in any of a spell's ability headers will force any Wild Surge of that spell to use the "Cast Normally" result.
  */
 OUTER_SET OPCODE_cure_death_raise_dead = 32
+
 /**
  * [Stat: Save vs. Death Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op33)
  *
@@ -1159,6 +1192,7 @@ OUTER_SET OPCODE_cure_death_raise_dead = 32
  * Effects proceeded after the stack are treated normaly like `Type = 0`.
  */
 OUTER_SET OPCODE_save_vs_death_mod = 33
+
 /**
  * [Stat: Save vs. Wands Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op34)
  *
@@ -1179,6 +1213,7 @@ OUTER_SET OPCODE_save_vs_death_mod = 33
  * When `Type = 3`, this opcode processes before saving throws are checked for effects proceeding it in the same effect stack; when `Type = 0`, it processes after.
  */
 OUTER_SET OPCODE_save_vs_wands_mod = 34
+
 /**
  * [Stat: Save vs. Petrification/Polymorph Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op35)
  *
@@ -1199,6 +1234,7 @@ OUTER_SET OPCODE_save_vs_wands_mod = 34
  * When `Type = 3`, this opcode processes before saving throws are checked for effects proceeding it in the same effect stack; when `Type = 0`, it processes after.
  */
 OUTER_SET OPCODE_save_vs_petrification_polymorph_mod = 35
+
 /**
  * [Stat: Save vs. Breath Weapons Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op36)
  *
@@ -1219,6 +1255,7 @@ OUTER_SET OPCODE_save_vs_petrification_polymorph_mod = 35
  * When `Type = 3`, this opcode processes before saving throws are checked for effects proceeding it in the same effect stack; when `Type = 0`, it processes after.
  */
 OUTER_SET OPCODE_save_vs_breath_weapons_mod = 36
+
 /**
  * [Stat: Save vs. Spells Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op37)
  *
@@ -1239,6 +1276,7 @@ OUTER_SET OPCODE_save_vs_breath_weapons_mod = 36
  * When `Type = 3`, this opcode processes before saving throws are checked for effects proceeding it in the same effect stack; when `Type = 0`, it processes after.
  */
 OUTER_SET OPCODE_save_vs_spells_mod = 37
+
 /**
  * [State: Silence](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op38)
  *
@@ -1252,6 +1290,7 @@ OUTER_SET OPCODE_save_vs_spells_mod = 37
  * - `"SPIN649"` (Teleport to Pocket Plane) in BG2/BGEE
  */
 OUTER_SET OPCODE_silence = 38
+
 /**
  * [State: Unconsciousness](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op39)
  *
@@ -1273,6 +1312,7 @@ OUTER_SET OPCODE_silence = 38
  * Immunity to this opcode does not prevent unconsciousness from [`stunning`](https://gibberlings3.github.io/iesdp/files/ids/bgee/damages.htm) damage done by normal fists.
  */
 OUTER_SET OPCODE_unconsciousness = 39
+
 /**
  * [State: Slow](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op40)
  *
@@ -1285,6 +1325,7 @@ OUTER_SET OPCODE_unconsciousness = 39
  * This opcode will set the [`STATE_SLOWED`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT16) flag and nothing else when applied with `Timing Mode 1`, and cannot be removed within the game by any means, only suppressed by [Haste](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op16).
  */
 OUTER_SET OPCODE_slow = 40
+
 /**
  * [Graphics: Sparkle](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op41)
  *
@@ -1318,6 +1359,7 @@ OUTER_SET OPCODE_slow = 40
  * Both of these params use only the lower 16 bits (upper bits might have other function).
  */
 OUTER_SET OPCODE_sparkle = 41
+
 /**
  * [Spell: Wizard Spell Slots Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op42)
  *
@@ -1351,6 +1393,7 @@ OUTER_SET OPCODE_sparkle = 41
  * - Applying multiple effects in increments of `-1` will insure that spell slots do not go below zero (and thus will not wrap around to maximum).
  */
 OUTER_SET OPCODE_wizard_spell_slots_mod = 42
+
 /**
  * [Cure: Stone to Flesh](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op43)
  *
@@ -1363,6 +1406,7 @@ OUTER_SET OPCODE_wizard_spell_slots_mod = 42
  * - Nor will it remove the False Petrification mode of [opcode #109](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op109).
  */
 OUTER_SET OPCODE_cure_stone_to_flesh = 43
+
 /**
  * [Stat: Strength Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op44)
  *
@@ -1416,6 +1460,7 @@ OUTER_SET OPCODE_cure_stone_to_flesh = 43
  * Final values are capped to the bound range `(0,25)` in game (`40` in IWD2).
  */
 OUTER_SET OPCODE_strength_mod = 44
+
 /**
  * [State: Stun](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op45)
  *
@@ -1435,6 +1480,7 @@ OUTER_SET OPCODE_strength_mod = 44
  * - By itself, [STATE_STUNNED](https://gibberlings3.github.io/iesdp/files/ids/bgee/state.htm#BIT3) does not disable any scripts or limit which actions the creature may take. It needs its opcode's immobilization effect as well as [STATE_HELPLESS](https://gibberlings3.github.io/iesdp/files/ids/bgee/state.htm#BIT5) to fully work.
  */
 OUTER_SET OPCODE_stun = 45
+
 /**
  * [Cure: Stun (Unstun)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op46)
  *
@@ -1443,6 +1489,7 @@ OUTER_SET OPCODE_stun = 45
  * This effect ignores durations attributed to it.
  */
 OUTER_SET OPCODE_cure_stun_unstun = 46
+
 /**
  * [Cure: Invisibility](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op47)
  *
@@ -1453,6 +1500,7 @@ OUTER_SET OPCODE_cure_stun_unstun = 46
  * Both parameters should be `0` (zero).
  */
 OUTER_SET OPCODE_cure_invisibility = 47
+
 /**
  * [Cure: Silence (Vocalize)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op48)
  *
@@ -1461,6 +1509,7 @@ OUTER_SET OPCODE_cure_invisibility = 47
  * This effect ignores durations attributed to it.
  */
 OUTER_SET OPCODE_cure_silence_vocalize = 48
+
 /**
  * [Stat: Wisdom Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op49)
  *
@@ -1494,6 +1543,7 @@ OUTER_SET OPCODE_cure_silence_vocalize = 48
  * Final values are capped to the bound range `(0,25)` in game (`40` in IWD2).
  */
 OUTER_SET OPCODE_wisdom_mod = 49
+
 /**
  * [Colour: Glow by RGB (Brief)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op50)
  *
@@ -1544,6 +1594,7 @@ OUTER_SET OPCODE_wisdom_mod = 49
  * See [opcode #7](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op7) for further details about this topic.
  */
 OUTER_SET OPCODE_colour_glow_by_rgb_brief = 50
+
 /**
  * [Colour: Strong/Dark by RGB](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op51)
  *
@@ -1587,6 +1638,7 @@ OUTER_SET OPCODE_colour_glow_by_rgb_brief = 50
  * See [opcode #7](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op7) for further details about this topic.
  */
 OUTER_SET OPCODE_colour_strong_dark_by_rgb = 51
+
 /**
  * [Colour: Very Bright by RGB](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op52)
  *
@@ -1630,6 +1682,7 @@ OUTER_SET OPCODE_colour_strong_dark_by_rgb = 51
  * See [opcode #7](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op7) for further details about this topic.
  */
 OUTER_SET OPCODE_colour_very_bright_by_rgb = 52
+
 /**
  * [Graphics: Animation Change](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op53)
  *
@@ -1648,6 +1701,7 @@ OUTER_SET OPCODE_colour_very_bright_by_rgb = 52
  * Applied with `Timing Mode`s `1/4/7`, sets the creature's base [`animation`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x28), leaving no removable effect.
  */
 OUTER_SET OPCODE_animation_change = 53
+
 /**
  * [Stat: THAC0 Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op54)
  *
@@ -1662,6 +1716,7 @@ OUTER_SET OPCODE_animation_change = 53
  * This effect adjusts the base stat, rather than modified THAC0.
  */
 OUTER_SET OPCODE_thac0_mod = 54
+
 /**
  * [Death: Kill Creature Type](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op55)
  *
@@ -1681,6 +1736,7 @@ OUTER_SET OPCODE_thac0_mod = 54
  * `IDS Entry` is a value from the specified IDS file, indicating the specific creature type to affect.
  */
 OUTER_SET OPCODE_death_kill_creature_type = 55
+
 /**
  * [Alignment: Invert](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op56)
  *
@@ -1689,6 +1745,7 @@ OUTER_SET OPCODE_death_kill_creature_type = 55
  * Both parameters should be `0` (zero).
  */
 OUTER_SET OPCODE_alignment_invert = 56
+
 /**
  * [Alignment: Change](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op57)
  *
@@ -1708,6 +1765,7 @@ OUTER_SET OPCODE_alignment_invert = 56
  * - 51 ⟶ Chaotic Evil
  */
 OUTER_SET OPCODE_alignment_change = 57
+
 /**
  * [Cure: Dispellable Effects (Dispel Magic)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op58)
  *
@@ -1722,6 +1780,7 @@ OUTER_SET OPCODE_alignment_change = 57
  * With 'Type' of 1 or 2, the base chance of successfully dispelling is 50%. This chance is modified by the relative levels of the dispeller to the caster. Each level below gives a -10% chance, each level above gives a +5% chance. There is always a 1% chance of success or failure.
  */
 OUTER_SET OPCODE_cure_dispellable_effects_dispel_magic = 58
+
 /**
  * [Stat: Stealth Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op59)
  *
@@ -1740,6 +1799,7 @@ OUTER_SET OPCODE_cure_dispellable_effects_dispel_magic = 58
  * (EE only) When `Type = 0` and `Timing Mode = 9`, it modifies [MOVESILENTLYMTPBONUS](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#177). The final value for this stat is multiplied by its percentage entry in [THIEFSCL.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/thiefscl.htm), capped to the range `[0,255]`, before being included in the creature's [`Move Silently`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x68) score.
  */
 OUTER_SET OPCODE_stealth_mod = 59
+
 /**
  * [Stat: Miscast Magic](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op60)
  *
@@ -1767,6 +1827,7 @@ OUTER_SET OPCODE_stealth_mod = 59
  * - Spells with [`Ignore Dead/Wild Magic`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#Header_Flags_BIT14) ignore the spell failure chance from this effect (regardless of using the `Dead Magic` mode).
  */
 OUTER_SET OPCODE_miscast_magic = 60
+
 /**
  * [Spell: Priest Spell Slots Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op62)
  *
@@ -1800,6 +1861,7 @@ OUTER_SET OPCODE_miscast_magic = 60
  * - Applying multiple effects in increments of `-1` will insure that spell slots do not go below zero (and thus will not wrap around to maximum).
  */
 OUTER_SET OPCODE_priest_spell_slots_mod = 62
+
 /**
  * [State: Infravision](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op63)
  *
@@ -1817,6 +1879,7 @@ OUTER_SET OPCODE_priest_spell_slots_mod = 62
  *   - Some areas have a separate Light Map for "nighttime" hours, `"AR####LN.BMP"`
  */
 OUTER_SET OPCODE_infravision = 63
+
 /**
  * [State: Remove Infravision](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op64)
  *
@@ -1829,6 +1892,7 @@ OUTER_SET OPCODE_infravision = 63
  * Both parameters should be `0` (zero).
  */
 OUTER_SET OPCODE_remove_infravision = 64
+
 /**
  * [Overlay: Blur](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op65)
  *
@@ -1842,6 +1906,7 @@ OUTER_SET OPCODE_remove_infravision = 64
  * - If you later apply [opcode #65](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op65) to the creature, once it expires, the blur visual will remain until you save & reload, but will no longer update based on your movement rate (it will remain stuck at whatever it was when the opcode expired).
  */
 OUTER_SET OPCODE_overlay_blur = 65
+
 /**
  * [Graphics: Transparency Fade](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op66)
  *
@@ -1872,6 +1937,7 @@ OUTER_SET OPCODE_overlay_blur = 65
  *   - If you also have the game option "Highlight selected sprites" enabled, [`TRANSLUCENT`](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#60) values `1 - 127` will display correctly, but only while the mouse is over the creature.
  */
 OUTER_SET OPCODE_transparency_fade = 66
+
 /**
  * [Summon: Creature Summoning](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op67)
  *
@@ -1914,6 +1980,7 @@ OUTER_SET OPCODE_transparency_fade = 66
  * - When summoned, any temporary changes (such as from equipped items) to the creature's [gender](https://gibberlings3.github.io/iesdp/files/ids/bgee/gender.htm) are made permanent.
  */
 OUTER_SET OPCODE_creature_summoning = 67
+
 /**
  * [Summon: Unsummon Creature](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op68)
  *
@@ -1933,6 +2000,7 @@ OUTER_SET OPCODE_creature_summoning = 67
  * - Global creatures can still be recovered through scripts actions, such as [MoveGlobalObject()](https://gibberlings3.github.io/iesdp/scripting/actions/bgeeactions.htm#291).
  */
 OUTER_SET OPCODE_unsummon_creature = 68
+
 /**
  * [Protection: From Detection (Non-Detection)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op69)
  *
@@ -1941,6 +2009,7 @@ OUTER_SET OPCODE_unsummon_creature = 68
  * `Timing Mode`s `1/4/7` will permanently set the creature's [`STATE_NONDETECTION`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT21) flag, leaving no removable effect. This flag is not cleared on death.
  */
 OUTER_SET OPCODE_protection_from_detection_non_detection = 69
+
 /**
  * [Cure: Non-Detection](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op70)
  *
@@ -1949,6 +2018,7 @@ OUTER_SET OPCODE_protection_from_detection_non_detection = 69
  * This effect ignores durations attributed to it.
  */
 OUTER_SET OPCODE_cure_non_detection = 70
+
 /**
  * [IDS: Sex Change](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op71)
  *
@@ -1967,6 +2037,7 @@ OUTER_SET OPCODE_cure_non_detection = 70
  *  For instance, `VAMPIRE` is `0x7F12`, `VAMPIRE_FEMALE` is `0x7F22` (Male should be `0x7F02` and female `0x7F12` for it to work).
  */
 OUTER_SET OPCODE_ids_sex_change = 71
+
 /**
  * [IDS: Set IDS State](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op72)
  *
@@ -1987,6 +2058,7 @@ OUTER_SET OPCODE_ids_sex_change = 71
  * - `Timing Mode`s `1/4/7` will permanently set the creature(s) IDS value, leaving no removable effect.
  */
 OUTER_SET OPCODE_ids_set_ids_state = 72
+
 /**
  * [Stat: Extra Damage Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op73)
  *
@@ -2001,6 +2073,7 @@ OUTER_SET OPCODE_ids_set_ids_state = 72
  * PST treats all Type values above `1` as `1` – it does not support the percentage modifier.
  */
 OUTER_SET OPCODE_extra_damage_mod = 73
+
 /**
  * [State: Blindness](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op74)
  *
@@ -2016,6 +2089,7 @@ OUTER_SET OPCODE_extra_damage_mod = 73
  * In the EE's, the `-4` penalties it applies are not cumulative.
  */
 OUTER_SET OPCODE_blindness = 74
+
 /**
  * [Cure: Blindness](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op75)
  *
@@ -2026,6 +2100,7 @@ OUTER_SET OPCODE_blindness = 74
  * Both parameters should be `0` (zero).
  */
 OUTER_SET OPCODE_cure_blindness = 75
+
 /**
  * [State: Feeblemindedness](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op76)
  *
@@ -2034,6 +2109,7 @@ OUTER_SET OPCODE_cure_blindness = 75
  * A creature's scripts do not run while the creature is feebleminded.
  */
 OUTER_SET OPCODE_feeblemindedness = 76
+
 /**
  * [Cure: Feeblemindedness](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op77)
  *
@@ -2044,6 +2120,7 @@ OUTER_SET OPCODE_feeblemindedness = 76
  * Both parameters should be `0` (zero).
  */
 OUTER_SET OPCODE_cure_feeblemindedness = 77
+
 /**
  * [State: Disease](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op78)
  *
@@ -2078,6 +2155,7 @@ OUTER_SET OPCODE_cure_feeblemindedness = 77
  * Permanent timing modes require a duration for this effect to work.
  */
 OUTER_SET OPCODE_disease = 78
+
 /**
  * [Cure: Disease](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op79)
  *
@@ -2088,6 +2166,7 @@ OUTER_SET OPCODE_disease = 78
  * Both parameters should be `0` (zero).
  */
 OUTER_SET OPCODE_cure_disease = 79
+
 /**
  * [State: Deafness](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op80)
  *
@@ -2098,6 +2177,7 @@ OUTER_SET OPCODE_cure_disease = 79
  * Maintains [DEAFENED](https://gibberlings3.github.io/iesdp/files/ids/bgee/splstate.htm#38) on the target (EE only).
  */
 OUTER_SET OPCODE_deafness = 80
+
 /**
  * [Cure: Deafness](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op81)
  *
@@ -2110,6 +2190,7 @@ OUTER_SET OPCODE_deafness = 80
  * PST: it is unclear if this effect exists or does anything!
  */
 OUTER_SET OPCODE_cure_deafness = 81
+
 /**
  * [Set AI Script](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op82)
  *
@@ -2132,6 +2213,7 @@ OUTER_SET OPCODE_cure_deafness = 81
  * - `AREA` and `SPECIFICS` can only be set on non-global creatures (not potential party members or familiars), and are lost upon saving & reload.
  */
 OUTER_SET OPCODE_set_ai_script = 82
+
 /**
  * [Protection: From Projectile](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op83)
  *
@@ -2144,6 +2226,7 @@ OUTER_SET OPCODE_set_ai_script = 82
  * Cannot protect against the projectile used by Melee weapon attacks (this is contrast to [opcode #197](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op197), which CAN reflect them (by specifying projectile `#0|NONE`)).
  */
 OUTER_SET OPCODE_protection_from_projectile = 83
+
 /**
  * [Stat: Magical Fire Resistance Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op84)
  *
@@ -2160,6 +2243,7 @@ OUTER_SET OPCODE_protection_from_projectile = 83
  * The effect modifies [RESISTMAGICFIRE](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#19).
  */
 OUTER_SET OPCODE_magical_fire_resist_mod = 84
+
 /**
  * [Stat: Magical Cold Resistance Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op85)
  *
@@ -2176,6 +2260,7 @@ OUTER_SET OPCODE_magical_fire_resist_mod = 84
  * The effect modifies [RESISTMAGICCOLD](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#20).
  */
 OUTER_SET OPCODE_magical_cold_resist_mod = 85
+
 /**
  * [Stat: Slashing Resistance Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op86)
  *
@@ -2192,6 +2277,7 @@ OUTER_SET OPCODE_magical_cold_resist_mod = 85
  * The effect modifies [RESISTSLASHING](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#21).
  */
 OUTER_SET OPCODE_slashing_resist_mod = 86
+
 /**
  * [Stat: Crushing Resistance Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op87)
  *
@@ -2208,6 +2294,7 @@ OUTER_SET OPCODE_slashing_resist_mod = 86
  * The effect modifies [RESISTCRUSHING](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#22).
  */
 OUTER_SET OPCODE_crushing_resist_mod = 87
+
 /**
  * [Stat: Piercing Resistance Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op88)
  *
@@ -2224,6 +2311,7 @@ OUTER_SET OPCODE_crushing_resist_mod = 87
  * The effect modifies [RESISTPIERCING](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#23).
  */
 OUTER_SET OPCODE_piercing_resist_mod = 88
+
 /**
  * [Stat: Missiles Resistance Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op89)
  *
@@ -2240,6 +2328,7 @@ OUTER_SET OPCODE_piercing_resist_mod = 88
  * The effect modifies [RESISTMISSILE](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#24).
  */
 OUTER_SET OPCODE_missiles_resist_mod = 89
+
 /**
  * [Stat: Open Locks Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op90)
  *
@@ -2256,6 +2345,7 @@ OUTER_SET OPCODE_missiles_resist_mod = 89
  * (EE only) When `Type = 0` and `Timing Mode = 9`, it modifies [LOCKPICKINGMTPBONUS](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#176). The final value for this stat is multiplied by its percentage entry in [THIEFSCL.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/thiefscl.htm), capped to the range `[0,255]`, before being included in the creature's [`Open Locks`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x67) score.
  */
 OUTER_SET OPCODE_open_locks_mod = 90
+
 /**
  * [Stat: Find Traps Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op91)
  *
@@ -2272,6 +2362,7 @@ OUTER_SET OPCODE_open_locks_mod = 90
  * (EE only) When `Type = 0` and `Timing Mode = 9`, it modifies [TRAPSMTPBONUS](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#178). The final value for this stat is multiplied by its percentage entry in [THIEFSCL.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/thiefscl.htm), capped to the range `[0,255]`, before being included in the creature's [`Find Traps`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x69) score.
  */
 OUTER_SET OPCODE_find_traps_mod = 91
+
 /**
  * [Stat: Pick Pockets Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op92)
  *
@@ -2288,6 +2379,7 @@ OUTER_SET OPCODE_find_traps_mod = 91
  * (EE only) When `Type = 0` and `Timing Mode = 9`, it modifies [PICKPOCKETMTPBONUS](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#179). The final value for this stat is multiplied by its percentage entry in [THIEFSCL.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/thiefscl.htm), capped to the range `[0,255]`, before being included in the creature's [`Pick Pockets`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x6A) score.
  */
 OUTER_SET OPCODE_pick_pockets_mod = 92
+
 /**
  * [Stat: Fatigue Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op93)
  *
@@ -2304,6 +2396,7 @@ OUTER_SET OPCODE_pick_pockets_mod = 92
  * The effect modifies [FATIGUE](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#30).
  */
 OUTER_SET OPCODE_fatigue_mod = 93
+
 /**
  * [Stat: Drunkenness Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op94)
  *
@@ -2320,6 +2413,7 @@ OUTER_SET OPCODE_fatigue_mod = 93
  * The effect modifies [INTOXICATION](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#31).
  */
 OUTER_SET OPCODE_drunkenness_mod = 94
+
 /**
  * [Stat: Tracking Skill Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op95)
  *
@@ -2336,6 +2430,7 @@ OUTER_SET OPCODE_drunkenness_mod = 94
  * The effect modifies [TRACKING](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#33).
  */
 OUTER_SET OPCODE_tracking_skill_mod = 95
+
 /**
  * [Stat: Level Change](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op96)
  *
@@ -2354,6 +2449,7 @@ OUTER_SET OPCODE_tracking_skill_mod = 95
  * Can only modify the [`first class level`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x234), it cannot modify [`second`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x235) or [`third`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x236) class levels.
  */
 OUTER_SET OPCODE_level_change = 96
+
 /**
  * [Stat: Exceptional Strength Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op97)
  *
@@ -2370,6 +2466,7 @@ OUTER_SET OPCODE_level_change = 96
  * The effect modifies [STREXTRA](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#37).
  */
 OUTER_SET OPCODE_exceptional_strength_mod = 97
+
 /**
  * [HP: Regeneration](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op98)
  *
@@ -2392,6 +2489,7 @@ OUTER_SET OPCODE_exceptional_strength_mod = 97
  * Permanent timing modes require a duration for this effect to work.
  */
 OUTER_SET OPCODE_hp_regeneration = 98
+
 /**
  * [Spell Effect: Duration Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op99)
  *
@@ -2416,6 +2514,7 @@ OUTER_SET OPCODE_hp_regeneration = 98
  * Not seen to work in BG1.
  */
 OUTER_SET OPCODE_duration_mod = 99
+
 /**
  * [Protection: from Creature Type](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op100)
  *
@@ -2435,12 +2534,14 @@ OUTER_SET OPCODE_duration_mod = 99
  * To be protected from any creature, leave `IDS Entry` at `0` (zero), and `IDS File` at `2`. Protection will grant the bearer immunity from being attacked, cast a spell at, or otherwise targeted by creatures with this type.
  */
 OUTER_SET OPCODE_protection_from_creature_type = 100
+
 /**
  * [Protection: from Opcode](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op101)
  *
  * Gives the targeted creature(s) protection from the opcode specified by the `Opcode` field.
  */
 OUTER_SET OPCODE_protection_from_opcode = 101
+
 /**
  * [Spell: Immunity (by Power Level)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op102)
  *
@@ -2459,12 +2560,14 @@ OUTER_SET OPCODE_protection_from_opcode = 101
  * [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files delivered by [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) will interact with Deflection separately from the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect that applies them, and only if that [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect already got through. If the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect is deflected, then the values in the [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) file won't matter. Most vanilla [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files have these fields set to `empty/zero` to avoid interacting with this opcode.
  */
 OUTER_SET OPCODE_immunity_by_power_level = 102
+
 /**
  * [Text: Change Name](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op103)
  *
  * Alters the name of the targeted creature(s) to the strref specified by the `String Reference` field. When used with a duration timing, after the duration, the name will be set to a blank entry.
  */
 OUTER_SET OPCODE_text_change_name = 103
+
 /**
  * [Stat: Experience Points](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op104)
  *
@@ -2479,6 +2582,7 @@ OUTER_SET OPCODE_text_change_name = 103
  * The effect modifies [XP](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#44).
  */
 OUTER_SET OPCODE_experience_points = 104
+
 /**
  * [Stat: Gold](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op105)
  *
@@ -2495,6 +2599,7 @@ OUTER_SET OPCODE_experience_points = 104
  * `Type=0` can only remove gold for party members, the passed value is used negative. Gold amount has a lower bound of `0`.
  */
 OUTER_SET OPCODE_gold = 105
+
 /**
  * [Stat: Morale Break Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op106)
  *
@@ -2509,6 +2614,7 @@ OUTER_SET OPCODE_gold = 105
  * The effect modifies [MORALEBREAK](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#46).
  */
 OUTER_SET OPCODE_morale_break_mod = 106
+
 /**
  * [Portrait Change](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op107)
  *
@@ -2520,6 +2626,7 @@ OUTER_SET OPCODE_morale_break_mod = 106
  * - 1 ⟶ Large portrait
  */
 OUTER_SET OPCODE_portrait_change = 107
+
 /**
  * [Stat: Reputation](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op108)
  *
@@ -2539,6 +2646,7 @@ OUTER_SET OPCODE_portrait_change = 107
  * The effect modifies [REPUTATION](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#48).
  */
 OUTER_SET OPCODE_reputation = 108
+
 /**
  * [State: Hold](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op109)
  *
@@ -2565,6 +2673,7 @@ OUTER_SET OPCODE_reputation = 108
  * This effect sets stat #58 (HELD) to 1. It also sets the STATE_HELPLESS flag.
  */
 OUTER_SET OPCODE_hold = 109
+
 /**
  * [Item: Create Magical Weapon](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op111)
  *
@@ -2577,12 +2686,14 @@ OUTER_SET OPCODE_hold = 109
  * The dispel bit of [opcode #111](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op111) has no bearing on the [item](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm) it creates. Its only function comes up when the [opcode #111](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op111) effect is delayed — the effect can be dispelled before it triggers (see also [`undispellable`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#Header_Flags_BIT24) and [opcode #58](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op58)).
  */
 OUTER_SET OPCODE_create_magical_weapon = 111
+
 /**
  * [Item: Remove Item](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op112)
  *
  * Removes a single instance (or stack) of the item specified by the `resource` key from the targeted creature(s). Items in container items (e.g. Bags of Holding) will not be removed. If a creature has multiple instances of the item, the one in the lowest slot number (see [SLOTS.IDS](https://gibberlings3.github.io/iesdp/files/ids/bgee/slots.htm)) is removed. `"EFF_M02"` is hard-coded to play when an item is removed. This effect should be used to remove equipped items (use [opcode #123](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op123) for inventory items).
  */
 OUTER_SET OPCODE_remove_item = 112
+
 /**
  * [Graphics: Dither](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op114)
  *
@@ -2591,6 +2702,7 @@ OUTER_SET OPCODE_remove_item = 112
  * Affected creature will be visible, targetable, and if controlled, selectable and orderable within the semi-transparent fog of war, but not within the black shroud.
  */
 OUTER_SET OPCODE_dither = 114
+
 /**
  * [Detect: Alignment](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op115)
  *
@@ -2603,6 +2715,7 @@ OUTER_SET OPCODE_dither = 114
  * - 2 ⟶ Good (glow Green)
  */
 OUTER_SET OPCODE_detect_alignment = 115
+
 /**
  * [State: Cure Invisibility](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op116)
  *
@@ -2619,6 +2732,7 @@ OUTER_SET OPCODE_detect_alignment = 115
  * - [Opcode #116](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op116) is used extensively because the original BG1 used it, and didn't use [opcode #47](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op47) at all.
  */
 OUTER_SET OPCODE_cure_invisibility_2 = 116
+
 /**
  * [Spell Effect: Reveal Area](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op117)
  *
@@ -2627,6 +2741,7 @@ OUTER_SET OPCODE_cure_invisibility_2 = 116
  * It does not remove the fog of war.
  */
 OUTER_SET OPCODE_reveal_area = 117
+
 /**
  * [Spell Effect: Mirror Image](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op119)
  *
@@ -2646,6 +2761,7 @@ OUTER_SET OPCODE_reveal_area = 117
  * The scroll casts the spell at level `10`, but the opcode checks the caster's Wizard Caster Level (which for a Thief is `1`).
  */
 OUTER_SET OPCODE_mirror_image = 119
+
 /**
  * [Protection: from Weapons](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op120)
  *
@@ -2673,6 +2789,7 @@ OUTER_SET OPCODE_mirror_image = 119
  * - [`Area-effect`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) projectiles (f.i. Arrow of Detonation) only check for Weapon Immunity on the attacked target, and use that result for all caught within their area of effect.
  */
 OUTER_SET OPCODE_protection_from_weapons = 120
+
 /**
  * [Item: Create Inventory Item](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op122)
  *
@@ -2683,6 +2800,7 @@ OUTER_SET OPCODE_protection_from_weapons = 120
  * - Applies a delayed [opcode #123](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op123) effect to remove the item (based on specified `duration`)
  */
 OUTER_SET OPCODE_create_inventory_item = 122
+
 /**
  * [Item: Remove Inventory Item](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op123)
  *
@@ -2695,6 +2813,7 @@ OUTER_SET OPCODE_create_inventory_item = 122
  * - Inventory slots are checked in numerical order from [SLOTS.IDS](https://gibberlings3.github.io/iesdp/files/ids/bgee/slots.htm).
  */
 OUTER_SET OPCODE_remove_inventory_item = 123
+
 /**
  * [Spell Effect: Teleport (Dimension Door)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op124)
  *
@@ -2710,6 +2829,7 @@ OUTER_SET OPCODE_remove_inventory_item = 123
  * `Return to Saved Location`: Teleport effect target to the coordinates stored by [SetHomeLocation(P:Point*)](https://gibberlings3.github.io/iesdp/scripting/actions/bgeeactions.htm#261) for that creature. Defaults to `(0.0)` if not set.
  */
 OUTER_SET OPCODE_teleport_dimension_door = 124
+
 /**
  * [Spell Effect: Unlock (Knock)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op125)
  *
@@ -2720,6 +2840,7 @@ OUTER_SET OPCODE_teleport_dimension_door = 124
  * It is automatically successful but only works on locks that can normally be picked with the Open Locks skill.
  */
 OUTER_SET OPCODE_unlock_knock = 125
+
 /**
  * [Stat: Movement Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op126)
  *
@@ -2742,6 +2863,7 @@ OUTER_SET OPCODE_unlock_knock = 125
  * - `150% * 150% = 225%`
  */
 OUTER_SET OPCODE_movement_mod = 126
+
 /**
  * [Summon: Monster Summoning](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op127)
  *
@@ -2779,6 +2901,7 @@ OUTER_SET OPCODE_movement_mod = 126
  * If used from an external effect (.eff), the [`vvc`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x70) field controls the bam file played when summoning.
  */
 OUTER_SET OPCODE_monster_summoning = 127
+
 /**
  * [State: Confusion](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op128)
  *
@@ -2794,6 +2917,7 @@ OUTER_SET OPCODE_monster_summoning = 127
  * - Disables Saving while affecting a Party Member (displayed message: "You do not control all your Party Members")
  */
 OUTER_SET OPCODE_confusion = 128
+
 /**
  * [State: Aid](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op129)
  *
@@ -2821,6 +2945,7 @@ OUTER_SET OPCODE_confusion = 128
  * more eg. maximum hitpoints.
  */
 OUTER_SET OPCODE_aid = 129
+
 /**
  * [State: Bless](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op130)
  *
@@ -2844,6 +2969,7 @@ OUTER_SET OPCODE_aid = 129
  *  This does not apply to Doom in other games.
  */
 OUTER_SET OPCODE_bless = 130
+
 /**
  * [State: Positive Chant](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op131)
  *
@@ -2864,6 +2990,7 @@ OUTER_SET OPCODE_bless = 130
  * `Modifier` only reads the first byte for its value, the last 3 bytes are ignored.
  */
 OUTER_SET OPCODE_positive_chant = 131
+
 /**
  * [State: Raise Strength, Constitution, & Dexterity Non-Cumulative](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op132)
  *
@@ -2878,6 +3005,7 @@ OUTER_SET OPCODE_positive_chant = 131
  * `Statistic Modifier` only reads the first byte for its value, the last 3 bytes are ignored.
  */
 OUTER_SET OPCODE_raise_strength_constitution_dexterity_non_cumulative = 132
+
 /**
  * [Spell Effect: Luck Non-Cumulative](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op133)
  *
@@ -2896,6 +3024,7 @@ OUTER_SET OPCODE_raise_strength_constitution_dexterity_non_cumulative = 132
  * `Statistic Modifier` only reads the first byte for its value, the last 3 bytes are ignored.
  */
 OUTER_SET OPCODE_luck_non_cumulative = 133
+
 /**
  * [State: Petrification](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op134)
  *
@@ -2917,6 +3046,7 @@ OUTER_SET OPCODE_luck_non_cumulative = 133
  * - Kicked from party, retains Inventory, Overlay's Color Index 72 on the entire creature.
  */
 OUTER_SET OPCODE_petrification = 134
+
 /**
  * [Graphics: Polymorph into Specific](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op135)
  *
@@ -2974,6 +3104,7 @@ OUTER_SET OPCODE_petrification = 134
  * The creature you're polymorphing into cannot have STATE_SLEEPING, STATE_FROZEN_DEATH, STATE_STONE_DEATH, STATE_FLAME_DEATH, or STATE_DEAD set in its CRE file, or the game will crash.
  */
 OUTER_SET OPCODE_polymorph_into_specific = 135
+
 /**
  * [State: Force Visible](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op136)
  *
@@ -2986,6 +3117,7 @@ OUTER_SET OPCODE_polymorph_into_specific = 135
  * Leave both parameters at zero for this effect to work.
  */
 OUTER_SET OPCODE_force_visible = 136
+
 /**
  * [State: Negative Chant](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op137)
  *
@@ -3006,6 +3138,7 @@ OUTER_SET OPCODE_force_visible = 136
  * `Statistic Modifier` only reads the first byte for its value, the last 3 bytes are ignored.
  */
 OUTER_SET OPCODE_negative_chant = 137
+
 /**
  * [Graphics: Character Animation Change](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op138)
  *
@@ -3032,6 +3165,7 @@ OUTER_SET OPCODE_negative_chant = 137
  * - 16 ⟶ Sleep
  */
 OUTER_SET OPCODE_character_animation_change = 138
+
 /**
  * [Text: Display String](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op139)
  *
@@ -3040,6 +3174,7 @@ OUTER_SET OPCODE_character_animation_change = 138
  * At least in EE games, it is possible to colorize the string. In order to do so, follow the instructions concerning the colorization of the name of your character during [Character Creation](https://gibberlings3.github.io/iesdp/appendices/charactercreation.htm).
  */
 OUTER_SET OPCODE_text_display_string = 139
+
 /**
  * [Graphics: Casting Glow](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op140)
  *
@@ -3068,6 +3203,7 @@ OUTER_SET OPCODE_text_display_string = 139
  * 17+ Crashes
  */
 OUTER_SET OPCODE_casting_glow = 140
+
 /**
  * [Graphics: Lighting Effects](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op141)
  *
@@ -3164,6 +3300,7 @@ OUTER_SET OPCODE_casting_glow = 140
  * 40+ *crash* (BG2)
  */
 OUTER_SET OPCODE_lighting_effects = 141
+
 /**
  * [Graphics: Display Special Effect Icon](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op142)
  *
@@ -3393,6 +3530,7 @@ OUTER_SET OPCODE_lighting_effects = 141
  * In EE games, values `0 – 190` are drawn directly from `"STATES.BAM"` from sequences `65 – 255`, but can be overridden in [STATDESC.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm). Additional values must be added to [STATDESC.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm).
  */
 OUTER_SET OPCODE_display_special_effect_icon = 142
+
 /**
  * [Item: Create Item in Slot](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op143)
  *
@@ -3450,6 +3588,7 @@ OUTER_SET OPCODE_display_special_effect_icon = 142
  * When using a non-permanent `timing mode`, it applies a delayed [opcode #123](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op123) effect based on the duration, but with an empty `resource` field, resulting in nothing being removed.
  */
 OUTER_SET OPCODE_create_item_in_slot = 143
+
 /**
  * [Button: Disable Button](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op144)
  *
@@ -3475,6 +3614,7 @@ OUTER_SET OPCODE_create_item_in_slot = 143
  * - 15 ⟶ Inventory Button (EE only)
  */
 OUTER_SET OPCODE_button_disable_button = 144
+
 /**
  * [Spell: Disable Spell Casting Abilities](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op145)
  *
@@ -3493,6 +3633,7 @@ OUTER_SET OPCODE_button_disable_button = 144
  * - 1 ⟶ No
  */
 OUTER_SET OPCODE_disable_spell_casting_abilities = 145
+
 /**
  * [Spell: Cast Spell (at Creature)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op146)
  *
@@ -3517,6 +3658,7 @@ OUTER_SET OPCODE_disable_spell_casting_abilities = 145
  * See [opcode #326](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op326) for some peculiarities of projectile behaviour for `Type=2`.
  */
 OUTER_SET OPCODE_cast_spell_at_creature = 146
+
 /**
  * [Spell: Learn Spell](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op147)
  *
@@ -3533,6 +3675,7 @@ OUTER_SET OPCODE_cast_spell_at_creature = 146
  * - Other [`Spell type`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C)s can be [`level`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x34) `1–32767` if learned.
  */
 OUTER_SET OPCODE_learn_spell = 147
+
 /**
  * [Spell: Cast Spell (at Point)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op148)
  *
@@ -3553,6 +3696,7 @@ OUTER_SET OPCODE_learn_spell = 147
  * - If this opcode uses the `Cast Instantly` option, then the target, not the caster, would cast the spell in [opcode #148](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op148).
  */
 OUTER_SET OPCODE_cast_spell_at_point = 148
+
 /**
  * [(Identify)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op149)
  *
@@ -3561,6 +3705,7 @@ OUTER_SET OPCODE_cast_spell_at_point = 148
  * It is still processed, so it will still interact with [Spell Turning](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op200)/[Deflection](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op201)/etc... just like any other effect.
  */
 OUTER_SET OPCODE_identify = 149
+
 /**
  * [Spell Effect: Find Traps](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op150)
  *
@@ -3571,6 +3716,7 @@ OUTER_SET OPCODE_identify = 149
  * This effect is automatically successful, but can only find traps that are normally detectable by the Find Traps skill.
  */
 OUTER_SET OPCODE_find_traps = 150
+
 /**
  * [Summon: Replace Creature](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op151)
  *
@@ -3586,6 +3732,7 @@ OUTER_SET OPCODE_find_traps = 150
  * Experience is given as normal for a kill (the party still has to be the one applying the effect to earn experience).
  */
 OUTER_SET OPCODE_replace_creature = 151
+
 /**
  * [Spell Effect: Play Movie](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op152)
  *
@@ -3615,6 +3762,7 @@ OUTER_SET OPCODE_replace_creature = 151
  * |          |          |                  |                                                      |                                              | RASAADTE – Temple (Rasaad)           |
  */
 OUTER_SET OPCODE_play_movie = 152
+
 /**
  * [Overlay: Sanctuary](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op153)
  *
@@ -3625,6 +3773,7 @@ OUTER_SET OPCODE_play_movie = 152
  * Both parameters should be 0 (zero).
  */
 OUTER_SET OPCODE_overlay_sanctuary = 153
+
 /**
  * [Overlay: Entangle](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op154)
  *
@@ -3635,6 +3784,7 @@ OUTER_SET OPCODE_overlay_sanctuary = 153
  * Both parameters should be set to 0.
  */
 OUTER_SET OPCODE_overlay_entangle = 154
+
 /**
  * [Overlay: Minor Globe](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op155)
  *
@@ -3643,6 +3793,7 @@ OUTER_SET OPCODE_overlay_entangle = 154
  * This effect sets stat #64 (MINORGLOBE) to 1.
  */
 OUTER_SET OPCODE_overlay_minor_globe = 155
+
 /**
  * [Overlay: Protection from Normal Missiles Cylinder](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op156)
  *
@@ -3653,6 +3804,7 @@ OUTER_SET OPCODE_overlay_minor_globe = 155
  * Both parameters should be 0 (zero).
  */
 OUTER_SET OPCODE_overlay_protection_from_normal_missiles_cylinder = 156
+
 /**
  * [State: Web Effect](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op157)
  *
@@ -3665,6 +3817,7 @@ OUTER_SET OPCODE_overlay_protection_from_normal_missiles_cylinder = 156
  * It cannot be removed by any of the stun/held removal opcodes.
  */
 OUTER_SET OPCODE_web_effect = 157
+
 /**
  * [Overlay: Grease](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op158)
  *
@@ -3675,6 +3828,7 @@ OUTER_SET OPCODE_web_effect = 157
  * Both parameters should be 0 (zero).
  */
 OUTER_SET OPCODE_overlay_grease = 158
+
 /**
  * [Spell Effect: Mirror Image (Exact Number)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op159)
  *
@@ -3686,6 +3840,7 @@ OUTER_SET OPCODE_overlay_grease = 158
  * - If you later apply [opcode #119](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op119)/[opcode #159](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op159) to the creature, once it expires, any remaining images will last until struck (absorbing attacks in the process), or until you save & reload.
  */
 OUTER_SET OPCODE_mirror_image_exact_number = 159
+
 /**
  * [Remove Sanctuary](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op160)
  *
@@ -3694,6 +3849,7 @@ OUTER_SET OPCODE_mirror_image_exact_number = 159
  * Both parameters should be `0` (zero).
  */
 OUTER_SET OPCODE_remove_sanctuary = 160
+
 /**
  * [Cure: Horror](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op161)
  *
@@ -3702,6 +3858,7 @@ OUTER_SET OPCODE_remove_sanctuary = 160
  * This effect ignores durations attributed to it.
  */
 OUTER_SET OPCODE_cure_horror = 161
+
 /**
  * [Cure: Hold](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op162)
  *
@@ -3710,6 +3867,7 @@ OUTER_SET OPCODE_cure_horror = 161
  * This effect should be used with an instant timing mode.
  */
 OUTER_SET OPCODE_cure_hold = 162
+
 /**
  * [Protection: Free Action](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op163)
  *
@@ -3718,12 +3876,14 @@ OUTER_SET OPCODE_cure_hold = 162
  * Also check out the EE description [here](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op163).
  */
 OUTER_SET OPCODE_protection_free_action = 163
+
 /**
  * [Cure: Drunkeness](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op164)
  *
  * Clears the drunkeness stat (as modified by [opcode #94](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op94)).
  */
 OUTER_SET OPCODE_cure_drunkeness = 164
+
 /**
  * [Spell Effect: Pause Target](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op165)
  *
@@ -3742,6 +3902,7 @@ OUTER_SET OPCODE_cure_drunkeness = 164
  * Both parameters should be `0`.
  */
 OUTER_SET OPCODE_pause_target = 165
+
 /**
  * [Stat: Magic Resistance Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op166)
  *
@@ -3755,6 +3916,7 @@ OUTER_SET OPCODE_pause_target = 165
  * The effect modifies [RESISTMAGIC](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#18).
  */
 OUTER_SET OPCODE_magic_resist_mod = 166
+
 /**
  * [Stat: THAC0 Modifier with Missile Weapons](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op167)
  *
@@ -3767,6 +3929,7 @@ OUTER_SET OPCODE_magic_resist_mod = 166
  * - 2 ⟶ Percentage Modifier: `THAC0 = (THAC0 * 'Statistic Modifier' value) / 100`
  */
 OUTER_SET OPCODE_thac0_mod_with_missile_weapons = 167
+
 /**
  * [Summon: Remove Creature](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op168)
  *
@@ -3783,6 +3946,7 @@ OUTER_SET OPCODE_thac0_mod_with_missile_weapons = 167
  * Both parameters should be `0` (zero).
  */
 OUTER_SET OPCODE_remove_creature = 168
+
 /**
  * [Graphics: Prevent Special Effect Icon](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op169)
  *
@@ -3797,6 +3961,7 @@ OUTER_SET OPCODE_remove_creature = 168
  * In EE games, can also block [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effects if their EFF file uses [opcode #142](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op142) with a matching `param2` value.
  */
 OUTER_SET OPCODE_prevent_special_effect_icon = 169
+
 /**
  * [Graphics: Play Damage Animation](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op170)
  *
@@ -3826,6 +3991,7 @@ OUTER_SET OPCODE_prevent_special_effect_icon = 169
  * - The animations for `Animation=1/2/3` are not pulled from [DMGTYPES.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/dmgtypes.htm), they're most likely fully hardcoded.
  */
 OUTER_SET OPCODE_play_damage_animation = 170
+
 /**
  * [Spell: Give Ability](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op171)
  *
@@ -3837,6 +4003,7 @@ OUTER_SET OPCODE_play_damage_animation = 170
  * - Other [`Spell type`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C)s can be [`level`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x34) `1–32767` if gained.
  */
 OUTER_SET OPCODE_give_ability = 171
+
 /**
  * [Spell: Remove Spell](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op172)
  *
@@ -3849,6 +4016,7 @@ OUTER_SET OPCODE_give_ability = 171
  * Two 8 characters long keys that are identical up to the 7th character are indistinguishable!
  */
 OUTER_SET OPCODE_remove_spell = 172
+
 /**
  * [Stat: Poison Resistance Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op173)
  *
@@ -3861,6 +4029,7 @@ OUTER_SET OPCODE_remove_spell = 172
  * Also known as "Stat: Set Poison Resistance".
  */
 OUTER_SET OPCODE_poison_resist_mod = 173
+
 /**
  * [Spell Effect: Play Sound Effect](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op174)
  *
@@ -3993,6 +4162,7 @@ OUTER_SET OPCODE_poison_resist_mod = 173
  * - EFF_P117 ⟶ Conjure Deva/Planetar
  */
 OUTER_SET OPCODE_play_sound_effect = 174
+
 /**
  * [State: Hold](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op175)
  *
@@ -4015,6 +4185,7 @@ OUTER_SET OPCODE_play_sound_effect = 174
  * It even overrides the entries in [EFFTEXT.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/efftext.htm).
  */
 OUTER_SET OPCODE_hold_graphic = 175
+
 /**
  * [Stat: Movement Modifier (II)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op176)
  *
@@ -4039,6 +4210,7 @@ OUTER_SET OPCODE_hold_graphic = 175
  * - `150% * 150% = 225%`
  */
 OUTER_SET OPCODE_movement_mod_ii = 176
+
 /**
  * [Use EFF File](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)
  *
@@ -4091,6 +4263,7 @@ OUTER_SET OPCODE_movement_mod_ii = 176
  * This effect causes a crash if used by a container.
  */
 OUTER_SET OPCODE_use_eff_file = 177
+
 /**
  * [Spell Effect: THAC0 vs. Creature Type Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op178)
  *
@@ -4116,6 +4289,7 @@ OUTER_SET OPCODE_use_eff_file = 177
  * This opcode uses a reverse stacking order: the "oldest" effect with matching IDS values for the target is used, not the most recent, and equipped effects take priority over non-equipped effects.
  */
 OUTER_SET OPCODE_thac0_vs_creature_type_mod = 178
+
 /**
  * [Spell Effect: Damage vs. Creature Type Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op179)
  *
@@ -4141,12 +4315,14 @@ OUTER_SET OPCODE_thac0_vs_creature_type_mod = 178
  * This opcode uses a reverse stacking order: the "oldest" effect with matching IDS values for the target is used, not the most recent, and equipped effects take priority over non-equipped effects.
  */
 OUTER_SET OPCODE_damage_vs_creature_type_mod = 179
+
 /**
  * [Item: Can't Use Item](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op180)
  *
  * The targeted creatures(s) cannot use the item specified by the `resource` key. The strref specified by the `String Reference` field is displayed when an attempt to use the item is made.
  */
 OUTER_SET OPCODE_cant_use_item = 180
+
 /**
  * [Item: Can't Use Itemtype](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op181)
  *
@@ -4155,6 +4331,7 @@ OUTER_SET OPCODE_cant_use_item = 180
  * This effect only works with 'Type' set to 0.
  */
 OUTER_SET OPCODE_cant_use_itemtype = 181
+
 /**
  * [Item: Apply Effect Item](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op182)
  *
@@ -4165,6 +4342,7 @@ OUTER_SET OPCODE_cant_use_itemtype = 181
  * PST: This effect doesn't exist and always crashes the game.
  */
 OUTER_SET OPCODE_apply_effect_item = 182
+
 /**
  * [Item: Apply Effect Itemtype](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op183)
  *
@@ -4182,6 +4360,7 @@ OUTER_SET OPCODE_apply_effect_item = 182
  * This effect has never been seen to work. This is not true for EE games.
  */
 OUTER_SET OPCODE_apply_effect_itemtype = 183
+
 /**
  * [Graphics: Passwall (Don't Jump)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op184)
  *
@@ -4195,6 +4374,7 @@ OUTER_SET OPCODE_apply_effect_itemtype = 183
  * PST: This effect doesn't exist and always crashes the game.
  */
 OUTER_SET OPCODE_passwall_dont_jump = 184
+
 /**
  * [State: Hold (II)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op185)
  *
@@ -4219,6 +4399,7 @@ OUTER_SET OPCODE_passwall_dont_jump = 184
  * It even overrides the entries in [EFFTEXT.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/efftext.htm).
  */
 OUTER_SET OPCODE_hold_ii = 185
+
 /**
  * [Script: MoveToArea](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op186)
  *
@@ -4241,6 +4422,7 @@ OUTER_SET OPCODE_hold_ii = 185
  * Avoid saving during the delay (can lead to lost NPCs or crashes if you load while NPC's are still in transition).
  */
 OUTER_SET OPCODE_script_movetoarea = 186
+
 /**
  * [Script: Store Local Variable](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op187)
  *
@@ -4251,6 +4433,7 @@ OUTER_SET OPCODE_script_movetoarea = 186
  * This effect is always instantaneous (local variables are stored internally, not as effects, while the game is running). All local variables for a [CRE](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm) are stored as [opcode #187](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op187) effects on that [CRE](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm) whenever the game is saved, which will trigger as soon as the game is loaded.
  */
 OUTER_SET OPCODE_script_store_local_variable = 187
+
 /**
  * [Spell Effect: Aura Cleansing](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op188)
  *
@@ -4263,6 +4446,7 @@ OUTER_SET OPCODE_script_store_local_variable = 187
  * The `Stat Value` parameter can take any value. If you set it to `0`, you will disable the effect (for its duration).
  */
 OUTER_SET OPCODE_aura_cleansing = 188
+
 /**
  * [Stat: Casting Time Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op189)
  *
@@ -4280,6 +4464,7 @@ OUTER_SET OPCODE_aura_cleansing = 188
  * `Type=2` was tested only for BGEE and might not work on non-EE.
  */
 OUTER_SET OPCODE_casting_time_mod = 189
+
 /**
  * [Stat: Attack Speed Factor](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op190)
  *
@@ -4290,6 +4475,7 @@ OUTER_SET OPCODE_casting_time_mod = 189
  * This effect sets `PHYSICALSPEED` to `Speed Modifier`.
  */
 OUTER_SET OPCODE_attack_speed_factor = 190
+
 /**
  * [Spell: Casting Level Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op191)
  *
@@ -4306,6 +4492,7 @@ OUTER_SET OPCODE_attack_speed_factor = 190
  * This effect changes the casting level stat, but has no actual affect in-game.
  */
 OUTER_SET OPCODE_casting_level_mod = 191
+
 /**
  * [Spell Effect: Find Familiar](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op192)
  *
@@ -4336,6 +4523,7 @@ OUTER_SET OPCODE_casting_level_mod = 191
  * The familiar restriction to `<CHARNAME>` is game-specific. IWDEE has no such restriction, but still only allows a single character to have a familiar at a time. It's unclear if it's a specific flag in the [GAM](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/gam_v2.0.htm) file or if it's engine-side.
  */
 OUTER_SET OPCODE_find_familiar = 192
+
 /**
  * [Spell Effect: Invisible Detection by Script](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op193)
  *
@@ -4346,6 +4534,7 @@ OUTER_SET OPCODE_find_familiar = 192
  * The `Stat Value` parameter can take any value. If you set it to `0`, you will disable the effect (for its duration).
  */
 OUTER_SET OPCODE_invisible_detection_by_script = 193
+
 /**
  * [Ignore Dialog Pause](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op194)
  *
@@ -4356,6 +4545,7 @@ OUTER_SET OPCODE_invisible_detection_by_script = 193
  * The `Stat Value` parameter can take any value. If you set it to `0`, you will disable the effect (for its duration).
  */
 OUTER_SET OPCODE_ignore_dialog_pause = 194
+
 /**
  * [Spell Effect: Death Dependent Constitution Loss (Familiar Bond)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op195)
  *
@@ -4385,6 +4575,7 @@ OUTER_SET OPCODE_ignore_dialog_pause = 194
  * `Parameter2` is possibly intended to be `Damage Type`. It uses the same format as [opcode #12](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op12) ([opcode #192](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op192) sets it to `0x400000 – MAGIC`), but changing it has no effect.
  */
 OUTER_SET OPCODE_death_dependent_constitution_loss_familiar_bond = 195
+
 /**
  * [Spell Effect: Familiar Block](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op196)
  *
@@ -4393,6 +4584,7 @@ OUTER_SET OPCODE_death_dependent_constitution_loss_familiar_bond = 195
  * The effect should be set with a `Timing Mode` of `9`.
  */
 OUTER_SET OPCODE_familiar_block = 196
+
 /**
  * [Spell: Bounce (by Impact Projectile)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op197)
  *
@@ -4417,6 +4609,7 @@ OUTER_SET OPCODE_familiar_block = 196
  * [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files delivered by [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) will interact with Reflection separately from the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect that applies them, and only if that [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect already got through. If the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect is reflected, then the values in the [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) file won't matter. Most vanilla [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files have these fields set to `empty/zero` to avoid interacting with this opcode.
  */
 OUTER_SET OPCODE_bounce_by_impact_projectile = 197
+
 /**
  * [Spell: Bounce (by Opcode)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op198)
  *
@@ -4438,6 +4631,7 @@ OUTER_SET OPCODE_bounce_by_impact_projectile = 197
  * [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files delivered by [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) will interact with Reflection separately from the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect that applies them, and only if that [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect already got through. If the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect is reflected, then the values in the [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) file won't matter. Most vanilla [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files have these fields set to `empty/zero` to avoid interacting with this opcode.
  */
 OUTER_SET OPCODE_bounce_by_opcode = 198
+
 /**
  * [Spell: Bounce (by Power Level)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op199)
  *
@@ -4456,6 +4650,7 @@ OUTER_SET OPCODE_bounce_by_opcode = 198
  * [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files delivered by [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) will interact with Reflection separately from the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect that applies them, and only if that [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect already got through. If the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect is reflected, then the values in the [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) file won't matter. Most vanilla [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files have these fields set to `empty/zero` to avoid interacting with this opcode.
  */
 OUTER_SET OPCODE_bounce_by_power_level = 199
+
 /**
  * [Spell: Bounce (by Power level, decrementing)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op200)
  *
@@ -4482,6 +4677,7 @@ OUTER_SET OPCODE_bounce_by_power_level = 199
  * [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files delivered by [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) will interact with Reflection separately from the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect that applies them, and only if that [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect already got through. If the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect is reflected, then the values in the [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) file won't matter. Most vanilla [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files have these fields set to `empty/zero` to avoid interacting with this opcode.
  */
 OUTER_SET OPCODE_bounce_by_power_level_decrementing = 200
+
 /**
  * [Spell: Immunity (by Power Level, decrementing)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op201)
  *
@@ -4503,6 +4699,7 @@ OUTER_SET OPCODE_bounce_by_power_level_decrementing = 200
  * [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files delivered by [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) will interact with Deflection separately from the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect that applies them, and only if that [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect already got through. If the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect is deflected, then the values in the [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) file won't matter. Most vanilla [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files have these fields set to `empty/zero` to avoid interacting with this opcode.
  */
 OUTER_SET OPCODE_immunity_by_power_level_decrementing = 201
+
 /**
  * [Spell: Bounce (by School)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op202)
  *
@@ -4538,6 +4735,7 @@ OUTER_SET OPCODE_immunity_by_power_level_decrementing = 201
  * [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files delivered by [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) will interact with Reflection separately from the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect that applies them, and only if that [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect already got through. If the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect is reflected, then the values in the [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) file won't matter. Most vanilla [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files have these fields set to `empty/zero` to avoid interacting with this opcode.
  */
 OUTER_SET OPCODE_bounce_by_school = 202
+
 /**
  * [Spell: Bounce (by Secondary Type)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op203)
  *
@@ -4575,6 +4773,7 @@ OUTER_SET OPCODE_bounce_by_school = 202
  * [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files delivered by [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) will interact with Reflection separately from the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect that applies them, and only if that [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect already got through. If the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect is reflected, then the values in the [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) file won't matter. Most vanilla [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files have these fields set to `empty/zero` to avoid interacting with this opcode.
  */
 OUTER_SET OPCODE_bounce_by_secondary_type = 203
+
 /**
  * [Spell: Protection (by School)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op204)
  *
@@ -4607,6 +4806,7 @@ OUTER_SET OPCODE_bounce_by_secondary_type = 203
  * [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files delivered by [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) will interact with Deflection separately from the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect that applies them, and only if that [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect already got through. If the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect is deflected, then the values in the [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) file won't matter. Most vanilla [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files have these fields set to `empty/zero` to avoid interacting with this opcode.
  */
 OUTER_SET OPCODE_protection_by_school = 204
+
 /**
  * [Spell: Protection (by Secondary Type)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op205)
  *
@@ -4641,6 +4841,7 @@ OUTER_SET OPCODE_protection_by_school = 204
  * [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files delivered by [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) will interact with Deflection separately from the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect that applies them, and only if that [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect already got through. If the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect is deflected, then the values in the [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) file won't matter. Most vanilla [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files have these fields set to `empty/zero` to avoid interacting with this opcode.
  */
 OUTER_SET OPCODE_protection_by_secondary_type = 205
+
 /**
  * [Spell: Protection from Spell](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op206)
  *
@@ -4670,6 +4871,7 @@ OUTER_SET OPCODE_protection_by_secondary_type = 205
  * In order to do so, both the `Resource` field of [opcode #206](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op206) and the [`Parent Resource`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x94) field of the EFF file must be the same string (max. 8 character long); moreover, you must set the [`Resource Type`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x90) field of the EFF file to [`Spell`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x90_1).
  */
 OUTER_SET OPCODE_protection_from_spell = 206
+
 /**
  * [Spell: Bounce (by Resource)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op207)
  *
@@ -4690,6 +4892,7 @@ OUTER_SET OPCODE_protection_from_spell = 206
  * [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files delivered by [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) will interact with Reflection separately from the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect that applies them, and only if that [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect already got through. If the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect is reflected, then the values in the [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) file won't matter. Most vanilla [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files have these fields set to `empty/zero` to avoid interacting with this opcode.
  */
 OUTER_SET OPCODE_bounce_by_resource = 207
+
 /**
  * [HP: Minimum Limit](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op208)
  *
@@ -4704,6 +4907,7 @@ OUTER_SET OPCODE_bounce_by_resource = 207
  * - Any positive value will also grant the creature immunity to directly applied [opcode #13](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op13) effects. Those applied indirectly will still kill the creature, notably by opcodes [#55](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op55), [#134](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op134), [#151](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op151), [#209](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op209), and [#238](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op238).
  */
 OUTER_SET OPCODE_hp_minimum_limit = 208
+
 /**
  * [Death: Kill 60HP](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op209)
  *
@@ -4714,6 +4918,7 @@ OUTER_SET OPCODE_hp_minimum_limit = 208
  * [Immunity](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op101) to [opcode #13](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op13) is not sufficient to block this effect unless it's granted through [`7EYES.2DA`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/7eyes.htm).
  */
 OUTER_SET OPCODE_death_kill_60hp = 209
+
 /**
  * [Spell Effect: Stun 90HP](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op210)
  *
@@ -4730,6 +4935,7 @@ OUTER_SET OPCODE_death_kill_60hp = 209
  * [Immunity](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op101) to [opcode #45](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op45) is sufficient to block the stun effect, but without [immunity](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op101) to [opcode #210](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op210) it will still generate an erroneous `~Stunned~` string display.
  */
 OUTER_SET OPCODE_stun_90hp = 210
+
 /**
  * [Spell Effect: Imprisonment](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op211)
  *
@@ -4748,6 +4954,7 @@ OUTER_SET OPCODE_stun_90hp = 210
  *   - Effects that would expire will not expire until this effect is removed.
  */
 OUTER_SET OPCODE_imprisonment = 211
+
 /**
  * [Protection: Freedom](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op212)
  *
@@ -4756,6 +4963,7 @@ OUTER_SET OPCODE_imprisonment = 211
  * Removes [Imprisonment](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op211) and [Maze](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op213), and [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files using those opcodes.
  */
 OUTER_SET OPCODE_protection_freedom = 212
+
 /**
  * [Spell Effect: Maze](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op213)
  *
@@ -4781,6 +4989,7 @@ OUTER_SET OPCODE_protection_freedom = 212
  * `Icon` defines the index from [STATDESC.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm) for custom portrait icons (EE only). Default value is [`Maze`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#78).
  */
 OUTER_SET OPCODE_maze = 213
+
 /**
  * [Spell Effect: Select Spell](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op214)
  *
@@ -4793,6 +5002,7 @@ OUTER_SET OPCODE_maze = 213
  * To make your own 2DA file for, use the SPWI510.2DA as a base.
  */
 OUTER_SET OPCODE_select_spell = 214
+
 /**
  * [Graphics: Play 3D Effect](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op215)
  *
@@ -5072,6 +5282,7 @@ OUTER_SET OPCODE_select_spell = 214
  * `Play where?` `0` or `2` also supports [VEF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/vef_v1.htm) files.
  */
 OUTER_SET OPCODE_play_3d_effect = 215
+
 /**
  * [Spell Effect: Level Drain](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op216)
  *
@@ -5084,18 +5295,21 @@ OUTER_SET OPCODE_play_3d_effect = 215
  * This effect sets stat #200 (LEVELDRAIN) to param #1.
  */
 OUTER_SET OPCODE_level_drain = 216
+
 /**
  * [Spell Effect: Unconsciousness 20HP](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op217)
  *
  * Applies [opcode #39](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op39) using `Sleep (Wake on Hit)` mode to the targeted creature(s), if the targeted creature(s) has less than 20 HP. The effect always lasts 5 rounds, and ignores the `duration` field. When calling the sleep opcode, parameters 2 and special are copied over.
  */
 OUTER_SET OPCODE_unconsciousness_20hp = 217
+
 /**
  * [Protection: Stoneskin](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op218)
  *
  * Gives the targeted creature(s) a number of protections from physical attacks, as specified by the 'Amount' field.
  */
 OUTER_SET OPCODE_protection_stoneskin = 218
+
 /**
  * [Stat: AC vs. Creature Type Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op219)
  *
@@ -5115,6 +5329,7 @@ OUTER_SET OPCODE_protection_stoneskin = 218
  * Multiple instances of this effect do not stack their bonus, but can be used to specify multiple creature types.
  */
 OUTER_SET OPCODE_ac_vs_creature_type_mod = 219
+
 /**
  * [Removal: Remove School](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op220)
  *
@@ -5141,6 +5356,7 @@ OUTER_SET OPCODE_ac_vs_creature_type_mod = 219
  * - 10 ⟶ WILDMAGE
  */
 OUTER_SET OPCODE_remove_school = 220
+
 /**
  * [Removal: Remove Secondary Type](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op221)
  *
@@ -5170,6 +5386,7 @@ OUTER_SET OPCODE_remove_school = 220
  * - 13 ⟶ NON-COMBAT
  */
 OUTER_SET OPCODE_remove_secondary_type = 221
+
 /**
  * [Spell Effect: Teleport Field](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op222)
  *
@@ -5178,6 +5395,7 @@ OUTER_SET OPCODE_remove_secondary_type = 221
  * The `Max Range` field sets the maximum range of the teleporting effect. Teleport is random direction up to specified range, range measured same as projectile radius, i.e.: `16 = 1 ft`.
  */
 OUTER_SET OPCODE_teleport_field = 222
+
 /**
  * [Spell: Immunity (by School, decrementing)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op223)
  *
@@ -5215,6 +5433,7 @@ OUTER_SET OPCODE_teleport_field = 222
  * [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files delivered by [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) will interact with Deflection separately from the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect that applies them, and only if that [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect already got through. If the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect is deflected, then the values in the [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) file won't matter. Most vanilla [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files have these fields set to `empty/zero` to avoid interacting with this opcode.
  */
 OUTER_SET OPCODE_immunity_by_school_decrementing = 223
+
 /**
  * [Cure: Level Drain (Restoration)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op224)
  *
@@ -5223,6 +5442,7 @@ OUTER_SET OPCODE_immunity_by_school_decrementing = 223
  * Removes [opcode #216](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op216) (Level drain) effects from the creature, will not remove [opcode #96](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op96) (Level change) effects.
  */
 OUTER_SET OPCODE_cure_level_drain_restoration = 224
+
 /**
  * [Spell: Reveal Magic](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op225)
  *
@@ -5231,6 +5451,7 @@ OUTER_SET OPCODE_cure_level_drain_restoration = 224
  * More specifically, it functions by applying [opcode #50](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op50) to creature(s) with any dispellable effects. Color glow is red.
  */
 OUTER_SET OPCODE_reveal_magic = 225
+
 /**
  * [Spell: Immunity (by Secondary Type, decrementing)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op226)
  *
@@ -5270,6 +5491,7 @@ OUTER_SET OPCODE_reveal_magic = 225
  * [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files delivered by [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) will interact with Deflection separately from the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect that applies them, and only if that [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect already got through. If the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect is deflected, then the values in the [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) file won't matter. Most vanilla [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files have these fields set to `empty/zero` to avoid interacting with this opcode.
  */
 OUTER_SET OPCODE_immunity_by_secondary_type_decrementing = 226
+
 /**
  * [Spell: Bounce (by School, decrementing)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op227)
  *
@@ -5311,6 +5533,7 @@ OUTER_SET OPCODE_immunity_by_secondary_type_decrementing = 226
  * [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files delivered by [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) will interact with Reflection separately from the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect that applies them, and only if that [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect already got through. If the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect is reflected, then the values in the [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) file won't matter. Most vanilla [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files have these fields set to `empty/zero` to avoid interacting with this opcode.
  */
 OUTER_SET OPCODE_bounce_by_school_decrementing = 227
+
 /**
  * [Spell: Bounce (by Secondary Type, decrementing)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op228)
  *
@@ -5354,6 +5577,7 @@ OUTER_SET OPCODE_bounce_by_school_decrementing = 227
  * [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files delivered by [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) will interact with Reflection separately from the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect that applies them, and only if that [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect already got through. If the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect is reflected, then the values in the [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) file won't matter. Most vanilla [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files have these fields set to `empty/zero` to avoid interacting with this opcode.
  */
 OUTER_SET OPCODE_bounce_by_secondary_type_decrementing = 228
+
 /**
  * [Removal: Remove One School](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op229)
  *
@@ -5380,6 +5604,7 @@ OUTER_SET OPCODE_bounce_by_secondary_type_decrementing = 228
  * 9   Generalist
  */
 OUTER_SET OPCODE_remove_one_school = 229
+
 /**
  * [Removal: Remove One Secondary Type](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op230)
  *
@@ -5414,6 +5639,7 @@ OUTER_SET OPCODE_remove_one_school = 229
  * 13  Non-Combat
  */
 OUTER_SET OPCODE_remove_one_secondary_type = 230
+
 /**
  * [Spell Effect: Time Stop](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op231)
  *
@@ -5433,6 +5659,7 @@ OUTER_SET OPCODE_remove_one_secondary_type = 230
  * Only one creature may have a Time Stop effect running at a time, applying a Time Stop effect during another will override the previous. The caster is always immune to their own Time Stop effect, they do not require [opcode #310](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op310), unless their own Time Stop is at risk of being overridden.
  */
 OUTER_SET OPCODE_time_stop = 231
+
 /**
  * [Spell Effect: Cast Spell on Condition](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op232)
  *
@@ -5477,6 +5704,7 @@ OUTER_SET OPCODE_time_stop = 231
  * Parameter 3 (EFF) activates the portrait icon and immediately triggers the HitBy() trigger
  */
 OUTER_SET OPCODE_cast_spell_on_condition = 232
+
 /**
  * [Stat: Proficiency Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op233)
  *
@@ -5546,6 +5774,7 @@ OUTER_SET OPCODE_cast_spell_on_condition = 232
  * This is however not true for EEs, where `param#2 ('Type')` is split into two word subfields. By setting the second (high) one to `1 (Increment)`, it's possible to increment/decrement the proficiency points of the targeted creature(s) by the value specified by the `Amount` parameter.
  */
 OUTER_SET OPCODE_proficiency_mod = 233
+
 /**
  * [Spell Effect: Contingency Creation](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op234)
  *
@@ -5568,6 +5797,7 @@ OUTER_SET OPCODE_proficiency_mod = 233
  * This opcode only works from party-members.
  */
 OUTER_SET OPCODE_contingency_creation = 234
+
 /**
  * [Spell Effect: Wing Buffet](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op235)
  *
@@ -5630,6 +5860,7 @@ OUTER_SET OPCODE_contingency_creation = 234
  * `Direction` options `1` and `3` "can" be overriden in external [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files, but default to the ability target/location.
  */
 OUTER_SET OPCODE_wing_buffet = 235
+
 /**
  * [Spell Effect: Image Projection](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op236)
  *
@@ -5698,6 +5929,7 @@ OUTER_SET OPCODE_wing_buffet = 235
  * Keep in mind that if the caster is equipped with an irremovable item (e.g., Edwin's Amulet), then its images will not inherit any bonuses/maluses from that specific item.
  */
 OUTER_SET OPCODE_image_projection = 236
+
 /**
  * [Spell Effect: Puppet ID](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op237)
  *
@@ -5736,6 +5968,7 @@ OUTER_SET OPCODE_image_projection = 236
  * [PUPPETID](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#141) is likewise set on the `Master ID`, to the image's `Object ID` (likely whichever image is most recent, if they have multiple images).
  */
 OUTER_SET OPCODE_puppet_id = 237
+
 /**
  * [Death: Disintegrate](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op238)
  *
@@ -5753,6 +5986,7 @@ OUTER_SET OPCODE_puppet_id = 237
  * - 9 ⟶ [KIT.IDS](https://gibberlings3.github.io/iesdp/files/ids/bgee/kit.htm) (EE-only)
  */
 OUTER_SET OPCODE_death_disintegrate = 238
+
 /**
  * [Spell Effect: Farsight](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op239)
  *
@@ -5766,6 +6000,7 @@ OUTER_SET OPCODE_death_disintegrate = 238
  * Effect needs to target a creature. Opcode still non-functional in SoD v2.5.
  */
 OUTER_SET OPCODE_farsight = 239
+
 /**
  * [Graphics: Remove Special Effect Icon](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op240)
  *
@@ -5778,18 +6013,21 @@ OUTER_SET OPCODE_farsight = 239
  * In EE games, can also remove [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effects if their EFF file uses [opcode #142](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op142) with a matching `param2` value.
  */
 OUTER_SET OPCODE_remove_special_effect_icon = 240
+
 /**
  * [Charm: Control Creature](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op241)
  *
  * As opcode [#5](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op5).
  */
 OUTER_SET OPCODE_charm_control_creature = 241
+
 /**
  * [Cure: Confusion](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op242)
  *
  * Removes [STATE_CONFUSED](https://gibberlings3.github.io/iesdp/files/ids/bgee/state.htm#BIT31) and [opcode #128](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op128) effects from the targeted creature(s).
  */
 OUTER_SET OPCODE_cure_confusion = 242
+
 /**
  * [Item: Drain Item Charges](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op243)
  *
@@ -5804,12 +6042,14 @@ OUTER_SET OPCODE_cure_confusion = 242
  * This effect works in SoA but not ToB
  */
 OUTER_SET OPCODE_drain_item_charges = 243
+
 /**
  * [Spell: Drain Wizard Spell](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op244)
  *
  * Drains spells from a wizards memory. This effect always drains the highest level possible spell first and drains the number set by the `Number to Drain` parameter.
  */
 OUTER_SET OPCODE_drain_wizard_spell = 244
+
 /**
  * [Check For Berserk](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op245)
  *
@@ -5818,6 +6058,7 @@ OUTER_SET OPCODE_drain_wizard_spell = 244
  * It sets [CHECKFORBERSERK](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#142).
  */
 OUTER_SET OPCODE_check_for_berserk = 245
+
 /**
  * [Spell Effect: Berserking](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op246)
  *
@@ -5826,6 +6067,7 @@ OUTER_SET OPCODE_check_for_berserk = 245
  * It also sets [BERSERKSTAGE1](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#143).
  */
 OUTER_SET OPCODE_berserking_2 = 246
+
 /**
  * [Spell Effect: Attack Nearest Creature](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op247)
  *
@@ -5840,6 +6082,7 @@ OUTER_SET OPCODE_berserking_2 = 246
  * At least in EEs, the only difference between opcodes [#3](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op3) and [#247](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op247), is that [opcode #247](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op247) will not force the creature(s) to use melee weapons, and is not removed by [opcode #4](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op4) (Cure Berserk).
  */
 OUTER_SET OPCODE_attack_nearest_creature = 247
+
 /**
  * [Item: Set Melee Effect](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op248)
  *
@@ -5858,6 +6101,7 @@ OUTER_SET OPCODE_attack_nearest_creature = 247
  * This opcode applies its effect inbetween base weapon damage and the on-hit effects of the weapon.
  */
 OUTER_SET OPCODE_set_melee_effect = 248
+
 /**
  * [Item: Set Ranged Effect](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op249)
  *
@@ -5872,6 +6116,7 @@ OUTER_SET OPCODE_set_melee_effect = 248
  * At least in EEs, this opcode applies its effect after both the base weapon damage and the on-hit effects of the weapon.
  */
 OUTER_SET OPCODE_set_ranged_effect = 249
+
 /**
  * [Spell Effect: Damage Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op250)
  *
@@ -5882,6 +6127,7 @@ OUTER_SET OPCODE_set_ranged_effect = 249
  * This opcode works in the same manner as [luck](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op22) (and stacks with it), except that it only affects base weapon damage. It can be positive or negative.
  */
 OUTER_SET OPCODE_damage_mod = 250
+
 /**
  * [Spell Effect: Change Bard Song Effect](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op251)
  *
@@ -5905,6 +6151,7 @@ OUTER_SET OPCODE_damage_mod = 250
  * On EE games, the default bardsong has been externalized to `"BARDSONG.SPL"`.
  */
 OUTER_SET OPCODE_change_bard_song_effect = 251
+
 /**
  * [Spell Effect: Set Trap](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op252)
  *
@@ -5913,6 +6160,7 @@ OUTER_SET OPCODE_change_bard_song_effect = 251
  * This effect will fail if the targeted creature(s) does not have sufficient points in the 'Set Traps' skill.
  */
 OUTER_SET OPCODE_set_trap = 252
+
 /**
  * [Spell Effect: Add Map Marker](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op253)
  *
@@ -5945,6 +6193,7 @@ OUTER_SET OPCODE_set_trap = 252
  * This effect works in SoA but not ToB. Works fine in EE's.
  */
 OUTER_SET OPCODE_add_map_marker = 253
+
 /**
  * [Spell Effect: Remove Map Marker](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op254)
  *
@@ -5955,6 +6204,7 @@ OUTER_SET OPCODE_add_map_marker = 253
  * This effect works in SoA but not ToB. Works fine in EE's.
  */
 OUTER_SET OPCODE_remove_map_marker = 254
+
 /**
  * [Item: Create Inventory Item (days)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op255)
  *
@@ -5963,12 +6213,14 @@ OUTER_SET OPCODE_remove_map_marker = 254
  * The difference from [opcode #122](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op122) is that when used in an external [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm), the `duration` (from the calling file) is specified in days.
  */
 OUTER_SET OPCODE_create_inventory_item_days = 255
+
 /**
  * [Spell: Spell Sequencer Active](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op256)
  *
  * This effect stores the spell resources for an active spell sequencer. The three spell resources are stored in the resource key, VVC field, and eff 3rd parameter.
  */
 OUTER_SET OPCODE_spell_sequencer_active = 256
+
 /**
  * [Spell: Spell Sequencer Creation](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op257)
  *
@@ -5979,6 +6231,7 @@ OUTER_SET OPCODE_spell_sequencer_active = 256
  * The filename of a spell containing this effect should be no more than 7 characters.
  */
 OUTER_SET OPCODE_spell_sequencer_creation = 257
+
 /**
  * [Spell: Spell Sequencer Activation](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op258)
  *
@@ -5997,6 +6250,7 @@ OUTER_SET OPCODE_spell_sequencer_creation = 257
  *   Spell Sequencer Activation filename = SPSS101D
  */
 OUTER_SET OPCODE_spell_sequencer_activation = 258
+
 /**
  * [Protection: Spell Trap (by Power Level, decrementing)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op259)
  *
@@ -6020,6 +6274,7 @@ OUTER_SET OPCODE_spell_sequencer_activation = 258
  * [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files delivered by [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) will interact with Trapping separately from the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect that applies them, and only if that [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect already got through. If the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect is trapped, then the values in the [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) file won't matter. Most vanilla [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files have these fields set to `empty/zero` to avoid interacting with this opcode.
  */
 OUTER_SET OPCODE_protection_spell_trap_by_power_level_decrementing = 259
+
 /**
  * [Spell: Restore Lost Spells](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op261)
  *
@@ -6033,6 +6288,7 @@ OUTER_SET OPCODE_protection_spell_trap_by_power_level_decrementing = 259
  * - 1 ⟶ Cleric / Druid / Shaman
  */
 OUTER_SET OPCODE_restore_lost_spells = 261
+
 /**
  * [Stat: Visual Range](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op262)
  *
@@ -6056,6 +6312,7 @@ OUTER_SET OPCODE_restore_lost_spells = 261
  * - Maximum visual range to reveal "Fog of War" = 23
  */
 OUTER_SET OPCODE_visual_range = 262
+
 /**
  * [Stat: Backstab](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op263)
  *
@@ -6068,6 +6325,7 @@ OUTER_SET OPCODE_visual_range = 262
  * - 2 ⟶ Percentage Modifier: `Backstab = (Backstab * 'Statistic Modifier' value) / 100`
  */
 OUTER_SET OPCODE_backstab = 263
+
 /**
  * [Spell Effect: Drop Weapons in Panic](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op264)
  *
@@ -6084,6 +6342,7 @@ OUTER_SET OPCODE_backstab = 263
  * 1   Drop a quickslot item (won't drop the left-hand weapon).
  */
 OUTER_SET OPCODE_drop_weapons_in_panic = 264
+
 /**
  * [Script: Modify Global Variable](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op265)
  *
@@ -6106,6 +6365,7 @@ OUTER_SET OPCODE_drop_weapons_in_panic = 264
  * Make sure to set target. Target: Self (1) works well. If target is unset (0), the game will freeze.
  */
 OUTER_SET OPCODE_script_modify_global_variable = 265
+
 /**
  * [Spell: Remove Protection from Spell](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op266)
  *
@@ -6114,6 +6374,7 @@ OUTER_SET OPCODE_script_modify_global_variable = 265
  * At least in BG2 and EEs, this effect can remove [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) when EFF file uses [opcode #206](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op206) and matching `resource`.
  */
 OUTER_SET OPCODE_remove_protection_from_spell = 266
+
 /**
  * [Text: Protection from Display Specific String](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op267)
  *
@@ -6124,6 +6385,7 @@ OUTER_SET OPCODE_remove_protection_from_spell = 266
  * Cannot block string displays from any other mechanic.
  */
 OUTER_SET OPCODE_text_protection_from_display_specific_string = 267
+
 /**
  * [Spell Effect: Clear Fog of War (Wizard Eye)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op268)
  *
@@ -6136,24 +6398,28 @@ OUTER_SET OPCODE_text_protection_from_display_specific_string = 267
  * Only 8 creatures in a given area can fully clear fog of war, with priority going to party members.
  */
 OUTER_SET OPCODE_clear_fog_of_war_wizard_eye = 268
+
 /**
  * [Spell Effect: Shake Window](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op269)
  *
  * Applies the shake windows effect, with an intensity specified by the `Strength` field.
  */
 OUTER_SET OPCODE_shake_window = 269
+
 /**
  * [Cure: Unpause Target](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op270)
  *
  * Removes the [pause effect](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op165) from the targeted creature(s).
  */
 OUTER_SET OPCODE_cure_unpause_target = 270
+
 /**
  * [Graphics: Avatar Removal](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op271)
  *
  * Removes the animation of the targeted creature(s).
  */
 OUTER_SET OPCODE_avatar_removal = 271
+
 /**
  * [Spell: Apply Repeating EFF](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op272)
  *
@@ -6178,6 +6444,7 @@ OUTER_SET OPCODE_avatar_removal = 271
  * If two or more effects of this type affect a creature, only the shortest duration effect will occur.
  */
 OUTER_SET OPCODE_apply_repeating_eff = 272
+
 /**
  * [Remove: Specific Area Effect(Zone of Sweet Air)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op273)
  *
@@ -6188,12 +6455,14 @@ OUTER_SET OPCODE_apply_repeating_eff = 272
  * The custom 2DA file must be structured as `"CLEARAIR.2DA"`.
  */
 OUTER_SET OPCODE_remove_specific_area_effect_zone_of_sweet_air = 273
+
 /**
  * [Spell Effect: Teleport to Target](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op274)
  *
  * Teleports the affected creature(s) to a random enemy (i.e. party members would teleport to a red circled creature, red circled creatures teleport to the party). Enemy needs to be within visual range, but can be invisible.
  */
 OUTER_SET OPCODE_teleport_to_target = 274
+
 /**
  * [Stat: Hide in Shadows Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op275)
  *
@@ -6208,6 +6477,7 @@ OUTER_SET OPCODE_teleport_to_target = 274
  * When `Type = 0` and `Timing Mode = 9`, it modifies [HIDEINSHADOWSMTPBONUS](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#180). The final value for this stat is multiplied by its percentage entry in [THIEFSCL.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/thiefscl.htm) capped to the range [0,255], before being included in the creature's Hide in Shadows score.
  */
 OUTER_SET OPCODE_hide_in_shadows_mod = 275
+
 /**
  * [Stat: Detect Illusion Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op276)
  *
@@ -6222,6 +6492,7 @@ OUTER_SET OPCODE_hide_in_shadows_mod = 275
  * At least in EEs, when `Type = 0` and `Timing Mode = 9`, it modifies [DETECTILLUSIONSMTPBONUS](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#181). The final value for this stat is multiplied by its percentage entry in [THIEFSCL.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/thiefscl.htm) capped to the range [0,255], before being included in the creature's Detect Illusions score.
  */
 OUTER_SET OPCODE_detect_illusion_mod = 276
+
 /**
  * [Stat: Set Traps Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op277)
  *
@@ -6236,6 +6507,7 @@ OUTER_SET OPCODE_detect_illusion_mod = 276
  * At least in EEs, when `Type = 0` and `Timing Mode = 9`, it modifies [SETTRAPSMTPBONUS](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#182). The final value for this stat is multiplied by its percentage entry in [THIEFSCL.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/thiefscl.htm) capped to the range [0,255], before being included in the creature's Set Traps score.
  */
 OUTER_SET OPCODE_set_traps_mod = 277
+
 /**
  * [Stat: To Hit Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op278)
  *
@@ -6250,6 +6522,7 @@ OUTER_SET OPCODE_set_traps_mod = 277
  * This effect adjusts modified THAC0, rather than the base stat.
  */
 OUTER_SET OPCODE_to_hit_mod = 278
+
 /**
  * [Button: Enable Button](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op279)
  *
@@ -6277,6 +6550,7 @@ OUTER_SET OPCODE_to_hit_mod = 278
  * Removing [opcode #144](https://gibberlings3.github.io/iesdp/opcodes/op144.html) is all it does, it cannot enable buttons disabled by other mechanics.
  */
 OUTER_SET OPCODE_button_enable_button = 279
+
 /**
  * [Spell Effect: Wild Magic](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op280)
  *
@@ -6296,6 +6570,7 @@ OUTER_SET OPCODE_button_enable_button = 279
  * Maintains [FORCESURGE](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#153) to `Type`.
  */
 OUTER_SET OPCODE_wild_magic = 280
+
 /**
  * [Stat: Wild Magic](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op281)
  *
@@ -6312,6 +6587,7 @@ OUTER_SET OPCODE_wild_magic = 280
  * At least in EEs, the final value is added to the inherint level-based bonus of the Wild Mage.
  */
 OUTER_SET OPCODE_wild_magic_2 = 281
+
 /**
  * [Script: Scripting State Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op282)
  *
@@ -6323,6 +6599,7 @@ OUTER_SET OPCODE_wild_magic_2 = 281
  *   - For best results, it should only be used for stats `#156 – #165`, as all others have dedicated opcodes and hardcoded effects.
  */
 OUTER_SET OPCODE_script_scripting_state_mod = 282
+
 /**
  * [Use EFF File (Cursed)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283)
  *
@@ -6345,6 +6622,7 @@ OUTER_SET OPCODE_script_scripting_state_mod = 282
  * 8   Align.ids
  */
 OUTER_SET OPCODE_use_eff_file_cursed = 283
+
 /**
  * [Stat: Melee THAC0 Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op284)
  *
@@ -6359,6 +6637,7 @@ OUTER_SET OPCODE_use_eff_file_cursed = 283
  * The effect modifies [MELEE_THACO_BONUS](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#166).
  */
 OUTER_SET OPCODE_melee_thac0_mod = 284
+
 /**
  * [Stat: Melee Weapon Damage Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op285)
  *
@@ -6373,6 +6652,7 @@ OUTER_SET OPCODE_melee_thac0_mod = 284
  * The effect modifies [MELEE_DAMAGE_BONUS](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#167).
  */
 OUTER_SET OPCODE_melee_weapon_damage_mod = 285
+
 /**
  * [Stat: Missile Weapon Damage Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op286)
  *
@@ -6387,6 +6667,7 @@ OUTER_SET OPCODE_melee_weapon_damage_mod = 285
  * The effect modifies [MISSILE_DAMAGE_BONUS](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#168).
  */
 OUTER_SET OPCODE_missile_weapon_damage_mod = 286
+
 /**
  * [Graphics: Selection Circle Removal](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op287)
  *
@@ -6395,6 +6676,7 @@ OUTER_SET OPCODE_missile_weapon_damage_mod = 286
  * The effect modifies [DISABLE_CIRCLE](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#169).
  */
 OUTER_SET OPCODE_selection_circle_removal = 287
+
 /**
  * [Stat: Fist THAC0 Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op288)
  *
@@ -6409,6 +6691,7 @@ OUTER_SET OPCODE_selection_circle_removal = 287
  * The effect modifies [FIST_THACO_BONUS](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#170).
  */
 OUTER_SET OPCODE_fist_thac0_mod = 288
+
 /**
  * [Stat: Fist Damage Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op289)
  *
@@ -6423,6 +6706,7 @@ OUTER_SET OPCODE_fist_thac0_mod = 288
  * The effect modifies [FIST_DAMAGE_BONUS](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#171).
  */
 OUTER_SET OPCODE_fist_damage_mod = 289
+
 /**
  * [Text: Change Title](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op290)
  *
@@ -6436,6 +6720,7 @@ OUTER_SET OPCODE_fist_damage_mod = 289
  * The effect modifies stats 172 and 173.
  */
 OUTER_SET OPCODE_text_change_title = 290
+
 /**
  * [Graphics: Disable Visual Effect](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op291)
  *
@@ -6446,6 +6731,7 @@ OUTER_SET OPCODE_text_change_title = 290
  * The `Stat Value` parameter can take any value. If you set it to `0`, you will disable the effect (for its duration).
  */
 OUTER_SET OPCODE_disable_visual_effect = 291
+
 /**
  * [Protection: Backstab](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op292)
  *
@@ -6456,6 +6742,7 @@ OUTER_SET OPCODE_disable_visual_effect = 291
  * The `Stat Value` parameter can take any value. If you set it to `0`, you will disable the effect (for its duration).
  */
 OUTER_SET OPCODE_protection_backstab = 292
+
 /**
  * [Script: Enable Offscreen AI](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op293)
  *
@@ -6471,6 +6758,7 @@ OUTER_SET OPCODE_protection_backstab = 292
  * The `Stat Value` parameter can take any value. If you set it to `0`, you will disable the effect (for its duration).
  */
 OUTER_SET OPCODE_script_enable_offscreen_ai = 293
+
 /**
  * [Spell Effect: Existance Delay Override](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op294)
  *
@@ -6485,6 +6773,7 @@ OUTER_SET OPCODE_script_enable_offscreen_ai = 293
  * The effect modifies [EXISTANCE_DELAY_OVERRIDE](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#184), unless `Constant Value` is set to `1`.
  */
 OUTER_SET OPCODE_existance_delay_override = 294
+
 /**
  * [Graphics: Disable Permanent Death](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op295)
  *
@@ -6497,6 +6786,7 @@ OUTER_SET OPCODE_existance_delay_override = 294
  * The `Stat Value` parameter can take any value. If you set it to `0`, you will disable the effect (for its duration).
  */
 OUTER_SET OPCODE_disable_permanent_death = 295
+
 /**
  * [Graphics: Protection from Specific Animation](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op296)
  *
@@ -6507,6 +6797,7 @@ OUTER_SET OPCODE_disable_permanent_death = 295
  * It cannot block animations from any other source.
  */
 OUTER_SET OPCODE_protection_from_specific_animation = 296
+
 /**
  * [Spell Effect: Immunity to Turn Undead](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op297)
  *
@@ -6517,6 +6808,7 @@ OUTER_SET OPCODE_protection_from_specific_animation = 296
  * The `Stat Value` parameter can take any value. If you set it to `0`, you will disable the effect (for its duration).
  */
 OUTER_SET OPCODE_immunity_to_turn_undead = 297
+
 /**
  * [Spell Effect: Execute Script cut250a](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op298)
  *
@@ -6525,6 +6817,7 @@ OUTER_SET OPCODE_immunity_to_turn_undead = 297
  * The Constant Value parameter should be set to 1.
  */
 OUTER_SET OPCODE_execute_script_cut250a = 298
+
 /**
  * [Spell Effect: Chaos Shield](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op299)
  *
@@ -6538,6 +6831,7 @@ OUTER_SET OPCODE_execute_script_cut250a = 298
  * The effect modifies stat #189 (CHAOS_SHIELD).
  */
 OUTER_SET OPCODE_chaos_shield = 299
+
 /**
  * [Spell Effect: NPCBump](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op300)
  *
@@ -6548,6 +6842,7 @@ OUTER_SET OPCODE_chaos_shield = 299
  * The `Stat Value` parameter can take any value. If you set it to `0`, you will disable the effect (for its duration).
  */
 OUTER_SET OPCODE_npcbump = 300
+
 /**
  * [Stat: Critical Hit Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op301)
  *
@@ -6558,6 +6853,7 @@ OUTER_SET OPCODE_npcbump = 300
  * 20 - 'Statistic Modifier'
  */
 OUTER_SET OPCODE_critical_hit_mod = 301
+
 /**
  * [Item: Can Use Any Item](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op302)
  *
@@ -6568,6 +6864,7 @@ OUTER_SET OPCODE_critical_hit_mod = 301
  * The 'Stat Value' parameter can take any value. If you set it to 0, you will disable the effect (for its duration).
  */
 OUTER_SET OPCODE_can_use_any_item = 302
+
 /**
  * [Spell Effect: Backstab Every Hit](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op303)
  *
@@ -6586,12 +6883,14 @@ OUTER_SET OPCODE_can_use_any_item = 302
  * Creature must still be using a weapon valid for backstabbing.
  */
 OUTER_SET OPCODE_backstab_every_hit = 303
+
 /**
  * [Mass Raise Dead](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op304)
  *
  * This effect will raise multiple dead Party Members (PCs).
  */
 OUTER_SET OPCODE_mass_raise_dead = 304
+
 /**
  * [Stat: THAC0 Modifier (Off-Hand)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op305)
  *
@@ -6604,6 +6903,7 @@ OUTER_SET OPCODE_mass_raise_dead = 304
  * - 2 ⟶ Percentage Modifier: `THAC0 = (THAC0 * 'Statistic Modifier' value) / 100`
  */
 OUTER_SET OPCODE_thac0_mod_off_hand = 305
+
 /**
  * [Stat: THAC0 Modifier (On-Hand)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op306)
  *
@@ -6616,6 +6916,7 @@ OUTER_SET OPCODE_thac0_mod_off_hand = 305
  * - 2 ⟶ Percentage Modifier: `THAC0 = (THAC0 * 'Statistic Modifier' value) / 100`
  */
 OUTER_SET OPCODE_thac0_mod_on_hand = 306
+
 /**
  * [Ranger Tracking Ability](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op307)
  *
@@ -6626,6 +6927,7 @@ OUTER_SET OPCODE_thac0_mod_on_hand = 306
  * The file [TRACKING.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/tracking.htm) lists the string reference that shows what information is learned from using this effect for each area.
  */
 OUTER_SET OPCODE_ranger_tracking_ability = 307
+
 /**
  * [Protection: From Tracking](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op308)
  *
@@ -6636,6 +6938,7 @@ OUTER_SET OPCODE_ranger_tracking_ability = 307
  * The 'Stat Value' parameter can take any value. If you set it to 0, you will disable the effect (for its duration).
  */
 OUTER_SET OPCODE_protection_from_tracking = 308
+
 /**
  * [Script: Modify Local Variable](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op309)
  *
@@ -6657,6 +6960,7 @@ OUTER_SET OPCODE_protection_from_tracking = 308
  * `Value` can store integers or coordinates. Coordinates are stored as first 2 bytes X, last 2 bytes Y (f.i.: `310 + (30 << 16)`).
  */
 OUTER_SET OPCODE_script_modify_local_variable = 309
+
 /**
  * [Protection: from Timestop](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op310)
  *
@@ -6671,6 +6975,7 @@ OUTER_SET OPCODE_script_modify_local_variable = 309
  * Creatures are naturally immune to their own Time Stop effects, without needing this effect or setting [IMMUNE_TO_TIME_STOP](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#197).
  */
 OUTER_SET OPCODE_protection_from_timestop = 310
+
 /**
  * [Spell: Random Wish Spell](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op311)
  *
@@ -6704,6 +7009,7 @@ OUTER_SET OPCODE_protection_from_timestop = 310
  * 25          0         25
  */
 OUTER_SET OPCODE_random_wish_spell = 311
+
 /**
  * [High-Level Ability Denotation](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op313)
  *
@@ -6712,6 +7018,7 @@ OUTER_SET OPCODE_random_wish_spell = 311
  * Automatically applied by the engine when selecting HLAs, but can be manually applied for the same effect.
  */
 OUTER_SET OPCODE_HLA_denotation = 313
+
 /**
  * [Spell: Golem Stoneskin](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op314)
  *
@@ -6724,6 +7031,7 @@ OUTER_SET OPCODE_HLA_denotation = 313
  * In particular, the Juggernaut Golem `"TOMEGOL4.CRE"` is scripted by `"TOMEGOL4.BCS"` to [`Kill()`](https://gibberlings3.github.io/iesdp/scripting/actions/bgeeactions.htm#131) itself if its Summoner and no Party Members have [STONESKINSGOLEM](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#199) set to a non-zero value.
  */
 OUTER_SET OPCODE_golem_stoneskin = 314
+
 /**
  * [Graphics: Animation Removal](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op315)
  *
@@ -6734,18 +7042,21 @@ OUTER_SET OPCODE_golem_stoneskin = 314
  * The `Stat Value` parameter can take any value. If you set it to `0`, you will disable the effect (for its duration).
  */
 OUTER_SET OPCODE_animation_removal = 315
+
 /**
  * [Spell: Magical Rest](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op316)
  *
  * This effect will refresh spells and remove any fatigue.
  */
 OUTER_SET OPCODE_magical_rest = 316
+
 /**
  * [State: Haste 2](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op317)
  *
  * This effect is functionally identical to [opcode #16](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op16). The only difference between the two is that some ITMs/SPLs/abilities will specifically block/remove [opcode #16](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op16) but not [opcode #317](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op317) (e.g., Monks are immune to [opcode #16](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op16) but not [opcode #317](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op317)).
  */
 OUTER_SET OPCODE_haste_2 = 317
+
 /**
  * [Stat: Set Stat (TobEx)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op318)
  *

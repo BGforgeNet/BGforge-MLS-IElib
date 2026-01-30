@@ -3,6 +3,7 @@
  * Effect type
  */
 OUTER_SET EFF_effect_type = 0x0
+
 /**
  * @type byte
  * **[Target type](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x2)**
@@ -42,21 +43,25 @@ OUTER_SET EFF_effect_type = 0x0
  * - Be aware that [opcode #146](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op146)`*p2=2`, [opcode #326](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op326), and [opcode #333](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op333) might behave differently when it comes to [`Self`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x2_1)/[`Projectile Target`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x2_2)/[`Original Caster`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x2_9).
  */
 OUTER_SET EFF_target = 0x2
+
 /**
  * @type byte
  * Power
  */
 OUTER_SET EFF_power = 0x3
+
 /**
  * @type dword
  * Parameter 1
  */
 OUTER_SET EFF_parameter1 = 0x4
+
 /**
  * @type dword
  * Parameter 2
  */
 OUTER_SET EFF_parameter2 = 0x8
+
 /**
  * @type byte
  * **[Timing mode](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC)**
@@ -111,6 +116,7 @@ OUTER_SET EFF_parameter2 = 0x8
  *     - One of such effects is [Time Stop](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op231) (this is in addition to lasting half its specified [`Duration`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xE)).
  */
 OUTER_SET EFF_timing_mode = 0xc
+
 /**
  * @type byte
  * **[Dispel / Resistance](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xD)**
@@ -125,17 +131,20 @@ OUTER_SET EFF_timing_mode = 0xc
  * The only difference between `0` and `2` is that `0` will automatically convert to `2` when targeting yourself.
  */
 OUTER_SET EFF_resistance = 0xd
+
 /**
  * @type dword
  * **[Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xE)**
  * - This field is measured in seconds or ticks (1⁄15 second), depending on [`Timing mode`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC).
  */
 OUTER_SET EFF_duration = 0xe
+
 /**
  * @type byte
  * **[Probability 1](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x12)**
  */
 OUTER_SET EFF_probability1 = 0x12
+
 /**
  * @type byte
  * **[Probability 2](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x13)**
@@ -147,11 +156,13 @@ OUTER_SET EFF_probability1 = 0x12
  * - An effect's probabilities are rolled on the sprite the effect is applied to. This means that an effect targeting [`Projectile Target`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x2_2) will have the target roll that effect's probabilities, not the attacker or caster. This decouples the split probability roll and allows both to occur at the same time, since each sprite rolls separately. As a consequence it is not directly possible to synchronize effects with partial probabilities that are applied to different targets (e.g. [`Projectile Target`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x2_2) and [`Self`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x2_1)).
  */
 OUTER_SET EFF_probability2 = 0x13
+
 /**
  * @type resref
  * **[Resref key](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_Resource)**
  */
 OUTER_SET EFF_resref_key = 0x14
+
 /**
  * @type dword
  * **[Dice Thrown / Maximum Level](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x1C)**
@@ -163,6 +174,7 @@ OUTER_SET EFF_resref_key = 0x14
  *   - A `1/30/1` single-class character qualifies as HD 1.
  */
 OUTER_SET EFF_dice_thrown = 0x1c
+
 /**
  * @type dword
  * **[Dice Sides / Minimum Level](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x20)**
@@ -174,6 +186,7 @@ OUTER_SET EFF_dice_thrown = 0x1c
  *   - A `1/30/1` single-class qualifies as HD 1.
  */
 OUTER_SET EFF_dice_sides = 0x20
+
 /**
  * @type dword
  * **[Saving throw type](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x24)**
@@ -209,6 +222,7 @@ OUTER_SET EFF_dice_sides = 0x20
  * If more than 1 Saving Throw Type is specified (`BIT0 – BIT4`), the target rolls against their best save.
  */
 OUTER_SET EFF_save_type = 0x24
+
 /**
  * @type dword
  * Saving throw bonus

@@ -3,6 +3,7 @@
  * Opcode Number
  */
 OUTER_SET FX_opcode = 0x0
+
 /**
  * @type char
  * **[Target type](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x2)**
@@ -19,21 +20,25 @@ OUTER_SET FX_opcode = 0x0
  * See [here](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x2) for further details.
  */
 OUTER_SET FX_target = 0x2
+
 /**
  * @type char
  * Power
  */
 OUTER_SET FX_power = 0x3
+
 /**
  * @type dword
  * Parameter 1
  */
 OUTER_SET FX_parameter1 = 0x4
+
 /**
  * @type dword
  * Parameter 2
  */
 OUTER_SET FX_parameter2 = 0x8
+
 /**
  * @type char
  * **[Timing mode](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0xC)**
@@ -52,6 +57,7 @@ OUTER_SET FX_parameter2 = 0x8
  * See [here](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC) for further details.
  */
 OUTER_SET FX_timing = 0xc
+
 /**
  * @type char
  * **[Dispel / Resistance](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0xD)**
@@ -66,39 +72,46 @@ OUTER_SET FX_timing = 0xc
  * The only difference between `0` and `2` is that `0` will automatically convert to `2` when targeting yourself.
  */
 OUTER_SET FX_resistance = 0xd
+
 /**
  * @type dword
  * **[Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0xE)**
  */
 OUTER_SET FX_duration = 0xe
+
 /**
  * @type char
  * **[Probability 1](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x12)**
  */
 OUTER_SET FX_probability1 = 0x12
+
 /**
  * @type char
  * **[Probability 2](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x13)**
  * See [here](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x13) for further details.
  */
 OUTER_SET FX_probability2 = 0x13
+
 /**
  * @type resref
  * Resource
  */
 OUTER_SET FX_resource = 0x14
+
 /**
  * @type dword
  * **[Dice Thrown / Maximum Level](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x1C)**
  * See [here](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x1C) for further details.
  */
 OUTER_SET FX_max_level = 0x1c
+
 /**
  * @type dword
  * **[Dice Sides / Minimum Level](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x20)**
  * See [here](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x20) for further details.
  */
 OUTER_SET FX_min_level = 0x20
+
 /**
  * @type dword
  * **[Saving throw type](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x24)**
@@ -117,11 +130,13 @@ OUTER_SET FX_min_level = 0x20
  * See [here](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x24) for further details.
  */
 OUTER_SET FX_save_type = 0x24
+
 /**
  * @type dword
  * Saving Throw Bonus
  */
 OUTER_SET FX_save_bonus = 0x28
+
 /**
  * @type dword
  * TobEx: Stacking ID. Checked when bit 25 of the Saving Throw Type is set.
