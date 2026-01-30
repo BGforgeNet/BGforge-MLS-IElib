@@ -219,7 +219,7 @@ OUTER_SET STO_ITEM_charges3 = 0xe
  * - bit 0: Identified
  * - bit 1: Unstealable
  * - bit 2: Stolen
- * - bit 3: **Undroppable**
+ * - bit 3: [**Undroppable**](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/sto_v1.htm#storv1_0_Sale_0x10_BIT3)
  */
 OUTER_SET STO_ITEM_flags = 0x10
 /**

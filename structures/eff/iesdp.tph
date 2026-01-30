@@ -5,23 +5,23 @@
 OUTER_SET EFF_effect_type = 0x0
 /**
  * @type byte
- * **Target type**
+ * **[Target type](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x2)**
  * - 0 ⟶ None
- * - 1 ⟶ **Self**
- * - 2 ⟶ **Projectile target**
+ * - 1 ⟶ **[Self](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x2_1)**
+ * - 2 ⟶ **[Projectile target](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x2_2)**
  *   - Affects each target of the specified projectile, as it impacts them.
- * - 3 ⟶ **Party**
- * - 4 ⟶ **Everyone**
- * - 5 ⟶ **Everyone except party**
- * - 6 ⟶ **Caster group**
+ * - 3 ⟶ **[Party](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x2_3)**
+ * - 4 ⟶ **[Everyone](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x2_4)**
+ * - 5 ⟶ **[Everyone except party](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x2_5)**
+ * - 6 ⟶ **[Caster group](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x2_6)**
  *   - Everyone matching [`specific`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x274) value of caster.
  *   - If cast by a party member, then it functions as `[Party](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x2_3)`.
  *   - Ability target (`[ITM](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0xC)/[SPL](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0xC)`) doesn't matter.
- * - 7 ⟶ **Target group**
+ * - 7 ⟶ **[Target group](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x2_7)**
  *   - Everyone matching `[specific](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x274)` value of target.
  *   - Ability (`[ITM](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0xC)/[SPL](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0xC)`) must target a [creature](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/are_v1.htm#formAREAV1_0_Actor), not a location, [container](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/are_v1.htm#formAREAV1_0_Container), [door](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/are_v1.htm#formAREAV1_0_Door), etc...
- * - 8 ⟶ **Everyone except self**
- * - 9 ⟶ **Original caster**
+ * - 8 ⟶ **[Everyone except self](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x2_8)**
+ * - 9 ⟶ **[Original caster](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x2_9)**
  *   - Affects Caster, as the specified projectile impacts its target(s), once or for each target depending on the projectile's flags (see [here](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#ExtFlags_BIT31)). The specified projectile only determines when/if it's applied.
  * - `ITM` global (equipped) effects: Target is always the wearer, this field isn't relevant.
  * - `SPL` global (casting) effects: Will not work with `[Projectile Target](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x2_2)`.
@@ -59,27 +59,27 @@ OUTER_SET EFF_parameter1 = 0x4
 OUTER_SET EFF_parameter2 = 0x8
 /**
  * @type byte
- * **Timing mode**
- * - 0 ⟶ **Instant/Limited**
+ * **[Timing mode](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC)**
+ * - 0 ⟶ **[Instant/Limited](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC_0)**
  *   - This timing mode measures `[Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xE)` in seconds.
  *   - Instantly converts to `[Absolute duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x24_4096)`, `[new duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x28)(ticks) = [Gametime](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/gam_v2.0.htm#GAMEV2_0_Header_GameTime)(ticks) + 15 * [Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xE)(seconds)`.
- * - 1 ⟶ **Instant/Permanent**
+ * - 1 ⟶ **[Instant/Permanent](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC_1)**
  *   - If the opcode doesn't directly modify a `[STAT](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm)/[STATE](https://gibberlings3.github.io/iesdp/files/ids/bgee/state.htm)` in the target's [CRE](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm) file, then it will last until removed (or it self-terminates). `[New duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x28)(ticks) = [Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xE)(ticks)` (mostly unused).
- * - 2 ⟶ **Instant/While equipped**
+ * - 2 ⟶ **[Instant/While equipped](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC_2)**
  *   - As global `ITM` effect: Applied when item is equipped, lasts until item is unequipped (or [polymorph](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op135) bug).
  *     - "Equipping" also occurs when game loads, and for weapons whenever they are selected from quickbar (even if it's already the active weapon). Never expires, and not considered a "Limited" effect.
  *   - As `SPL` or header `ITM` effect: applies instantly, lasts until game is reloaded.
  *   - `[New duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x28)(ticks) = [Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xE)(ticks)` (mostly unused).
- * - 3 ⟶ **Delay/Limited**
+ * - 3 ⟶ **[Delay/Limited](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC_3)**
  *   - This timing mode measures `[Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xE)` in seconds.
  *   - Instantly converts to `[Limited after duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC_6)`, `[new duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x28)(ticks) = [Gametime](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/gam_v2.0.htm#GAMEV2_0_Header_GameTime)(ticks) + 15 * [Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xE)(seconds)`.
- * - 4 ⟶ **Delay/Permanent**
+ * - 4 ⟶ **[Delay/Permanent](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC_4)**
  *   - This timing mode measures `[Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xE)` in seconds.
  *   - Instantly converts to `[Permanent after duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC_7)`, `[new duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x28)(ticks) = [Gametime](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/gam_v2.0.htm#GAMEV2_0_Header_GameTime)(ticks) + 15 * [Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xE)(seconds)`.
- * - 5 ⟶ **Delay/While equipped**
+ * - 5 ⟶ **[Delay/While equipped](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC_5)**
  *   - This timing mode measures `[Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xE)` in seconds.
  *   - Instantly converts to `[Equipped after duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC_8)`, `[new duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x28)(ticks) = [Gametime](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/gam_v2.0.htm#GAMEV2_0_Header_GameTime)(ticks) + 15 * [Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xE)(seconds)`.
- * - 6 ⟶ **Limited after duration**
+ * - 6 ⟶ **[Limited after duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC_6)**
  *   - This timing mode measures `[Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xE)` in ticks (1⁄15 second).
  *   - At `[Gametime](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/gam_v2.0.htm#GAMEV2_0_Header_GameTime)(ticks) >= [Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xE)(ticks)` converts to `[Absolute duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x24_4096)`, `[new duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x28)(ticks) = 2 * [Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xE)(ticks) - [Time Applied](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x6C)(ticks)`.
  *     - (If previously converted from `[Delay/Limited](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC_3)`)
@@ -88,20 +88,20 @@ OUTER_SET EFF_parameter2 = 0x8
  *     - `16 x Duration(ticks) = Duration(ticks) + 15 * Duration(seconds)` (Yes, it calculates a new duration using its current `[Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xE)` field as both ticks and seconds).
  *     - It will convert to `[Absolute duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x24_4096)` at the same `[Gametime](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/gam_v2.0.htm#GAMEV2_0_Header_GameTime)` (ticks) no matter when the effect was applied.
  *     - That `[Absolute duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x24_4096)` will expire at the same `[Gametime](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/gam_v2.0.htm#GAMEV2_0_Header_GameTime)` (ticks) no matter when the effect was applied.
- * - 7 ⟶ **Permanent after duration**
+ * - 7 ⟶ **[Permanent after duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC_7)**
  *   - This timing mode measures `[Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xE)` in ticks (1⁄15 second).
  *   - At `[Gametime](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/gam_v2.0.htm#GAMEV2_0_Header_GameTime)(ticks) >= [Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xE)(ticks)` converts to `[Instant/Permanent](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC_1)`, `[new duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x28)(ticks) = 2 * [Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xE)(ticks) - [Time Applied](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x6C)(ticks)`.
  *     - (If previously converted from `[Delay/Permanent](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC_4)`)
  *   - At `[Gametime](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/gam_v2.0.htm#GAMEV2_0_Header_GameTime)(ticks) >= [Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xE)(ticks)` converts to `[Instant/Permanent](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC_1)`, `[new duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x28)(ticks) = 16 * [Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xE)(ticks)`.
  *     - (If effect applied directly with `[Permanent after duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC_7)`)
  *     - It will convert to `[Instant/Permanent](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC_1)` at the same `[Gametime](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/gam_v2.0.htm#GAMEV2_0_Header_GameTime)` (ticks) no matter when the effect was applied.
- * - 8 ⟶ **Equipped after duration**
+ * - 8 ⟶ **[Equipped after duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC_8)**
  *   - This timing mode measures `[Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xE)` in ticks (1⁄15 second).
  *   - At `[Gametime](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/gam_v2.0.htm#GAMEV2_0_Header_GameTime)(ticks) >= [Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xE)(ticks)` converts to `[Instant/While equipped](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC_2)`, `[new duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x28)(ticks) = irrelevant`.
- * - 9 ⟶ **Instant/Permanent** (after Death)
+ * - 9 ⟶ **[Instant/Permanent](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC_9)** (after Death)
  *   - Effect is applied instantly.
  *   - Never expires, but can terminate or be removed. `[New duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x28)(ticks) = [Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xE)(ticks)`.
- * - 10 ⟶ **Instant/Limited**
+ * - 10 ⟶ **[Instant/Limited](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC_10)**
  *   - This timing mode measures `[Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xE)` in ticks (1⁄15 second).
  *   - Instantly converts to `[Absolute duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x24_4096)`, `[new duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x28)(ticks) = [Gametime](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/gam_v2.0.htm#GAMEV2_0_Header_GameTime)(ticks) + [Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xE)(ticks)`.
  *   - If `[Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xE) = 0`, it won't function any differently from timing mode `[0](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC_0)`.
@@ -113,7 +113,7 @@ OUTER_SET EFF_parameter2 = 0x8
 OUTER_SET EFF_timing_mode = 0xc
 /**
  * @type byte
- * **Dispel / Resistance**
+ * **[Dispel / Resistance](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xD)**
  * The default behaviour is that effects cannot be dispelled and ignore magic resistance.
  * - bit 0 ⟶ Can be dispelled, affected by magic resistance
  * - bit 1 ⟶ Ignores magic resistance (when used in combination with bit 0)
@@ -127,18 +127,18 @@ OUTER_SET EFF_timing_mode = 0xc
 OUTER_SET EFF_resistance = 0xd
 /**
  * @type dword
- * **Duration**
+ * **[Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xE)**
  * - This field is measured in seconds or ticks (1⁄15 second), depending on `[Timing mode](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC)`.
  */
 OUTER_SET EFF_duration = 0xe
 /**
  * @type byte
- * **Probability 1**
+ * **[Probability 1](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x12)**
  */
 OUTER_SET EFF_probability1 = 0x12
 /**
  * @type byte
- * **Probability 2**
+ * **[Probability 2](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x13)**
  * - The `BG1` engine treats probability as a single word, effects are applied in the range `0–probability`.
  * - Other engines treat probability as two values. When an event fires, a random number (let us denote it by `x`) in the `0–99` range is generated. If `x <= [Probability1](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x12) && >= [Probability2](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x13)`, the event fires.
  *   - Some counter-intuitive cases:
@@ -149,12 +149,12 @@ OUTER_SET EFF_probability1 = 0x12
 OUTER_SET EFF_probability2 = 0x13
 /**
  * @type resref
- * **Resref key**
+ * **[Resref key](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_Resource)**
  */
 OUTER_SET EFF_resref_key = 0x14
 /**
  * @type dword
- * **Dice Thrown / Maximum Level**
+ * **[Dice Thrown / Maximum Level](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x1C)**
  * - When this field is non-zero, all opcodes except for [opcode #12](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op12), [opcode #17](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op17), [opcode #18](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op18), [opcode #218](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op218) (only when `parameter2=1`), [opcode #331](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op331), and [opcode #333](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op333), treat it as `Maximum Level`, meaning that only creatures whose level attribute is less than or equal to this value will be affected by the effect.
  * When this field is used as `Maximum Level`:
  * - A `7 ➔ 1` dual-class character qualifies as HD 7, even though the level 7 class is still inactive.
@@ -165,7 +165,7 @@ OUTER_SET EFF_resref_key = 0x14
 OUTER_SET EFF_dice_thrown = 0x1c
 /**
  * @type dword
- * **Dice Sides / Minimum Level**
+ * **[Dice Sides / Minimum Level](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x20)**
  * - When this field is non-zero, all opcodes except for [opcode #12](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op12), [opcode #17](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op17), [opcode #18](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op18), [opcode #218](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op218) (only when `parameter2=1`), [opcode #331](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op331), and [opcode #333](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op333), treat it as `Minimum Level`, meaning that only creatures whose level attribute is greater than or equal to this value will be affected by the effect.
  * When this field is used as `Minimum Level`:
  * - A `7 ➔ 1` dual-class character qualifies as HD 7, even though the level 7 class is still inactive.
@@ -176,12 +176,12 @@ OUTER_SET EFF_dice_thrown = 0x1c
 OUTER_SET EFF_dice_sides = 0x20
 /**
  * @type dword
- * **Saving throw type**
- * - bit 0 ⟶ **Spells**
- * - bit 1 ⟶ **Breath**
- * - bit 2 ⟶ **Paralyze / Poison / Death**
- * - bit 3 ⟶ **Wands**
- * - bit 4 ⟶ **Petrify / Polymorph**
+ * **[Saving throw type](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x24)**
+ * - bit 0 ⟶ **[Spells](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x24_BIT0)**
+ * - bit 1 ⟶ **[Breath](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x24_BIT1)**
+ * - bit 2 ⟶ **[Paralyze / Poison / Death](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x24_BIT2)**
+ * - bit 3 ⟶ **[Wands](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x24_BIT3)**
+ * - bit 4 ⟶ **[Petrify / Polymorph](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x24_BIT4)**
  * - bit 5 ⟶ **Spells** (EE only)
  *   - see **opcode #322**
  * - bit 6 ⟶ **Breath** (EE only)
@@ -192,18 +192,18 @@ OUTER_SET EFF_dice_sides = 0x20
  *   - see **opcode #322**
  * - bit 9 ⟶ **Petrify / Polymorph** (EE only)
  *   - see **opcode #322**
- * - bit 10 ⟶ **Ignore primary target** (EE only)
+ * - bit 10 ⟶ **[Ignore primary target](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x24_BIT10)** (EE only)
  *   - [Line AoE projectile](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#ExtFlags_BIT14) doesn't affect end target.
- * - bit 11 ⟶ **Ignore secondary target** (EE only)
+ * - bit 11 ⟶ **[Ignore secondary target](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x24_BIT11)** (EE only)
  *   - [Line AoE projectile](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#ExtFlags_BIT14) doesn't affect bystanders.
- * - bit 24 ⟶ **Bypass mirror image** (EE/TobEx only)
+ * - bit 24 ⟶ **[Bypass mirror image](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x24_BIT24)** (EE/TobEx only)
  *   - This bit is only relevant for [opcode #12](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op12) and [opcode #25](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op25).
  *   - All other opcodes bypass Mirror Image by default, setting/unsetting this bit is harmless.
  * - bit 25 ⟶
- *   - **Ignore difficulty** (EE only)
+ *   - **[Ignore difficulty](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x24_BIT25_EE)** (EE only)
  *     - This bit is specific to [opcode #12](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op12) only.
  *     - It refers to the damage multiplier to Party Members based on Game Difficulty.
- *   - **Limit effect stacking** (ToBEx only)
+ *   - **[Limit effect stacking](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x24_BIT25_ToBEx)** (ToBEx only)
  * - bit 26 ⟶ TobEx internal (don't use)
  *   - Suspends effect application.
  * If more than 1 Saving Throw Type is specified (`BIT0 – BIT4`), the target rolls against their best save.

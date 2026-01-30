@@ -17,17 +17,17 @@ OUTER_SET EFF2_version2 = 0xc
 OUTER_SET EFF2_opcode = 0x10
 /**
  * @type dword
- * **Target type**
- * - 0 ⟶ **None**
- * - 1 ⟶ **Self**
- * - 2 ⟶ **Projectile target**
- * - 3 ⟶ **Party**
- * - 4 ⟶ **Everyone**
- * - 5 ⟶ **Everyone except party**
- * - 6 ⟶ **Caster group**
- * - 7 ⟶ **Target group**
- * - 8 ⟶ **Everyone except self**
- * - 9 ⟶ **Original caster**
+ * **[Target type](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x14)**
+ * - 0 ⟶ **[None](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x14_0)**
+ * - 1 ⟶ **[Self](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x14_1)**
+ * - 2 ⟶ **[Projectile target](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x14_2)**
+ * - 3 ⟶ **[Party](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x14_3)**
+ * - 4 ⟶ **[Everyone](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x14_4)**
+ * - 5 ⟶ **[Everyone except party](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x14_5)**
+ * - 6 ⟶ **[Caster group](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x14_6)**
+ * - 7 ⟶ **[Target group](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x14_7)**
+ * - 8 ⟶ **[Everyone except self](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x14_8)**
+ * - 9 ⟶ **[Original caster](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x14_9)**
  * - If called via [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283)/[opcode #183](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op183)/[opcode #272](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op272), this field is irrelevant (it will affect whatever creature the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283)/[opcode #183](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op183)/[opcode #272](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op272) effect is attached to).
  * - If called via [opcode #248](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op248), this field is irrelevant (it will affect whatever creature was attacked).
  * - If called via [opcode #249](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op249), this field will function same as in `[SPL/ITM](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x2)` effects, except that `[None](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x14_0)` will default to `[Projectile target](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x14_2)`.
@@ -51,7 +51,7 @@ OUTER_SET EFF2_parameter1 = 0x1c
 OUTER_SET EFF2_parameter2 = 0x20
 /**
  * @type word
- * **Timing mode**
+ * [**Timing mode**](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x24)
  * - 0 ⟶ [Instant/Limited](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC_0)
  * - 1 ⟶ [Instant/Permanent](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC_1)
  * - 2 ⟶ [Instant/While equipped](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC_2)
@@ -63,7 +63,7 @@ OUTER_SET EFF2_parameter2 = 0x20
  * - 8 ⟶ [Equipped after duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC_8)
  * - 9 ⟶ [Instant/Permanent](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC_9) (after Death)
  * - 10 ⟶ [Instant/Limited](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC_10)
- * - 4096 ⟶ **Absolute duration**
+ * - 4096 ⟶ [**Absolute duration**](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x24_4096)
  *   - Effect is applied instantly.
  *   - This timing mode treats the [Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x28) field as the effect's expiration time (in ticks). Expires at [Gametime](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/gam_v2.0.htm#GAMEV2_0_Header_GameTime)`(ticks) >= `[Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x28)`(ticks)`.
  *   If the [Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x28) field is `108000`, the effect will expire when the game timer reaches 24 hours, or instantly if the game timer has already passed that point. `108000 = 300(1 hour) * 24 * 15 (ticks ➔ seconds)`.
@@ -72,27 +72,27 @@ OUTER_SET EFF2_parameter2 = 0x20
 OUTER_SET EFF2_timing = 0x24
 /**
  * @type dword
- * **Duration**
+ * **[Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x28)**
  * - This field is measured in seconds or ticks (1⁄15 second), depending on `[Timing mode](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x24)`.
  * If called via [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #183](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op183)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283), this field is ignored.
  */
 OUTER_SET EFF2_duration = 0x28
 /**
  * @type word
- * **Probability 1**
+ * **[Probability 1](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x2C)**
  * If called via [opcode #183](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op183), this field is ignored.
  */
 OUTER_SET EFF2_probability1 = 0x2c
 /**
  * @type word
- * **Probability 2**
+ * **[Probability 2](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x2E)**
  * See [here](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x13) for further details.
  * If called via [opcode #183](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op183), this field is ignored.
  */
 OUTER_SET EFF2_probability2 = 0x2e
 /**
  * @type resref
- * **Resource**
+ * **[Resource](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_Resource)**
  */
 OUTER_SET EFF2_resource = 0x30
 /**
@@ -107,12 +107,12 @@ OUTER_SET EFF2_dice_thrown = 0x38
 OUTER_SET EFF2_dice_sides = 0x3c
 /**
  * @type dword
- * **Saving throw type**
- * - bit 0 ⟶ **Spells**
- * - bit 1 ⟶ **Breath**
- * - bit 2 ⟶ **Paralyze / Poison / Death**
- * - bit 3 ⟶ **Wands**
- * - bit 4 ⟶ **Petrify / Polymorph**
+ * **[Saving throw type](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x40)**
+ * - bit 0 ⟶ **[Spells](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x40_BIT0)**
+ * - bit 1 ⟶ **[Breath](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x40_BIT1)**
+ * - bit 2 ⟶ **[Paralyze / Poison / Death](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x40_BIT2)**
+ * - bit 3 ⟶ **[Wands](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x40_BIT3)**
+ * - bit 4 ⟶ **[Petrify / Polymorph](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x40_BIT4)**
  * - bit 5 ⟶ **Spells** (EE only)
  *   - see **opcode #322**
  * - bit 6 ⟶ **Breath** (EE only)
@@ -123,12 +123,12 @@ OUTER_SET EFF2_dice_sides = 0x3c
  *   - see **opcode #322**
  * - bit 9 ⟶ **Petrify / Polymorph** (EE only)
  *   - see **opcode #322**
- * - bit 10 ⟶ **Ignore primary target** (EE only)
- * - bit 11 ⟶ **Ignore secondary target** (EE only)
- * - bit 24 ⟶ **Bypass mirror image** (EE/TobEx only)
+ * - bit 10 ⟶ **[Ignore primary target](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x40_BIT10)** (EE only)
+ * - bit 11 ⟶ **[Ignore secondary target](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x40_BIT11)** (EE only)
+ * - bit 24 ⟶ **[Bypass mirror image](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x40_BIT24)** (EE/TobEx only)
  * - bit 25 ⟶
- *   - **Ignore difficulty** (EE only)
- *   - **Limit effect stacking** (ToBEx only)
+ *   - **[Ignore difficulty](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x40_BIT25_EE)** (EE only)
+ *   - **[Limit effect stacking](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x40_BIT25_ToBEx)** (ToBEx only)
  * - bit 26 ⟶ TobEx internal (don't use)
  * See [here](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x24) for further details.
  * If called via [opcode #183](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op183), this field is ignored.
@@ -136,13 +136,13 @@ OUTER_SET EFF2_dice_sides = 0x3c
 OUTER_SET EFF2_save_type = 0x40
 /**
  * @type dword
- * **Save bonus**
+ * **[Save bonus](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x44)**
  * If called via [opcode #183](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op183), this field is ignored.
  */
 OUTER_SET EFF2_save_bonus = 0x44
 /**
  * @type dword
- * **Special** (EE games)
+ * **[Special](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_Special)** (EE games)
  * TobEx: Stacking ID. Checked when bit 25 of the Saving Throw Type is set.
  * If two effects of the same opcode are applied, both have Limit Effect Stacking bit set, and both have the same stacking ID, then the latter applied effect is suspended in application until the former effect expires. Regardless of whether it is applied, the latter effect will expire at the same time that it would expire if it was applied. In other words, the total duration of some non-stacking effect opcode is not extended because more than one copy of the effect was applied.
  * Stacking IDs are unique to the opcode being applied. To maintain uniqueness of stacking IDs between different mods, one recommendation is to use the higher word of Special as the modder's Infinity Engine Community Prefix, then use the lower word as an identifying ID. For example, 0x41360001 ('A6' 0x0001).
@@ -150,17 +150,17 @@ OUTER_SET EFF2_save_bonus = 0x44
 OUTER_SET EFF2_stacking_id_tobex = 0x48
 /**
  * @type dword
- * **Primary Type (School)**
+ * **[Primary Type (School)](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x4C)**
  * - See `[MSCHOOL.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/mschool.htm)`.
  */
 OUTER_SET EFF2_school = 0x4c
 /**
  * @type dword
- * **Dispel/Resistance**
+ * **[Dispel/Resistance](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C)**
  * The default behaviour is that effects cannot be dispelled and ignore resistance.
- * - bit 0 ⟶ **Dispel**
+ * - bit 0 ⟶ **[Dispel](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT0)**
  *   - Can be dispelled, affected by Magic Resistance.
- * - bit 1 ⟶ **Bypass resistance**
+ * - bit 1 ⟶ **[Bypass resistance](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT1)**
  *   - Ignores Magic Resistance.
  * - bit 2 ⟶
  *   **Bypasses
@@ -181,14 +181,14 @@ OUTER_SET EFF2_school = 0x4c
  *   - The hardcoded projectiles `25/26/189`
  *   - **or** a `PRO` file's `Secondary Projectile`
  * **and** uses a non-`Original caster (9)` `Target type`.
- * - bit 3 ⟶ **Self-targeted** (only in EE games patched to v2.6+)
+ * - bit 3 ⟶ **[Self-targeted](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT3)** (only in EE games patched to v2.6+)
  *   - Targeting yourself with an ability (Extended Header) will internally set this bit on all effects applied by that ability.
  *     - For the caster, it will allow a Magic Resistance check for any effect that has both `[Dispel](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT0)` set and offers some saving throw.
  *       - The saving throw doesn't have to succeed, it just has to be offered.
  *     - For anyone else hit by the ability, it will allow a Magic Resistance check for any effect that also has `[Dispel](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT0)` set.
  *   - Either way, this bit is still overridden by `[Bypass Resistance](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT1)`.
  *   - This feature should eliminate the bug/exploit of bypassing other's Magic Resistance by targeting yourself with an `[area-effect](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3)` ability.
- * - bit 31 ⟶ **Effect applied by item**
+ * - bit 31 ⟶ **[Effect applied by item](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT31)**
  *   - Effect was applied by an [ITM](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm) (only present in EE games patched to v2.0+).
  *   - It is set by the engine if the effect's source [ITM](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm) is identified.
  *     - This bit is only used by [opcode #324](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op324) which checks it to determine whether it should set `[STRREF_FEEDBACK_IMMUNE_RESOURCE](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/enginest.htm#128)` to the ITM's general or identified name.
@@ -202,12 +202,12 @@ OUTER_SET EFF2_school = 0x4c
 OUTER_SET EFF2_resistance = 0x5c
 /**
  * @type dword
- * **Parameter 3**
+ * **[Parameter 3](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x60)**
  */
 OUTER_SET EFF2_parameter3 = 0x60
 /**
  * @type dword
- * **Parameter 4**
+ * **[Parameter 4](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x64)**
  */
 OUTER_SET EFF2_parameter4 = 0x64
 /**
@@ -217,18 +217,18 @@ OUTER_SET EFF2_parameter4 = 0x64
 OUTER_SET EFF2_parameter5 = 0x68
 /**
  * @type dword
- * **Time applied** (ticks)
+ * **[Time applied](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x6C)** (ticks)
  * - It stores the gametime (ticks) at which the effect was originally applied.
  */
 OUTER_SET EFF2_time_applied = 0x6c
 /**
  * @type resref
- * **Resource 2** ([VVC](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/vvc_v1.htm) in many effects)
+ * **[Resource 2](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x70)** ([VVC](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/vvc_v1.htm) in many effects)
  */
 OUTER_SET EFF2_resource2 = 0x70
 /**
  * @type resref
- * **Resource 3**
+ * **[Resource 3](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x78)**
  */
 OUTER_SET EFF2_resource3 = 0x78
 /**
@@ -253,15 +253,15 @@ OUTER_SET EFF2_target_x_coord = 0x88
 OUTER_SET EFF2_target_y_coord = 0x8c
 /**
  * @type dword
- * **Parent resource type**
- * - 0 ⟶ **None**
- * - 1 ⟶ **Spell**
- * - 2 ⟶ **Item**
+ * **[Parent resource type](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x90)**
+ * - 0 ⟶ **[None](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x90_0)**
+ * - 1 ⟶ **[Spell](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x90_1)**
+ * - 2 ⟶ **[Item](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x90_2)**
  */
 OUTER_SET EFF2_parent_resource_type = 0x90
 /**
  * @type resref
- * **Parent resource**
+ * **[Parent resource](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x94)**
  * This specific field always needs to be in **ALLCAPS**.
  * Be careful checking it in [Near Infinity](https://github.com/Argent77/NearInfinity), it displays `resource` fields in ALLCAPS regardless of the actual characters. However, it also always saves those fields in ALLCAPS as well.
  * - [Global/Casting effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Feature_Block) on [`SPL`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm) files have an empty/blank [`Parent resource`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x94) field, allowing them to safely ignore [opcode #206](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op206)/[opcode #318](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op318)/[opcode #324](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op324), as such effects are designed to affect the caster (or the global environment) even when the [`SPL`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm) fails.
@@ -272,8 +272,8 @@ OUTER_SET EFF2_parent_resource_type = 0x90
 OUTER_SET EFF2_parent_resource = 0x94
 /**
  * @type dword
- * **Parent resource flags**
- * - bit 10 ⟶ **Hostile**
+ * **[Parent resource flags](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x9C)**
+ * - bit 10 ⟶ **[Hostile](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x9C_BIT10)**
  * - bit 11 ⟶ No LOS required
  * - bit 12 ⟶ Allow spotting
  * - bit 13 ⟶ Outdoors only
@@ -284,22 +284,22 @@ OUTER_SET EFF2_parent_resource = 0x94
 OUTER_SET EFF2_parent_resource_flags = 0x9c
 /**
  * @type dword
- * **Projectile**
+ * **[Projectile](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0xA0)**
  */
 OUTER_SET EFF2_projectile = 0xa0
 /**
  * @type bytes
- * **Variable name**
+ * **[Variable name](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0xA8)**
  */
 OUTER_SET EFF2_variable_name = 0xa8
 /**
  * @type dword
- * **Caster level**
+ * **[Caster level](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0xC8)**
  */
 OUTER_SET EFF2_caster_level = 0xc8
 /**
  * @type dword
- * **Secondary Type**
+ * **[Secondary Type](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0xD0)**
  * - See `[MSECTYPE.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm)`.
  */
 OUTER_SET EFF2_sectype = 0xd0

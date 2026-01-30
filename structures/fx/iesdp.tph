@@ -5,17 +5,17 @@
 OUTER_SET FX_opcode = 0x0
 /**
  * @type char
- * **Target type**
+ * **[Target type](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x2)**
  * - 0 ⟶ None
- * - 1 ⟶ **Self**
- * - 2 ⟶ **Projectile target**
- * - 3 ⟶ **Party**
- * - 4 ⟶ **Everyone**
- * - 5 ⟶ **Everyone except party**
- * - 6 ⟶ **Caster group**
- * - 7 ⟶ **Target group**
- * - 8 ⟶ **Everyone except self**
- * - 9 ⟶ **Original caster**
+ * - 1 ⟶ **[Self](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x2_1)**
+ * - 2 ⟶ **[Projectile target](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x2_2)**
+ * - 3 ⟶ **[Party](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x2_3)**
+ * - 4 ⟶ **[Everyone](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x2_4)**
+ * - 5 ⟶ **[Everyone except party](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x2_5)**
+ * - 6 ⟶ **[Caster group](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x2_6)**
+ * - 7 ⟶ **[Target group](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x2_7)**
+ * - 8 ⟶ **[Everyone except self](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x2_8)**
+ * - 9 ⟶ **[Original caster](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x2_9)**
  * See [here](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x2) for further details.
  */
 OUTER_SET FX_target = 0x2
@@ -36,25 +36,25 @@ OUTER_SET FX_parameter1 = 0x4
 OUTER_SET FX_parameter2 = 0x8
 /**
  * @type char
- * **Timing mode**
- * - 0 ⟶ **Instant/Limited**
- * - 1 ⟶ **Instant/Permanent**
- * - 2 ⟶ **Instant/While equipped**
- * - 3 ⟶ **Delay/Limited**
- * - 4 ⟶ **Delay/Permanent**
- * - 5 ⟶ **Delay/While equipped**
- * - 6 ⟶ **Limited after duration**
- * - 7 ⟶ **Permanent after duration**
- * - 8 ⟶ **Equipped after duration**
- * - 9 ⟶ **Instant/Permanent** (after Death)
- * - 10 ⟶ **Instant/Limited**
- * - 4096 ⟶ **Absolute duration**
+ * **[Timing mode](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0xC)**
+ * - 0 ⟶ **[Instant/Limited](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0xC_0)**
+ * - 1 ⟶ **[Instant/Permanent](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0xC_1)**
+ * - 2 ⟶ **[Instant/While equipped](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0xC_2)**
+ * - 3 ⟶ **[Delay/Limited](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0xC_3)**
+ * - 4 ⟶ **[Delay/Permanent](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0xC_4)**
+ * - 5 ⟶ **[Delay/While equipped](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0xC_5)**
+ * - 6 ⟶ **[Limited after duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0xC_6)**
+ * - 7 ⟶ **[Permanent after duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0xC_7)**
+ * - 8 ⟶ **[Equipped after duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0xC_8)**
+ * - 9 ⟶ **[Instant/Permanent](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0xC_9)** (after Death)
+ * - 10 ⟶ **[Instant/Limited](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0xC_10)**
+ * - 4096 ⟶ **[Absolute duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0xC_4096)**
  * See [here](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0xC) for further details.
  */
 OUTER_SET FX_timing = 0xc
 /**
  * @type char
- * **Dispel / Resistance**
+ * **[Dispel / Resistance](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0xD)**
  * The default behaviour is that effects cannot be dispelled and ignore magic resistance.
  * - bit 0 ⟶ Can be dispelled, affected by magic resistance
  * - bit 1 ⟶ Ignores magic resistance (when used in combination with bit 0)
@@ -68,17 +68,17 @@ OUTER_SET FX_timing = 0xc
 OUTER_SET FX_resistance = 0xd
 /**
  * @type dword
- * **Duration**
+ * **[Duration](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0xE)**
  */
 OUTER_SET FX_duration = 0xe
 /**
  * @type char
- * **Probability 1**
+ * **[Probability 1](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x12)**
  */
 OUTER_SET FX_probability1 = 0x12
 /**
  * @type char
- * **Probability 2**
+ * **[Probability 2](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x13)**
  * See [here](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x13) for further details.
  */
 OUTER_SET FX_probability2 = 0x13
@@ -89,30 +89,30 @@ OUTER_SET FX_probability2 = 0x13
 OUTER_SET FX_resource = 0x14
 /**
  * @type dword
- * **Dice Thrown / Maximum Level**
+ * **[Dice Thrown / Maximum Level](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x1C)**
  * See [here](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x1C) for further details.
  */
 OUTER_SET FX_max_level = 0x1c
 /**
  * @type dword
- * **Dice Sides / Minimum Level**
+ * **[Dice Sides / Minimum Level](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x20)**
  * See [here](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x20) for further details.
  */
 OUTER_SET FX_min_level = 0x20
 /**
  * @type dword
- * **Saving throw type**
- * - bit 0 ⟶ **Spells**
- * - bit 1 ⟶ **Breath**
- * - bit 2 ⟶ **Paralyze / Poison / Death**
- * - bit 3 ⟶ **Wands**
- * - bit 4 ⟶ **Petrify / Polymorph**
- * - bit 10 ⟶ **Ignore primary target** (EE only)
- * - bit 11 ⟶ **Ignore secondary target** (EE only)
- * - bit 24 ⟶ **Bypass mirror image** (EE/TobEx only)
+ * **[Saving throw type](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x24)**
+ * - bit 0 ⟶ **[Spells](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x24_BIT0)**
+ * - bit 1 ⟶ **[Breath](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x24_BIT1)**
+ * - bit 2 ⟶ **[Paralyze / Poison / Death](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x24_BIT2)**
+ * - bit 3 ⟶ **[Wands](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x24_BIT3)**
+ * - bit 4 ⟶ **[Petrify / Polymorph](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x24_BIT4)**
+ * - bit 10 ⟶ **[Ignore primary target](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x24_BIT10)** (EE only)
+ * - bit 11 ⟶ **[Ignore secondary target](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x24_BIT11)** (EE only)
+ * - bit 24 ⟶ **[Bypass mirror image](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x24_BIT24)** (EE/TobEx only)
  * - bit 25 ⟶
- *   - **Ignore difficulty** (EE only)
- *   - **Limit effect stacking** (ToBEx only)
+ *   - **[Ignore difficulty](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x24_BIT25_EE)** (EE only)
+ *   - **[Limit effect stacking](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#V1_Feature_Block_0x24_BIT25_ToBEx)** (ToBEx only)
  * - bit 26 ⟶ TobEx internal (don't use)
  * See [here](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm#effv1_Header_0x24) for further details.
  */

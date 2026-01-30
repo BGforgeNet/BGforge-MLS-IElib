@@ -1,11 +1,11 @@
 /**
  * @type char
- * **Attack type**
+ * **[Attack type](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x0)**
  * - 0 ⟶ None
- * - 1 ⟶ **Melee**
- * - 2 ⟶ **Ranged**
- * - 3 ⟶ **Magical**
- * - 4 ⟶ **Launcher**
+ * - 1 ⟶ **[Melee](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x0_1)**
+ * - 2 ⟶ **[Ranged](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x0_2)**
+ * - 3 ⟶ **[Magical](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x0_3)**
+ * - 4 ⟶ **[Launcher](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x0_4)**
  * For `[Item](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x2_3)` abilities:
  * - Do NOT use `0|None`, will crash the game.
  * - Only `[Magical](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x0_3)` abilities can be drained (along with [opcode #243](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op243)'s other restrictions).
@@ -38,14 +38,14 @@ OUTER_SET ITM_HEAD_attack_type = 0x0
 OUTER_SET ITM_HEAD_id_required = 0x1
 /**
  * @type char
- * **Location**
+ * **[Location](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x2)**
  * - 0 ⟶ None
  *   - Ability will not be selectable through the UI (but still available to scripts and spell-casting opcodes).
- * - 1 ⟶ **Weapon**
+ * - 1 ⟶ **[Weapon](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x2_1)**
  *   - Ability can be used/selected in Quick-weapon slots (when equipped in one of the `[mainhand](https://gibberlings3.github.io/iesdp/files/ids/bgee/slots.htm#35)`/`[ammo](https://gibberlings3.github.io/iesdp/files/ids/bgee/slots.htm#11)`/`[fist](https://gibberlings3.github.io/iesdp/files/ids/bgee/slots.htm#10)`/`[magical weapon](https://gibberlings3.github.io/iesdp/files/ids/bgee/slots.htm#34)` slots).
  * - 2 ⟶ Spell
  *   - `[SPL](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0x2_2)` only.
- * - 3 ⟶ **Equipment / Item**
+ * - 3 ⟶ **[Equipment / Item](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x2_3)**
  *   - Ability can be selected from Quick-item slots, when equipped in one of those slots, or from the "Use Item (F8)" button if equipped elsewhere (except the `[Magical Weapon Slot](https://gibberlings3.github.io/iesdp/files/ids/bgee/slots.htm#34)`).
  * - 4 ⟶ Innate
  *   - `[SPL](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0x2_4)` only.
@@ -65,21 +65,21 @@ OUTER_SET ITM_HEAD_alt_dice_sides = 0x3
 OUTER_SET ITM_HEAD_use_icon = 0x4
 /**
  * @type char
- * **Target type**
+ * **[Target type](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0xC)**
  * - 0 ⟶ Invalid (cannot be selected)
- * - 1 ⟶ **Living actor**
+ * - 1 ⟶ **[Living actor](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0xC_1)**
  *   - Targets Portrait, [Creature/Actor](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/are_v1.htm#formAREAV1_0_Actor), [Container](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/are_v1.htm#formAREAV1_0_Container), or [Door](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/are_v1.htm#formAREAV1_0_Door). Checks `[Range](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0xE)`.
- * - 2 ⟶ **Inventory**
+ * - 2 ⟶ **[Inventory](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0xC_2)**
  *   - Can't be activated manually.
- * - 3 ⟶ **Dead actor**
+ * - 3 ⟶ **[Dead actor](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0xC_3)**
  *   - As `[Living Actor](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0xC_1)`. It really just ignores any `[Range](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0xE)` requirement, including being in the same area.
- * - 4 ⟶ **Any point within range**
+ * - 4 ⟶ **[Any point within range](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0xC_4)**
  *   - Targets location. Checks `[Range](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0xE)`.
- * - 5 ⟶ **Caster**
+ * - 5 ⟶ **[Caster](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0xC_5)**
  *   - Targets Self.
  * - 6 ⟶ Crash
  *   - Can't be activated manually.
- * - 7 ⟶ **Caster** (EE only)
+ * - 7 ⟶ **[Caster](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0xC_7)** (EE only)
  *   - Targets Self. In particular:
  *     - Used instantly (even while the game is paused).
  *     - Ignores one item per round rule.
@@ -90,7 +90,7 @@ OUTER_SET ITM_HEAD_use_icon = 0x4
 OUTER_SET ITM_HEAD_target = 0xc
 /**
  * @type char
- * **Target count**
+ * **[Target count](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0xD)**
  * - Only usable by `[Item](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x2_3)` abilities, and only with Ability Targets `[1](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0xC_1)`, `[3](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0xC_3)`, or `[4](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0xC_4)`.
  * - Targeting reticle will display amount remaining while selecting targets.
  * - Double-clicking a target/location will target it for the remaining amount.
@@ -101,18 +101,18 @@ OUTER_SET ITM_HEAD_target = 0xc
 OUTER_SET ITM_HEAD_target_count = 0xd
 /**
  * @type word
- * **Range**
+ * **[Range](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0xE)**
  */
 OUTER_SET ITM_HEAD_range = 0xe
 /**
  * @type byte
- * **Launcher required**
+ * **[Launcher required](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x10)**
  * - 0 ⟶ None
- * - 1 ⟶ **Bow**
+ * - 1 ⟶ **[Bow](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x10_1)**
  *   - Any `[Ranged](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x0_2)` ability with this field set to this value will require a weapon with the corresponding `[ITEMCAT.IDS](https://gibberlings3.github.io/iesdp/files/ids/bgee/itemcat.htm#15)` (Item category) in one of the `[mainhand](https://gibberlings3.github.io/iesdp/files/ids/bgee/slots.htm#35)` weapon slots (not `[off-hand](https://gibberlings3.github.io/iesdp/files/ids/bgee/slots.htm#9)`, `[fist](https://gibberlings3.github.io/iesdp/files/ids/bgee/slots.htm#10)`, or `[magical weapon](https://gibberlings3.github.io/iesdp/files/ids/bgee/slots.htm#34)` slot).
- * - 2 ⟶ **Crossbow**
+ * - 2 ⟶ **[Crossbow](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x10_2)**
  *   - Any `[Ranged](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x0_2)` ability with this field set to this value will require a weapon with the corresponding `[ITEMCAT.IDS](https://gibberlings3.github.io/iesdp/files/ids/bgee/itemcat.htm#27)` (Item category) in one of the `[mainhand](https://gibberlings3.github.io/iesdp/files/ids/bgee/slots.htm#35)` weapon slots (not `[off-hand](https://gibberlings3.github.io/iesdp/files/ids/bgee/slots.htm#9)`, `[fist](https://gibberlings3.github.io/iesdp/files/ids/bgee/slots.htm#10)`, or `[magical weapon](https://gibberlings3.github.io/iesdp/files/ids/bgee/slots.htm#34)` slot).
- * - 3 ⟶ **Sling**
+ * - 3 ⟶ **[Sling](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x10_3)**
  *   - Any `[Ranged](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x0_2)` ability with this field set to this value will require a weapon with the corresponding `[ITEMCAT.IDS](https://gibberlings3.github.io/iesdp/files/ids/bgee/itemcat.htm#18)` (Item category) in one of the `[mainhand](https://gibberlings3.github.io/iesdp/files/ids/bgee/slots.htm#35)` weapon slots (not `[off-hand](https://gibberlings3.github.io/iesdp/files/ids/bgee/slots.htm#9)`, `[fist](https://gibberlings3.github.io/iesdp/files/ids/bgee/slots.htm#10)`, or `[magical weapon](https://gibberlings3.github.io/iesdp/files/ids/bgee/slots.htm#34)` slot).
  * - 40 ⟶ Spear
  * - 100 ⟶ Throwing Axe
@@ -133,7 +133,7 @@ OUTER_SET ITM_HEAD_projectile_type = 0x10
 OUTER_SET ITM_HEAD_alt_dice_thrown = 0x11
 /**
  * @type byte
- * **Speed Factor**
+ * **[Speed Factor](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_SpeedFactor)**
  * - See [opcode #190](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op190).
  */
 OUTER_SET ITM_HEAD_speed = 0x12
@@ -153,51 +153,51 @@ OUTER_SET ITM_HEAD_alt_damage_bonus = 0x13
 OUTER_SET ITM_HEAD_thac0_bonus = 0x14
 /**
  * @type byte
- * **Dice sides**
+ * **[Dice sides](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x16)**
  */
 OUTER_SET ITM_HEAD_dice_sides = 0x16
 /**
  * @type byte
- * **Primary Type (School)**
+ * **[Primary Type (School)](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x17)**
  * - See `[MSCHOOL.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/mschool.htm)`.
  */
 OUTER_SET ITM_HEAD_primary_type = 0x17
 /**
  * @type byte
- * **Dice thrown**
+ * **[Dice thrown](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x18)**
  */
 OUTER_SET ITM_HEAD_dice_thrown = 0x18
 /**
  * @type byte
- * **Secondary Type**
+ * **[Secondary Type](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x19)**
  * - See `[MSECTYPE.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm)`.
  */
 OUTER_SET ITM_HEAD_secondary_type = 0x19
 /**
  * @type word
- * **Damage bonus**
+ * **[Damage bonus](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x1A)**
  */
 OUTER_SET ITM_HEAD_damage_bonus = 0x1a
 /**
  * @type word
- * **Damage type**
- * - 0 ⟶ **None**
+ * **[Damage type](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x1C)**
+ * - 0 ⟶ **[None](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x1C_0)**
  *   - Deals Crushing damage, uses base AC (ignores all 4 specific AC).
  *     - If `[#dice](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x18) = 0`: Deals damage as normal, just no dice amount.
  *     - If `[#dice](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x18) > 0`: Sets target's HP to `Damage Dealt`, ignores crushing resistance.
- * - 1 ⟶ **Piercing**
- * - 2 ⟶ **Crushing**
- * - 3 ⟶ **Slashing**
- * - 4 ⟶ **Missile**
- * - 5 ⟶ **Fist**
+ * - 1 ⟶ **[Piercing](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x1C_1)**
+ * - 2 ⟶ **[Crushing](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x1C_2)**
+ * - 3 ⟶ **[Slashing](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x1C_3)**
+ * - 4 ⟶ **[Missile](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x1C_4)**
+ * - 5 ⟶ **[Fist](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x1C_5)**
  *   - Deals non-lethal damage, but uses Crushing AC.
- * - 6 ⟶ **Piercing/Crushing** (Better)
+ * - 6 ⟶ **[Piercing/Crushing](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x1C_6)** (Better)
  *   - Uses whichever damage type and AC the creature has the worst damage resistance against (regardless if its AC is better or worse). Uses `Piercing` if equal resistance.
- * - 7 ⟶ **Piercing/Slashing** (Better)
+ * - 7 ⟶ **[Piercing/Slashing](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x1C_7)** (Better)
  *   - Uses whichever damage type and AC the creature has the worst damage resistance against (regardless if its AC is better or worse). Uses `Piercing` if equal resistance.
- * - 8 ⟶ **Crushing/Slashing** (Worse)
+ * - 8 ⟶ **[Crushing/Slashing](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x1C_8)** (Worse)
  *   - Uses whichever damage type and AC the creature has the better damage resistance against (regardless if its AC is better or worse). Uses `Slashing` if equal resistance.
- * - 9 ⟶ **Blunt Missile**
+ * - 9 ⟶ **[Blunt Missile](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x1C_9)**
  *   - Same as `[None](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x1C_0)`
  *     - Either it's bugged or `[Blunt Missile](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x1C_9)` has always been an IWD2-only feature.
  *     - It's probably meant to deal crushing damage while using Missile AC.
@@ -224,19 +224,19 @@ OUTER_SET ITM_HEAD_feature_block_count = 0x1e
 OUTER_SET ITM_HEAD_feature_block_index = 0x20
 /**
  * @type word
- * **Max Charges**
+ * **[Max Charges](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x22)**
  */
 OUTER_SET ITM_HEAD_max_charges = 0x22
 /**
  * @type word
- * **Charge depletion behaviour**
- * - 0 ⟶ **Item remains**
+ * **[Charge depletion behaviour](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x24)**
+ * - 0 ⟶ **[Item remains](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x24_0)**
  *   - Item becomes unusable (except as a weapon) when `[Max Charges](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x22)` reaches zero. Can be recharged by selling or by resting if it has the `[Recharge after resting](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#ExtHeader_Flags_BIT11)` flag.
- * - 1 ⟶ **Item vanishes**
+ * - 1 ⟶ **[Item vanishes](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x24_1)**
  *   - Item disappears when `[Max Charges](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x22)` reaches zero. Can be recharged prior to reaching zero (through either method).
- * - 2 ⟶ **Replace with used up**
+ * - 2 ⟶ **[Replace with used up](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x24_2)**
  *   - When `[Max Charges](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x22)` reaches zero, item is replaced with the item specified at offset `[0x10](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Header_0x10)`. Can be recharged prior to reaching zero (through either method).
- * - 3 ⟶ **Item recharges**
+ * - 3 ⟶ **[Item recharges](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x24_3)**
  *   - This is very likely no different from `[Item remains](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x24_0)` or `4+`, i.e. defaults to `[0](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x24_0)`.
  * - This field is irrelevant when the `[Max Charges](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x22)` field is zero. Item can be used infinitely.
  * - If the item has a `[Max Stack Size](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Header_0x38) > 1`, this behavior will instead occur when the stack is depleted, not the charges (but still requires a non-zero `[Max Charges](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x22)`).
@@ -249,7 +249,7 @@ OUTER_SET ITM_HEAD_depletion = 0x24
 OUTER_SET ITM_HEAD_flags = 0x26
 /**
  * @type word
- * **Projectile Animation** (projectl.ids/missile.ids)
+ * **[Projectile Animation](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x2A)** (projectl.ids/missile.ids)
  */
 OUTER_SET ITM_HEAD_projectile_animation = 0x2a
 /**
@@ -276,7 +276,7 @@ OUTER_SET ITM_HEAD_projectile_animation = 0x2a
 OUTER_SET ITM_HEAD_melee_animation = 0x2c
 /**
  * @type word
- * **Arrow qualifier / Is arrow?**
+ * **[Arrow qualifier / Is arrow?](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x32)**
  * - 0 ⟶ No
  * - 1 ⟶ Yes
  * It controls which firing animation the ability will use.
@@ -285,7 +285,7 @@ OUTER_SET ITM_HEAD_melee_animation = 0x2c
 OUTER_SET ITM_HEAD_is_arrow = 0x32
 /**
  * @type word
- * **Bolt qualifier / Is bolt?**
+ * **[Bolt qualifier / Is bolt?](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x34)**
  * - 0 ⟶ No
  * - 1 ⟶ Yes
  * It controls which firing animation the ability will use.
@@ -294,7 +294,7 @@ OUTER_SET ITM_HEAD_is_arrow = 0x32
 OUTER_SET ITM_HEAD_is_bolt = 0x34
 /**
  * @type word
- * **Bullet qualifier / Is bullet?**
+ * **[Bullet qualifier / Is bullet?](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x36)**
  * - 0 ⟶ No
  * - 1 ⟶ Yes
  * It controls which firing animation the ability will use.
@@ -324,7 +324,7 @@ OUTER_SET ITM_identified_name = 0xc
 /**
  * @type resref
  * BG1, BG2, BGEE:
- * **Replacement item** (ITM)
+ * **[Replacement item](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Header_0x10)** (ITM)
  * PSTEE:
  * Drop sound - played when the item is dropped in the inventory (WAV)
  */
@@ -351,7 +351,7 @@ OUTER_SET ITM_usability_flags = 0x1e
 OUTER_SET ITM_animation = 0x22
 /**
  * @type word
- * **Min Level**
+ * **[Min Level](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Header_0x24)**
  * - Treated as average of all active class levels, rounded up.
  * - This field is basically the ITM counterpart of `[Level Required](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0x10)`.
  * - The only difference is that ITM [abilities](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header) cannot have separate level requirements.
@@ -425,7 +425,7 @@ OUTER_SET ITM_min_charisma = 0x32
 OUTER_SET ITM_price = 0x34
 /**
  * @type word
- * **Stack amount**
+ * **[Stack amount](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Header_0x38)**
  */
 OUTER_SET ITM_stack_amount = 0x38
 /**
@@ -440,7 +440,7 @@ OUTER_SET ITM_inventory_icon = 0x3a
 OUTER_SET ITM_lore_to_id = 0x42
 /**
  * @type resref
- * **Ground icon** (BAM)
+ * **[Ground icon](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Header_0x44)** (BAM)
  */
 OUTER_SET ITM_ground_icon = 0x44
 /**
@@ -465,7 +465,7 @@ OUTER_SET ITM_identified_desc = 0x54
 OUTER_SET ITM_description_icon = 0x58
 /**
  * @type dword
- * **Enchantment**
+ * **[Enchantment](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Header_0x60)**
  */
 OUTER_SET ITM_enchantment = 0x60
 /**
