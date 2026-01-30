@@ -24,22 +24,22 @@
  *
  * - `Type=0`:
  *   - Modifies [ARMORCLASS](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#2).
- *   - With `Timing Mode`s `1/4/7`, alters target's base `[Armor Class](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x48)`.
+ *   - With `Timing Mode`s `1/4/7`, alters target's base [`Armor Class`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x48).
  * - `Type=1`:
  *   - Modifies [ACCRUSHINGMOD](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#3).
- *   - With `Timing Mode`s `1/4/7`, alters target's base `[Crushing AC](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x4A)`.
+ *   - With `Timing Mode`s `1/4/7`, alters target's base [`Crushing AC`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x4A).
  * - `Type=2`:
  *   - Modifies [ACMISSILEMOD](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#4).
- *   - With `Timing Mode`s `1/4/7`, alters target's base `[Missile AC](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x4C)`.
+ *   - With `Timing Mode`s `1/4/7`, alters target's base [`Missile AC`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x4C).
  * - `Type=4`:
  *   - Modifies [ACPIERCINGMOD](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#5).
- *   - With `Timing Mode`s `1/4/7`, alters target's base `[Piercing AC](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x4E)`.
+ *   - With `Timing Mode`s `1/4/7`, alters target's base [`Piercing AC`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x4E).
  * - `Type=8`:
  *   - Modifies [ACSLASHINGMOD](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#6).
- *   - With `Timing Mode`s `1/4/7`, alters target's base `[Slashing AC](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x50)`.
+ *   - With `Timing Mode`s `1/4/7`, alters target's base [`Slashing AC`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x50).
  * - `Type=16`:
  *   - Modifies [ARMORCLASS](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#2).
- *   - With `Timing Mode`s `1/4/7`, alters target's base `[Armor Class](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x48)`, still subject to "only if better/lower", checked against base value, not current effective value.
+ *   - With `Timing Mode`s `1/4/7`, alters target's base [`Armor Class`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x48), still subject to "only if better/lower", checked against base value, not current effective value.
  */
 OUTER_SET OPCODE_ac_vs_damage_type_mod = 0
 /**
@@ -120,13 +120,13 @@ OUTER_SET OPCODE_cure_sleep = 2
  *
  *
  * - Forces creature(s) to use a melee weapon if possible.
- *   - If a certain creature is equipped with a `[Cursed](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#Header_Flags_BIT4)` ranged weapon, this opcode will not force it to switch to a melee weapon.
+ *   - If a certain creature is equipped with a [`Cursed`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#Header_Flags_BIT4) ranged weapon, this opcode will not force it to switch to a melee weapon.
  *
  * This effect only affects party members (this is not true for EE games, it works fine on non-party creatures.)
  *
  * The second paragraph hasn't been verified for PST and BG1 yet, but likely holds.
  *
- * Used with `Timing Mode`s `1/4/7` results in setting `[STATE_BERSERK](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT1)` when it triggers (and using its default behavior), rather than attaching a removable effect with selected behavior.
+ * Used with `Timing Mode`s `1/4/7` results in setting [`STATE_BERSERK`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT1) when it triggers (and using its default behavior), rather than attaching a removable effect with selected behavior.
  *
  * "Morale Failure: Berserk" does NOT use this or any of the other berserk opcodes, nor does it set [STATE_BERSERK](https://gibberlings3.github.io/iesdp/files/ids/bgee/state.htm#BIT1).
  */
@@ -156,7 +156,7 @@ OUTER_SET OPCODE_cure_berserking = 4
  *   - Does not alter targets allegiance stat.
  *   - Maintains [REALLYCHARMED](https://gibberlings3.github.io/iesdp/files/ids/bgee/ea.htm) on the target if the caster is [GOODCUTOFF](https://gibberlings3.github.io/iesdp/files/ids/bgee/ea.htm#30).
  *   - Maintains [CHARMED_PC](https://gibberlings3.github.io/iesdp/files/ids/bgee/ea.htm#254) on the target if the caster is [NOTGOOD](https://gibberlings3.github.io/iesdp/files/ids/bgee/ea.htm#31).
- *   - Maintains Portrait Icon `[Charm](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#0)` on the target.
+ *   - Maintains Portrait Icon [`Charm`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#0) on the target.
  *   - Effect ends if the creature is attacked by [GOODCUTOFF](https://gibberlings3.github.io/iesdp/files/ids/bgee/ea.htm#30).
  *   - Target displays "charmed" string.
  * - 1 ⟶ Hostile Charm
@@ -164,14 +164,14 @@ OUTER_SET OPCODE_cure_berserking = 4
  *   - Sets targets allegiance to [EVILCUTOFF](https://gibberlings3.github.io/iesdp/files/ids/bgee/ea.htm#200) if the caster is [NOTEVIL](https://gibberlings3.github.io/iesdp/files/ids/bgee/ea.htm#199).
  *   - Maintains [REALLYCHARMED](https://gibberlings3.github.io/iesdp/files/ids/bgee/ea.htm) on the target if the caster is [GOODCUTOFF](https://gibberlings3.github.io/iesdp/files/ids/bgee/ea.htm#30).
  *   - Maintains [CHARMED_PC](https://gibberlings3.github.io/iesdp/files/ids/bgee/ea.htm#254) on the target if the caster is [NOTGOOD](https://gibberlings3.github.io/iesdp/files/ids/bgee/ea.htm#31).
- *   - Maintains Portrait Icon `[Charm](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#0)` on the target.
+ *   - Maintains Portrait Icon [`Charm`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#0) on the target.
  *   - Effect ends if the creature is attacked by [GOODCUTOFF](https://gibberlings3.github.io/iesdp/files/ids/bgee/ea.htm#30).
  *   - Target displays "Charmed" string.
  * - 2 ⟶ Neutral Dire Charm
  *   - Does not alter targets allegiance stat.
  *   - Maintains [CONTROLLED](https://gibberlings3.github.io/iesdp/files/ids/bgee/ea.htm#5) on the target if the caster is [GOODCUTOFF](https://gibberlings3.github.io/iesdp/files/ids/bgee/ea.htm#30).
  *   - Maintains [ENEMY](https://gibberlings3.github.io/iesdp/files/ids/bgee/ea.htm#255) on the target if the caster is [NOTGOOD](https://gibberlings3.github.io/iesdp/files/ids/bgee/ea.htm#31).
- *   - Maintains Portrait Icon `[Dire Charm](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#1)` on the target.
+ *   - Maintains Portrait Icon [`Dire Charm`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#1) on the target.
  *   - Effect ends if the creature is attacked by [GOODCUTOFF](https://gibberlings3.github.io/iesdp/files/ids/bgee/ea.htm#30).
  *   - Target displays "dire charmed" string.
  * - 3 ⟶ Hostile Dire Charm
@@ -179,7 +179,7 @@ OUTER_SET OPCODE_cure_berserking = 4
  *   - Sets targets allegiance to [EVILCUTOFF](https://gibberlings3.github.io/iesdp/files/ids/bgee/ea.htm#200) if the caster is [NOTEVIL](https://gibberlings3.github.io/iesdp/files/ids/bgee/ea.htm#199).
  *   - Maintains [CONTROLLED](https://gibberlings3.github.io/iesdp/files/ids/bgee/ea.htm#5) on the target if the caster is [GOODCUTOFF](https://gibberlings3.github.io/iesdp/files/ids/bgee/ea.htm#30).
  *   - Maintains [ENEMY](https://gibberlings3.github.io/iesdp/files/ids/bgee/ea.htm#255) on the target if the caster is [NOTGOOD](https://gibberlings3.github.io/iesdp/files/ids/bgee/ea.htm#31).
- *   - Maintains Portrait Icon `[Dire Charm](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#1)` on the target.
+ *   - Maintains Portrait Icon [`Dire Charm`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#1) on the target.
  *   - Effect ends if the creature is attacked by [GOODCUTOFF](https://gibberlings3.github.io/iesdp/files/ids/bgee/ea.htm#30).
  *   - Target displays "dire charmed" string.
  * - 4 ⟶ Controlled by Cleric
@@ -192,17 +192,17 @@ OUTER_SET OPCODE_cure_berserking = 4
  *   - Does not alter targets allegiance stat.
  *   - Maintains [ENEMY](https://gibberlings3.github.io/iesdp/files/ids/bgee/ea.htm#255) on the target (regardless of casters Allegience).
  *   - Sets [THRULLCHARM](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#149) to `1`.
- *   - Maintains Portrait Icon `[Charm](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#0)` on the target.
+ *   - Maintains Portrait Icon [`Charm`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#0) on the target.
  *   - Target displays "Charmed" string.
  * - 1000 ⟶ Neutral Charm (no Feedback)
  *   - Same as `0`, but target does not display any string.
  * - 1001 ⟶ Hostile Charm (no Feedback)
  *   - Same as `1`, but target does not display any string.
  * - 1002 ⟶ Neutral Domination. Same as `2`, except:
- *   - Maintains Portrait Icon `[Domination](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#43)` on the target.
+ *   - Maintains Portrait Icon [`Domination`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#43) on the target.
  *   - Target does not display any string.
  * - 1003 ⟶ Hostile Domination. Same as `3`, except:
- *   - Maintains Portrait Icon `[Domination](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#43)` on the target.
+ *   - Maintains Portrait Icon [`Domination`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#43) on the target.
  *   - Target does not display any string.
  * - 1004 ⟶ Controlled by Cleric (no Feedback)
  *   - Same as `4`, but target does not display any string.
@@ -242,7 +242,7 @@ OUTER_SET OPCODE_charm_charm_specific_creature = 5
  *   - An effective value < base value ⟶ red.
  *   - An effective value = base value ⟶ white/default.
  *
- * With `Timing Mode`s `1/4/7`, the creature's base `[Charisma](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x23E)` is altered, leaving behind no removable effect.
+ * With `Timing Mode`s `1/4/7`, the creature's base [`Charisma`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x23E) is altered, leaving behind no removable effect.
  *
  * Final values are capped to the bound range `(0,25)` in game (`40` in IWD2).
  */
@@ -443,7 +443,7 @@ OUTER_SET OPCODE_colour_glow_pulse = 9
  *   - An effective value < base value ⟶ red.
  *   - An effective value = base value ⟶ white/default.
  *
- * With `Timing Mode`s `1/4/7`, the creature's base `[Constitution](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x23D)` is altered, leaving behind no removable effect.
+ * With `Timing Mode`s `1/4/7`, the creature's base [`Constitution`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x23D) is altered, leaving behind no removable effect.
  *
  * Final values are capped to the bound range `(0,25)` in game (`40` in IWD2).
  */
@@ -705,7 +705,7 @@ OUTER_SET OPCODE_defrost = 14
  * - When you apply this effect in an External [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm), (via [op177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177) / [op283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283)):
  *   - `Parameter1` in the EFF will determine the exact Dexterity increase (so it must be set manually, and ignores any limit).
  *
- * With `Timing Mode`s `1/4/7`, the creature's base `[Dexterity](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x23C)` is altered, leaving behind no removable effect.
+ * With `Timing Mode`s `1/4/7`, the creature's base [`Dexterity`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x23C) is altered, leaving behind no removable effect.
  *
  * Final values are capped to the bound range `(0,25)` in game (`40` in IWD2).
  */
@@ -727,7 +727,7 @@ OUTER_SET OPCODE_dexterity_mod = 15
  * - [ANIMATION_ONLY_HASTE](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#185).
  *
  * The `Normal` and `Improved` haste types grant a `-2` initiative (Weapon Speed) bonus. All types:
- * - grant portrait icons (`[Haste](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#38)` / `[Improved Haste](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#110)`)
+ * - grant portrait icons ([`Haste`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#38) / [`Improved Haste`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#110))
  * - increase the creature's animation speed and the animation speed of [opcode 140](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op140) effects
  * - halve the creature's round timer used by attacks, modal abilities and "Auto-Pause: End of Round"
  * - increase frequency of application of [poison](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op25), [disease](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op78), [regeneration](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op98), [Cast on Condition](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op232) and [Use EFF File (at Frequency)](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op272), but not below `1s`
@@ -736,7 +736,7 @@ OUTER_SET OPCODE_dexterity_mod = 15
  *
  * BG1 only supports haste type `0`.
  *
- * This opcode will set the `[STATE_HASTED](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT15)` flag and nothing else when applied with `Timing Mode 1`, and cannot be removed within the game by any means, only suppressed by [Slow](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op40).
+ * This opcode will set the [`STATE_HASTED`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT15) flag and nothing else when applied with `Timing Mode 1`, and cannot be removed within the game by any means, only suppressed by [Slow](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op40).
  *
  * This only works when applying `Normal/Improved` haste (there's no difference, since the `STAT` for `Improved` haste doesn't get set this way), `Weak` haste does not do anything with `Timing Mode 1`.
  */
@@ -761,7 +761,7 @@ OUTER_SET OPCODE_haste = 16
  * Known values for the upper word of `Type` are:
  *
  * - BIT0 ⟶ Raise dead
- * - BIT1 ⟶ Remove all effects with a limited Timing Mode (`not equipped(2)` or `permanent(9)`), but also any [ITM](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm) in the `[Magical Weapon Slot](https://gibberlings3.github.io/iesdp/files/ids/bgee/slots.htm#34)`.
+ * - BIT1 ⟶ Remove all effects with a limited Timing Mode (`not equipped(2)` or `permanent(9)`), but also any [ITM](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm) in the [`Magical Weapon Slot`](https://gibberlings3.github.io/iesdp/files/ids/bgee/slots.htm#34).
  *
  * Unlike [opcode #12](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op12), this opcode does not apply any death effect ([opcode #13](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op13)) to the creature if it reduces their hit points to zero or less. The creature will remain in a bugged state (no HP but not dead) until they take further damage, or the game is saved & reloaded, at which point they will die properly.
  */
@@ -829,7 +829,7 @@ OUTER_SET OPCODE_hp_maximum_hp_mod = 18
  *   - An effective value < base value ⟶ red.
  *   - An effective value = base value ⟶ white/default.
  *
- * With `Timing Mode`s `1/4/7`, the creature's base `[Intelligence](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x23A)` is altered, leaving behind no removable effect.
+ * With `Timing Mode`s `1/4/7`, the creature's base [`Intelligence`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x23A) is altered, leaving behind no removable effect.
  *
  * Final values are capped to the bound range `(0,25)` in game (`40` in IWD2).
  */
@@ -844,27 +844,27 @@ OUTER_SET OPCODE_intelligence_mod = 19
  * - 0 ⟶ Normal Invisibility
  *   - Grants a `+4` bonus to melee attacks only.
  *   - Applying `Normal` Invisibility with `Timing Mode`s other than `1/4/7` in an external [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) through [opcode #183](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op183) will NOT terminate early due to hostile/aggressive action (similar to the constant invisibility provided by Mislead). Applying the same through [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177) or [opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) DOES terminate due to hostile/aggressive action as normal.
- *   - Applying `Normal` Invisibility with `Timing Mode`s `1/4/7` will set the creature's base state `[STATE_INVISIBLE](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT4)`, while still leaving behind a removable (but irrelevant) effect. This state is not cleared on death, but it is still terminated by any hostile/aggressive action that would normally terminate invisibility.
+ *   - Applying `Normal` Invisibility with `Timing Mode`s `1/4/7` will set the creature's base state [`STATE_INVISIBLE`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT4), while still leaving behind a removable (but irrelevant) effect. This state is not cleared on death, but it is still terminated by any hostile/aggressive action that would normally terminate invisibility.
  * - 1 ⟶ Improved Invisibility
  *   - Affected creature stays invisible after attack.
  *   - Does not provide saving throw bonuses outside EEs, where it provides a bonus of `4` to all.
  *   - Lingers after the duration is spent and act as permanent if used as a 'While Equipped' effect.
  *   - Applying `Improved` Invisibility will cause the effect to be duplicated, with the duplicate using `Normal` invisibility. There's no reason to apply both `Normal` and `Improved` invisibility in the same spell/item (unless you want them to have different probabilities/hd limits).
- *   - Applying `Improved` Invisibility with `Timing Mode`s `1/4/7` will set the creature's base state `[STATE_IMPROVEDINVISIBILITY](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT22)`, and because it duplicates itself as `Normal` invisibility, `[STATE_INVISIBLE](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT4)` as well, while still leaving behind a removable (but irrelevant) effect for each. These states are not cleared on death.
+ *   - Applying `Improved` Invisibility with `Timing Mode`s `1/4/7` will set the creature's base state [`STATE_IMPROVEDINVISIBILITY`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT22), and because it duplicates itself as `Normal` invisibility, [`STATE_INVISIBLE`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT4) as well, while still leaving behind a removable (but irrelevant) effect for each. These states are not cleared on death.
  *   - The effects that remain when setting the base `STATE`s are irrelevant, at least in-game, because everything that can remove the `STATE`s will also remove the effect. The `STATE`s can however be removed separately through NI or EEkeeper, at which point the effect will once again reapply its `STATE` immediately upon loading the game.
  * - 2 ⟶ Weak Invisibility (EE only)
  *   - It's the same type of invisibility as `Improved` Invisibility after you take a hostile action and reveal yourself.
  *   - Applying "Weak" Invisibility with `Timing Mode`s `1/4/7` will function no differently than `Timing Mode 0`, aside from having no natural expiration timer.
  *   - Applying "Weak" Invisibility is otherwise the same as `Improved` Invisibility, except it doesn't duplicate itself with a `Normal` version, which is why it doesn't quality for backstabs.
  *
- * Any attack a character makes while invisible will ignore the target's AC dexterity bonus (see `[dexmod.2da](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/dexmod.htm)`)
+ * Any attack a character makes while invisible will ignore the target's AC dexterity bonus (see [`dexmod.2da`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/dexmod.htm))
  *
  * To be exact, the attack must follow these rules:
  *
- * - Attacker must have a backstab multiplier of `2` or higher (see `[backstab.2da](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/backstab.htm)`)
- * - Attacker must be `[STATE_INVISIBLE](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT4)`
- * - Attacker's weapon must not be `[RANGED](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x0_2)`
- * `[Class](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x273)` / `[Kit](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x244)` doesn't matter, `[sneakatt.2da](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/sneakatt.htm)` doesn't matter (even though the backstab multiplier isn't used to calculate damage under "Game Option: 3E Sneak Attack", the creature still has its multiplier calculated / assigned), weapon backstab suitability doesn't matter.
+ * - Attacker must have a backstab multiplier of `2` or higher (see [`backstab.2da`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/backstab.htm))
+ * - Attacker must be [`STATE_INVISIBLE`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT4)
+ * - Attacker's weapon must not be [`RANGED`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x0_2)
+ * [`Class`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x273) / [`Kit`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x244) doesn't matter, [`sneakatt.2da`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/sneakatt.htm) doesn't matter (even though the backstab multiplier isn't used to calculate damage under "Game Option: 3E Sneak Attack", the creature still has its multiplier calculated / assigned), weapon backstab suitability doesn't matter.
  *
  * 	In the following example:
  *
@@ -1009,7 +1009,7 @@ OUTER_SET OPCODE_poison = 25
 /**
  * [Item: Remove Curse](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op26)
  *
- * Removes `[Cursed](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#Header_Flags_BIT4)` items in addition to all [opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effects from the targeted creature(s).
+ * Removes [`Cursed`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#Header_Flags_BIT4) items in addition to all [opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effects from the targeted creature(s).
  */
 OUTER_SET OPCODE_remove_curse = 26
 /**
@@ -1244,7 +1244,7 @@ OUTER_SET OPCODE_save_vs_spells_mod = 37
  *
  * Applies the silence effect to the targeted creature(s). Sets [STATE_SILENCED](https://gibberlings3.github.io/iesdp/files/ids/bgee/state.htm#BIT12) to true.
  *
- * A silenced creature cannot cast spells / use special abilities (unless flagged as `[Castable when silenced](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#Header_Flags_BIT25)`), bard song or initiate dialog.
+ * A silenced creature cannot cast spells / use special abilities (unless flagged as [`Castable when silenced`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#Header_Flags_BIT25)), bard song or initiate dialog.
  *
  * The engine is hard-coded to allow these spells to be cast by a silenced creature:
  *
@@ -1262,27 +1262,27 @@ OUTER_SET OPCODE_silence = 38
  * - 0 ⟶ Yes
  * - 1 ⟶ No
  *
- * `Icon` defines the index from [STATDESC.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm) for custom portrait icons (EE only). Default value is `[Sleep](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#14)`. If it is set, also spell state `[PRONE](https://gibberlings3.github.io/iesdp/files/ids/bgee/splstate.htm#249)` will be set. Otherwise the creature will be moved to the backlist and become [untargettable by most scripts](https://www.gibberlings3.net/forums/topic/35548-ee-additional-op39-info/).
+ * `Icon` defines the index from [STATDESC.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm) for custom portrait icons (EE only). Default value is [`Sleep`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#14). If it is set, also spell state [`PRONE`](https://gibberlings3.github.io/iesdp/files/ids/bgee/splstate.htm#249) will be set. Otherwise the creature will be moved to the backlist and become [untargettable by most scripts](https://www.gibberlings3.net/forums/topic/35548-ee-additional-op39-info/).
  *
- * This opcode sets the `[STATE_SLEEPING](https://gibberlings3.github.io/iesdp/files/ids/bgee/state.htm#BIT0)` and `[STATE_HELPLESS](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT5)` flag bits.
+ * This opcode sets the [`STATE_SLEEPING`](https://gibberlings3.github.io/iesdp/files/ids/bgee/state.htm#BIT0) and [`STATE_HELPLESS`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT5) flag bits.
  *
  * In case of `Timing Mode`s `1/4/7` the bits cannot be removed in-game.
  *
- * Moreover, the `[STATE_SLEEPING](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT0)` works as the `Wake on Hit` option. It's just not usable because of the unremovable `[STATE_HELPLESS](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT5)`.
+ * Moreover, the [`STATE_SLEEPING`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT0) works as the `Wake on Hit` option. It's just not usable because of the unremovable [`STATE_HELPLESS`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT5).
  *
- * Immunity to this opcode does not prevent unconsciousness from `[stunning](https://gibberlings3.github.io/iesdp/files/ids/bgee/damages.htm)` damage done by normal fists.
+ * Immunity to this opcode does not prevent unconsciousness from [`stunning`](https://gibberlings3.github.io/iesdp/files/ids/bgee/damages.htm) damage done by normal fists.
  */
 OUTER_SET OPCODE_unconsciousness = 39
 /**
  * [State: Slow](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op40)
  *
- * Applies the slow effect to the targeted creature(s). It automatically grants the `[Slow](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#41)` portrait icon.
+ * Applies the slow effect to the targeted creature(s). It automatically grants the [`Slow`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#41) portrait icon.
  *
  * This effect will cancel out the [haste opcode](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op16).
  *
- * This effect doubles the `[Casting Time](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0x12)` of all spells. Not verified for IWD2.
+ * This effect doubles the [`Casting Time`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0x12) of all spells. Not verified for IWD2.
  *
- * This opcode will set the `[STATE_SLOWED](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT16)` flag and nothing else when applied with `Timing Mode 1`, and cannot be removed within the game by any means, only suppressed by [Haste](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op16).
+ * This opcode will set the [`STATE_SLOWED`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT16) flag and nothing else when applied with `Timing Mode 1`, and cannot be removed within the game by any means, only suppressed by [Haste](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op16).
  */
 OUTER_SET OPCODE_slow = 40
 /**
@@ -1411,7 +1411,7 @@ OUTER_SET OPCODE_cure_stone_to_flesh = 43
  *   - The actual increase for Exceptional STR will be stored in the `Special` field of [op177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177) / [op283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) (after it's been applied to the creature).
  *   - Basically, it works exactly like `Type=0`, except that warriors will still gain a random Exceptional STR increase (of course it's only noticeable if their resulting STR is 18).
  *
- * With `Timing Mode`s `1/4/7`, the creature's base `[Strength](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x238)` is altered, leaving behind no removable effect.
+ * With `Timing Mode`s `1/4/7`, the creature's base [`Strength`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x238) is altered, leaving behind no removable effect.
  *
  * Final values are capped to the bound range `(0,25)` in game (`40` in IWD2).
  */
@@ -1421,7 +1421,7 @@ OUTER_SET OPCODE_strength_mod = 44
  *
  * Stuns the targeted creature(s) and sets HELD to 1. In particular:
  *
- * - Maintains Portrait Icon `[Stun](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#55)` (EE only).
+ * - Maintains Portrait Icon [`Stun`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#55) (EE only).
  * - Immobilizes the creature, limiting it to instantaneous actions ([INSTANT.IDS](https://gibberlings3.github.io/iesdp/files/ids/bgee/instant.htm)).
  * - Maintains [STATE_STUNNED](https://gibberlings3.github.io/iesdp/files/ids/bgee/state.htm#BIT3).
  *   - Renders the creature unselectable and disable the Inventory.
@@ -1429,7 +1429,7 @@ OUTER_SET OPCODE_strength_mod = 44
  *   - Renders the creature unselectable and disable the Inventory.
  *   - Causes all attacks against the creature to automatically hit, disabling Critical Hits and misses.
  *
- * Applied with `Timing Mode`s `1/4/7`: will set the creature's base `[STATE_STUNNED](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT3)` flag, while still leaving behind a separate removable effect.
+ * Applied with `Timing Mode`s `1/4/7`: will set the creature's base [`STATE_STUNNED`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT3) flag, while still leaving behind a separate removable effect.
  *
  * - Should you remove the effect without removing the state (through means other than [opcode #46](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op46)), the creature will be fully functional, just not controllable by the player (if it was).
  * - By itself, [STATE_STUNNED](https://gibberlings3.github.io/iesdp/files/ids/bgee/state.htm#BIT3) does not disable any scripts or limit which actions the creature may take. It needs its opcode's immobilization effect as well as [STATE_HELPLESS](https://gibberlings3.github.io/iesdp/files/ids/bgee/state.htm#BIT5) to fully work.
@@ -1489,7 +1489,7 @@ OUTER_SET OPCODE_cure_silence_vocalize = 48
  *   - An effective value < base value ⟶ red.
  *   - An effective value = base value ⟶ white/default.
  *
- * With `Timing Mode`s `1/4/7`, the creature's base `[Wisdom](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x23B)` is altered, leaving behind no removable effect.
+ * With `Timing Mode`s `1/4/7`, the creature's base [`Wisdom`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x23B) is altered, leaving behind no removable effect.
  *
  * Final values are capped to the bound range `(0,25)` in game (`40` in IWD2).
  */
@@ -1645,7 +1645,7 @@ OUTER_SET OPCODE_colour_very_bright_by_rgb = 52
  * - 2 ⟶ Change target's animation to `Animation ID` (High Priority)
  *   - Has priority over other `op53` effects using either `p2=0` or `p2=1`, regardless of stacking order.
  *
- * Applied with `Timing Mode`s `1/4/7`, sets the creature's base `[animation](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x28)`, leaving no removable effect.
+ * Applied with `Timing Mode`s `1/4/7`, sets the creature's base [`animation`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x28), leaving no removable effect.
  */
 OUTER_SET OPCODE_animation_change = 53
 /**
@@ -1735,9 +1735,9 @@ OUTER_SET OPCODE_cure_dispellable_effects_dispel_magic = 58
  *
  * In BG2 and EEs, this effect alters the Move Silently skill.
  *
- * `Timing Mode`s `1/4/7` permanently alter the creature's `[Move Silently](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x68)` score, leaving no removable effect.
+ * `Timing Mode`s `1/4/7` permanently alter the creature's [`Move Silently`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x68) score, leaving no removable effect.
  *
- * (EE only) When `Type = 0` and `Timing Mode = 9`, it modifies [MOVESILENTLYMTPBONUS](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#177). The final value for this stat is multiplied by its percentage entry in [THIEFSCL.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/thiefscl.htm), capped to the range `[0,255]`, before being included in the creature's `[Move Silently](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x68)` score.
+ * (EE only) When `Type = 0` and `Timing Mode = 9`, it modifies [MOVESILENTLYMTPBONUS](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#177). The final value for this stat is multiplied by its percentage entry in [THIEFSCL.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/thiefscl.htm), capped to the range `[0,255]`, before being included in the creature's [`Move Silently`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x68) score.
  */
 OUTER_SET OPCODE_stealth_mod = 59
 /**
@@ -1754,17 +1754,17 @@ OUTER_SET OPCODE_stealth_mod = 59
  * - 4 ⟶ Cleric Spells
  * - 5 ⟶ Innate Abilities
  *
- * This opcode increments `[SPELLFAILUREMAGE](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#51)`, `[SPELLFAILUREPRIEST](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#52)` and `[SPELL_FAILURE_INNATE](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#194)`, each of which is capped `0 — 100`.
+ * This opcode increments [`SPELLFAILUREMAGE`](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#51), [`SPELLFAILUREPRIEST`](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#52) and [`SPELL_FAILURE_INNATE`](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#194), each of which is capped `0 — 100`.
  *
- * `Type` values of `0`,`1` or `2` display a message — "Spell Failed: casting failure" (on EE games, this string is specified by `[STRREF_FEEDBACK_SPELLFAILED_CASTFAILURE](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/enginest.htm#178)`)
+ * `Type` values of `0`,`1` or `2` display a message — "Spell Failed: casting failure" (on EE games, this string is specified by [`STRREF_FEEDBACK_SPELLFAILED_CASTFAILURE`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/enginest.htm#178))
  *
- * `Type` values of `3`,`4` or `5` display a message — "Spell failed due to dead magic" (on EE games, this string is specified by `[STRREF_FEEDBACK_SPELLFAILED_CASTFAILUREDEAD](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/enginest.htm#179)`)
+ * `Type` values of `3`,`4` or `5` display a message — "Spell failed due to dead magic" (on EE games, this string is specified by [`STRREF_FEEDBACK_SPELLFAILED_CASTFAILUREDEAD`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/enginest.htm#179))
  *
- * - Additionally, it sets `[DEAD_MAGIC](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#196)` to `1`.
+ * - Additionally, it sets [`DEAD_MAGIC`](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#196) to `1`.
  *
  *
  * - This opcode is cumulative with itself and the [Deafness](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op80) effect.
- * - Spells with `[Ignore Dead/Wild Magic](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#Header_Flags_BIT14)` ignore the spell failure chance from this effect (regardless of using the `Dead Magic` mode).
+ * - Spells with [`Ignore Dead/Wild Magic`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#Header_Flags_BIT14) ignore the spell failure chance from this effect (regardless of using the `Dead Magic` mode).
  */
 OUTER_SET OPCODE_miscast_magic = 60
 /**
@@ -1853,7 +1853,7 @@ OUTER_SET OPCODE_overlay_blur = 65
  * - ...
  * - 255 ⟶ Fully transparent
  *
- * A creature's `[TRANSLUCENT](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#60)` stat is stored in a single byte (`0-255`) on the `[CRE](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_translucency)` file.
+ * A creature's [`TRANSLUCENT`](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#60) stat is stored in a single byte (`0-255`) on the [`CRE`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_translucency) file.
  *  This opcode only reads the first byte (out of four) of `Fade Amount`, so the value will always be `0-255`.
  *
  * Known values for `Visual Effect` are:
@@ -1862,14 +1862,14 @@ OUTER_SET OPCODE_overlay_blur = 65
  * - 1 ⟶ Fade in
  * - 2 ⟶ Fade out
  *
- * `Visual Effect = 0` sets the `[TRANSLUCENT](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#60)` stat directly, based on the `timing mode`.
- *  `Visual Effect = 1` and `Visual Effect = 2` call a hardcoded process that decreases/increases the `[TRANSLUCENT](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#60)` stat by `Fade Amount` every tick, until it reaches `0`/`255`.
+ * `Visual Effect = 0` sets the [`TRANSLUCENT`](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#60) stat directly, based on the `timing mode`.
+ *  `Visual Effect = 1` and `Visual Effect = 2` call a hardcoded process that decreases/increases the [`TRANSLUCENT`](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#60) stat by `Fade Amount` every tick, until it reaches `0`/`255`.
  *
  *
- * - Any transparency inherit in the `[animation](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/ini_anim.htm)` (see for instance `7703.INI — SHADOW`) will stack with that of the `[TRANSLUCENT](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#60)` stat.
+ * - Any transparency inherit in the [`animation`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/ini_anim.htm) (see for instance `7703.INI — SHADOW`) will stack with that of the [`TRANSLUCENT`](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#60) stat.
  *   - It's likely multiplied (so that `50% * 50% = 25%`), or something similar, but not additive.
- * - On EE games, If you have the game option "Sprite Outlines" enabled, `[TRANSLUCENT](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#60)` values `1 - 127` are treated as `0`.
- *   - If you also have the game option "Highlight selected sprites" enabled, `[TRANSLUCENT](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#60)` values `1 - 127` will display correctly, but only while the mouse is over the creature.
+ * - On EE games, If you have the game option "Sprite Outlines" enabled, [`TRANSLUCENT`](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#60) values `1 - 127` are treated as `0`.
+ *   - If you also have the game option "Highlight selected sprites" enabled, [`TRANSLUCENT`](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#60) values `1 - 127` will display correctly, but only while the mouse is over the creature.
  */
 OUTER_SET OPCODE_transparency_fade = 66
 /**
@@ -1905,10 +1905,10 @@ OUTER_SET OPCODE_transparency_fade = 66
  * `Mode = 5` fails to make creatures summoned as ALLY (4) controllable. This is fixed upon reload.
  *
  *
- * - (EE only) `[Resource 2](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x70)` (external [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm)s): Animation VVC/BAM file to be played at the summoned creature's location.
+ * - (EE only) [`Resource 2`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x70) (external [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm)s): Animation VVC/BAM file to be played at the summoned creature's location.
  *  Default is a hardcoded VVC using `"SPBOOM.BAM"` and palette `#65`. This is generally used as the "portal" animation.
- * - (EE only) `[Resource 3](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x78)` (external [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm)s): Animation VVC/BAM file to be played at the location of the ability target.
- * - Applies an [opcode #271](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op271) to the summoned creature based on the duration of the `[Resource 2](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x70)` (not exact) and Mode set to 1 (tested only in EE). Creature will not appear/spawn until this animation finishes.
+ * - (EE only) [`Resource 3`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x78) (external [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm)s): Animation VVC/BAM file to be played at the location of the ability target.
+ * - Applies an [opcode #271](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op271) to the summoned creature based on the duration of the [`Resource 2`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x70) (not exact) and Mode set to 1 (tested only in EE). Creature will not appear/spawn until this animation finishes.
  * - Applies a delayed [opcode #215](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op215) with `resource = "SPGFLSH1"` to the summoned creature, `delayed duration = 5 ticks less` than the [opcode #271](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op271).
  * - Applies a delayed [opcode #68](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op68) to the summoned creature based on effect duration (unless permanent).
  * - When summoned, any temporary changes (such as from equipped items) to the creature's [gender](https://gibberlings3.github.io/iesdp/files/ids/bgee/gender.htm) are made permanent.
@@ -1938,7 +1938,7 @@ OUTER_SET OPCODE_unsummon_creature = 68
  *
  * Applies the non-detection effect to the targeted creature(s), setting [STATE_NONDETECTION](https://gibberlings3.github.io/iesdp/files/ids/bgee/state.htm#BIT21) while active. This effect is negated by [opcode #70](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op70). While in the non-detection state, the creature is immune to [opcode #47](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op47) and [opcode #116](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op116), though they are affected by effects that remove illusionary protections by school or secondary type.
  *
- * `Timing Mode`s `1/4/7` will permanently set the creature's `[STATE_NONDETECTION](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT21)` flag, leaving no removable effect. This flag is not cleared on death.
+ * `Timing Mode`s `1/4/7` will permanently set the creature's [`STATE_NONDETECTION`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT21) flag, leaving no removable effect. This flag is not cleared on death.
  */
 OUTER_SET OPCODE_protection_from_detection_non_detection = 69
 /**
@@ -2005,10 +2005,10 @@ OUTER_SET OPCODE_extra_damage_mod = 73
  * [State: Blindness](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op74)
  *
  * Applies the blindness effect to the targeted creature(s). This sets [VISUALRANGE](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#147) to 2, sets [STATE_BLIND](https://gibberlings3.github.io/iesdp/files/ids/bgee/state.htm#BIT18) to true and incurs a cummulative `10` point base THAC0 penalty (`4` on EE games, plus a cumulative `4` point base AC penalty. All of that is unverified in PST).
- * Maintains its own portrait icon `[Blind](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#8)`.
+ * Maintains its own portrait icon [`Blind`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#8).
  *
  *
- * - `Timing Mode`s `1/4/7` will permanently set the creature's `[STATE_BLIND](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT18)` flag, leaving no removable effect.
+ * - `Timing Mode`s `1/4/7` will permanently set the creature's [`STATE_BLIND`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT18) flag, leaving no removable effect.
  * - Related: the `-4` penalty to `AC` and `THAC0` are apparently tied to the effect, not `STATE_BLIND`.
  *   - So for instance you will not be able to 100% cure a creature affected by `CLERIC_NATURE_BEAUTY — "sppr704.spl"` (it applies [opcode #74](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op74) with `timing_mode=1`).
  *     - As a workaround, you might want to stick with a limited `timing_mode` and set `duration` to a very high random value.
@@ -2091,7 +2091,7 @@ OUTER_SET OPCODE_cure_disease = 79
 /**
  * [State: Deafness](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op80)
  *
- * Applies the Deafness effect on the targeted creature(s) – creatures suffer a casting failure rate of 50% (20% in bg1, unknown in iwd1). The casting failure rate refers to `[Wizard](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C_1)` and `[Priest](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C_2)` spells only. This is cumulative with Miscast Magic.
+ * Applies the Deafness effect on the targeted creature(s) – creatures suffer a casting failure rate of 50% (20% in bg1, unknown in iwd1). The casting failure rate refers to [`Wizard`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C_1) and [`Priest`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C_2) spells only. This is cumulative with Miscast Magic.
  *
  * PST: it is unclear if this effect exist or does anything!
  *
@@ -2251,9 +2251,9 @@ OUTER_SET OPCODE_missiles_resist_mod = 89
  * - 1 ⟶ Flat Value Modifier: `Skill = 'Statistic Modifier' value`
  * - 2 ⟶ Percentage Modifier: `Skill = (Skill * 'Statistic Modifier' value) / 100`
  *
- * `Timing Mode`s `1/4/7` permanently alters the creature's `[Open Locks](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x67)` score, leaving no removable effect.
+ * `Timing Mode`s `1/4/7` permanently alters the creature's [`Open Locks`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x67) score, leaving no removable effect.
  *
- * (EE only) When `Type = 0` and `Timing Mode = 9`, it modifies [LOCKPICKINGMTPBONUS](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#176). The final value for this stat is multiplied by its percentage entry in [THIEFSCL.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/thiefscl.htm), capped to the range `[0,255]`, before being included in the creature's `[Open Locks](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x67)` score.
+ * (EE only) When `Type = 0` and `Timing Mode = 9`, it modifies [LOCKPICKINGMTPBONUS](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#176). The final value for this stat is multiplied by its percentage entry in [THIEFSCL.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/thiefscl.htm), capped to the range `[0,255]`, before being included in the creature's [`Open Locks`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x67) score.
  */
 OUTER_SET OPCODE_open_locks_mod = 90
 /**
@@ -2267,9 +2267,9 @@ OUTER_SET OPCODE_open_locks_mod = 90
  * - 1 ⟶ Flat Value Modifier: `Skill = 'Statistic Modifier' value`
  * - 2 ⟶ Percentage Modifier: `Skill = (Skill * 'Statistic Modifier' value) / 100`
  *
- * `Timing Mode`s `1/4/7` permanently alters the creature's `[Find Traps](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x69)` score, leaving no removable effect.
+ * `Timing Mode`s `1/4/7` permanently alters the creature's [`Find Traps`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x69) score, leaving no removable effect.
  *
- * (EE only) When `Type = 0` and `Timing Mode = 9`, it modifies [TRAPSMTPBONUS](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#178). The final value for this stat is multiplied by its percentage entry in [THIEFSCL.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/thiefscl.htm), capped to the range `[0,255]`, before being included in the creature's `[Find Traps](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x69)` score.
+ * (EE only) When `Type = 0` and `Timing Mode = 9`, it modifies [TRAPSMTPBONUS](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#178). The final value for this stat is multiplied by its percentage entry in [THIEFSCL.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/thiefscl.htm), capped to the range `[0,255]`, before being included in the creature's [`Find Traps`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x69) score.
  */
 OUTER_SET OPCODE_find_traps_mod = 91
 /**
@@ -2283,9 +2283,9 @@ OUTER_SET OPCODE_find_traps_mod = 91
  * - 1 ⟶ Flat Value Modifier: `Skill = 'Statistic Modifier' value`
  * - 2 ⟶ Percentage Modifier: `Skill = (Skill * 'Statistic Modifier' value) / 100`
  *
- * `Timing Mode`s `1/4/7` permanently alters the creature's `[Pick Pockets](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x6A)` score, leaving no removable effect.
+ * `Timing Mode`s `1/4/7` permanently alters the creature's [`Pick Pockets`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x6A) score, leaving no removable effect.
  *
- * (EE only) When `Type = 0` and `Timing Mode = 9`, it modifies [PICKPOCKETMTPBONUS](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#179). The final value for this stat is multiplied by its percentage entry in [THIEFSCL.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/thiefscl.htm), capped to the range `[0,255]`, before being included in the creature's `[Pick Pockets](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x6A)` score.
+ * (EE only) When `Type = 0` and `Timing Mode = 9`, it modifies [PICKPOCKETMTPBONUS](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#179). The final value for this stat is multiplied by its percentage entry in [THIEFSCL.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/thiefscl.htm), capped to the range `[0,255]`, before being included in the creature's [`Pick Pockets`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x6A) score.
  */
 OUTER_SET OPCODE_pick_pockets_mod = 92
 /**
@@ -2349,9 +2349,9 @@ OUTER_SET OPCODE_tracking_skill_mod = 95
  *
  * In IWD2 the class to receive the change is specified at 0x2C
  *
- * `Timing Mode`s `1/4/7` permanently alter the creature's `[level](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x234)`, leaving no removable effect.
+ * `Timing Mode`s `1/4/7` permanently alter the creature's [`level`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x234), leaving no removable effect.
  *
- * Can only modify the `[first class level](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x234)`, it cannot modify `[second](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x235)` or `[third](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x236)` class levels.
+ * Can only modify the [`first class level`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x234), it cannot modify [`second`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x235) or [`third`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x236) class levels.
  */
 OUTER_SET OPCODE_level_change = 96
 /**
@@ -2449,9 +2449,9 @@ OUTER_SET OPCODE_protection_from_opcode = 101
  *
  * - Each application of this opcode only protects against its specified `Spell Level`, not "up to" it.
  * - Each effect in a spell/item is checked separately by this opcode.
- * - CAN block effects of Secondary Type `[MagicAttack](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4)`.
+ * - CAN block effects of Secondary Type [`MagicAttack`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4).
  *   - [V1 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm) inherit their Secondary Type from the Header([SPL](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x27)) / Extended Header([ITM](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x19)), [V2 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0xD0) specify it manually.
- * - CAN block EFF files with `[resist_dispel = BIT2](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2)`.
+ * - CAN block EFF files with [`resist_dispel = BIT2`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2).
  *   - Keep in mind that this BIT is automatically set on any effect delivered by an [Area-Effect](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) (Explosion) projectile, so this opcode can deflect effects through [AoE](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) projectiles.
  * - CANNOT block non-hostile effects from self.
  *   - [V1 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm) inherit their non-hostile behavior from the Header([SPL](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#Header_Flags_BIT10)) / Extended Header([ITM](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#ExtHeader_Flags_BIT10)), [V2 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x9C_BIT10) specify it manually.
@@ -2568,13 +2568,13 @@ OUTER_SET OPCODE_hold = 109
 /**
  * [Item: Create Magical Weapon](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op111)
  *
- * Creates the item specified by the `resource` key. The number of items created is controlled by the `Amount` field. The item is created in the `[Magical Weapon Slot](https://gibberlings3.github.io/iesdp/files/ids/bgee/slots.htm#34)`.
+ * Creates the item specified by the `resource` key. The number of items created is controlled by the `Amount` field. The item is created in the [`Magical Weapon Slot`](https://gibberlings3.github.io/iesdp/files/ids/bgee/slots.htm#34).
  *
- * The `[Magical Weapon Slot](https://gibberlings3.github.io/iesdp/files/ids/bgee/slots.htm#34)` does not allow `[Item](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x2_3)` Abilities.
+ * The [`Magical Weapon Slot`](https://gibberlings3.github.io/iesdp/files/ids/bgee/slots.htm#34) does not allow [`Item`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x2_3) Abilities.
  *
  * The `resource` field should not be empty, or the game will crash (not consistently, but it happens).
  *
- * The dispel bit of [opcode #111](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op111) has no bearing on the [item](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm) it creates. Its only function comes up when the [opcode #111](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op111) effect is delayed — the effect can be dispelled before it triggers (see also `[undispellable](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#Header_Flags_BIT24)` and [opcode #58](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op58)).
+ * The dispel bit of [opcode #111](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op111) has no bearing on the [item](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm) it creates. Its only function comes up when the [opcode #111](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op111) effect is delayed — the effect can be dispelled before it triggers (see also [`undispellable`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#Header_Flags_BIT24) and [opcode #58](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op58)).
  */
 OUTER_SET OPCODE_create_magical_weapon = 111
 /**
@@ -2670,7 +2670,7 @@ OUTER_SET OPCODE_mirror_image = 119
  *
  * - Protected weapons will still trigger [HitBy()](https://gibberlings3.github.io/iesdp/scripting/triggers/bgeetriggers.htm#0x0020), but will not interact with Mirror Image or Stone skins.
  * - Blocks weapon damage, on-hit effects of the weapon, [opcode #248](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op248) and [opcode #249](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op249), regardless of the effects target.
- * - `[Area-effect](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3)` projectiles (f.i. Arrow of Detonation) only check for Weapon Immunity on the attacked target, and use that result for all caught within their area of effect.
+ * - [`Area-effect`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) projectiles (f.i. Arrow of Detonation) only check for Weapon Immunity on the attacked target, and use that result for all caught within their area of effect.
  */
 OUTER_SET OPCODE_protection_from_weapons = 120
 /**
@@ -2679,7 +2679,7 @@ OUTER_SET OPCODE_protection_from_weapons = 120
  * Creates the item specified by the `resource` key. The number of items created is controlled by the `Charges` field. The number of secondary charge is determined by `Parameter3`. The number of tertiary charges is determined by `Parameter4` (external [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm)s). The item is created in the Inventory.
  *
  *
- * - (EE only) `[Resource 2](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x70)` and `[Resource 3](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x78)` (external [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm)s): item to be created is randomly chosen from resource fields `1–3` that are not empty.
+ * - (EE only) [`Resource 2`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x70) and [`Resource 3`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x78) (external [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm)s): item to be created is randomly chosen from resource fields `1–3` that are not empty.
  * - Applies a delayed [opcode #123](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op123) effect to remove the item (based on specified `duration`)
  */
 OUTER_SET OPCODE_create_inventory_item = 122
@@ -2747,19 +2747,19 @@ OUTER_SET OPCODE_movement_mod = 126
  *
  * Summons a number of monsters.
  *
- * Each CRE file has a `[Creature Power Level](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x18)` number. The amount of monsters summoned by this effect depends on this value, the `special` parameter and if it's used in [SPL](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Feature_Block) / [ITM](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Feature_Block) or from an external [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm).
+ * Each CRE file has a [`Creature Power Level`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x18) number. The amount of monsters summoned by this effect depends on this value, the `special` parameter and if it's used in [SPL](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Feature_Block) / [ITM](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Feature_Block) or from an external [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm).
  *
  * When used in [SPL](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Feature_Block)/[ITM](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Feature_Block) files, known value for `Mode` are:
  *
- * - 0 ⟶ Summon until `[Creature Power Level](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x18)` equals/exceeds `Number`
+ * - 0 ⟶ Summon until [`Creature Power Level`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x18) equals/exceeds `Number`
  * - 1 ⟶ Summon amount equal to `Number`
- * - 2 ⟶ Summon until `[Creature Power Level](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x18)` equals/exceeds Caster's Level
+ * - 2 ⟶ Summon until [`Creature Power Level`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x18) equals/exceeds Caster's Level
  *
  * When used in external [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files, known value for `Mode` are:
  *
- * - 0 ⟶ Summon until `[Creature Power Level](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x18)` equals/exceeds `Number`
+ * - 0 ⟶ Summon until [`Creature Power Level`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x18) equals/exceeds `Number`
  * - 1 ⟶ Summon amount equal to `'Number' + Dice rolls`
- * - 2 ⟶ Summon until `[Creature Power Level](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x18)` equals/exceeds `[Caster Level](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0xC8)` field
+ * - 2 ⟶ Summon until [`Creature Power Level`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x18) equals/exceeds [`Caster Level`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0xC8) field
  *
  * The `Type` field sets which [2DA](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/2da.htm) file to pick the creatures to summon from. The 2da files are `monsumX` and `anisumX`, where `X = 'Type' + 1`. `0–4` are allied , `5–9` are hostile. The specific 2da files used are:
  *
@@ -2776,7 +2776,7 @@ OUTER_SET OPCODE_movement_mod = 126
  *
  * A custom .2da file can be entered in the resource field (untested in bg1).
  *
- * If used from an external effect (.eff), the `[vvc](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x70)` field controls the bam file played when summoning.
+ * If used from an external effect (.eff), the [`vvc`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x70) field controls the bam file played when summoning.
  */
 OUTER_SET OPCODE_monster_summoning = 127
 /**
@@ -2784,7 +2784,7 @@ OUTER_SET OPCODE_monster_summoning = 127
  *
  * Applies the confusion effect to the targeted creature(s). The creature will run around uncontrollable, randomly attacking.
  *
- * `Timing Mode 1` will set `[STATE_CONFUSED](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT31)` without leaving behind a removable effect.
+ * `Timing Mode 1` will set [`STATE_CONFUSED`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_0x20_BIT31) without leaving behind a removable effect.
  *
  * [STATE_CONFUSED](https://gibberlings3.github.io/iesdp/files/ids/bgee/state.htm#BIT31) specs:
  *
@@ -3443,7 +3443,7 @@ OUTER_SET OPCODE_display_special_effect_icon = 142
  * - 37 ⟶ WEAPON2
  * - 38 ⟶ WEAPON3
  *
- * The `[Magical Weapon Slot](https://gibberlings3.github.io/iesdp/files/ids/bgee/slots.htm#34)` does not allow `[Item](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x2_3)` Abilities.
+ * The [`Magical Weapon Slot`](https://gibberlings3.github.io/iesdp/files/ids/bgee/slots.htm#34) does not allow [`Item`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x2_3) Abilities.
  *
  * Moreover, unlike [opcode #111](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op111), this opcode will not "equip" the item that's created in this particular slot.
  *
@@ -3482,10 +3482,10 @@ OUTER_SET OPCODE_button_disable_button = 144
  *
  * Known values for `Spell Type` are:
  *
- * - 0 ⟶ Disables `[wizard](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C_1)` spells with `[location](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0x2)=[spell](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0x2_2)` (also applied by [polymorph](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op135))
- * - 1 ⟶ Disables `[priest](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C_2)` spells with `[location](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0x2)=[spell](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0x2_2)` (also applied by [polymorph](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op135))
- * - 2 ⟶ Disables all innate spells (really any `[type](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C)` except `[wizard](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C_1)`/`[priest](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C_2)`), regardless of `[location](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0x2)`
- * - 3 ⟶ Disables only "magical" spells (those lacking `[Ignore dead/wild magic](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#Header_Flags_BIT14)`), regardless of `[type](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C)` or `[location](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0x2)` (EEs)
+ * - 0 ⟶ Disables [`wizard`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C_1) spells with [`location`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0x2) (also applied by [polymorph](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op135))
+ * - 1 ⟶ Disables [`priest`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C_2) spells with [`location`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0x2) (also applied by [polymorph](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op135))
+ * - 2 ⟶ Disables all innate spells (really any [`type`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C) except [`wizard`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C_1)/[`priest`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C_2)), regardless of [`location`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0x2)
+ * - 3 ⟶ Disables only "magical" spells (those lacking [`Ignore dead/wild magic`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#Header_Flags_BIT14)), regardless of [`type`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C) or [`location`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0x2) (EEs)
  *
  * Known values for `Show message?` are:
  *
@@ -3510,7 +3510,7 @@ OUTER_SET OPCODE_disable_spell_casting_abilities = 145
  *
  *
  * - When `Type=2`, effects in the `resource` will also bypass Magic Resistance, of every target, as if the caster targeted themselves, regardless of who they target with the spell or this effect.
- *   - Setting the `[Ignore Center](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#Behavior_BIT4)` bit in the subspell's projectile will force its effects to check Magic Resistance on every target, even if the caster did target themselves. Though as its primary function is to cause the projectile to ignore the caster (not "center"), it still won't affect them if it's `[area-effect](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3)`.
+ *   - Setting the [`Ignore Center`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#Behavior_BIT4) bit in the subspell's projectile will force its effects to check Magic Resistance on every target, even if the caster did target themselves. Though as its primary function is to cause the projectile to ignore the caster (not "center"), it still won't affect them if it's [`area-effect`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3).
  *
  * If the target is a container, the `Type` parameter is ignored and treated as `0`.
  *
@@ -3527,10 +3527,10 @@ OUTER_SET OPCODE_cast_spell_at_creature = 146
  * The `LEARN_SPELL` value is modified for mage specialists, with `+15` for same school spells, and `-15` for non-same school spells.
  *
  *
- * - `[Wizard](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C_1)` spell type uses [INTMOD.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/intmod.htm). Other `[Spell type](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C)`s automatically succeed, but report failure.
- * - `[Wizard](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C_1)` spell type can be `[level](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x34)` `1–9` if learned.
- * - `[Priest](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C_2)` spell type can be `[level](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x34)` `1–7` if learned.
- * - Other `[Spell type](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C)`s can be `[level](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x34)` `1–32767` if learned.
+ * - [`Wizard`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C_1) spell type uses [INTMOD.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/intmod.htm). Other [`Spell type`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C)s automatically succeed, but report failure.
+ * - [`Wizard`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C_1) spell type can be [`level`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x34) `1–9` if learned.
+ * - [`Priest`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C_2) spell type can be [`level`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x34) `1–7` if learned.
+ * - Other [`Spell type`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C)s can be [`level`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x34) `1–32767` if learned.
  */
 OUTER_SET OPCODE_learn_spell = 147
 /**
@@ -3548,8 +3548,8 @@ OUTER_SET OPCODE_learn_spell = 147
  * This opcode should generally target `Self`. In particular:
  *
  * - The projectile of the subspell will originate from the target(s) of [opcode #148](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op148).
- * - If the SPL/ITM with [opcode #148](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op148) targets a location, and doesn't have an `[area-effect](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3)` projectile, there will be no target to cast on.
- * - If the SPL/ITM with [opcode #148](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op148) has an `[area-effect](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3)` projectile, the spell in [opcode #148](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op148) would be cast once for every valid target.
+ * - If the SPL/ITM with [opcode #148](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op148) targets a location, and doesn't have an [`area-effect`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) projectile, there will be no target to cast on.
+ * - If the SPL/ITM with [opcode #148](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op148) has an [`area-effect`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) projectile, the spell in [opcode #148](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op148) would be cast once for every valid target.
  * - If this opcode uses the `Cast Instantly` option, then the target, not the caster, would cast the spell in [opcode #148](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op148).
  */
 OUTER_SET OPCODE_cast_spell_at_point = 148
@@ -3829,18 +3829,18 @@ OUTER_SET OPCODE_play_damage_animation = 170
 /**
  * [Spell: Give Ability](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op171)
  *
- * Gives the `[SPL](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm)` specified by the `resource` key to the targeted creature(s).
+ * Gives the [`SPL`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm) specified by the `resource` key to the targeted creature(s).
  *
  *
- * - `[Wizard](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C_1)` spell type can be `[level](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x34)` `1–9` if gained.
- * - `[Priest](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C_2)` spell type can be `[level](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x34)` `1–7` if gained.
- * - Other `[Spell type](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C)`s can be `[level](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x34)` `1–32767` if gained.
+ * - [`Wizard`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C_1) spell type can be [`level`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x34) `1–9` if gained.
+ * - [`Priest`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C_2) spell type can be [`level`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x34) `1–7` if gained.
+ * - Other [`Spell type`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x1C)s can be [`level`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x34) `1–32767` if gained.
  */
 OUTER_SET OPCODE_give_ability = 171
 /**
  * [Spell: Remove Spell](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op172)
  *
- * Removes the `[SPL](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm)` specified by the `resource` key from the targeted creature(s) spellbook.
+ * Removes the [`SPL`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm) specified by the `resource` key from the targeted creature(s) spellbook.
  *
  * If the key is not 8 characters long, all memorized copies will be removed.
  *  If the key is 8 characters, memorized copies will remain intact.
@@ -4011,7 +4011,7 @@ OUTER_SET OPCODE_play_sound_effect = 174
  *
  * This effect sets [HELD](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#58) to `1`. It also sets the [STATE_HELPLESS](https://gibberlings3.github.io/iesdp/files/ids/bgee/state.htm#BIT5) flag.
  *
- * At least in EEs, this opcode automatically displays string `[STRREF_EFFECT_HOLD](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/enginest.htm#35)` in the combat log.
+ * At least in EEs, this opcode automatically displays string [`STRREF_EFFECT_HOLD`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/enginest.htm#35) in the combat log.
  * It even overrides the entries in [EFFTEXT.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/efftext.htm).
  */
 OUTER_SET OPCODE_hold_graphic = 175
@@ -4215,7 +4215,7 @@ OUTER_SET OPCODE_passwall_dont_jump = 184
  *
  * This effect sets [HELD](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#58) to `1`. It also sets the [STATE_HELPLESS](https://gibberlings3.github.io/iesdp/files/ids/bgee/state.htm#BIT5) flag.
  *
- * At least in EEs, this opcode automatically displays string `[STRREF_EFFECT_HOLD](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/enginest.htm#35)` in the combat log.
+ * At least in EEs, this opcode automatically displays string [`STRREF_EFFECT_HOLD`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/enginest.htm#35) in the combat log.
  * It even overrides the entries in [EFFTEXT.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/efftext.htm).
  */
 OUTER_SET OPCODE_hold_ii = 185
@@ -4232,7 +4232,7 @@ OUTER_SET OPCODE_hold_ii = 185
  * - Delay is measured in 1⁄30 seconds, (½ tick), `600 = 20 seconds`.
  * - On non-EE games, the creature appears at the point specified by the Target Point fields (external [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files only).
  *   - On EE games, target(s) appear at Caster's Coordinates in new area (it does not seem to be possible to override through EFFs).
- * - Creature is moved to the new area (instantly) and flagged `[Moving Between Areas](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_Flags_BIT14)` until their delay expires (if it's used). It won't be active until the delay expires (it's hidden, cannot be affected by Area-effect, doesn't occupy space). It can still be targeted by the various `Everyone` targeting modes in the new area while it's still inactive, but similar to [maze](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op213)/[imprisonment](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op211), effects won't trigger (including [poison](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op25) and similar) on them until they become active.
+ * - Creature is moved to the new area (instantly) and flagged [`Moving Between Areas`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Header_Flags_BIT14) until their delay expires (if it's used). It won't be active until the delay expires (it's hidden, cannot be affected by Area-effect, doesn't occupy space). It can still be targeted by the various `Everyone` targeting modes in the new area while it's still inactive, but similar to [maze](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op213)/[imprisonment](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op211), effects won't trigger (including [poison](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op25) and similar) on them until they become active.
  *
  * IWD2: there was a note to not use this effect in older IESDP.
  *
@@ -4244,7 +4244,7 @@ OUTER_SET OPCODE_script_movetoarea = 186
 /**
  * [Script: Store Local Variable](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op187)
  *
- * This effect sets the variable specified by the `[Variable Name](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0xA8)` field to the value specified by the `Value` field.
+ * This effect sets the variable specified by the [`Variable Name`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0xA8) field to the value specified by the `Value` field.
  *
  * This effect can only be used in an external effect ([CRE](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm#CREV1_0_Effects)/[EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) file).
  *
@@ -4254,7 +4254,7 @@ OUTER_SET OPCODE_script_store_local_variable = 187
 /**
  * [Spell Effect: Aura Cleansing](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op188)
  *
- * While ON, the creature displays string `[STRREF_FEEDBACK_AURA_CLEANSED](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/enginest.htm#86)` (EE games only) whenever they begin to cast a spell before their aura would normally clear (i.e. more than once/round). Does NOT affect item usage, only spellcasting.
+ * While ON, the creature displays string [`STRREF_FEEDBACK_AURA_CLEANSED`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/enginest.htm#86) (EE games only) whenever they begin to cast a spell before their aura would normally clear (i.e. more than once/round). Does NOT affect item usage, only spellcasting.
  *
  * Set the `Stat Value` field to any non-zero value if you want no time needed between spells.
  *
@@ -4266,7 +4266,7 @@ OUTER_SET OPCODE_aura_cleansing = 188
 /**
  * [Stat: Casting Time Modifier](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op189)
  *
- * Alters the `[Casting Time](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0x12)` of spells by the value specified by the `Speed Modifier` field. This effect is cummulative.
+ * Alters the [`Casting Time`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Extended_Header_0x12) of spells by the value specified by the `Speed Modifier` field. This effect is cummulative.
  *
  * This effect sets [MENTALSPEED](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#77) to `Speed Modifier`. Known value for `Type` are:
  *
@@ -4407,9 +4407,9 @@ OUTER_SET OPCODE_familiar_block = 196
  * - [Opcode #333](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op333), [opcode #326](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op326) and [opcode #146](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op146)`*p2=2` are NOT properly reflected by this opcode – the spell specified by their `resource` key will affect the original target (as if it wasn't reflected).
  *
  *
- * - CANNOT reflect effects of Secondary Type `[MagicAttack](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4)`.
+ * - CANNOT reflect effects of Secondary Type [`MagicAttack`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4).
  *   - [V1 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm) inherit their Secondary Type from the Header([SPL](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x27)) / Extended Header([ITM](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x19)), [V2 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0xD0) specify it manually.
- * - CAN reflect EFF files with `[resist_dispel = BIT2](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2)`.
+ * - CAN reflect EFF files with [`resist_dispel = BIT2`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2).
  *   - Keep in mind that this BIT is automatically set on any effect delivered by an [Area-Effect](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) (Explosion) projectile, so this opcode can reflect effects through [AoE](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) projectiles.
  * - CANNOT reflect effects from self.
  * - Maintains animation `SPTURNI2` on the target, can be suppressed by [opcode #291](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op291).
@@ -4427,12 +4427,12 @@ OUTER_SET OPCODE_bounce_by_impact_projectile = 197
  * [Opcode #333](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op333), [opcode #326](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op326) and [opcode #146](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op146)`*p2=2` are NOT properly reflected by this opcode – the spell specified by their `resource` key will affect the original target (as if it wasn't reflected).
  *
  *
- * - CANNOT reflect effects of Secondary Type `[MagicAttack](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4)`.
+ * - CANNOT reflect effects of Secondary Type [`MagicAttack`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4).
  *   - [V1 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm) inherit their Secondary Type from the Header([SPL](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x27)) / Extended Header([ITM](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x19)), [V2 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0xD0) specify it manually.
- * - CAN reflect EFF files with `[resist_dispel = BIT2](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2)`.
+ * - CAN reflect EFF files with [`resist_dispel = BIT2`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2).
  *   - Keep in mind that this BIT is automatically set on any effect delivered by an [Area-Effect](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) (Explosion) projectile, so this opcode can reflect effects through [AoE](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) projectiles.
  * - CANNOT block effects from self.
- * - Maintains portrait icon `[Spell Deflection](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#67)` on the target (this is likely a bug).
+ * - Maintains portrait icon [`Spell Deflection`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#67) on the target (this is likely a bug).
  * - Maintains animation `SPTURNI2` on the target, can be suppressed by [opcode #291](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op291).
  *
  * [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files delivered by [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) will interact with Reflection separately from the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect that applies them, and only if that [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect already got through. If the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect is reflected, then the values in the [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) file won't matter. Most vanilla [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files have these fields set to `empty/zero` to avoid interacting with this opcode.
@@ -4446,12 +4446,12 @@ OUTER_SET OPCODE_bounce_by_opcode = 198
  * [Opcode #333](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op333), [opcode #326](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op326) and [opcode #146](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op146)`*p2=2` are NOT properly reflected by this opcode – the spell specified by their `resource` key will affect the original target (as if it wasn't reflected).
  *
  *
- * - CANNOT block effects of Secondary Type `[MagicAttack](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4)`.
+ * - CANNOT block effects of Secondary Type [`MagicAttack`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4).
  *   - [V1 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm) inherit their Secondary Type from the Header([SPL](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x27)) / Extended Header([ITM](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x19)), [V2 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0xD0) specify it manually.
- * - CANNOT block EFF files with `[resist_dispel = BIT2](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2)`.
+ * - CANNOT block EFF files with [`resist_dispel = BIT2`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2).
  *   - Keep in mind that this BIT is automatically set on any effect delivered by an [Area-Effect](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) (Explosion) projectile, so this opcode cannot reflect effects through [AoE](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) projectiles.
  * - CANNOT block effects from self.
- * - Maintains portrait icon `[Spell Deflection](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#67)` on the target (this is likely a bug).
+ * - Maintains portrait icon [`Spell Deflection`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#67) on the target (this is likely a bug).
  *
  * [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files delivered by [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) will interact with Reflection separately from the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect that applies them, and only if that [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect already got through. If the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect is reflected, then the values in the [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) file won't matter. Most vanilla [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files have these fields set to `empty/zero` to avoid interacting with this opcode.
  */
@@ -4471,12 +4471,12 @@ OUTER_SET OPCODE_bounce_by_power_level = 199
  * If Caster and Target are both affected by this opcode, the spell from Caster will reflect off Target, but not reflect back off Caster. Previously, whoever had more reflection charges would end up victorious, now the initial target always ends up victorious.
  *
  *
- * - CANNOT block effects of Secondary Type `[MagicAttack](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4)`.
+ * - CANNOT block effects of Secondary Type [`MagicAttack`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4).
  *   - [V1 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm) inherit their Secondary Type from the Header([SPL](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x27)) / Extended Header([ITM](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x19)), [V2 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0xD0) specify it manually.
- * - CANNOT block EFF files with `[resist_dispel = BIT2](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2)`.
+ * - CANNOT block EFF files with [`resist_dispel = BIT2`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2).
  *   - Keep in mind that this BIT is automatically set on any effect delivered by an [Area-Effect](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) (Explosion) projectile, so this opcode cannot reflect effects through [AoE](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) projectiles.
  * - CANNOT block effects from self.
- * - Maintains portrait icon `[Spell Turning](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#65)` on the target.
+ * - Maintains portrait icon [`Spell Turning`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#65) on the target.
  * - Maintains animation `SPTURNI2` on the target, can be suppressed by [opcode #291](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op291).
  *
  * [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files delivered by [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) will interact with Reflection separately from the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect that applies them, and only if that [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect already got through. If the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect is reflected, then the values in the [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) file won't matter. Most vanilla [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files have these fields set to `empty/zero` to avoid interacting with this opcode.
@@ -4492,12 +4492,12 @@ OUTER_SET OPCODE_bounce_by_power_level_decrementing = 200
  * On EE games, `resource` field ⟶ Spell cast when this effect self-terminates, `default = Parent + "B"`.
  *
  *
- * - CANNOT block effects of Secondary Type `[MagicAttack](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4)`.
+ * - CANNOT block effects of Secondary Type [`MagicAttack`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4).
  *   - [V1 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm) inherit their Secondary Type from the Header([SPL](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x27)) / Extended Header([ITM](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x19)), [V2 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0xD0) specify it manually.
- * - CANNOT block EFF files with `[resist_dispel = BIT2](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2)`.
+ * - CANNOT block EFF files with [`resist_dispel = BIT2`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2).
  *   - Keep in mind that this BIT is automatically set on any effect delivered by an [Area-Effect](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) (Explosion) projectile, so this opcode cannot deflect effects through [AoE](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) projectiles.
  * - CANNOT block effects from self.
- * - Maintains portrait icon `[Spell Deflection](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#67)` on the target.
+ * - Maintains portrait icon [`Spell Deflection`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#67) on the target.
  * - Maintains animation `SPMAGGLO` on the target, can be suppressed by [opcode #291](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op291).
  *
  * [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files delivered by [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) will interact with Deflection separately from the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect that applies them, and only if that [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect already got through. If the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect is deflected, then the values in the [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) file won't matter. Most vanilla [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files have these fields set to `empty/zero` to avoid interacting with this opcode.
@@ -4527,12 +4527,12 @@ OUTER_SET OPCODE_immunity_by_power_level_decrementing = 201
  * [Opcode #333](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op333), [opcode #326](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op326) and [opcode #146](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op146)`*p2=2` are NOT properly reflected by this opcode – the spell specified by their `resource` key will affect the original target (as if it wasn't reflected).
  *
  *
- * - CANNOT reflect effects of Secondary Type `[MagicAttack](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4)`.
+ * - CANNOT reflect effects of Secondary Type [`MagicAttack`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4).
  *   - [V1 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm) inherit their Secondary Type from the Header([SPL](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x27)) / Extended Header([ITM](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x19)), [V2 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0xD0) specify it manually.
- * - CAN reflect EFF files with `[resist_dispel = BIT2](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2)`.
+ * - CAN reflect EFF files with [`resist_dispel = BIT2`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2).
  *   - Keep in mind that this BIT is automatically set on any effect delivered by an [Area-Effect](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) (Explosion) projectile, so this opcode can reflect effects through [AoE](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) projectiles.
  * - CANNOT reflect effects from self.
- * - Maintains portrait icon `[Spell Deflection](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#67)` on the target (this is likely a bug).
+ * - Maintains portrait icon [`Spell Deflection`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#67) on the target (this is likely a bug).
  * - Maintains animation `SPTURNI2` on the target, can be suppressed by [opcode #291](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op291).
  *
  * [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files delivered by [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) will interact with Reflection separately from the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect that applies them, and only if that [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect already got through. If the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect is reflected, then the values in the [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) file won't matter. Most vanilla [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files have these fields set to `empty/zero` to avoid interacting with this opcode.
@@ -4565,11 +4565,11 @@ OUTER_SET OPCODE_bounce_by_school = 202
  * [Opcode #333](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op333), [opcode #326](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op326) and [opcode #146](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op146)`*p2=2` are NOT properly reflected by this opcode – the spell specified by their `resource` key will affect the original target (as if it wasn't reflected).
  *
  *
- * - CANNOT reflect effects of Secondary Type `[MagicAttack](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4)`.
- * - CAN reflect EFF files with `[resist_dispel = BIT2](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2)`.
+ * - CANNOT reflect effects of Secondary Type [`MagicAttack`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4).
+ * - CAN reflect EFF files with [`resist_dispel = BIT2`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2).
  *   - Keep in mind that this BIT is automatically set on any effect delivered by an [Area-Effect](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) (Explosion) projectile, so this opcode can reflect effects through [AoE](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) projectiles.
  * - CANNOT reflect effects from self.
- * - Maintains portrait icon `[Spell Deflection](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#67)` on the target (this is likely a bug).
+ * - Maintains portrait icon [`Spell Deflection`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#67) on the target (this is likely a bug).
  * - Maintains animation `SPTURNI2` on the target, can be suppressed by [opcode #291](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op291).
  *
  * [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files delivered by [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) will interact with Reflection separately from the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect that applies them, and only if that [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect already got through. If the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect is reflected, then the values in the [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) file won't matter. Most vanilla [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files have these fields set to `empty/zero` to avoid interacting with this opcode.
@@ -4597,9 +4597,9 @@ OUTER_SET OPCODE_bounce_by_secondary_type = 203
  * - 10 ⟶ WILDMAGE
  *
  *
- * - CANNOT block effects of Secondary Type `[MagicAttack](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4)`.
+ * - CANNOT block effects of Secondary Type [`MagicAttack`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4).
  *   - [V1 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm) inherit their Secondary Type from the Header([SPL](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x27)) / Extended Header([ITM](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x19)), [V2 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0xD0) specify it manually.
- * - CAN block EFF files with `[resist_dispel = BIT2](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2)`.
+ * - CAN block EFF files with [`resist_dispel = BIT2`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2).
  *   - Keep in mind that this BIT is automatically set on any effect delivered by an [Area-Effect](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) (Explosion) projectile, so this opcode can deflect effects through [AoE](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) projectiles.
  * - CANNOT block effects from self.
  * - Maintains animation `SPMAGGLO` on the target, can be suppressed by [opcode #291](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op291).
@@ -4632,8 +4632,8 @@ OUTER_SET OPCODE_protection_by_school = 204
  * - 13 ⟶ NON-COMBAT
  *
  *
- * - CANNOT block effects of Secondary Type `[MagicAttack](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4)`.
- * - CAN block EFF files with `[resist_dispel = BIT2](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2)`.
+ * - CANNOT block effects of Secondary Type [`MagicAttack`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4).
+ * - CAN block EFF files with [`resist_dispel = BIT2`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2).
  *   - Keep in mind that this BIT is automatically set on any effect delivered by an [Area-Effect](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) (Explosion) projectile, so this opcode can deflect effects through [AoE](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) projectiles.
  * - CANNOT block effects from self.
  * - Maintains animation `SPMAGGLO` on the target, can be suppressed by [opcode #291](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op291).
@@ -4659,15 +4659,15 @@ OUTER_SET OPCODE_protection_by_secondary_type = 205
  * 	pImmunitySpell->m_error = nNewFeedback;
  * }
  *
- * Basically, `String Reference` has to be `0xF00074` (`[STRREF_FEEDBACK_EVADE_RESOURCE](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/enginest.htm#116)`) or `0xF00080` (`[STRREF_FEEDBACK_IMMUNE_RESOURCE](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/enginest.htm#128)`) for the engine to display it.
+ * Basically, `String Reference` has to be `0xF00074` ([`STRREF_FEEDBACK_EVADE_RESOURCE`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/enginest.htm#116)) or `0xF00080` ([`STRREF_FEEDBACK_IMMUNE_RESOURCE`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/enginest.htm#128)) for the engine to display it.
  *
- * **NOTE:** the engine only allows `0xF00074` / `0xF00080` — it doesn't care that `[STRREF_FEEDBACK_IMMUNE_RESOURCE](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/enginest.htm#128)` (`99389` on BG2:EE) is what `0xF00080` eventually resolves to, it's not `0xF00080`. [opcode #206](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op206)'s `String Reference` should look like this in [Near Infinity](https://github.com/Argent77/NearInfinity) (right click ⇒ Edit as hex number):
+ * **NOTE:** the engine only allows `0xF00074` / `0xF00080` — it doesn't care that [`STRREF_FEEDBACK_IMMUNE_RESOURCE`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/enginest.htm#128) (`99389` on BG2:EE) is what `0xF00080` eventually resolves to, it's not `0xF00080`. [opcode #206](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op206)'s `String Reference` should look like this in [Near Infinity](https://github.com/Argent77/NearInfinity) (right click ⇒ Edit as hex number):
  *
  *
  *
  * At least in EEs, this opcode can block [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files too.
  *
- * In order to do so, both the `Resource` field of [opcode #206](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op206) and the `[Parent Resource](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x94)` field of the EFF file must be the same string (max. 8 character long); moreover, you must set the `[Resource Type](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x90)` field of the EFF file to `[Spell](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x90_1)`.
+ * In order to do so, both the `Resource` field of [opcode #206](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op206) and the [`Parent Resource`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x94) field of the EFF file must be the same string (max. 8 character long); moreover, you must set the [`Resource Type`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x90) field of the EFF file to [`Spell`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x90_1).
  */
 OUTER_SET OPCODE_protection_from_spell = 206
 /**
@@ -4678,13 +4678,13 @@ OUTER_SET OPCODE_protection_from_spell = 206
  * [Opcode #333](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op333), [opcode #326](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op326) and [opcode #146](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op146)`*p2=2` are NOT properly reflected by this opcode – the spell specified by their `resource` key will affect the original target (as if it wasn't reflected).
  *
  *
- * - Similar to [opcode #206](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op206), this can only reflect EFF files if their `[Parent Type](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x90)` is set to `[Spell](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x90_1)`.
- * - CANNOT reflect effects of Secondary Type `[MagicAttack](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4)`.
+ * - Similar to [opcode #206](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op206), this can only reflect EFF files if their [`Parent Type`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x90) is set to [`Spell`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x90_1).
+ * - CANNOT reflect effects of Secondary Type [`MagicAttack`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4).
  *   - [V1 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm) inherit their Secondary Type from the Header([SPL](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x27)) / Extended Header([ITM](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x19)), [V2 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0xD0) specify it manually.
- * - CAN reflect EFF files with `[resist_dispel = BIT2](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2)`.
+ * - CAN reflect EFF files with [`resist_dispel = BIT2`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2).
  *   - Keep in mind that this BIT is automatically set on any effect delivered by an [Area-Effect](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) (Explosion) projectile, so this opcode can reflect effects through [AoE](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) projectiles.
  * - CANNOT reflect effects from self.
- * - Maintains portrait icon `[Spell Deflection](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#67)` on the target (this is likely a bug).
+ * - Maintains portrait icon [`Spell Deflection`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#67) on the target (this is likely a bug).
  * - Maintains animation `SPTURNI2` on the target, can be suppressed by [opcode #291](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op291).
  *
  * [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files delivered by [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) will interact with Reflection separately from the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect that applies them, and only if that [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect already got through. If the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect is reflected, then the values in the [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) file won't matter. Most vanilla [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files have these fields set to `empty/zero` to avoid interacting with this opcode.
@@ -4711,7 +4711,7 @@ OUTER_SET OPCODE_hp_minimum_limit = 208
  *
  * More specifically, it functions by applying [opcode #13](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op13) (`Death Type = 4 // Normal Death`).
  *
- * [Immunity](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op101) to [opcode #13](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op13) is not sufficient to block this effect unless it's granted through `[7EYES.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/7eyes.htm)`.
+ * [Immunity](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op101) to [opcode #13](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op13) is not sufficient to block this effect unless it's granted through [`7EYES.2DA`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/7eyes.htm).
  */
 OUTER_SET OPCODE_death_kill_60hp = 209
 /**
@@ -4778,7 +4778,7 @@ OUTER_SET OPCODE_protection_freedom = 212
  * - 15 to 17 int ⟶ 2d4 rounds
  * - 18+ int ⟶ 1d4 rounds
  *
- * `Icon` defines the index from [STATDESC.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm) for custom portrait icons (EE only). Default value is `[Maze](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#78)`.
+ * `Icon` defines the index from [STATDESC.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm) for custom portrait icons (EE only). Default value is [`Maze`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#78).
  */
 OUTER_SET OPCODE_maze = 213
 /**
@@ -5122,7 +5122,7 @@ OUTER_SET OPCODE_ac_vs_creature_type_mod = 219
  *
  * - All effects from that effect's `Parent Resource` with a `Power Level <= Maximum Level` that do not use `Timing Mode 9` will be removed.
  * - An effect using `Timing Mode 9` can be used to match the type and power level to trigger its resource's removal, but that effect itself will not be removed.
- * - If removal is triggered, the relevant string from `[MSCHOOL.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/mschool.htm)` is displayed in the combat log.
+ * - If removal is triggered, the relevant string from [`MSCHOOL.2DA`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/mschool.htm) is displayed in the combat log.
  *
  * [V1 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm) inherit their `Primary Type (School)` from the Header([SPL](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x25)) / Extended Header([ITM](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x17)), [V2 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x4C) specify it manually.
  *
@@ -5148,7 +5148,7 @@ OUTER_SET OPCODE_remove_school = 220
  *
  * - All effects from that effect's `Parent Resource` with a `Power Level <= Maximum Level` that do not use `Timing Mode 9` will be removed.
  * - An effect using `Timing Mode 9` can be used to match the type and power level to trigger its resource's removal, but that effect itself will not be removed.
- * - If removal is triggered, the relevant string from `[MSECTYPE.2DA](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm)` is displayed in the combat log.
+ * - If removal is triggered, the relevant string from [`MSECTYPE.2DA`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm) is displayed in the combat log.
  *
  * [V1 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm) inherit their `Secondary Type` from the Header([SPL](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x27)) / Extended Header([ITM](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x19)), [V2 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0xD0) specify it manually.
  *
@@ -5204,12 +5204,12 @@ OUTER_SET OPCODE_teleport_field = 222
  * On EE games, `resource` field ⟶ Spell cast when this effect self-terminates, `default = Parent + "B"`.
  *
  *
- * - CANNOT block effects of Secondary Type `[MagicAttack](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4)`.
+ * - CANNOT block effects of Secondary Type [`MagicAttack`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4).
  *   - [V1 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm) inherit their Secondary Type from the Header([SPL](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x27)) / Extended Header([ITM](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x19)), [V2 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0xD0) specify it manually.
- * - CAN block EFF files with `[resist_dispel = BIT2](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2)`.
+ * - CAN block EFF files with [`resist_dispel = BIT2`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2).
  *   - Keep in mind that this BIT is automatically set on any effect delivered by an [Area-Effect](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) (Explosion) projectile, so this opcode can deflect effects through [AoE](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) projectiles.
  * - CANNOT block effects from self.
- * - Maintains portrait icon `[Spell Shield](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#73)` on the target.
+ * - Maintains portrait icon [`Spell Shield`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#73) on the target.
  * - Maintains animation `SPMAGGLO` on the target, can be suppressed by [opcode #291](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op291).
  *
  * [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files delivered by [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) will interact with Deflection separately from the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect that applies them, and only if that [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect already got through. If the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect is deflected, then the values in the [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) file won't matter. Most vanilla [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files have these fields set to `empty/zero` to avoid interacting with this opcode.
@@ -5260,11 +5260,11 @@ OUTER_SET OPCODE_reveal_magic = 225
  * On EE games, `resource` field ⟶ Spell cast when this effect self-terminates, `default = Parent + "B"`.
  *
  *
- * - CAN block effects of Secondary Type `[MagicAttack](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4)`.
- * - CAN block EFF files with `[resist_dispel = BIT2](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2)`.
+ * - CAN block effects of Secondary Type [`MagicAttack`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4).
+ * - CAN block EFF files with [`resist_dispel = BIT2`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2).
  *   - Keep in mind that this BIT is automatically set on any effect delivered by an [Area-Effect](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) (Explosion) projectile, so this opcode can deflect effects through [AoE](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) projectiles.
  * - CANNOT block effects from self.
- * - Maintains portrait icon `[Spell Shield](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#73)` on the target.
+ * - Maintains portrait icon [`Spell Shield`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#73) on the target.
  * - Maintains animation `SPMAGGLO` on the target, can be suppressed by [opcode #291](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op291).
  *
  * [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files delivered by [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) will interact with Deflection separately from the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect that applies them, and only if that [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect already got through. If the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect is deflected, then the values in the [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) file won't matter. Most vanilla [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files have these fields set to `empty/zero` to avoid interacting with this opcode.
@@ -5300,12 +5300,12 @@ OUTER_SET OPCODE_immunity_by_secondary_type_decrementing = 226
  * If Caster and Target are both affected by this opcode, the spell from Caster will reflect off Target, but not reflect back off Caster. Previously, whoever had more reflection charges would end up victorious, now the initial target always ends up victorious.
  *
  *
- * - CANNOT reflect effects of Secondary Type `[MagicAttack](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4)`.
+ * - CANNOT reflect effects of Secondary Type [`MagicAttack`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4).
  *   - [V1 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm) inherit their Secondary Type from the Header([SPL](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x27)) / Extended Header([ITM](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x19)), [V2 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0xD0) specify it manually.
- * - CAN reflect EFF files with `[resist_dispel = BIT2](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2)`.
+ * - CAN reflect EFF files with [`resist_dispel = BIT2`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2).
  *   - Keep in mind that this BIT is automatically set on any effect delivered by an [Area-Effect](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) (Explosion) projectile, so this opcode can reflect effects through [AoE](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) projectiles.
  * - CANNOT reflect effects from self.
- * - Maintains portrait icon `[Spell Deflection](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#67)` on the target (this is likely a bug).
+ * - Maintains portrait icon [`Spell Deflection`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#67) on the target (this is likely a bug).
  * - Maintains animation `SPTURNI2` on the target, can be suppressed by [opcode #291](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op291).
  *
  * [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files delivered by [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) will interact with Reflection separately from the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect that applies them, and only if that [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect already got through. If the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect is reflected, then the values in the [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) file won't matter. Most vanilla [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files have these fields set to `empty/zero` to avoid interacting with this opcode.
@@ -5344,11 +5344,11 @@ OUTER_SET OPCODE_bounce_by_school_decrementing = 227
  * If Caster and Target are both affected by this opcode, the spell from Caster will reflect off Target, but not reflect back off Caster. Previously, whoever had more reflection charges would end up victorious, now the initial target always ends up victorious.
  *
  *
- * - CANNOT reflect effects of Secondary Type `[MagicAttack](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4)`.
- * - CAN reflect EFF files with `[resist_dispel = BIT2](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2)`.
+ * - CANNOT reflect effects of Secondary Type [`MagicAttack`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4).
+ * - CAN reflect EFF files with [`resist_dispel = BIT2`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2).
  *   - Keep in mind that this BIT is automatically set on any effect delivered by an [Area-Effect](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) (Explosion) projectile, so this opcode can reflect effects through [AoE](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) projectiles.
  * - CANNOT reflect effects from self.
- * - Maintains portrait icon `[Spell Deflection](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#67)` on the target (this is likely a bug).
+ * - Maintains portrait icon [`Spell Deflection`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#67) on the target (this is likely a bug).
  * - Maintains animation `SPTURNI2` on the target, can be suppressed by [opcode #291](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op291).
  *
  * [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files delivered by [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) will interact with Reflection separately from the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect that applies them, and only if that [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect already got through. If the [opcode #177](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op177)/[opcode #283](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op283) effect is reflected, then the values in the [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) file won't matter. Most vanilla [EFF](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm) files have these fields set to `empty/zero` to avoid interacting with this opcode.
@@ -5423,9 +5423,9 @@ OUTER_SET OPCODE_remove_one_secondary_type = 230
  *
  * In particular:
  *
- * - All creatures not immune to Time Stop will be rendered uncontrollable, can be hit automatically by attacks as if they were HELPLESS (but do not actually have `[STATE_HELPLESS](https://gibberlings3.github.io/iesdp/files/ids/bgee/state.htm#BIT5)` set), and their frequency-based effects will not trigger ([poison](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op25)/[regeneration](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op98)), but their `duration` will run.
+ * - All creatures not immune to Time Stop will be rendered uncontrollable, can be hit automatically by attacks as if they were HELPLESS (but do not actually have [`STATE_HELPLESS`](https://gibberlings3.github.io/iesdp/files/ids/bgee/state.htm#BIT5) set), and their frequency-based effects will not trigger ([poison](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op25)/[regeneration](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op98)), but their `duration` will run.
  * - [Projectiles](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm) are suspended mid-flight until the Time Stop ends, at which point they will resume normal function.
- * - `[Area Effect](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3)` projectiles are suppressed until the Time Stop ends, at which point they will resume normal function, though their duration will run during the Time Stop.
+ * - [`Area Effect`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) projectiles are suppressed until the Time Stop ends, at which point they will resume normal function, though their duration will run during the Time Stop.
  * - Projectiles that hit "instantly" (`#0` and `#1` for spells/items) are unaffected by Time Stop, which includes all melee weapons.
  *
  * Both parameters should be `0` (zero).
@@ -5720,7 +5720,7 @@ OUTER_SET OPCODE_image_projection = 236
  *   - Maintains [STATE_INVISIBLE](https://gibberlings3.github.io/iesdp/files/ids/bgee/state.htm#BIT4) on `Master ID`. This state is constantly reapplied whenever removed or terminated.
  * - 2 ⟶ Project Image
  *   - Maintains [STATE_HELPLESS](https://gibberlings3.github.io/iesdp/files/ids/bgee/state.htm#BIT5) on `Master ID`. This state is constantly reapplied whenever removed or terminated.
- *   - If `Master ID` triggers `[HitBy([ANYONE],0)](https://gibberlings3.github.io/iesdp/scripting/triggers/bgeetriggers.htm#0x0020)`, this creature is moved to area `"NO_AREA.ARE"`. This will delete non-global creatures from the game, unless such an area has been added to the game.
+ *   - If `Master ID` triggers [`HitBy([ANYONE],0)`](https://gibberlings3.github.io/iesdp/scripting/triggers/bgeetriggers.htm#0x0020), this creature is moved to area `"NO_AREA.ARE"`. This will delete non-global creatures from the game, unless such an area has been added to the game.
  * - 3 ⟶ Simulacrum
  *
  * Modifies [PUPPETMASTERID](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#138) to the `Object ID` of a projected image's Master. `Object ID` is the 4 byte long number stored at offset `0x27c` of the [CRE](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm) file, and can change.
@@ -5821,7 +5821,7 @@ OUTER_SET OPCODE_check_for_berserk = 245
 /**
  * [Spell Effect: Berserking](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op246)
  *
- * This effect appears to be a combination of [opcode #3](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op3) and the `[Berserk](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#4)` portrait icon. This effect attaches [opcode #247](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op247).
+ * This effect appears to be a combination of [opcode #3](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op3) and the [`Berserk`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#4) portrait icon. This effect attaches [opcode #247](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op247).
  *
  * It also sets [BERSERKSTAGE1](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#143).
  */
@@ -5950,7 +5950,7 @@ OUTER_SET OPCODE_add_map_marker = 253
  *
  * Applies the remove map marker effect. This effect removes the map marker (if any) at the position the effect is cast. The `Target` of this effect should be set to `Pre-Target` to function correctly (actually, it can work with `Self`, might depend on how you are using it).
  *
- * The `String Reference` field should match `[opcode #253 StrRef](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op253)` to be removed. [Opcode #254](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op254) needs to be cast on exact coordinates as [opcode #253](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op253).
+ * The `String Reference` field should match [`opcode #253 StrRef`](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op253) to be removed. [Opcode #254](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op254) needs to be cast on exact coordinates as [opcode #253](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op253).
  *
  * This effect works in SoA but not ToB. Works fine in EE's.
  */
@@ -6007,12 +6007,12 @@ OUTER_SET OPCODE_spell_sequencer_activation = 258
  * On EE games, `resource` field ⟶ Spell cast when this effect self-terminates, `default = Parent + "B"`.
  *
  *
- * - CANNOT trap effects of Secondary Type `[MagicAttack](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4)`.
+ * - CANNOT trap effects of Secondary Type [`MagicAttack`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/msectype.htm#4).
  *   - [V1 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v1.htm) inherit their Secondary Type from the Header([SPL](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/spl_v1.htm#splv1_Header_0x27)) / Extended Header([ITM](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/itm_v1.htm#itmv1_Extended_Header_0x19)), [V2 effects](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0xD0) specify it manually.
- * - CANNOT trap EFF files with `[resist_dispel = BIT2](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2)`.
+ * - CANNOT trap EFF files with [`resist_dispel = BIT2`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x5C_BIT2).
  *   - Keep in mind that this BIT is automatically set on any effect delivered by an [Area-Effect](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) (Explosion) projectile, so this opcode cannot trap effects through [AoE](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/pro_v1.htm#0x8_3) projectiles.
  * - CANNOT trap effects from self.
- * - Maintains portrait icon `[Spell Trap](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#117)` on the target.
+ * - Maintains portrait icon [`Spell Trap`](https://gibberlings3.github.io/iesdp/files/2da/2da_bgee/statdesc.htm#117) on the target.
  * - Maintains animation `SPMAGGLO` on the target, can be suppressed by [opcode #291](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op291).
  * - When it traps an effect, it applies [opcode #261](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op261) to the target.
  *   - `Parameter1` is the `Power` level of the trapped effect, `Parameter2` is always `0|Wizard`.
@@ -6096,8 +6096,8 @@ OUTER_SET OPCODE_drop_weapons_in_panic = 264
  *
  *
  * - Since the `Resource` Key can only be 8 characters long maximum, you can not set a Global Variable with this effect that has a name longer than this amount.
- *   - You can use the `[VVC](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x70)` field of external EFF files for an additional 8 characters of variable name.
- *     - You can use the `[3rdresource](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x78)` field of external EFF files for an additional 8 characters of variable name.
+ *   - You can use the [`VVC`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x70) field of external EFF files for an additional 8 characters of variable name.
+ *     - You can use the [`3rdresource`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x78) field of external EFF files for an additional 8 characters of variable name.
  *
  * All timing modes act as permanent for this effect.
  *
@@ -6648,8 +6648,8 @@ OUTER_SET OPCODE_protection_from_tracking = 308
  *
  *
  * - Since the `resource` key can only be 8 characters long maximum, you can not set a variable with this Effect that has a name longer than this amount.
- *   - You can use the `[Resource 2](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x70)` field of external EFF files for an additional 8 characters of variable name.
- *     - You can use the `[Resource 3](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x78)` field of external EFF files for an additional 8 characters of variable name.
+ *   - You can use the [`Resource 2`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x70) field of external EFF files for an additional 8 characters of variable name.
+ *     - You can use the [`Resource 3`](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/eff_v2.htm#effv2_Body_0x78) field of external EFF files for an additional 8 characters of variable name.
  *       - As a result, it cannot modify variables more than 24 characters long.
  *
  * This effect is always instantaneous (local variables are stored internally, not as effects, while the game is running). All local variables for a [CRE](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm) are stored as [opcode #187](https://gibberlings3.github.io/iesdp/opcodes/bgee.htm#op187) effects on that [CRE](https://gibberlings3.github.io/iesdp/file_formats/ie_formats/cre_v1.htm) whenever the game is saved, which will trigger as soon as the game is loaded.
@@ -6721,7 +6721,7 @@ OUTER_SET OPCODE_HLA_denotation = 313
  *
  * Do not use this effect in conjunction with the Juggernaut Golem Manual as it will corrupt the use of that item.
  *
- * In particular, the Juggernaut Golem `"TOMEGOL4.CRE"` is scripted by `"TOMEGOL4.BCS"` to `[Kill()](https://gibberlings3.github.io/iesdp/scripting/actions/bgeeactions.htm#131)` itself if its Summoner and no Party Members have [STONESKINSGOLEM](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#199) set to a non-zero value.
+ * In particular, the Juggernaut Golem `"TOMEGOL4.CRE"` is scripted by `"TOMEGOL4.BCS"` to [`Kill()`](https://gibberlings3.github.io/iesdp/scripting/actions/bgeeactions.htm#131) itself if its Summoner and no Party Members have [STONESKINSGOLEM](https://gibberlings3.github.io/iesdp/files/ids/bgee/stats.htm#199) set to a non-zero value.
  */
 OUTER_SET OPCODE_golem_stoneskin = 314
 /**
