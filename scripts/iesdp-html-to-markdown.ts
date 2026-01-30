@@ -40,8 +40,19 @@ export function walkNode(node: Node, formatName: string, listDepth: number = 0):
       }
       return children;
     }
-    case "code":
+    case "code": {
+      // When <code> wraps a single <a> link, emit [``text``](url) so the link renders.
+      // Raw `[text](url)` inside backticks would not render as a clickable link.
+      const anchor = el.querySelector("a[href]");
+      if (anchor) {
+        const linkText = walkChildren(anchor, formatName, listDepth);
+        const href = anchor.getAttribute("href");
+        if (href) {
+          return `[\`${linkText}\`](${resolveIesdpUrl(href, formatName)})`;
+        }
+      }
       return `\`${walkChildren(el, formatName, listDepth)}\``;
+    }
     case "b":
     case "strong":
       return `**${walkChildren(el, formatName, listDepth)}**`;

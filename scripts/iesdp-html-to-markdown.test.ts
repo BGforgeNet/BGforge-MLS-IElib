@@ -81,6 +81,12 @@ describe("htmlToMarkdown", () => {
     expect(result).toBe(`[effect](${IESDP_BASE_URL}/opcodes/bgee.htm#op10)`);
   });
 
+  it("converts code wrapping a link to a linked code span", () => {
+    const html = '<code><a href="../ie_formats/cre_v1.htm#CREV1_0_Header_0x48">Armor Class</a></code>';
+    const result = htmlToMarkdown(html, "opcode");
+    expect(result).toBe(`[\`Armor Class\`](${IESDP_BASE_URL}/ie_formats/cre_v1.htm#CREV1_0_Header_0x48)`);
+  });
+
   it("handles named anchors without href", () => {
     const html = '<a name="effv2_Body_0x14">text</a>';
     const result = htmlToMarkdown(html, "eff_v2");
