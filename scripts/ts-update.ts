@@ -121,8 +121,8 @@ function isValidActionData(data: unknown): data is ParsedActionData {
   if (data === null || typeof data !== "object" || Array.isArray(data)) {
     return false;
   }
-  const obj = data as Record<string, unknown>;
-  return typeof obj.bg2 === "number" && typeof obj.name === "string";
+  return "bg2" in data && typeof data.bg2 === "number"
+    && "name" in data && typeof data.name === "string";
 }
 
 /**
@@ -188,7 +188,7 @@ function generateTypeScriptDeclaration(yamlFilePath: string): string | null {
   }
 
   if (!isValidActionData(parsed)) {
-    const obj = parsed as Record<string, unknown>;
+    const obj = parsed;
     // Files for other game variants (bg1, bgee, pst, iwd) lack bg2 field -- expected, skip silently
     if (!("bg2" in obj)) {
       return null;
