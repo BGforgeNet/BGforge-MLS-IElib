@@ -12,11 +12,10 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: "20"
-      - uses: JS-DevTools/npm-publish@v3
+          node-version: "24"
+      - uses: JS-DevTools/npm-publish@v4.1.4
         with:
-          token: ${{ secrets.NPM_TOKEN }}
           package: ts/ielib
