@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3
+
+Switch `$tra` to `tra` and `$obj` to `obj`.
+
 ## 0.1.2
 
 - Add bg2 animate.ids.
