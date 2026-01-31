@@ -6,8 +6,12 @@
 	"dependencies": {},
 	"devDependencies": {},
 	"keywords": [
-        "Infinity Engine",
-        "Baldur's Gate",
-        "WeiDU"
-    ]
+		"Infinity Engine",
+		"Baldur's Gate",
+		"WeiDU"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/BGforgeNet/BGforge-MLS-IElib"
+	}
 }
