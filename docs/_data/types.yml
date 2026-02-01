@@ -3,7 +3,7 @@
 - name: bool
   desc: 0 or 1.
 - name: ids
-  desc: A string containing an existing IDS symbol.
+  desc: An ID symbol. A string from an existing IDS table file.
 - name: int
   desc: Integer value.
 - name: list
