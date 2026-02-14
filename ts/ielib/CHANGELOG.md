@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.4
+
+Add `Action` type for actions.
+
 ## 0.1.3
 
 Switch `$tra` to `tra` and `$obj` to `obj`.
