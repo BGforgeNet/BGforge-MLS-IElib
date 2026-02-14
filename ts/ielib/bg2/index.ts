@@ -1,4 +1,4 @@
-import { ObjectPtr } from '..';
+import { Action, ObjectPtr } from '..';
 
 export * from './actions';
 export * from './align.ids';
@@ -77,7 +77,7 @@ export * from './weather.ids';
   END
 ```
  */
-export declare function Help(): void;
+export declare function Help(): Action;
 
 /**
  * Returns true if the specified object shouted for Help() in the two script rounds. Help() has a range of approximately 40.

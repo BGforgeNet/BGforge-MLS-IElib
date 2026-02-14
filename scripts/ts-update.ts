@@ -237,7 +237,7 @@ function generateTypeScriptDeclaration(yamlFilePath: string): string | null {
   }
 
   const paramsStr = paramLines.join(", ");
-  return `/**\n * ${description.trim()}\n */\ndeclare function ${functionName}(${paramsStr}): void;`;
+  return `/**\n * ${description.trim()}\n */\ndeclare function ${functionName}(${paramsStr}): Action;`;
 }
 
 /**

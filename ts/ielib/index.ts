@@ -47,10 +47,10 @@ export declare type ObjectPtr = IE<string, "ObjectPtr"> | ObjectSpec;
  */
 export type Point = `[${number}.${number}]`;
 
-/**
- * Action ID.
- */
-export type Action = void;
+/** Branded type for engine actions. Sync with MLS: engine action functions must return this type. */
+export interface Action {
+  readonly __brand: "Action";
+}
 
 /** Spell.ids */
 export type SpellID = number & {};
