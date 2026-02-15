@@ -249,7 +249,7 @@ function generateTypeScriptDeclaration(yamlFilePath: string): string | null {
   }
 
   const paramsStr = paramLines.join(", ");
-  return `/**\n * ${description.trim()}\n */\ndeclare function ${functionName}(${paramsStr}): Action;`;
+  return `/**\n * ${description.trim()}\n */\nexport declare function ${functionName}(${paramsStr}): Action;`;
 }
 
 /**
@@ -325,7 +325,7 @@ function convertTriggerBlockToDeclaration(block: string): string {
   }
   const paramsStr = parseTriggerParameters(params);
 
-  return `/**\n * ${description.trim()}\n */\ndeclare function ${triggerName}(${paramsStr}): boolean;`;
+  return `/**\n * ${description.trim()}\n */\nexport declare function ${triggerName}(${paramsStr}): boolean;`;
 }
 
 /**
@@ -386,6 +386,13 @@ function processTriggers(triggerFilePath: string, triggerOutputFilePath: string)
   let errorCount = 0;
 
   for (const [i, block] of triggerBlocks.entries()) {
+    // Skip triggers that are handled separately (e.g. Help is both action and trigger)
+    const nameMatch = block.match(/^0x[0-9A-Fa-f]+ (\w+)\(/);
+    if (nameMatch?.[1] && SKIP_FUNCTION_NAMES.includes(nameMatch[1])) {
+      log(`Skipping trigger block #${i + 1}: ${nameMatch[1]}() is in skip list`);
+      continue;
+    }
+
     try {
       const declaration = convertTriggerBlockToDeclaration(block);
       tsOutput.push(declaration);

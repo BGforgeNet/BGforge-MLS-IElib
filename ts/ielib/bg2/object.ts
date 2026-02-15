@@ -1,7 +1,5 @@
 import { ObjectPtr } from "..";
-
-
-declare const Myself: ObjectPtr; // dupe to avoid circular import
+import { Myself } from "./object.d";
 // To keep declarations shorter
 function DefaultSelf(who: ObjectPtr = Myself): ObjectPtr { return who };
 

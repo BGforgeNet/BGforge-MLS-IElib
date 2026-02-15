@@ -61,27 +61,12 @@ export interface Action {
 
 // --- MLS sync surface end ---
 
-/**
- * Wrapper for TRA references. Use instead of `@`.
- *
- * TRA references are a WeiDU compile-time concept -- they resolve to
- * TLK indices (StrRefs) at install time.
- *
- * @param index tra reference number
- */
-export declare function tra(index: number): StrRef;
-
-/**
- * Wrapper for direct TLK references. Use instead of `#`.
- *
- * @param index TLK string index
- */
-export declare function tlk(index: number): StrRef;
+export { tra, tlk } from "./ambient";
 
 /**
  * Game Object
  */
-export declare type ObjectPtr = IE<string, "ObjectPtr"> | ObjectSpec;
+export type ObjectPtr = IE<string, "ObjectPtr"> | ObjectSpec;
 
 /**
  * Area point/location.
