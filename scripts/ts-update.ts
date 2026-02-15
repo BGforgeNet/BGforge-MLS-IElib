@@ -20,7 +20,6 @@ const SKIP_FUNCTION_NAMES = ["Help"]; // Help is both action and trigger
 
 const RESERVED_PARAM_NAMES: Readonly<Record<string, string>> = {
   GLOBAL: "global",
-  STRREF: "strRef",
   class: "classID",
   iD: "id",
 };
@@ -48,6 +47,7 @@ const TYPE_MAPPING: Readonly<Record<string, string>> = {
 const PARAM_NAME_TYPES: Readonly<Record<string, string>> = {
   Scope: "Scope",
   Face: "Direction",
+  Direction: "Direction",
 };
 
 const ACTION_FILE_HEADER = `import type { Action, AreRef, CreRef, Direction, ObjectPtr, Point, Scope, SpellID, SplRef, StrRef } from "../index";

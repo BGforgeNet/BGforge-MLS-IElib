@@ -1004,7 +1004,7 @@ declare function StartStore(store: string, target: ObjectPtr): Action;
   END
 ```
  */
-declare function DisplayString(object: ObjectPtr, strref: StrRef): Action;
+declare function DisplayString(object: ObjectPtr, string: StrRef): Action;
 
 /**
  * This action changes the IDS identifiers for the active creature to the values specified. The object parameter must be in the IDS object form (i.e [EA.GENERAL.RACE.CLASS.SPECIFIC.GENDER.ALIGN]). If parameters are missing, they will default to 0. If a symbolic object is passed, all identifiers will be cleared and the IDS identifier bytes will be filled. ChangeAIType(NearestEnemyOf(LastSeenBy(LastTalkedToBy(LastTrigger())))) would zero Allegiance, General, Race, Class, Specific, Gender, and Alignment, set spec 1 to "Myself" (the [object.ids]({{ ids }}/object.htm) value, 1), 2 to LastTrigger, 3 to LastTalkedToBy, 4 to LastSeenBy, and 5 to NearestEnemyOf.
@@ -1947,7 +1947,7 @@ declare function MoveGlobalObjectOffScreen(object: ObjectPtr, target: ObjectPtr)
 /**
  * This action removes the specified strref from the quest section of the journal.
  */
-declare function SetQuestDone(strRef: number): Action;
+declare function SetQuestDone(string: StrRef): Action;
 
 /**
  * This action stores the current location of party members in the GAM file.
@@ -2052,7 +2052,7 @@ declare function CreateCreatureAtLocation(global: string, scope: Scope, creature
 /**
  * This action sets the specified token to the specified value. Whenever the token is then used within a strref, the current value of the token will be displayed. Values assigned by this action are not saved.
  */
-declare function SetToken(token: string, strRef: number): Action;
+declare function SetToken(token: string, string: StrRef): Action;
 
 /**
  * This action sets the token specified by the string parameter (e.g. DAMAGER) to the name of the object specified in the object parameter. Values assigned by this action are not persisted to save games.
@@ -2189,12 +2189,12 @@ declare function SetHomeLocation(point: Point): Action;
 /**
  * This action displays the strref specified by the StrRef parameter in the message window, without attributing the text to an object.
  */
-declare function DisplayStringNoName(object: ObjectPtr, strref: StrRef): Action;
+declare function DisplayStringNoName(object: ObjectPtr, string: StrRef): Action;
 
 /**
  * This action removes the specified strref from the journal, regardless of the journal section the entry is in - except the user section.
  */
-declare function EraseJournalEntry(strref: StrRef): Action;
+declare function EraseJournalEntry(string: StrRef): Action;
 
 /**
  * This action copies all items lying around on the ground in the current area to the specified point in the target area.
@@ -2252,7 +2252,7 @@ declare function RealSetGlobalTimer(name: string, scope: Scope, time: GTimes): A
 
 If the object's name is unset or set to an invalid strref, it will be attributed to the protagonist in the message log. To avoid that, use `DisplayStringNoNameHead()`, or `SAY` the creature's `NAME` to ~~ (empty string) when coding it in WeIDu.
  */
-declare function DisplayStringHead(object: ObjectPtr, strref: StrRef): Action;
+declare function DisplayStringHead(object: ObjectPtr, string: StrRef): Action;
 
 /**
  * This action causes the active creature to guard the specified point, staying within the specified range.
@@ -2381,7 +2381,7 @@ declare function UnhideGUI(): Action;
 /**
  * This action changes the name of the active creature to the specified strref.
  */
-declare function SetName(strRef: number): Action;
+declare function SetName(string: StrRef): Action;
 
 /**
  * This action sets the active creatures kit to the specified kit . Abilities from any previous kits are kept. Class restrictions apply for kits. When attempting adding an invalid kit, the existing kit (if any) will be replied.
@@ -2420,7 +2420,7 @@ declare function MoveGlobalObject(object: ObjectPtr, target: ObjectPtr): Action;
 /**
  * This action displays the specified strref over the head of the creature with the specified item. The action only checks current party members.
  */
-declare function DisplayStringHeadOwner(item: ItmRef, strref: StrRef): Action;
+declare function DisplayStringHeadOwner(item: ItmRef, string: StrRef): Action;
 
 /**
  * 
@@ -2532,7 +2532,7 @@ declare function SG(name: string, num: number): Action;
 /**
  * This action will add a map note onto the current area's mini-map at the specified position. The position is a location on the actual area map (not the minimap).
  */
-declare function AddMapNote(position: Point, stringref: number): Action;
+declare function AddMapNote(position: Point, string: StrRef): Action;
 
 /**
  * This action ends the demo and returns the player to the game selection screen.
@@ -2581,7 +2581,7 @@ declare function MoveGlobalsTo(fromarea: AreRef, toarea: AreRef, location: Point
 /**
  * This action displays the specified string over the head on the specified object (on the game-screen). The text stays onscreen until the associated sound has completed playing.
  */
-declare function DisplayStringWait(object: ObjectPtr, strref: StrRef): Action;
+declare function DisplayStringWait(object: ObjectPtr, string: StrRef): Action;
 
 /**
  * This action instructs all creatures in the current area(?) ignore the following states flags for the time specified, or until a save-game reload. The creatures still have the state flags set. This action mainly seems to be used to get player characters to look like they are "paying attention" to anything that is happening around them.
@@ -2666,7 +2666,7 @@ declare function ForceSpellPointRange(target: Point, spell: SpellID): Action;
 /**
  * This action changes the specified sound reference (SndSlot) on the specified creature to the specified value. It should be noted that the biography can be changed by this action, as it is listed as a SoundSlot (EXISTANCE5).
  */
-declare function SetPlayerSound(object: ObjectPtr, strRef: number, slotnum: SndSlot): Action;
+declare function SetPlayerSound(object: ObjectPtr, string: StrRef, slotnum: SndSlot): Action;
 
 /**
  * This action dictates whether resting is allowed in the current area.
@@ -2706,7 +2706,7 @@ declare function AddXP2DA(column: string): Action;
 /**
  * This will remove a map note from the current area's mini-map at the specified position. The position is a location on the actual area map (not the minimap).
  */
-declare function RemoveMapNote(position: Point, strRef: number): Action;
+declare function RemoveMapNote(position: Point, string: StrRef): Action;
 
 /**
  * This action turns any undead creatures within range of the active creature. This action can be used for any creature (not just paladins/clerics) though success in turning is dependent on the Turn Undead level of the creature, which is only calculated for paladins and clerics. The chance to successfully turn undead is based on creatures level and class. Paladins turn at 2 levels less than clerics of the same level. An undead creature will be destroyed/controlled if its level is more than 7 levels below the active creatures turn undead level. An undead creature may be turned (i.e. forced to flee) is its level is equal to, or up to 4 levels below, the active creatures turn undead level.
@@ -2863,7 +2863,7 @@ declare function StaticPalette(palette: string, object: ObjectPtr): Action;
 /**
  * This action displays the specified string over the head on the specified object (on the game-screen) even if the target is dead.
  */
-declare function DisplayStringHeadDead(object: ObjectPtr, strref: StrRef): Action;
+declare function DisplayStringHeadDead(object: ObjectPtr, string: StrRef): Action;
 
 /**
  * This action moves the party to ToB, changes the worldmap, and switches scripts and dialogs to the X25 versions.
@@ -2883,7 +2883,7 @@ declare function SetSequence(sequence: Seq): Action;
 /**
  * This action displays the specified string over the head on the specified object (on the game-screen), without displaying it in the message log.
  */
-declare function DisplayStringNoNameHead(object: ObjectPtr, strref: StrRef): Action;
+declare function DisplayStringNoNameHead(object: ObjectPtr, string: StrRef): Action;
 
 /**
  * This action modifies the probability of a travel encounter (by modifying fields in the WMP file) between the specified areas.
@@ -3326,7 +3326,7 @@ declare function SmallWait(time: number): Action;
   END
 ```
  */
-declare function Face(direction: number): Action;
+declare function Face(direction: Direction): Action;
 
 /**
  * This action causes the active creature to walk randomly, staying within the current area. The example script is blbear.bcs; it instructs bears to walk rather than fight if the nearest enemy is a druid.

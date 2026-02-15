@@ -42,12 +42,41 @@ export function obj(spec: string) {
   return new ObjectSpec(spec);
 }
 
+// --- MLS sync surface start ---
+// These types must be structurally compatible with BGforge MLS.
+// Both projects define them independently; keep shapes and brand strings identical.
+
 /**
- * Wrapper for TRA references. Use instead of `@`
+ * String reference (TLK index).
+ *
+ * Branded to prevent accidentally passing a plain number where a text
+ * reference is expected.
+ */
+export type StrRef = number & { __brand: "StrRef" };
+
+/** Branded type for engine actions. Engine action functions must return this type. */
+export interface Action {
+  readonly __brand: "Action";
+}
+
+// --- MLS sync surface end ---
+
+/**
+ * Wrapper for TRA references. Use instead of `@`.
+ *
+ * TRA references are a WeiDU compile-time concept -- they resolve to
+ * TLK indices (StrRefs) at install time.
  *
  * @param index tra reference number
  */
-export declare function tra(index: number): number;
+export declare function tra(index: number): StrRef;
+
+/**
+ * Wrapper for direct TLK references. Use instead of `#`.
+ *
+ * @param index TLK string index
+ */
+export declare function tlk(index: number): StrRef;
 
 /**
  * Game Object
@@ -59,15 +88,8 @@ export declare type ObjectPtr = IE<string, "ObjectPtr"> | ObjectSpec;
  */
 export type Point = `[${number}.${number}]`;
 
-/** Branded type for engine actions. Sync with MLS: engine action functions must return this type. */
-export interface Action {
-  readonly __brand: "Action";
-}
-
 /** Spell.ids */
 export type SpellID = IE<number, "SpellID">;
-/** String reference (TLK index). */
-export type StrRef = IE<number, "StrRef">;
 
 /**
  * Resource reference, up to 8 characters.

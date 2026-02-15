@@ -19,10 +19,6 @@ describe("normalizeParamName", () => {
       expect(normalizeParamName("GLOBAL", "lower")).toBe("global");
     });
 
-    it("resolves reserved name STRREF", () => {
-      expect(normalizeParamName("STRREF", "lower")).toBe("strRef");
-    });
-
     it("resolves reserved name class", () => {
       expect(normalizeParamName("class", "lower")).toBe("classID");
     });
