@@ -8,6 +8,7 @@ export * from './areatype.ids';
 export * from './astyles.ids';
 export * from './class.ids';
 export * from './damages.ids';
+export * from './dir.ids';
 export * from './difflev.ids';
 export * from './dmgtype.ids';
 export * from './ea.ids';

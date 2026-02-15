@@ -108,8 +108,7 @@ export type AreRef = string & {};
 /** CRE resource reference, up to 8 characters. */
 export type CreRef = string & {};
 
-/** Facing direction (0-15, clockwise from S). */
-export type Direction = IE<number, "Direction">;
+export { Direction } from "./bg2/dir.ids";
 
 /**
  * Variable and timers scope: GLOBAL, LOCALS, MYAREA, or area resref.

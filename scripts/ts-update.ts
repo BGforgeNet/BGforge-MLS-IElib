@@ -50,8 +50,9 @@ const PARAM_NAME_TYPES: Readonly<Record<string, string>> = {
   Direction: "Direction",
 };
 
-const ACTION_FILE_HEADER = `import type { Action, AreRef, CreRef, Direction, ObjectPtr, Point, Scope, SpellID, SplRef, StrRef } from "../index";
+const ACTION_FILE_HEADER = `import type { Action, AreRef, CreRef, ItmRef, ObjectPtr, Point, Scope, SpellID, SplRef, StrRef } from "../index";
 
+import type { Direction } from "./dir.ids";
 import type { Align } from "./align.ids";
 import type { Animate } from "./animate.ids";
 import type { AreaFlag } from "./areaflag.ids";

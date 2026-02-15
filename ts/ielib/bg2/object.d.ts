@@ -13,57 +13,57 @@ export declare const Myself: ObjectPtr;
 /**
  * Leader of the group.
  */
-export declare const LeaderOf: ObjectPtr;
+export declare function LeaderOf(target?: ObjectPtr): ObjectPtr;
 
 /**
  * Not implemented.
  */
-export declare const GroupOf: ObjectPtr;
+export declare function GroupOf(target?: ObjectPtr): ObjectPtr;
 
 /**
  * The weakest player character (in the party).
  */
-export declare const WeakestOf: ObjectPtr;
+export declare function WeakestOf(target?: ObjectPtr): ObjectPtr;
 
 /**
  * The strongest player character (in the party).
  */
-export declare const StrongestOf: ObjectPtr;
+export declare function StrongestOf(target?: ObjectPtr): ObjectPtr;
 
 /**
  * The most damaged player character (in the party).
  */
-export declare const MostDamagedOf: ObjectPtr;
+export declare function MostDamagedOf(target?: ObjectPtr): ObjectPtr;
 
 /**
  * The least damaged player character (in the party).
  */
-export declare const LeastDamagedOf: ObjectPtr;
+export declare function LeastDamagedOf(target?: ObjectPtr): ObjectPtr;
 
 /**
  * Protected by.
  */
-export declare const ProtectedBy: ObjectPtr;
+export declare function ProtectedBy(target?: ObjectPtr): ObjectPtr;
 
 /**
  * Protector of.
  */
-export declare const ProtectorOf: ObjectPtr;
+export declare function ProtectorOf(target?: ObjectPtr): ObjectPtr;
 
 /**
  * The creature that last inflicted physical damage on the active creature.
  */
-export declare const LastAttackerOf: ObjectPtr;
+export declare function LastAttackerOf(target?: ObjectPtr): ObjectPtr;
 
 /**
  * May not be implemented.
  */
-export declare const LastTargetedBy: ObjectPtr;
+export declare function LastTargetedBy(target?: ObjectPtr): ObjectPtr;
 
 /**
  * Last commanded by.
  */
-export declare const LastCommandedBy: ObjectPtr;
+export declare function LastCommandedBy(target?: ObjectPtr): ObjectPtr;
 
 /**
  * The nearest visible creature.
@@ -123,7 +123,7 @@ export declare const Protagonist: ObjectPtr;
 /**
  * The strongest male player character (in the party).
  */
-export declare const StrongestOfMale: ObjectPtr;
+export declare function StrongestOfMale(target?: ObjectPtr): ObjectPtr;
 
 /**
  * The second nearest visible creature.
@@ -183,7 +183,7 @@ export declare const BestAC: ObjectPtr;
 /**
  * Last summoner of.
  */
-export declare const LastSummonerOf: ObjectPtr;
+export declare function LastSummonerOf(target?: ObjectPtr): ObjectPtr;
 
 /**
  * Nearest enemy of a specific type.
@@ -203,7 +203,7 @@ export declare function ThirdNearestEnemyOfType(enemyType: ObjectSpec): ObjectPt
 /**
  * Fourth nearest enemy of a specific type.
  */
-export declare function  FourthNearestEnemyOfType(enemyType: ObjectSpec): ObjectPtr;
+export declare function FourthNearestEnemyOfType(enemyType: ObjectSpec): ObjectPtr;
 
 /**
  * Fifth nearest enemy of a specific type.

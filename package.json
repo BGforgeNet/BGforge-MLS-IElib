@@ -4,7 +4,7 @@
 	"type": "module",
 	"scripts": {
 		"lint": "eslint scripts/",
-		"typecheck": "tsc --noEmit",
+		"typecheck": "tsc --noEmit && tsc --noEmit -p ts/ielib/tsconfig.json",
 		"ts-update": "tsx scripts/ts-update.ts external/iesdp/_data/actions ts/ielib/bg2/actions.d.ts external/iesdp/scripting/triggers/bg2triggers.htm ts/ielib/bg2/triggers.d.ts",
 		"iesdp-update": "bash scripts/iesdp-update.sh",
 		"test": "vitest run",

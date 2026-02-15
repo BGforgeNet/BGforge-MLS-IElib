@@ -1,5 +1,6 @@
-import type { Action, AreRef, CreRef, Direction, ObjectPtr, Point, Scope, SpellID, SplRef, StrRef } from "../index";
+import type { Action, AreRef, CreRef, ItmRef, ObjectPtr, Point, Scope, SpellID, SplRef, StrRef } from "../index";
 
+import type { Direction } from "./dir.ids";
 import type { Align } from "./align.ids";
 import type { Animate } from "./animate.ids";
 import type { AreaFlag } from "./areaflag.ids";
