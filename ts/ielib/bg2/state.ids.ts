@@ -1,5 +1,7 @@
+import type { IE } from "../index";
+
 /** State.ids */
-export declare type State = number & {};
+export declare type State = IE<number, "State">;
 
 /** 0x00000000 */
 export declare const STATE_NORMAL: State;

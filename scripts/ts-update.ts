@@ -37,11 +37,20 @@ const TYPE_MAPPING: Readonly<Record<string, string>> = {
   i: "number",
   p: "Point",
   a: "Action",
+  areref: "AreRef",
+  creref: "CreRef",
   itmref: "ItmRef",
   splref: "SplRef",
+  strref: "StrRef",
 };
 
-const ACTION_FILE_HEADER = `import type { Action, ObjectPtr, Point, SpellID, SplRef } from "../index";
+/** Maps YAML param names to TypeScript types. Checked before type/ids resolution. */
+const PARAM_NAME_TYPES: Readonly<Record<string, string>> = {
+  Scope: "Scope",
+  Face: "Direction",
+};
+
+const ACTION_FILE_HEADER = `import type { Action, AreRef, CreRef, Direction, ObjectPtr, Point, Scope, SpellID, SplRef, StrRef } from "../index";
 
 import type { Align } from "./align.ids";
 import type { Animate } from "./animate.ids";
@@ -70,7 +79,7 @@ import type { WeatherID } from "./weather.ids";
 
 `;
 
-const TRIGGER_FILE_HEADER = `import type { ObjectPtr, SpellID, ItmRef } from "../index";
+const TRIGGER_FILE_HEADER = `import type { AreRef, ItmRef, ObjectPtr, Scope, SplRef, SpellID } from "../index";
 
 import type { Align } from "./align.ids";
 import type { AreaTypeID as AreaType } from "./areatype.ids";
@@ -229,8 +238,10 @@ function generateTypeScriptDeclaration(yamlFilePath: string): string | null {
     let paramName = param.name.toLowerCase() === "unused" ? `unused${unusedCount++}` : param.name;
     paramName = normalizeParamName(paramName, "lower");
 
+    // Priority: param name exact override > ids field > type code
+    const typeOverride = PARAM_NAME_TYPES[param.name];
     // Use explicit empty-string check: ids may be "" which should fall through to TYPE_MAPPING
-    const paramType = normalizeTypeName(
+    const paramType = typeOverride ?? normalizeTypeName(
       param.ids !== undefined && param.ids !== "" ? param.ids : TYPE_MAPPING[param.type] ?? param.type,
     );
     paramLines.push(`${paramName}: ${paramType}`);
@@ -342,10 +353,11 @@ export function parseTriggerParameters(params: string): string {
       const specificType = parts.length > 1 ? parts[1] : undefined;
       const formattedName = normalizeParamName(name, "camelCase");
 
-      // Use specific IDS type if present and non-empty, otherwise fall through to TYPE_MAPPING
-      const rawType = specificType !== undefined && specificType !== ""
+      // Priority: param name exact override > specific IDS type > base type code
+      const typeOverride = PARAM_NAME_TYPES[name];
+      const rawType = typeOverride ?? (specificType !== undefined && specificType !== ""
         ? specificType
-        : TYPE_MAPPING[type.toLowerCase()];
+        : TYPE_MAPPING[type.toLowerCase()]);
       if (!rawType) {
         throw new Error(`Unknown type: "${type}" or "${specificType}"`);
       }

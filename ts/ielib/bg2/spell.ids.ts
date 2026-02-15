@@ -1,4 +1,4 @@
-import { SpellID } from "../index";
+import type { SpellID } from "../index";
 
 /** SPPR101 */
 export declare const CLERIC_BLESS: SpellID;

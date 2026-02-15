@@ -1,5 +1,7 @@
+import type { IE } from "../index";
+
 /** Slots.ids */
-export declare type Slots = number & {};
+export declare type Slots = IE<number, "Slots">;
 /** 0 */
 export declare const SLOT_AMULET: Slots;
 /** 1 */

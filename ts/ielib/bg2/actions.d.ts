@@ -1,4 +1,4 @@
-import type { Action, ObjectPtr, Point, SpellID, SplRef } from "../index";
+import type { Action, AreRef, CreRef, Direction, ObjectPtr, Point, Scope, SpellID, SplRef, StrRef } from "../index";
 
 import type { Align } from "./align.ids";
 import type { Animate } from "./animate.ids";
@@ -201,7 +201,7 @@ declare function MoveToOffset(offset: Point): Action;
 /**
  * 
  */
-declare function EscapeAreaMove(area: string, x: number, y: number, face: number): Action;
+declare function EscapeAreaMove(area: AreRef, x: number, y: number, face: Direction): Action;
 
 /**
  * This action, in its first form, instructs the active creature to leave the current area, either by walking, or, if the path is blocked, by simply disappearing. In the actions second form the action functions as a combination of EscapeAreaDestroy() and MoveBetweenAreas(). The parameters are similar to MoveBetweenAreas(), in that it takes in all the same information, but unlike MoveBetweenAreas(), the character will search for the nearest enabled travel trigger, move to that, then execute his movement to the specified area. If no travel trigger is found, the creature will just execute the movement.
@@ -235,7 +235,7 @@ declare function EscapeArea(): Action;
   END
 ```
  */
-declare function IncrementGlobal(name: string, area: string, value: number): Action;
+declare function IncrementGlobal(name: string, scope: Scope, value: number): Action;
 
 /**
  * This action instructs the active creature to equip the specified item.
@@ -245,7 +245,7 @@ declare function IncrementGlobal(name: string, area: string, value: number): Act
 - Item's global effects (`timing_mode=2`) are applied to the creature each time the action is performed, and avatar animations are updated to reflect the new item.
 {% endcapture %} {% include info.html %}
  */
-declare function EquipItem(object: string): Action;
+declare function EquipItem(item: ItmRef): Action;
 
 /**
  * This action changes the current area. Parchment is the MOS image to use in the area transition loading screen. Only EE games support IDS symbols for `Face`.
@@ -265,7 +265,7 @@ declare function EquipItem(object: string): Action;
   END
 ```
  */
-declare function LeaveAreaLUA(area: string, parchment: string, point: Point, face: number): Action;
+declare function LeaveAreaLUA(area: AreRef, parchment: string, point: Point, face: Direction): Action;
 
 /**
  * This action removes the active creature from the game. No death variable is set. Global creatures like 
@@ -294,12 +294,12 @@ declare function UseContainer(): Action;
 /**
  * 
  */
-declare function ForceSpellRES(res: string, target: ObjectPtr): Action;
+declare function ForceSpellRES(spell: SplRef, target: ObjectPtr): Action;
 
 /**
  * 
  */
-declare function ForceSpellRES(res: string, target: ObjectPtr, castinglevel: number): Action;
+declare function ForceSpellRES(spell: SplRef, target: ObjectPtr, castinglevel: number): Action;
 
 /**
  * This action causes the active creature to cast the specified spell at the target object. The spell need not currently be memorised by the caster, and will not be interrupted while being cast. The caster must meet the level requirements of the spell. For the RES version of the action, the spell name can not consist of only numbers, should be written in upper case and should be no more than 7 characters long. The example script is from suelfw9.bcs.
@@ -327,12 +327,12 @@ declare function ForceSpell(target: ObjectPtr, spell: SpellID): Action;
 /**
  * 
  */
-declare function ForceSpellPointRES(res: string, target: Point): Action;
+declare function ForceSpellPointRES(spell: SplRef, target: Point): Action;
 
 /**
  * 
  */
-declare function ForceSpellPointRES(res: string, target: Point, castinglevel: number): Action;
+declare function ForceSpellPointRES(spell: SplRef, target: Point, castinglevel: number): Action;
 
 /**
  * This action causes the active creature to cast the specified spell at the specified point ([x.y]). The spell need not currently be memorised by the caster, and will not be interrupted while being cast. The caster must meet the level requirements of the spell. For the RES version of the action, the spell name can not consist of only numbers, should be written in upper case and should be no more than 7 characters long.
@@ -373,7 +373,7 @@ declare function ForceSpellPoint(target: Point, spell: SpellID): Action;
   END
 ```
  */
-declare function SetGlobalTimer(name: string, area: string, time: GTimes): Action;
+declare function SetGlobalTimer(name: string, scope: Scope, time: GTimes): Action;
 
 /**
  * This action takes a single instance of the specified item from the party (unless the item exists in a stack, in which case the entire stack is taken). Characters are checked in current party order. The item is transferred to the inventory of the active creature. If there are multiple calls to TakePartyItem() in the same block, each with the same item specified, only one call will actually remove an item (on each execution of the block). If an item is found in a container on an earlier player and in the inventory of a later player, both item instances may be removed. All slots are checked; inventory slots are checked in the following order
@@ -395,7 +395,7 @@ The example is from AR0516.bcs.
   END
 ```
  */
-declare function TakePartyItem(item: string): Action;
+declare function TakePartyItem(item: ItmRef): Action;
 
 /**
  * This action takes the specified amount of gold from the party. If performed by a party member, the gold is transferred to that characters gold stat (in the CRE file) and re-added to the party pot when the character re-joins the party.
@@ -813,7 +813,7 @@ declare function PlayerDialog(target: ObjectPtr): Action;
   END
 ```
  */
-declare function GiveItemCreate(resref: string, object: ObjectPtr, usage1: number, usage2: number, usage3: number): Action;
+declare function GiveItemCreate(item: ItmRef, object: ObjectPtr, usage1: number, usage2: number, usage3: number): Action;
 
 /**
  * This action gives the party a sum of gold corresponding to the given global variable. The gold amount is deducted from the active creature. The example script will give the party 50gp.
@@ -826,7 +826,7 @@ declare function GiveItemCreate(resref: string, object: ObjectPtr, usage1: numbe
   END
 ```
  */
-declare function GivePartyGoldGlobal(name: string, area: string): Action;
+declare function GivePartyGoldGlobal(name: string, scope: Scope): Action;
 
 /**
  * This action is used by the engine internally. An object id is expected in the in1 parameter.
@@ -904,7 +904,7 @@ declare function Polymorph(animationtype: Animate): Action;
 /**
  * 
  */
-declare function RemoveSpellRES(res: string): Action;
+declare function RemoveSpellRES(spell: SplRef): Action;
 
 /**
  * This action removes one memorised indtance of the specified spell from the spellbook of the active creature. The spell can be an innate ability, a priest spell or a wizard spell, but must be listed in [spell.ids]({{ ids }}/spell.htm).
@@ -974,7 +974,7 @@ declare function EquipMostDamagingMelee(): Action;
   END
 ```
  */
-declare function GiveItem(object: string, target: ObjectPtr): Action;
+declare function GiveItem(item: ItmRef, target: ObjectPtr): Action;
 
 /**
  * This action starts the specified store with the specified object.
@@ -1004,7 +1004,7 @@ declare function StartStore(store: string, target: ObjectPtr): Action;
   END
 ```
  */
-declare function DisplayString(object: ObjectPtr, strref: number): Action;
+declare function DisplayString(object: ObjectPtr, strref: StrRef): Action;
 
 /**
  * This action changes the IDS identifiers for the active creature to the values specified. The object parameter must be in the IDS object form (i.e [EA.GENERAL.RACE.CLASS.SPECIFIC.GENDER.ALIGN]). If parameters are missing, they will default to 0. If a symbolic object is passed, all identifiers will be cleared and the IDS identifier bytes will be filled. ChangeAIType(NearestEnemyOf(LastSeenBy(LastTalkedToBy(LastTrigger())))) would zero Allegiance, General, Race, Class, Specific, Gender, and Alignment, set spec 1 to "Myself" (the [object.ids]({{ ids }}/object.htm) value, 1), 2 to LastTrigger, 3 to LastTalkedToBy, 4 to LastSeenBy, and 5 to NearestEnemyOf.
@@ -1162,7 +1162,7 @@ declare function GiveOrder(object: ObjectPtr, order: number): Action;
 /**
  * 
  */
-declare function ApplySpellRES(res: string, target: ObjectPtr): Action;
+declare function ApplySpellRES(spell: SplRef, target: ObjectPtr): Action;
 
 /**
  * This action causes the active creature to cast the specified spell at the target object. The spell is applied instantly; no casting animation is played. The spell cannot be interrupted. For the RES version of the action, the spell name can not consist of only numbers, should be written in upper case and should be no more than 7 characters long. Both actions apply the spell at the lowest casting level (they will even use a level `0` ability if the spell has one, which other actions cannot do) and ignore its projectile (i.e. they use projectile `#1|None`) - the casting level of the originating creature is ignored. Note that for normal spellcasting the probability dice values for effects are rolled for each spell, whereas spells applied in the same scripting block by `ApplySpell` use a single dice value. The example script is used to mimic a contingency from `"mage18y.bcs"`.
@@ -1274,7 +1274,7 @@ declare function AddExperienceParty(xp: number): Action;
   END
 ```
  */
-declare function AddExperiencePartyGlobal(name: string, area: string): Action;
+declare function AddExperiencePartyGlobal(name: string, scope: Scope): Action;
 
 /**
  * This action sets the number of times the active creature has been talked to (by player characters). The example script is from ar0103.bcs.
@@ -1346,7 +1346,7 @@ declare function Interact(object: ObjectPtr): Action;
   END
 ```
  */
-declare function DestroyItem(resref: string): Action;
+declare function DestroyItem(item: ItmRef): Action;
 
 /**
  * This action reveals an area on the worldmap, enabling travelling to it.
@@ -1363,7 +1363,7 @@ declare function DestroyItem(resref: string): Action;
   END
 ```
  */
-declare function RevealAreaOnMap(resref: string): Action;
+declare function RevealAreaOnMap(area: AreRef): Action;
 
 /**
  * This action gives the specified amount of gold to the party. The active creature need not have the gold in its "money variable". A negative amount will remove gold from the active creature.
@@ -1401,7 +1401,7 @@ declare function ChangeTileState(tile: ObjectPtr, state: boolean): Action;
   END
 ```
  */
-declare function AddJournalEntry(entry: number, type: JourType): Action;
+declare function AddJournalEntry(entry: StrRef, type: JourType): Action;
 
 /**
  * This action instructs the active creature to a ranged weapon from the weapons available in the quickslots.
@@ -1560,12 +1560,12 @@ declare function StartMusic(slot: number, flags: MFlags): Action;
 /**
  * This action removes all instances of the specified item from the party. The items are placed in the inventory of the active creature. Items contained in containers (e.g. Bag of Holding) are not taken.
  */
-declare function TakePartyItemAll(item: string): Action;
+declare function TakePartyItemAll(item: ItmRef): Action;
 
 /**
  * This multiplayer-only action changes the current area. Parchment is the MOS image to use in the area transition loading screen. Only EE games support IDS symbols for `Face`.
  */
-declare function LeaveAreaLUAPanic(area: string, parchment: string, point: Point, face: number): Action;
+declare function LeaveAreaLUAPanic(area: AreRef, parchment: string, point: Point, face: Direction): Action;
 
 /**
  * This action adds the active creature to the party. If the party is currently full the 'select party members' dialog is shown. JoinParty clears the ActionQueue of the active creature.
@@ -1590,7 +1590,7 @@ declare function SaveGame(slot: number): Action;
 /**
  * 
  */
-declare function SpellNoDecRES(res: string, target: ObjectPtr): Action;
+declare function SpellNoDecRES(spell: SplRef, target: ObjectPtr): Action;
 
 /**
  * This action causes the active creature to cast the specified spell at the target object. The spell need not be currently be memorised by the caster, and may be interrupted while being cast. The caster must meet the level requirements of the spell. The spell will not be removed from the casters memory after casting. For the RES version of the action, the spell name can not consist of only numbers, should be written in upper case and should be no more than 7 characters long.
@@ -1605,7 +1605,7 @@ declare function SpellNoDec(target: ObjectPtr, spell: SpellID): Action;
 /**
  * 
  */
-declare function SpellPointNoDecRES(res: string, target: Point): Action;
+declare function SpellPointNoDecRES(spell: SplRef, target: Point): Action;
 
 /**
  * This action causes the active creature to cast the specified spell at the specified point (`[x.y]`). The spell must currently be memorised by the caster, and may be interrupted while being cast. The caster must meet the level requirements of the spell. The spell will be removed from the casters memory. For the RES version of the action, the spell name can not consist of only numbers, should be written in upper case and should be no more than 7 characters long. The example script is from `"andris.bcs"`.
@@ -1620,12 +1620,12 @@ declare function SpellPointNoDec(target: Point, spell: SpellID): Action;
 /**
  * This action instructs the active creature to take the specified item from the party, if they are nearby. A range for the action cannot be specified.
  */
-declare function TakePartyItemRange(item: string): Action;
+declare function TakePartyItemRange(item: ItmRef): Action;
 
 /**
  * This action will change the animation of the active creature to match that of the specified CRE file. If the active creature is in the party, the action will create the specified creature.
  */
-declare function ChangeAnimation(resref: string): Action;
+declare function ChangeAnimation(creature: CreRef): Action;
 
 /**
  * This action will lock the specified door/container.
@@ -1640,7 +1640,7 @@ declare function Unlock(object: ObjectPtr): Action;
 /**
  * This action will move the specified object to the target area, at the indicated point. The action will only work for creatures in the GAM file - i.e. NPCs or that have been added via MakeGlobal.
  */
-declare function MoveGlobal(area: string, object: ObjectPtr, point: Point): Action;
+declare function MoveGlobal(area: AreRef, object: ObjectPtr, point: Point): Action;
 
 /**
  * 
@@ -1684,7 +1684,7 @@ declare function FadeFromColor(point: Point, blue: number): Action;
 /**
  * This action will remove a number of instances (specified by the Num parameter) of the specified item from the party. The items will be removed from players in order, for example; Player1 has 3 instances of "MYITEM" in their inventory, Player2 has 2 instance of "MYITEM," and Player3 has 1 instance. If the action TakePartyItemNum("MYITEM", 4) is run, all 3 instances of "MYITEM" will be taken from Player1, and 1 instance will be taken from Player2. This leaves Player2 and Player3 each with one instance of "MYITEM." If the last item of an item type stored in a container STO file is removed by this action, the amount becomes zero. Items with zero quantities cannot be seen in-game, cannot be removed by TakePartyItem, and will not count toward a container's current item load. If the item to be taken is in a stack, and the stack is in a quickslot, the item will be removed, and the remaining stack will be placed in the inventory. If the inventory is full, the stack item will be dropped on the ground.
  */
-declare function TakePartyItemNum(resref: string, num: number): Action;
+declare function TakePartyItemNum(item: ItmRef, num: number): Action;
 
 /**
  * This action functions the same as Wait.
@@ -1736,7 +1736,7 @@ declare function SpawnPtSpawn(object: ObjectPtr): Action;
 /**
  * This action acts like <a href="#106"><code>Shout()</code></a> without the range limit.
  */
-declare function GlobalShout(id: number): Action;
+declare function GlobalShout(id: ShoutID): Action;
 
 /**
  * This action is used in conjunction with animations in ARE files. The action will start the specified animation.
@@ -1834,7 +1834,7 @@ declare function PauseGame(): Action;
 /**
  * This action will change the animation of the active creature to match that of the specified CRE file. If the active creature is in the party, the action will create the specified creature. No lighting effects are played.
  */
-declare function ChangeAnimationNoEffect(resref: string): Action;
+declare function ChangeAnimationNoEffect(creature: CreRef): Action;
 
 /**
  * This action instructs the active creature to move to the specified object. The action does not update the current position of the actor, saved in ARE files. The example script shows the creature moving towards the nearest enemy.
@@ -1869,12 +1869,12 @@ declare function GivePartyAllEquipment(): Action;
 /**
  * This action will move the active creature to the specified point in the indicated area, facing the appropriate direction, and plays the specified graphics when the creature disappears.
  */
-declare function MoveBetweenAreasEffect(area: string, graphic: string, location: Point, face: number): Action;
+declare function MoveBetweenAreasEffect(area: AreRef, graphic: string, location: Point, face: Direction): Action;
 
 /**
  * This action will move the active creature to the specified point in the indicated area, facing the appropriate direction.
  */
-declare function MoveBetweenAreas(area: string, location: Point, face: number): Action;
+declare function MoveBetweenAreas(area: AreRef, location: Point, face: Direction): Action;
 
 /**
  * This action will remove the specified number of items from the party, as listed in the specified 2DA file.
@@ -1884,17 +1884,17 @@ declare function TakeItemListPartyNum(resref: string, num: number): Action;
 /**
  * 
  */
-declare function CreateCreatureObjectEffect(resref: string, effect: string, object: ObjectPtr): Action;
+declare function CreateCreatureObjectEffect(creature: CreRef, effect: string, object: ObjectPtr): Action;
 
 /**
  * This action will create the specified creature next to the specified object. The facing of the creature is controlled by the Usage1 parameter.
  */
-declare function CreateCreatureObject(resref: string, object: ObjectPtr, usage1: number, usage2: number, usage3: number): Action;
+declare function CreateCreatureObject(creature: CreRef, object: ObjectPtr, usage1: number, usage2: number, usage3: number): Action;
 
 /**
  * This action creates the specified creature on a normally impassable surface (e.g. on a wall, on water, on a roof).
  */
-declare function CreateCreatureImpassable(newobject: string, location: Point, face: number): Action;
+declare function CreateCreatureImpassable(creature: CreRef, location: Point, face: Direction): Action;
 
 /**
  * This action instructs the active creature to face the target object.
@@ -1927,17 +1927,17 @@ declare function RestParty(): Action;
 /**
  * This action creates the specified creature at the specified location, and plays the dimension door graphic. The creature appears after approximately 100 AI cycles (~3.5 seconds at the default of 30 frame/second).
  */
-declare function CreateCreatureDoor(newobject: string, location: Point, face: number): Action;
+declare function CreateCreatureDoor(creature: CreRef, location: Point, face: Direction): Action;
 
 /**
  * This action will create the specified creature next to the specified object, and plays the dimension door graphic. The facing of the creature is controlled by the Usage1 parameter. The creature appears after approximately 100 AI cycles (~3.5 seconds at the default of 30 frame/second).
  */
-declare function CreateCreatureObjectDoor(resref: string, object: ObjectPtr, usage1: number, usage2: number, usage3: number): Action;
+declare function CreateCreatureObjectDoor(creature: CreRef, object: ObjectPtr, usage1: number, usage2: number, usage3: number): Action;
 
 /**
  * This action creates the specified creature just off-screen from the current viewpoint (the north/south/east/west direction is random). The facing of the creature is controlled by the Usage1 parameter.
  */
-declare function CreateCreatureObjectOffScreen(resref: string, object: ObjectPtr, usage1: number, usage2: number, usage3: number): Action;
+declare function CreateCreatureObjectOffScreen(creature: CreRef, object: ObjectPtr, usage1: number, usage2: number, usage3: number): Action;
 
 /**
  * This action moves the object creature a screen away from the specified target creature. The target object must be stored in the GAM file (i.e. NPC or added explicitly via the MakeGlobal action.
@@ -1962,7 +1962,7 @@ declare function RestorePartyLocations(): Action;
 /**
  * This action creates the specified creature just offscreen from the active creature.
  */
-declare function CreateCreatureOffScreen(resref: string, face: number): Action;
+declare function CreateCreatureOffScreen(creature: CreRef, face: Direction): Action;
 
 /**
  * This action moves the active creature to the centre of the screen. Script conditions are not checked for the specified duration (measured in seconds) or until the creature has reached the screen centre.
@@ -1986,7 +1986,7 @@ declare function Panic(): Action;
 /**
  * 
  */
-declare function ReallyForceSpellDeadRES(res: string, target: ObjectPtr): Action;
+declare function ReallyForceSpellDeadRES(spell: SplRef, target: ObjectPtr): Action;
 
 /**
  * This action causes the active creature to cast the specified spell at the target object. The spell need not currently be memorised by the caster, and will not be interrupted while being cast. The spell is cast instantly (i.e. with a casting time of 0). The caster must meet the level requirements of the spell. For the RES version of the action, the spell name can not consist of only numbers, should be written in upper case and should be no more than 7 characters long. This action works in the script round where the active creature has died.
@@ -2027,7 +2027,7 @@ declare function RestNoSpells(): Action;
 /**
  * This action is similar to StorePartyLocations() but with one object.
  */
-declare function SaveLocation(area: string, global: string, point: Point): Action;
+declare function SaveLocation(scope: Scope, global: string, point: Point): Action;
 
 /**
  * This action stores the location of the specified object in the named variable.
@@ -2042,12 +2042,12 @@ declare function SaveLocation(area: string, global: string, point: Point): Actio
   END
 ```
  */
-declare function SaveObjectLocation(area: string, global: string, object: ObjectPtr): Action;
+declare function SaveObjectLocation(scope: Scope, global: string, object: ObjectPtr): Action;
 
 /**
  * This action creates the specified creature at the specified saved location.
  */
-declare function CreateCreatureAtLocation(global: string, area: string, resref: string): Action;
+declare function CreateCreatureAtLocation(global: string, scope: Scope, creature: CreRef): Action;
 
 /**
  * This action sets the specified token to the specified value. Whenever the token is then used within a strref, the current value of the token will be displayed. Values assigned by this action are not saved.
@@ -2084,22 +2084,22 @@ declare function PickPockets(target: ObjectPtr): Action;
 /**
  * 
  */
-declare function CreateCreatureObjectCopyEffect(resref: string, effect: string, object: ObjectPtr): Action;
+declare function CreateCreatureObjectCopyEffect(creature: CreRef, effect: string, object: ObjectPtr): Action;
 
 /**
  * This action creates the specified creature and sets its animation to that of the active creature.
  */
-declare function CreateCreatureObjectCopy(resref: string, object: ObjectPtr, usage1: number, usage2: number, usage3: number): Action;
+declare function CreateCreatureObjectCopy(creature: CreRef, object: ObjectPtr, usage1: number, usage2: number, usage3: number): Action;
 
 /**
  * This action hides an area on the worldmap, preventing travelling to it.
  */
-declare function HideAreaOnMap(resref: string): Action;
+declare function HideAreaOnMap(area: AreRef): Action;
 
 /**
  * This action creates the specified creature at a location offset from the target object point.
  */
-declare function CreateCreatureObjectOffset(resref: string, object: ObjectPtr, offset: Point): Action;
+declare function CreateCreatureObjectOffset(creature: CreRef, object: ObjectPtr, offset: Point): Action;
 
 /**
  * This action is used in conjunction with containers in ARE files. The action sets the enabled state of a container (specified by the object parameter).
@@ -2130,7 +2130,7 @@ declare function AddGlobals(name: string, name2: string): Action;
 /**
  * 
  */
-declare function CreateItemGlobal(global: string, area: string, resref: string): Action;
+declare function CreateItemGlobal(global: string, scope: Scope, item: ItmRef): Action;
 
 /**
  * This action creates a quantity of items equal to a global variable on the active creature. The example script will create 50 arrows.
@@ -2145,12 +2145,12 @@ declare function CreateItemGlobal(global: string, area: string, resref: string):
   END
 ```
  */
-declare function CreateItemNumGlobal(global: string, area: string, resref: string): Action;
+declare function CreateItemNumGlobal(global: string, scope: Scope, item: ItmRef): Action;
 
 /**
  * This action instructs the active creature remove the item from the area and put it in their inventory (assuming the inventory has enough room and the item exists).
  */
-declare function PickUpItem(resref: string): Action;
+declare function PickUpItem(item: ItmRef): Action;
 
 /**
  * This action will attempt to fill a slot in the active creature's inventory with the appropriate item type. Using FillSlot(SLOT\_WEAPON) will look for any weapon in the inventory, and move the first such item into the weapon slot. Any item already in the slot is destroyed.
@@ -2189,12 +2189,12 @@ declare function SetHomeLocation(point: Point): Action;
 /**
  * This action displays the strref specified by the StrRef parameter in the message window, without attributing the text to an object.
  */
-declare function DisplayStringNoName(object: ObjectPtr, strref: number): Action;
+declare function DisplayStringNoName(object: ObjectPtr, strref: StrRef): Action;
 
 /**
  * This action removes the specified strref from the journal, regardless of the journal section the entry is in - except the user section.
  */
-declare function EraseJournalEntry(strRef: number): Action;
+declare function EraseJournalEntry(strref: StrRef): Action;
 
 /**
  * This action copies all items lying around on the ground in the current area to the specified point in the target area.
@@ -2234,7 +2234,7 @@ declare function StartDialogueNoSetInterrupt(object: ObjectPtr): Action;
 /**
  * This action sets a global timer measured in seconds (of real time).
  */
-declare function RealSetGlobalTimer(name: string, area: string, time: GTimes): Action;
+declare function RealSetGlobalTimer(name: string, scope: Scope, time: GTimes): Action;
 
 /**
  * This action displays the specified string over the head on the specified object (on the game-screen). The string may also be shown in the message log, depending on options specified in baldur.ini.
@@ -2252,7 +2252,7 @@ declare function RealSetGlobalTimer(name: string, area: string, time: GTimes): A
 
 If the object's name is unset or set to an invalid strref, it will be attributed to the protagonist in the message log. To avoid that, use `DisplayStringNoNameHead()`, or `SAY` the creature's `NAME` to ~~ (empty string) when coding it in WeIDu.
  */
-declare function DisplayStringHead(object: ObjectPtr, strref: number): Action;
+declare function DisplayStringHead(object: ObjectPtr, strref: StrRef): Action;
 
 /**
  * This action causes the active creature to guard the specified point, staying within the specified range.
@@ -2306,7 +2306,7 @@ declare function EscapeAreaNoSee(): Action;
 /**
  * This action instructs the target object to leave the current area, either by walking, or, if the path is blocked, by simply disappearing. The action functions as a combination of EscapeAreaDestroy() and MoveBetweenAreas(). The parameters are similar to MoveBetweenAreas(), in that it takes in all the same information, but unlike MoveBetweenAras(), the character will search for the nearest travel trigger, move to that, then execute his movement to the specified area. If he cannot find a travel trigger, he will execute the movement.
  */
-declare function EscapeAreaObjectMove(resref: string, object: ObjectPtr, x: number, y: number, face: number): Action;
+declare function EscapeAreaObjectMove(area: AreRef, object: ObjectPtr, x: number, y: number, face: Direction): Action;
 
 /**
  * This action instructs the active creature to leave the area via the specified region.
@@ -2316,12 +2316,12 @@ declare function EscapeAreaObject(object: ObjectPtr): Action;
 /**
  * This action replaces the item in second parameter with the item in first parameter. If the target does not have the item in the second parameter, the item in the first parameter will still be created in the inventory. Note that this action will not automatically equip the item that's created.
  */
-declare function TakeItemReplace(give: string, take: string, object: ObjectPtr): Action;
+declare function TakeItemReplace(give: ItmRef, take: ItmRef, object: ObjectPtr): Action;
 
 /**
  * This action adds the specified spell to the active creature. The message <creature\_name> has gained a special ability: "Ability" is displayed in the message log.
  */
-declare function AddSpecialAbility(resref: string): Action;
+declare function AddSpecialAbility(spell: SplRef): Action;
 
 /**
  * This action causes the active creature to attempt to disarm the specified trap. This action can be used for any creature (not just thieves) though success in disarming is dependent on points in the Disarm Trap skill.
@@ -2420,7 +2420,7 @@ declare function MoveGlobalObject(object: ObjectPtr, target: ObjectPtr): Action;
 /**
  * This action displays the specified strref over the head of the creature with the specified item. The action only checks current party members.
  */
-declare function DisplayStringHeadOwner(item: string, strRef: number): Action;
+declare function DisplayStringHeadOwner(item: ItmRef, strref: StrRef): Action;
 
 /**
  * 
@@ -2436,7 +2436,7 @@ declare function StartDialogOverride(dialogfile: string, target: ObjectPtr): Act
 /**
  * This action creates the specified creature at the specified point and sets its animation to that of the active creature.
  */
-declare function CreateCreatureCopyPoint(resref: string, object: ObjectPtr, dest: Point): Action;
+declare function CreateCreatureCopyPoint(creature: CreRef, object: ObjectPtr, dest: Point): Action;
 
 /**
  * This action instructs the active creature to play their associated bard song.
@@ -2446,7 +2446,7 @@ declare function BattleSong(): Action;
 /**
  * 
  */
-declare function MoveToSavedLocationn(global: string, area: string): Action;
+declare function MoveToSavedLocationn(global: string, scope: Scope): Action;
 
 /**
  * This action instructs the active creature to move to the previously saved specified location.
@@ -2461,7 +2461,7 @@ declare function MoveToSavedLocationn(global: string, area: string): Action;
   END
 ```
  */
-declare function MoveToSavedLocation(global: string, area: string): Action;
+declare function MoveToSavedLocation(global: string, scope: Scope): Action;
 
 /**
  * This action inflicts the specified amount of damage (of the specified type) on the target creature.
@@ -2502,7 +2502,7 @@ declare function Attack(target: ObjectPtr): Action;
   END
 ```
  */
-declare function SetGlobal(name: string, area: string, value: number): Action;
+declare function SetGlobal(name: string, scope: Scope, value: number): Action;
 
 /**
  * This action dictates whether the banter timer can expire.
@@ -2542,7 +2542,7 @@ declare function DemoEnd(): Action;
 /**
  * 
  */
-declare function SpellRES(res: string, target: ObjectPtr): Action;
+declare function SpellRES(spell: SplRef, target: ObjectPtr): Action;
 
 /**
  * This action causes the active creature to cast the specified spell at the target object. The spell must currently be memorised by the caster, and may be interrupted while being cast. The caster must meet the level requirements of the spell. For the RES version of the action, the spell name can not consist of only numbers, should be written in upper case and should be no more than 7 characters long.
@@ -2576,12 +2576,12 @@ declare function Spell(target: ObjectPtr, spell: SpellID): Action;
 /**
  * It is likely to move all creatures present in the saved game that are currently in the FromArea parameter and move them to the Location in the ToArea parameter.
  */
-declare function MoveGlobalsTo(fromarea: string, toarea: string, location: Point): Action;
+declare function MoveGlobalsTo(fromarea: AreRef, toarea: AreRef, location: Point): Action;
 
 /**
  * This action displays the specified string over the head on the specified object (on the game-screen). The text stays onscreen until the associated sound has completed playing.
  */
-declare function DisplayStringWait(object: ObjectPtr, strref: number): Action;
+declare function DisplayStringWait(object: ObjectPtr, strref: StrRef): Action;
 
 /**
  * This action instructs all creatures in the current area(?) ignore the following states flags for the time specified, or until a save-game reload. The creatures still have the state flags set. This action mainly seems to be used to get player characters to look like they are "paying attention" to anything that is happening around them.
@@ -2681,7 +2681,7 @@ declare function FakeEffectExpiryCheck(object: ObjectPtr, ticks: number): Action
 /**
  * This action creates the specified creature at the specified location, facing the specified direction. The creature will be created even if the searchmap is marked as impassable, or whether there are any other obstructions.
  */
-declare function CreateCreatureImpassableAllowOverlap(newobject: string, location: Point, face: number): Action;
+declare function CreateCreatureImpassableAllowOverlap(creature: CreRef, location: Point, face: Direction): Action;
 
 /**
  * This action sets the 'BeenInParty' flag in the [CRE](../../file_formats/ie_formats/cre_v1.htm#CREV1_0_Header) file of the active creature. This action also triggers appropriate dialog and script file changes (as referenced in [PDIALOG.2DA]({{ 2da }}/pdialog.htm)).
@@ -2766,7 +2766,7 @@ declare function StartDialogNoName(dialogfile: string, target: ObjectPtr): Actio
   END
 ```
  */
-declare function SetTokenGlobal(global: string, area: string, token: string): Action;
+declare function SetTokenGlobal(global: string, scope: Scope, token: string): Action;
 
 /**
  * This action adds the active creature to the GAM file (if it isn't there already).
@@ -2776,7 +2776,7 @@ declare function MakeGlobal(): Action;
 /**
  * 
  */
-declare function ReallyForceSpellPointRES(res: string, target: Point): Action;
+declare function ReallyForceSpellPointRES(spell: SplRef, target: Point): Action;
 
 /**
  * This action causes the active creature to cast the specified spell at the target point. The spell need not currently be memorised by the caster, and will not be interrupted while being cast. The spell is cast instantly (i.e. with a casting time of 0). The caster must meet the level requirements of the spell. For the RES version of the action, the spell name can not consist of only numbers, should be written in upper case and should be no more than 7 characters long.
@@ -2811,12 +2811,12 @@ declare function SwingOnce(): Action;
 /**
  * 
  */
-declare function UseItemSlot(target: ObjectPtr, slot: number): Action;
+declare function UseItemSlot(target: ObjectPtr, slot: Slots): Action;
 
 /**
  * 
  */
-declare function UseItemSlotAbility(target: ObjectPtr, slot: number, ability: number): Action;
+declare function UseItemSlotAbility(target: ObjectPtr, slot: Slots, ability: number): Action;
 
 /**
  * This action instructs the active creature to use the specified item (object) on the specified target (target). The ability number (i.e. extended header index) to use may be specified. This action is most often used to allow use of potions and wands. The item to be used must exist in the active creature's inventory (not in a container within the inventory) - though it need not be equipped.
@@ -2848,7 +2848,7 @@ IWDEE supports also the `UseItemAbility` signature:
   END
 ```
  */
-declare function UseItem(object: string, target: ObjectPtr): Action;
+declare function UseItem(item: ItmRef, target: ObjectPtr): Action;
 
 /**
  * This action is used in conjunction with animations in ARE files. The action will start the specified animation sequence.
@@ -2863,7 +2863,7 @@ declare function StaticPalette(palette: string, object: ObjectPtr): Action;
 /**
  * This action displays the specified string over the head on the specified object (on the game-screen) even if the target is dead.
  */
-declare function DisplayStringHeadDead(object: ObjectPtr, strref: number): Action;
+declare function DisplayStringHeadDead(object: ObjectPtr, strref: StrRef): Action;
 
 /**
  * This action moves the party to ToB, changes the worldmap, and switches scripts and dialogs to the X25 versions.
@@ -2883,12 +2883,12 @@ declare function SetSequence(sequence: Seq): Action;
 /**
  * This action displays the specified string over the head on the specified object (on the game-screen), without displaying it in the message log.
  */
-declare function DisplayStringNoNameHead(object: ObjectPtr, strref: number): Action;
+declare function DisplayStringNoNameHead(object: ObjectPtr, strref: StrRef): Action;
 
 /**
  * This action modifies the probability of a travel encounter (by modifying fields in the WMP file) between the specified areas.
  */
-declare function SetEncounterProbability(fromarea: string, toarea: string, probability: number): Action;
+declare function SetEncounterProbability(fromarea: AreRef, toarea: AreRef, probability: number): Action;
 
 /**
  * This action instructs the engine to use the specified column of [WISH.2DA]({{ 2da }}/wish.htm), randomly select 5 choices (rows; count appears hardcoded) and set the appropriate globals for those spells. Once the maximum "wish choices" have been selected, the dialog continues and casts the selected spell.
@@ -2957,12 +2957,12 @@ declare function SetupWishObject(creature: ObjectPtr, count: number): Action;
 /**
  * This action changes the current area. The active creature will move to the specified entry point (from [ENTRIES.2DA]({{ 2da }}/entries.htm)) before travelling. The action appears to only work from a creature script.
  */
-declare function LeaveAreaLUAEntry(area: string, entry: string, point: Point, face: number): Action;
+declare function LeaveAreaLUAEntry(area: AreRef, entry: string, point: Point, face: Direction): Action;
 
 /**
  * This multiplayer-only action changes the current area. The creature moves to the destination point (from [ENTRIES.2DA]({{ 2da }}/entries.htm)) before travelling (the point parameter is unused). Only EE games support IDS symbols for `Face`.
  */
-declare function LeaveAreaLUAPanicEntry(area: string, entry: string, point: Point, face: number): Action;
+declare function LeaveAreaLUAPanicEntry(area: AreRef, entry: string, point: Point, face: Direction): Action;
 
 /**
  * This action instructs the script parser to continue looking for actions in the active creatures action list. This is mainly included in scripts for efficiency. Continue should also be appended to any script blocks added to the top of existing scripts, to ensure correct functioning of any blocks which include the OnCreation trigger. Continue may prevent actions being completed until the script parser has finished its execution cycle. Continue() must be the last command in an action list to function correctly. Use of continue in a script block will cause the parser to treater subsequent empty response blocks as though they contained a Continue() command - this parsing can be stopped by including a NoAction() in the empty response block.
@@ -3255,7 +3255,7 @@ This script is from the area script for the Copper Coronet (AR0406) and creates 
   END
 ```
  */
-declare function CreateCreature(newobject: string, location: Point, face: number): Action;
+declare function CreateCreature(creature: CreRef, location: Point, face: Direction): Action;
 
 /**
  * 
@@ -3292,7 +3292,7 @@ declare function Dialogue(object: ObjectPtr): Action;
   END
 ```
  */
-declare function CreateItem(resref: string, usage1: number, usage2: number, usage3: number): Action;
+declare function CreateItem(item: ItmRef, usage1: number, usage2: number, usage3: number): Action;
 
 /**
  * This action is similar to [Wait()](#63), it causes a delay in script processing. The time is measured in AI updates (which default to 15 per second)
@@ -3416,12 +3416,12 @@ declare function Follow(point: Point): Action;
   END
 ```
  */
-declare function DropItem(object: string, location: Point): Action;
+declare function DropItem(item: ItmRef, location: Point): Action;
 
 /**
  * This action instructs the active creature to leave the current area.
  */
-declare function LeaveArea(area: string, point: Point, face: number): Action;
+declare function LeaveArea(area: AreRef, point: Point, face: Direction): Action;
 
 /**
  * This action instructs the active creature to select the specified slot, and use the ability in the extended header specified by the ability parameter. The example script is from ankheg.bcs.
@@ -3457,7 +3457,7 @@ declare function GroupAttack(target: ObjectPtr): Action;
 /**
  * 
  */
-declare function SpellPointRES(res: string, target: Point): Action;
+declare function SpellPointRES(spell: SplRef, target: Point): Action;
 
 /**
  * This action causes the active creature to cast the specified spell at the specified point ([x.y]). The spell must currently be memorised by the caster, and may be interrupted while being cast. The caster must meet the level requirements of the spell. For the RES version of the action, the spell name can not consist of only numbers, should be written in upper case and should be no more than 7 characters long. The example script is from `"andris.bcs"`.

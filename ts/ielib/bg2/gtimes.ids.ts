@@ -1,2 +1,4 @@
+import type { IE } from "../index";
+
 /** GTimes.ids */
-export declare type GTimes = number & {};
+export declare type GTimes = IE<number, "GTimes">;

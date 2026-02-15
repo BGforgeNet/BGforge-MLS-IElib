@@ -1,5 +1,7 @@
+import type { IE } from "../index";
+
 /** Animate.ids */
-export declare type Animate = number & {};
+export declare type Animate = IE<number, "Animate">;
 /** 0x0000 */
 export declare const FIRE_RING: Animate;
 /** 0x0100 */

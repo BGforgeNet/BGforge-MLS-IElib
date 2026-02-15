@@ -1,7 +1,9 @@
+import type { IE } from "../index";
+
 /**
  * ShoutIDS
  */
-export declare type ShoutID = number & {};
+export declare type ShoutID = IE<number, "ShoutID">;
 
 /** 123 */
 export declare const HEALME: ShoutID;

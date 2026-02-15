@@ -1,4 +1,4 @@
-import type { ObjectPtr, SpellID, ItmRef } from "../index";
+import type { AreRef, ItmRef, ObjectPtr, Scope, SplRef, SpellID } from "../index";
 
 import type { Align } from "./align.ids";
 import type { AreaTypeID as AreaType } from "./areatype.ids";
@@ -29,7 +29,7 @@ import type { TimeODay } from "./timeoday.ids";
 /**
  * NT Returns true only if the current CRE obtained the specified item in the last script round. Trigger appears to be broken?
  */
-declare function Acquired(resRef: string): boolean;
+declare function Acquired(item: ItmRef): boolean;
 
 /**
  * Returns true only if the active CRE was attacked in the style specified (not necessarily hit) or had an offensive spell cast on it by the specified object in the last script round. The style parameter is non functional - this trigger is triggered by any attack style. Note that the LastAttacker object is only set for physical attacks (i.e. spell and script damage does not set LastAttacker).
@@ -69,7 +69,7 @@ declare function TurnedBy(object: ObjectPtr): boolean;
 /**
  * NT Returns true only if the specified item is unusable by the active CRE.
  */
-declare function Unusable(resRef: string): boolean;
+declare function Unusable(item: ItmRef): boolean;
 
 /**
  * Returns true only if the alignment of the specified object matches that in the second parameter.
@@ -99,7 +99,7 @@ declare function General(object: ObjectPtr, general: General): boolean;
 /**
  * Returns true only if the variable with name 1st parameter of type 2nd parameter has value 3rd parameter.
  */
-declare function Global(name: string, area: string, value: number): boolean;
+declare function Global(name: string, scope: Scope, value: number): boolean;
 
 /**
  * Returns true only if the current hitpoints of the specified object are equal to the 2nd parameter.
@@ -282,14 +282,14 @@ declare function HaveAnySpells(): boolean;
 declare function BecameVisible(): boolean;
 
 /**
- * See Global(S:Name*,S:Area*,I:Value*) except the variable must be greater than the value specified to be true.
+ * See Global(S:Name*,S:Scope*,I:Value*) except the variable must be greater than the value specified to be true.
  */
-declare function GlobalGT(name: string, area: string, value: number): boolean;
+declare function GlobalGT(name: string, scope: Scope, value: number): boolean;
 
 /**
  * As above except for less than.
  */
-declare function GlobalLT(name: string, area: string, value: number): boolean;
+declare function GlobalLT(name: string, scope: Scope, value: number): boolean;
 
 /**
  * Returns true if the script is processed for the first time this session, e.g. when a creature is created (for CRE scripts) or when the player enters an area (for ARE scripts).
@@ -339,17 +339,17 @@ declare function ReactionLT(object: ObjectPtr, value: Reaction): boolean;
 /**
  * NT
  */
-declare function GlobalTimerExact(name: string, area: string): boolean;
+declare function GlobalTimerExact(name: string, scope: Scope): boolean;
 
 /**
  * Returns true only if the timer with the name specified and of the type in the 2nd parameter has run and expired.
  */
-declare function GlobalTimerExpired(name: string, area: string): boolean;
+declare function GlobalTimerExpired(name: string, scope: Scope): boolean;
 
 /**
- * Returns true only if the timer with the name specified and of the type in the 2nd parameter is still running. Note that if we use !GlobalTimerNotExpired(S:Name*,S:Area*) this will return true if the timer has never been set OR if it has already expired- very useful...most useful of all the GlobalTimer triggers :) .
+ * Returns true only if the timer with the name specified and of the type in the 2nd parameter is still running. Note that if we use !GlobalTimerNotExpired(S:Name*,S:Scope*) this will return true if the timer has never been set OR if it has already expired- very useful...most useful of all the GlobalTimer triggers :) .
  */
-declare function GlobalTimerNotExpired(name: string, area: string): boolean;
+declare function GlobalTimerNotExpired(name: string, scope: Scope): boolean;
 
 /**
  * Returns true if any of the party members have the specified item in their inventory. This trigger also checks with container items (e.g. Bags of Holding).
@@ -614,42 +614,42 @@ declare function Detect(object: ObjectPtr): boolean;
 /**
  * Returns true only if the item specified in parameter 1 is in the container specified in parameter 2.
  */
-declare function Contains(resRef: string, object: ObjectPtr): boolean;
+declare function Contains(item: ItmRef, object: ObjectPtr): boolean;
 
 /**
  * NT Returns true only if the open state of the specified door matches the state specified in the 2nd parameter.
  */
-declare function OpenState(object: ObjectPtr, open: Boolean): boolean;
+declare function OpenState(object: ObjectPtr, open: boolean): boolean;
 
 /**
  * Returns true only if the specified object has the number of items in the 3rd parameter of the type specified in the 1st parameter in its inventory.
  */
-declare function NumItems(resRef: string, object: ObjectPtr, num: number): boolean;
+declare function NumItems(item: ItmRef, object: ObjectPtr, num: number): boolean;
 
 /**
  * Returns true only if the specified object has more than the number of items in the 3rd parameter of the type specified in the 1st parameter in its inventory.
  */
-declare function NumItemsGT(resRef: string, object: ObjectPtr, num: number): boolean;
+declare function NumItemsGT(item: ItmRef, object: ObjectPtr, num: number): boolean;
 
 /**
  * Returns true only if the specified object has fewer than the number of items in the 3rd parameter of the type specified in the 1st parameter in its inventory.
  */
-declare function NumItemsLT(resRef: string, object: ObjectPtr, num: number): boolean;
+declare function NumItemsLT(item: ItmRef, object: ObjectPtr, num: number): boolean;
 
 /**
  * Returns true only if the party has a total number of items of the type specified equal to the 2nd parameter.
  */
-declare function NumItemsParty(resRef: string, num: number): boolean;
+declare function NumItemsParty(item: ItmRef, num: number): boolean;
 
 /**
  * Returns true only if the party has a total number of items of the type specified greater than the 2nd parameter.
  */
-declare function NumItemsPartyGT(resRef: string, num: number): boolean;
+declare function NumItemsPartyGT(item: ItmRef, num: number): boolean;
 
 /**
  * Returns true only if the party has a total number of items of the type specified less than the 2nd parameter.
  */
-declare function NumItemsPartyLT(resRef: string, num: number): boolean;
+declare function NumItemsPartyLT(item: ItmRef, num: number): boolean;
 
 /**
  * Only for trigger regions. Returns true only if the specified object is over the trigger running the script.
@@ -659,7 +659,7 @@ declare function IsOverMe(object: ObjectPtr): boolean;
 /**
  * Returns true only if the active CRE is in the area specified.
  */
-declare function AreaCheck(resRef: string): boolean;
+declare function AreaCheck(area: AreRef): boolean;
 
 /**
  * Returns true if the specified object has the specified item outside the general inventory slots (does not check for equipped status). This trigger does not work for Melf's Minute Meteors or other magically created weapons.
@@ -889,17 +889,17 @@ declare function InMyGroup(object: ObjectPtr): boolean;
 /**
  * NT
  */
-declare function RealGlobalTimerExact(name: string, area: string): boolean;
+declare function RealGlobalTimerExact(name: string, scope: Scope): boolean;
 
 /**
  * NT Returns true only if the timer with the specified name of the specified area has been set at least once and has now expired.
  */
-declare function RealGlobalTimerExpired(name: string, area: string): boolean;
+declare function RealGlobalTimerExpired(name: string, scope: Scope): boolean;
 
 /**
  * NT Returns true only if the timer with the specified name of the specified area has been set and has not yet expired.
  */
-declare function RealGlobalTimerNotExpired(name: string, area: string): boolean;
+declare function RealGlobalTimerNotExpired(name: string, scope: Scope): boolean;
 
 /**
  * Returns true only if the number of party members alive is equal to the number specified.
@@ -1039,7 +1039,7 @@ declare function InPartyAllowDead(object: ObjectPtr): boolean;
 /**
  * Returns true if the specified object is in the area specified. This trigger can cause a crash if the specified area is not loaded.
  */
-declare function AreaCheckObject(resRef: string, object: ObjectPtr): boolean;
+declare function AreaCheckObject(area: AreRef, object: ObjectPtr): boolean;
 
 /**
  * Returns true if combat counter is greater than 0. Confirmed as working in SoA.
@@ -1074,7 +1074,7 @@ declare function HaveSpellParty(spell: SpellID): boolean;
 /**
  * ToB only. Returns true if the active CRE has the specified (by the string parameter) spell memorised.
  */
-declare function HaveSpellRES(spell: string): boolean;
+declare function HaveSpellRES(spell: SplRef): boolean;
 
 /**
  * ToB only. Returns true only if the active CRE is in a Watcher's Keep (i.e. the current area begins with AR30).

@@ -88,6 +88,22 @@ describe("parseTriggerParameters", () => {
   it("throws on unknown type", () => {
     expect(() => parseTriggerParameters("Z:Unknown")).toThrow("Unknown type");
   });
+
+  it("overrides type for param named Scope via PARAM_NAME_TYPES", () => {
+    const result = parseTriggerParameters("S:Name*,S:Scope*");
+    expect(result).toBe("name: string, scope: Scope");
+  });
+
+  it("resolves resref type codes (ItmRef, AreRef, SplRef)", () => {
+    expect(parseTriggerParameters("ItmRef:Item*")).toBe("item: ItmRef");
+    expect(parseTriggerParameters("AreRef:Area*")).toBe("area: AreRef");
+    expect(parseTriggerParameters("SplRef:Spell*")).toBe("spell: SplRef");
+  });
+
+  it("does not override non-matching param names", () => {
+    const result = parseTriggerParameters("S:MyScope*");
+    expect(result).toBe("myScope: string");
+  });
 });
 
 describe("extractTriggerBlocks", () => {
