@@ -100,33 +100,18 @@ export function moduleSection(modulePath: string): Section {
 }
 
 /**
- * Formats a single export line. Uses multi-line layout when there are more
- * than 3 names, single-line otherwise. Wraps long lines at ~80 cols.
+ * Formats an export statement with one symbol per line.
  */
 export function formatExportLine(keyword: "export" | "export type", names: readonly string[], modulePath: string): string {
-  if (names.length <= 3) {
-    return `${keyword} { ${names.join(", ")} } from '${modulePath}';`;
+  if (names.length === 1) {
+    return `${keyword} { ${names[0]} } from '${modulePath}';`;
   }
 
-  // Multi-line: wrap names at ~80 columns for readability
-  const lines: string[] = [`${keyword} {`];
-  let currentLine = "  ";
-  for (let i = 0; i < names.length; i++) {
-    const name = names[i];
-    if (!name) continue;
-    const separator = i < names.length - 1 ? ", " : ",";
-    const candidate = currentLine + name + separator;
-    if (candidate.length > 80 && currentLine !== "  ") {
-      lines.push(currentLine.trimEnd());
-      currentLine = `  ${name}${separator}`;
-    } else {
-      currentLine = candidate;
-    }
-  }
-  if (currentLine.trim()) {
-    lines.push(currentLine.trimEnd());
-  }
-  lines.push(`} from '${modulePath}';`);
+  const lines = [
+    `${keyword} {`,
+    ...names.map((name) => `  ${name},`),
+    `} from '${modulePath}';`,
+  ];
   return lines.join("\n");
 }
 

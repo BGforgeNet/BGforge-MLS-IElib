@@ -122,34 +122,27 @@ describe("moduleSection", () => {
 });
 
 describe("formatExportLine", () => {
-  it("formats single-line for 1-3 names", () => {
-    expect(formatExportLine("export", ["A", "B"], "./mod"))
-      .toBe("export { A, B } from './mod';");
+  it("formats single name inline", () => {
+    expect(formatExportLine("export", ["A"], "./mod"))
+      .toBe("export { A } from './mod';");
   });
 
-  it("formats single-line for exactly 3 names", () => {
-    expect(formatExportLine("export type", ["A", "B", "C"], "./mod"))
-      .toBe("export type { A, B, C } from './mod';");
+  it("formats multiple names one per line", () => {
+    const result = formatExportLine("export", ["A", "B", "C"], "./mod");
+    expect(result).toBe(
+      "export {\n  A,\n  B,\n  C,\n} from './mod';",
+    );
   });
 
-  it("formats multi-line for 4+ names", () => {
-    const result = formatExportLine("export", ["Alpha", "Beta", "Gamma", "Delta"], "./mod");
-    expect(result).toContain("export {");
-    expect(result).toContain("} from './mod';");
-    expect(result.split("\n").length).toBeGreaterThan(1);
+  it("formats export type keyword", () => {
+    expect(formatExportLine("export type", ["Foo"], "./mod"))
+      .toBe("export type { Foo } from './mod';");
   });
 
-  it("wraps lines at ~80 columns", () => {
-    const longNames = Array.from({ length: 10 }, (_, i) => `VeryLongExportName${i}`);
-    const result = formatExportLine("export", longNames, "./mod");
-    const contentLines = result.split("\n").slice(1, -1); // exclude header/footer
-    for (const line of contentLines) {
-      expect(line.length).toBeLessThanOrEqual(82);
-    }
-  });
-
-  it("uses export type keyword when specified", () => {
-    const result = formatExportLine("export type", ["Foo"], "./mod");
-    expect(result).toBe("export type { Foo } from './mod';");
+  it("formats export type with multiple names one per line", () => {
+    const result = formatExportLine("export type", ["Bar", "Foo"], "./mod");
+    expect(result).toBe(
+      "export type {\n  Bar,\n  Foo,\n} from './mod';",
+    );
   });
 });
