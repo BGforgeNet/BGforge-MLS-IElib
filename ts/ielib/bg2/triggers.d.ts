@@ -36,8 +36,6 @@ export declare function Acquired(item: ItmRef): boolean;
  */
 export declare function AttackedBy(object: ObjectPtr, style: AStyles): boolean;
 
-// Help() is in help.d.ts (both action and trigger overloads).
-
 /**
  * Returns true if the specified object has joined the party in the last script round. This trigger is only sent to player characters.
  */

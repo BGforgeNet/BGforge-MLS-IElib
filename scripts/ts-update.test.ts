@@ -3,7 +3,7 @@
  */
 
 import { describe, it, expect } from "vitest";
-import { normalizeParamName, parseTriggerParameters, extractTriggerBlocks } from "./ts-update";
+import { normalizeParamName, parseTriggerParameters, extractTriggerBlocks, extractExportedNames } from "./ts-update";
 
 describe("normalizeParamName", () => {
   describe("lower case strategy (actions)", () => {
@@ -132,5 +132,83 @@ Trigger desc
     const html = "<html><body>No triggers here</body></html>";
     const blocks = extractTriggerBlocks(html);
     expect(blocks.length).toBe(0);
+  });
+});
+
+describe("extractExportedNames", () => {
+  it("extracts type-only exports", () => {
+    const content = `import type { IE } from "../index";\n\nexport declare type Align = IE<number, "Align">;`;
+    const result = extractExportedNames(content);
+    expect(result.types).toEqual(["Align"]);
+    expect(result.values).toEqual([]);
+  });
+
+  it("extracts value-only exports (declare const)", () => {
+    const content = `export declare const ENEMY: EA;\nexport declare const ALLY: EA;`;
+    const result = extractExportedNames(content);
+    expect(result.types).toEqual([]);
+    expect(result.values).toEqual(["ENEMY", "ALLY"]);
+  });
+
+  it("extracts mixed type and value exports", () => {
+    const content = [
+      `export declare type Modal = IE<number, "Modal">;`,
+      `export declare const NONE: Modal;`,
+      `export declare const BATTLESONG: Modal;`,
+    ].join("\n");
+    const result = extractExportedNames(content);
+    expect(result.types).toEqual(["Modal"]);
+    expect(result.values).toEqual(["NONE", "BATTLESONG"]);
+  });
+
+  it("extracts declare function exports", () => {
+    const content = [
+      `export declare function LeaderOf(target?: ObjectPtr): ObjectPtr;`,
+      `export declare const Myself: ObjectPtr;`,
+    ].join("\n");
+    const result = extractExportedNames(content);
+    expect(result.types).toEqual([]);
+    expect(result.values).toEqual(["LeaderOf", "Myself"]);
+  });
+
+  it("deduplicates overloaded function declarations", () => {
+    const content = [
+      `export declare function Help(): Action;`,
+      `export declare function Help(who: ObjectPtr): boolean;`,
+    ].join("\n");
+    const result = extractExportedNames(content);
+    expect(result.values).toEqual(["Help"]);
+  });
+
+  it("extracts enum exports", () => {
+    const content = `export enum Direction {\n  S = 0,\n  N = 8,\n}`;
+    const result = extractExportedNames(content);
+    expect(result.types).toEqual([]);
+    expect(result.values).toEqual(["Direction"]);
+  });
+
+  it("extracts const exports (non-declare)", () => {
+    const content = `export const NearestEnemyOf = DefaultSelf;`;
+    const result = extractExportedNames(content);
+    expect(result.types).toEqual([]);
+    expect(result.values).toEqual(["NearestEnemyOf"]);
+  });
+
+  it("returns empty arrays for content with no exports", () => {
+    const content = `import type { IE } from "../index";\nconst x = 1;`;
+    const result = extractExportedNames(content);
+    expect(result.types).toEqual([]);
+    expect(result.values).toEqual([]);
+  });
+
+  it("ignores import statements", () => {
+    const content = [
+      `import type { IE } from "../index";`,
+      `import { ObjectPtr } from "..";`,
+      `export declare type Foo = IE<number, "Foo">;`,
+    ].join("\n");
+    const result = extractExportedNames(content);
+    expect(result.types).toEqual(["Foo"]);
+    expect(result.values).toEqual([]);
   });
 });
