@@ -1,646 +1,324 @@
-import type { IE } from "../index";
-
 /** Animate.ids */
-export declare type Animate = IE<number, "Animate">;
-/** 0x0000 */
-export declare const FIRE_RING: Animate;
-/** 0x0100 */
-export declare const CHUNKS: Animate;
-/** 0x0200 */
-export declare const EXPLODING_ARM: Animate;
-/** 0x0210 */
-export declare const EXPLODING_HEAD: Animate;
-/** 0x0220 */
-export declare const EXPLODING_FOOT: Animate;
-/** 0x0230 */
-export declare const EXPLODING_TORSO: Animate;
-/** 0x0240 */
-export declare const EXPLODING_LEG: Animate;
-/** 0x0300 */
-export declare const SMOKE_PUFF_LARGE: Animate;
-/** 0x0301 */
-export declare const SMOKE_PUFF_SMALL: Animate;
-/** 0x0400 */
-export declare const TRAP_SKULL: Animate;
-/** 0x0410 */
-export declare const TRAP_GLYPH: Animate;
-/** 0x0500 */
-export declare const CLOUD_TRAVEL: Animate;
-/** 0x0510 */
-export declare const CLOUD_STATIC: Animate;
-/** 0x0600 */
-export declare const STORM_TRAVEL: Animate;
-/** 0x0610 */
-export declare const STORM_STATIC: Animate;
-/** 0x0700 */
-export declare const GREASE_TRAVEL: Animate;
-/** 0x0710 */
-export declare const GREASE_STATIC: Animate;
-/** 0x0800 */
-export declare const WEB_TRAVEL: Animate;
-/** 0x0810 */
-export declare const WEB_STATIC: Animate;
-/** 0x1000 */
-export declare const WYVERN_BIG: Animate;
-/** 0x1100 */
-export declare const TANARRI: Animate;
-/** 0x1200 */
-export declare const DRAGON_RED: Animate;
-/** 0x1201 */
-export declare const DRAGON_BLACK: Animate;
-/** 0x1202 */
-export declare const DRAGON_SILVER: Animate;
-/** 0x1203 */
-export declare const DRAGON_GREEN: Animate;
-/** 0x1204 */
-export declare const DRAGON_AQUA: Animate;
-/** 0x1205 */
-export declare const DRAGON_BLUE: Animate;
-/** 0x1206 */
-export declare const DRAGON_BROWN: Animate;
-/** 0x1207 */
-export declare const DRAGON_MULTICOLOR: Animate;
-/** 0x1208 */
-export declare const DRAGON_PURPLE: Animate;
-/** 0x1300 */
-export declare const DEMIGORGON: Animate;
-/** 0x2000 */
-export declare const SIRINE: Animate;
-/** 0x2100 */
-export declare const VOLO: Animate;
-/** 0x2200 */
-export declare const OGRE_MAGE: Animate;
-/** 0x2300 */
-export declare const DEATH_KNIGHT: Animate;
-/** 0x3000 */
-export declare const ANKHEG: Animate;
-/** 0x4000 */
-export declare const STATIC_NOBLE_MAN_CHAIR: Animate;
-/** 0x4002 */
-export declare const STATIC_NOBLE_MAN_MATTE: Animate;
-/** 0x4010 */
-export declare const STATIC_NOBLE_WOMAN_CHAIR: Animate;
-/** 0x4012 */
-export declare const STATIC_NOBLE_WOMAN_MATTE: Animate;
-/** 0x4100 */
-export declare const STATIC_PEASANT_MAN_CHAIR: Animate;
-/** 0x4101 */
-export declare const STATIC_PEASANT_MAN_STOOL: Animate;
-/** 0x4102 */
-export declare const STATIC_PEASANT_MAN_MATTE: Animate;
-/** 0x4110 */
-export declare const STATIC_PEASANT_WOMAN_CHAIR: Animate;
-/** 0x4112 */
-export declare const STATIC_PEASANT_WOMAN_MATTE: Animate;
-/** 0x4200 */
-export declare const STATIC_HUMANCLERIC_MAN_CHAIR: Animate;
-/** 0x4300 */
-export declare const STATIC_SPIDER_WOMAN: Animate;
-/** 0x4400 */
-export declare const SLEEPING_MAN_HUMAN: Animate;
-/** 0x4410 */
-export declare const SLEEPING_WOMAN_HUMAN: Animate;
-/** 0x4500 */
-export declare const SLEEPING_FAT_MAN_HUMAN: Animate;
-/** 0x4600 */
-export declare const SLEEPING_DWARF: Animate;
-/** 0x4700 */
-export declare const SLEEPING_MAN_ELF: Animate;
-/** 0x4710 */
-export declare const SLEEPING_WOMAN_ELF: Animate;
-/** 0x4800 */
-export declare const SLEEPING_MAN_HALFLING: Animate;
-/** 0x5000 */
-export declare const CLERIC_MALE_HUMAN_LOW: Animate;
-/** 0x5001 */
-export declare const CLERIC_MALE_ELF_LOW: Animate;
-/** 0x5002 */
-export declare const CLERIC_MALE_DWARF_LOW: Animate;
-/** 0x5003 */
-export declare const CLERIC_MALE_HALFLING_LOW: Animate;
-/** 0x5010 */
-export declare const CLERIC_FEMALE_HUMAN_LOW: Animate;
-/** 0x5011 */
-export declare const CLERIC_FEMALE_ELF_LOW: Animate;
-/** 0x5012 */
-export declare const CLERIC_FEMALE_DWARF_LOW: Animate;
-/** 0x5013 */
-export declare const CLERIC_FEMALE_HALFLING_LOW: Animate;
-/** 0x5100 */
-export declare const FIGHTER_MALE_HUMAN_LOW: Animate;
-/** 0x5101 */
-export declare const FIGHTER_MALE_ELF_LOW: Animate;
-/** 0x5102 */
-export declare const FIGHTER_MALE_DWARF_LOW: Animate;
-/** 0x5103 */
-export declare const FIGHTER_MALE_HALFLING_LOW: Animate;
-/** 0x5110 */
-export declare const FIGHTER_FEMALE_HUMAN_LOW: Animate;
-/** 0x5111 */
-export declare const FIGHTER_FEMALE_ELF_LOW: Animate;
-/** 0x5112 */
-export declare const FIGHTER_FEMALE_DWARF_LOW: Animate;
-/** 0x5113 */
-export declare const FIGHTER_FEMALE_HALFLING_LOW: Animate;
-/** 0x5200 */
-export declare const MAGE_MALE_HUMAN_LOW: Animate;
-/** 0x5201 */
-export declare const MAGE_MALE_ELF_LOW: Animate;
-/** 0x5202 */
-export declare const MAGE_MALE_DWARF_LOW: Animate;
-/** 0x5210 */
-export declare const MAGE_FEMALE_HUMAN_LOW: Animate;
-/** 0x5211 */
-export declare const MAGE_FEMALE_ELF_LOW: Animate;
-/** 0x5212 */
-export declare const MAGE_FEMALE_DWARF_LOW: Animate;
-/** 0x5300 */
-export declare const THIEF_MALE_HUMAN_LOW: Animate;
-/** 0x5301 */
-export declare const THIEF_MALE_ELF_LOW: Animate;
-/** 0x5302 */
-export declare const THIEF_MALE_DWARF_LOW: Animate;
-/** 0x5303 */
-export declare const THIEF_MALE_HALFLING_LOW: Animate;
-/** 0x5310 */
-export declare const THIEF_FEMALE_HUMAN_LOW: Animate;
-/** 0x5311 */
-export declare const THIEF_FEMALE_ELF_LOW: Animate;
-/** 0x5312 */
-export declare const THIEF_FEMALE_DWARF_LOW: Animate;
-/** 0x5313 */
-export declare const THIEF_FEMALE_HALFLING_LOW: Animate;
-/** 0x6000 */
-export declare const CLERIC_MALE_HUMAN: Animate;
-/** 0x6001 */
-export declare const CLERIC_MALE_ELF: Animate;
-/** 0x6002 */
-export declare const CLERIC_MALE_DWARF: Animate;
-/** 0x6003 */
-export declare const CLERIC_MALE_HALFLING: Animate;
-/** 0x6004 */
-export declare const CLERIC_MALE_GNOME: Animate;
-/** 0x6005 */
-export declare const CLERIC_MALE_HALFORC: Animate;
-/** 0x6010 */
-export declare const CLERIC_FEMALE_HUMAN: Animate;
-/** 0x6011 */
-export declare const CLERIC_FEMALE_ELF: Animate;
-/** 0x6012 */
-export declare const CLERIC_FEMALE_DWARF: Animate;
-/** 0x6013 */
-export declare const CLERIC_FEMALE_HALFLING: Animate;
-/** 0x6014 */
-export declare const CLERIC_FEMALE_GNOME: Animate;
-/** 0x6015 */
-export declare const CLERIC_FEMALE_HALFORC: Animate;
-/** 0x6100 */
-export declare const FIGHTER_MALE_HUMAN: Animate;
-/** 0x6101 */
-export declare const FIGHTER_MALE_ELF: Animate;
-/** 0x6102 */
-export declare const FIGHTER_MALE_DWARF: Animate;
-/** 0x6103 */
-export declare const FIGHTER_MALE_HALFLING: Animate;
-/** 0x6104 */
-export declare const FIGHTER_MALE_GNOME: Animate;
-/** 0x6105 */
-export declare const FIGHTER_MALE_HALFORC: Animate;
-/** 0x6110 */
-export declare const FIGHTER_FEMALE_HUMAN: Animate;
-/** 0x6111 */
-export declare const FIGHTER_FEMALE_ELF: Animate;
-/** 0x6112 */
-export declare const FIGHTER_FEMALE_DWARF: Animate;
-/** 0x6113 */
-export declare const FIGHTER_FEMALE_HALFLING: Animate;
-/** 0x6114 */
-export declare const FIGHTER_FEMALE_GNOME: Animate;
-/** 0x6115 */
-export declare const FIGHTER_FEMALE_HALFORC: Animate;
-/** 0x6200 */
-export declare const MAGE_MALE_HUMAN: Animate;
-/** 0x6201 */
-export declare const MAGE_MALE_ELF: Animate;
-/** 0x6202 */
-export declare const MAGE_MALE_DWARF: Animate;
-/** 0x6204 */
-export declare const MAGE_MALE_GNOME: Animate;
-/** 0x6205 */
-export declare const MAGE_MALE_HALFORC: Animate;
-/** 0x6210 */
-export declare const MAGE_FEMALE_HUMAN: Animate;
-/** 0x6211 */
-export declare const MAGE_FEMALE_ELF: Animate;
-/** 0x6212 */
-export declare const MAGE_FEMALE_DWARF: Animate;
-/** 0x6214 */
-export declare const MAGE_FEMALE_GNOME: Animate;
-/** 0x6215 */
-export declare const MAGE_FEMALE_HALFORC: Animate;
-/** 0x6300 */
-export declare const THIEF_MALE_HUMAN: Animate;
-/** 0x6301 */
-export declare const THIEF_MALE_ELF: Animate;
-/** 0x6302 */
-export declare const THIEF_MALE_DWARF: Animate;
-/** 0x6303 */
-export declare const THIEF_MALE_HALFLING: Animate;
-/** 0x6304 */
-export declare const THIEF_MALE_GNOME: Animate;
-/** 0x6305 */
-export declare const THIEF_MALE_HALFORC: Animate;
-/** 0x6310 */
-export declare const THIEF_FEMALE_HUMAN: Animate;
-/** 0x6311 */
-export declare const THIEF_FEMALE_ELF: Animate;
-/** 0x6312 */
-export declare const THIEF_FEMALE_DWARF: Animate;
-/** 0x6313 */
-export declare const THIEF_FEMALE_HALFLING: Animate;
-/** 0x6314 */
-export declare const THIEF_FEMALE_GNOME: Animate;
-/** 0x6315 */
-export declare const THIEF_FEMALE_HALFORC: Animate;
-/** 0x6500 */
-export declare const MONK_MALE_HUMAN: Animate;
-/** 0x6510 */
-export declare const MONK_FEMALE_HUMAN: Animate;
-/** 0x6400 */
-export declare const DRIZZT: Animate;
-/** 0x6401 */
-export declare const ELMINSTER: Animate;
-/** 0x6402 */
-export declare const MONK: Animate;
-/** 0x6403 */
-export declare const SKELETON: Animate;
-/** 0x6404 */
-export declare const SAREVOK: Animate;
-/** 0x6405 */
-export declare const DOOM_GUARD: Animate;
-/** 0x6406 */
-export declare const DOOM_GUARD_LARGER: Animate;
-/** 0x7000 */
-export declare const HALF_OGRE: Animate;
-/** 0x7001 */
-export declare const OGRILLON: Animate;
-/** 0x7100 */
-export declare const BASILISK: Animate;
-/** 0x7101 */
-export declare const BASILISK_GREATER: Animate;
-/** 0x7200 */
-export declare const BEAR_BLACK: Animate;
-/** 0x7201 */
-export declare const BEAR_BROWN: Animate;
-/** 0x7202 */
-export declare const BEAR_CAVE: Animate;
-/** 0x7203 */
-export declare const BEAR_POLAR: Animate;
-/** 0x7300 */
-export declare const ELEMENTAL_EARTH: Animate;
-/** 0x7301 */
-export declare const ELEMENTAL_EARTH_SMALL: Animate;
-/** 0x7302 */
-export declare const SHAMBLING_MOUND: Animate;
-/** 0x7310 */
-export declare const ELEMENTAL_FIRE: Animate;
-/** 0x7311 */
-export declare const ELEMENTAL_FIRE_SMALL: Animate;
-/** 0x7312 */
-export declare const ELEMENTAL_FIRE_PURPLE: Animate;
-/** 0x7313 */
-export declare const ELEMENTAL_FIRE_SMALL_PURPLE: Animate;
-/** 0x7314 */
-export declare const BURNING_MAN: Animate;
-/** 0x7320 */
-export declare const ELEMENTAL_AIR: Animate;
-/** 0x7321 */
-export declare const ELEMENTAL_AIR_SMALL: Animate;
-/** 0x7400 */
-export declare const DOG_WILD: Animate;
-/** 0x7401 */
-export declare const DOG_WAR: Animate;
-/** 0x7402 */
-export declare const DOG_MOON: Animate;
-/** 0x7500 */
-export declare const DOPPLEGANGER: Animate;
-/** 0x7501 */
-export declare const DOPPLEGANGER_GREATER: Animate;
-/** 0x7600 */
-export declare const ETTERCAP: Animate;
-/** 0x7700 */
-export declare const GHOUL: Animate;
-/** 0x7701 */
-export declare const REVEANT: Animate;
-/** 0x7702 */
-export declare const GHAST: Animate;
-/** 0x7703 */
-export declare const SHADOW: Animate;
-/** 0x7800 */
-export declare const GIBBERLING: Animate;
-/** 0x7900 */
-export declare const SLIME_GREEN: Animate;
-/** 0x7901 */
-export declare const SLIME_OLIVE: Animate;
-/** 0x7902 */
-export declare const SLIME_MUSTARD: Animate;
-/** 0x7903 */
-export declare const SLIME_OCHRE: Animate;
-/** 0x7904 */
-export declare const GRAY_OOZE: Animate;
-/** 0x7a00 */
-export declare const SPIDER_GIANT: Animate;
-/** 0x7a01 */
-export declare const SPIDER_HUGE: Animate;
-/** 0x7a02 */
-export declare const SPIDER_PHASE: Animate;
-/** 0x7a03 */
-export declare const SPIDER_SWORD: Animate;
-/** 0x7a04 */
-export declare const SPIDER_WRAITH: Animate;
-/** 0x7b00 */
-export declare const WOLF: Animate;
-/** 0x7b01 */
-export declare const WOLF_WORG: Animate;
-/** 0x7b02 */
-export declare const WOLF_DIRE: Animate;
-/** 0x7b03 */
-export declare const WOLF_WINTER: Animate;
-/** 0x7b04 */
-export declare const WOLF_VAMPIRE: Animate;
-/** 0x7b05 */
-export declare const WOLF_DREAD: Animate;
-/** 0x7b06 */
-export declare const WOLF_SHADOW: Animate;
-/** 0x7c00 */
-export declare const KOBOLD_XVART: Animate;
-/** 0x7c01 */
-export declare const KOBOLD_TASLOI: Animate;
-/** 0x7d00 */
-export declare const ZOMBIE: Animate;
-/** 0x7e00 */
-export declare const WEREWOLF: Animate;
-/** 0x7e01 */
-export declare const WEREWOLF_GREATER: Animate;
-/** 0x7f00 */
-export declare const TROLL: Animate;
-/** 0x7f01 */
-export declare const MINDFLAYER: Animate;
-/** 0x7f02 */
-export declare const BEHOLDER: Animate;
-/** 0x7f03 */
-export declare const IMP: Animate;
-/** 0x7f04 */
-export declare const GOLEM_IRON: Animate;
-/** 0x7f05 */
-export declare const DJINNI: Animate;
-/** 0x7f06 */
-export declare const DJINNI_LEGS: Animate;
-/** 0x7f07 */
-export declare const GOLEM_CLAY: Animate;
-/** 0x7f08 */
-export declare const OTYUGH: Animate;
-/** 0x7f09 */
-export declare const SAHAUGIN: Animate;
-/** 0x7f0a */
-export declare const GREATCAT_PANTHER: Animate;
-/** 0x7f0b */
-export declare const GREATCAT_LEOPARD: Animate;
-/** 0x7f0c */
-// export declare const KUO-TOA: Animate;
-/** 0x7f0d */
-export declare const LICH: Animate;
-/** 0x7f0e */
-export declare const DEMILICH: Animate;
-/** 0x7f0f */
-export declare const TROLL_SMALL: Animate;
-/** 0x7f10 */
-export declare const RAKSHASA: Animate;
-/** 0x7f11 */
-export declare const UMBER_HULK: Animate;
-/** 0x7f12 */
-export declare const VAMPIRE: Animate;
-/** 0x7f13 */
-export declare const SNAKE: Animate;
-/** 0x7f14 */
-export declare const GITHYANKI: Animate;
-/** 0x7f15 */
-export declare const BEHOLDER_SMALL: Animate;
-/** 0x7f16 */
-export declare const MOOSE: Animate;
-/** 0x7f17 */
-export declare const RABBIT: Animate;
-/** 0x7f18 */
-export declare const DEER: Animate;
-/** 0x7f19 */
-export declare const DANCING_SWORD: Animate;
-/** 0x7f20 */
-export declare const GROUNDHOG: Animate;
-/** 0x7f21 */
-export declare const PHEASANT: Animate;
-/** 0x7f22 */
-export declare const VAMPIRE_FEMALE: Animate;
-/** 0x7f23 */
-export declare const SAHAUGIN_LARGE: Animate;
-/** 0x7f24 */
-export declare const PIRATE: Animate;
-/** 0x7f27 */
-export declare const DROW: Animate;
-/** 0x7f28 */
-// export declare const KUO-TOA_LARGE: Animate;
-/** 0x7f29 */
-export declare const DROW_FEMALE: Animate;
-/** 0x7f2a */
-export declare const SAILOR_MAN: Animate;
-/** 0x7f2b */
-export declare const MDK2_MAX: Animate;
-/** 0x7f2c */
-export declare const AMISH_SOLDIER: Animate;
-/** 0x7f2d */
-export declare const WYVERN_FAMILIAR: Animate;
-/** 0x7f2e */
-export declare const RAVER: Animate;
-/** 0x7f2f */
-export declare const SPIDER_SMALL: Animate;
-/** 0x7f30 */
-export declare const BODHI: Animate;
-/** 0x7f31 */
-export declare const ELLESIME: Animate;
-/** 0x7f32 */
-export declare const SLAYER: Animate;
-/** 0x7f33 */
-export declare const MDK2_KURT: Animate;
-/** 0x7f34 */
-export declare const MDK2_DOCTOR: Animate;
-/** 0x7f35 */
-export declare const MIST_CREATURE: Animate;
-/** 0x7f36 */
-export declare const SHADOW_THIEF: Animate;
-/** 0x7f37 */
-export declare const JON_IRENICUS: Animate;
-/** 0x7f38 */
-// export declare const WIZARD_EYE: Animate;
-/** 0x7f39 */
-export declare const BLOB_MIST_CREATURE: Animate;
-/** 0x7f3a */
-export declare const HULA_WIZARD: Animate;
-/** 0x7f3b */
-export declare const SOLAR: Animate;
-/** 0x7f3c */
-export declare const ANTISOLAR: Animate;
-/** 0x7f3d */
-export declare const MELISSAN: Animate;
-/** 0x7f3e */
-export declare const FIRE_GIANT: Animate;
-/** 0x8000 */
-export declare const GNOLL: Animate;
-/** 0x8100 */
-export declare const HOBGOBLIN: Animate;
-/** 0x8200 */
-export declare const KOBOLD: Animate;
-/** 0x9000 */
-export declare const OGRE: Animate;
-/** 0xa000 */
-export declare const WYVERN: Animate;
-/** 0xa100 */
-export declare const CARRION_CRAWLER: Animate;
-/** 0xb000 */
-export declare const COW: Animate;
-/** 0xb100 */
-export declare const HORSE: Animate;
-/** 0xb200 */
-export declare const STATIC_BEGGAR_MAN: Animate;
-/** 0xb210 */
-export declare const STATIC_HARLOT_WOMAN: Animate;
-/** 0xb300 */
-export declare const STATIC_BOY: Animate;
-/** 0xb310 */
-export declare const STATIC_GIRL: Animate;
-/** 0xb400 */
-export declare const STATIC_FAT_MAN: Animate;
-/** 0xb410 */
-export declare const STATIC_FAT_WOMAN: Animate;
-/** 0xb500 */
-export declare const STATIC_PEASANT_MAN: Animate;
-/** 0xb510 */
-export declare const STATIC_PEASANT_WOMAN: Animate;
-/** 0xb600 */
-export declare const STATIC_NOBLE_MAN: Animate;
-/** 0xb610 */
-export declare const STATIC_NOBLE_WOMAN: Animate;
-/** 0xb700 */
-export declare const STATIC_SLAVE: Animate;
-/** 0xc000 */
-export declare const BAT_INSIDE: Animate;
-/** 0xc100 */
-export declare const CAT: Animate;
-/** 0xc200 */
-export declare const CHICKEN: Animate;
-/** 0xc300 */
-export declare const RAT: Animate;
-/** 0xc400 */
-export declare const SQUIRREL: Animate;
-/** 0xc500 */
-export declare const BAT_OUTSIDE: Animate;
-/** 0xc600 */
-export declare const BEGGAR_MAN: Animate;
-/** 0xc610 */
-export declare const HARLOT_WOMAN: Animate;
-/** 0xc700 */
-export declare const BOY: Animate;
-/** 0xc710 */
-export declare const GIRL: Animate;
-/** 0xc800 */
-export declare const FAT_MAN: Animate;
-/** 0xc810 */
-export declare const FAT_WOMAN: Animate;
-/** 0xc900 */
-export declare const PEASANT_MAN: Animate;
-/** 0xc910 */
-export declare const PEASANT_WOMAN: Animate;
-/** 0xca00 */
-export declare const NOBLE_MAN: Animate;
-/** 0xca10 */
-export declare const NOBLE_WOMAN: Animate;
-/** 0xcb00 */
-export declare const SLAVE: Animate;
-/** 0xd000 */
-export declare const EAGLE: Animate;
-/** 0xd100 */
-export declare const SEAGULL: Animate;
-/** 0xd200 */
-export declare const VULTURE: Animate;
-/** 0xd300 */
-export declare const BIRD: Animate;
-/** 0xd400 */
-export declare const BIRD_INSIDE: Animate;
-/** 0xe010 */
-export declare const IC_ETTIN: Animate;
-/** 0xe020 */
-export declare const DONOT_USE: Animate;
-/** 0xe050 */
-export declare const IC_LICHBLACK: Animate;
-/** 0xe070 */
-export declare const IC_MINOTAUR: Animate;
-/** 0xe080 */
-export declare const IC_MUMMY: Animate;
-/** 0xe090 */
-export declare const IC_MERILITH: Animate;
-/** 0xe0b0 */
-export declare const IC_TROLL1: Animate;
-/** 0xe0e0 */
-export declare const IC_CORNUGONSKI: Animate;
-/** 0xe0f0 */
-export declare const IC_ICE_GOLEM: Animate;
-/** 0xe0f1 */
-export declare const IC_GLAB: Animate;
-/** 0xe0f2 */
-export declare const IC_WAILING_VIRGIN: Animate;
-/** 0xe400 */
-export declare const IC_GOBLIN_AXE: Animate;
-/** 0xe410 */
-export declare const IC_GOBLIN_BOW: Animate;
-/** 0xe420 */
-export declare const IC_GOBLINELITE_AXE: Animate;
-/** 0xe430 */
-export declare const IC_GOBLINELITE_BOW: Animate;
-/** 0xe500 */
-export declare const IC_LIZARDCASTER1: Animate;
-/** 0xe600 */
-export declare const IC_MYCONID: Animate;
-/** 0xe610 */
-export declare const IC_MYCONID2: Animate;
-/** 0xe700 */
-export declare const IC_OROG1: Animate;
-/** 0xe710 */
-export declare const IC_OROG2: Animate;
-/** 0xe720 */
-export declare const IC_OROG3: Animate;
-/** 0xe800 */
-export declare const IC_ORC_MELEE1: Animate;
-/** 0xe810 */
-export declare const IC_ORC_RANGE2: Animate;
-/** 0xe820 */
-export declare const IC_ORC_MELEE3: Animate;
-/** 0xe830 */
-export declare const IC_ORC_RANGE4: Animate;
-/** 0xe840 */
-export declare const IC_ORC_SHAMAN: Animate;
-/** 0xe900 */
-export declare const IC_SALAMANDER: Animate;
-/** 0xe910 */
-export declare const IC_SALAMANDER2: Animate;
-/** 0xea00 */
-export declare const IC_SHROOM: Animate;
-/** 0xeb00 */
-export declare const IC_SKELETON0: Animate;
-/** 0xeb10 */
-export declare const IC_SKELETONA: Animate;
-/** 0xeb20 */
-export declare const IC_SKELETONB: Animate;
-/** 0xed00 */
-export declare const IC_YUANTI: Animate;
-/** 0xed10 */
-export declare const IC_YUANTI2: Animate;
-/** 0xed20 */
-export declare const IC_YUANTI3: Animate;
+export declare enum ANIMATE {
+  FIRE_RING = 0x0000,
+  CHUNKS = 0x0100,
+  EXPLODING_ARM = 0x0200,
+  EXPLODING_HEAD = 0x0210,
+  EXPLODING_FOOT = 0x0220,
+  EXPLODING_TORSO = 0x0230,
+  EXPLODING_LEG = 0x0240,
+  SMOKE_PUFF_LARGE = 0x0300,
+  SMOKE_PUFF_SMALL = 0x0301,
+  TRAP_SKULL = 0x0400,
+  TRAP_GLYPH = 0x0410,
+  CLOUD_TRAVEL = 0x0500,
+  CLOUD_STATIC = 0x0510,
+  STORM_TRAVEL = 0x0600,
+  STORM_STATIC = 0x0610,
+  GREASE_TRAVEL = 0x0700,
+  GREASE_STATIC = 0x0710,
+  WEB_TRAVEL = 0x0800,
+  WEB_STATIC = 0x0810,
+  WYVERN_BIG = 0x1000,
+  TANARRI = 0x1100,
+  DRAGON_RED = 0x1200,
+  DRAGON_BLACK = 0x1201,
+  DRAGON_SILVER = 0x1202,
+  DRAGON_GREEN = 0x1203,
+  DRAGON_AQUA = 0x1204,
+  DRAGON_BLUE = 0x1205,
+  DRAGON_BROWN = 0x1206,
+  DRAGON_MULTICOLOR = 0x1207,
+  DRAGON_PURPLE = 0x1208,
+  DEMIGORGON = 0x1300,
+  SIRINE = 0x2000,
+  VOLO = 0x2100,
+  OGRE_MAGE = 0x2200,
+  DEATH_KNIGHT = 0x2300,
+  ANKHEG = 0x3000,
+  STATIC_NOBLE_MAN_CHAIR = 0x4000,
+  STATIC_NOBLE_MAN_MATTE = 0x4002,
+  STATIC_NOBLE_WOMAN_CHAIR = 0x4010,
+  STATIC_NOBLE_WOMAN_MATTE = 0x4012,
+  STATIC_PEASANT_MAN_CHAIR = 0x4100,
+  STATIC_PEASANT_MAN_STOOL = 0x4101,
+  STATIC_PEASANT_MAN_MATTE = 0x4102,
+  STATIC_PEASANT_WOMAN_CHAIR = 0x4110,
+  STATIC_PEASANT_WOMAN_MATTE = 0x4112,
+  STATIC_HUMANCLERIC_MAN_CHAIR = 0x4200,
+  STATIC_SPIDER_WOMAN = 0x4300,
+  SLEEPING_MAN_HUMAN = 0x4400,
+  SLEEPING_WOMAN_HUMAN = 0x4410,
+  SLEEPING_FAT_MAN_HUMAN = 0x4500,
+  SLEEPING_DWARF = 0x4600,
+  SLEEPING_MAN_ELF = 0x4700,
+  SLEEPING_WOMAN_ELF = 0x4710,
+  SLEEPING_MAN_HALFLING = 0x4800,
+  CLERIC_MALE_HUMAN_LOW = 0x5000,
+  CLERIC_MALE_ELF_LOW = 0x5001,
+  CLERIC_MALE_DWARF_LOW = 0x5002,
+  CLERIC_MALE_HALFLING_LOW = 0x5003,
+  CLERIC_FEMALE_HUMAN_LOW = 0x5010,
+  CLERIC_FEMALE_ELF_LOW = 0x5011,
+  CLERIC_FEMALE_DWARF_LOW = 0x5012,
+  CLERIC_FEMALE_HALFLING_LOW = 0x5013,
+  FIGHTER_MALE_HUMAN_LOW = 0x5100,
+  FIGHTER_MALE_ELF_LOW = 0x5101,
+  FIGHTER_MALE_DWARF_LOW = 0x5102,
+  FIGHTER_MALE_HALFLING_LOW = 0x5103,
+  FIGHTER_FEMALE_HUMAN_LOW = 0x5110,
+  FIGHTER_FEMALE_ELF_LOW = 0x5111,
+  FIGHTER_FEMALE_DWARF_LOW = 0x5112,
+  FIGHTER_FEMALE_HALFLING_LOW = 0x5113,
+  MAGE_MALE_HUMAN_LOW = 0x5200,
+  MAGE_MALE_ELF_LOW = 0x5201,
+  MAGE_MALE_DWARF_LOW = 0x5202,
+  MAGE_FEMALE_HUMAN_LOW = 0x5210,
+  MAGE_FEMALE_ELF_LOW = 0x5211,
+  MAGE_FEMALE_DWARF_LOW = 0x5212,
+  THIEF_MALE_HUMAN_LOW = 0x5300,
+  THIEF_MALE_ELF_LOW = 0x5301,
+  THIEF_MALE_DWARF_LOW = 0x5302,
+  THIEF_MALE_HALFLING_LOW = 0x5303,
+  THIEF_FEMALE_HUMAN_LOW = 0x5310,
+  THIEF_FEMALE_ELF_LOW = 0x5311,
+  THIEF_FEMALE_DWARF_LOW = 0x5312,
+  THIEF_FEMALE_HALFLING_LOW = 0x5313,
+  CLERIC_MALE_HUMAN = 0x6000,
+  CLERIC_MALE_ELF = 0x6001,
+  CLERIC_MALE_DWARF = 0x6002,
+  CLERIC_MALE_HALFLING = 0x6003,
+  CLERIC_MALE_GNOME = 0x6004,
+  CLERIC_MALE_HALFORC = 0x6005,
+  CLERIC_FEMALE_HUMAN = 0x6010,
+  CLERIC_FEMALE_ELF = 0x6011,
+  CLERIC_FEMALE_DWARF = 0x6012,
+  CLERIC_FEMALE_HALFLING = 0x6013,
+  CLERIC_FEMALE_GNOME = 0x6014,
+  CLERIC_FEMALE_HALFORC = 0x6015,
+  FIGHTER_MALE_HUMAN = 0x6100,
+  FIGHTER_MALE_ELF = 0x6101,
+  FIGHTER_MALE_DWARF = 0x6102,
+  FIGHTER_MALE_HALFLING = 0x6103,
+  FIGHTER_MALE_GNOME = 0x6104,
+  FIGHTER_MALE_HALFORC = 0x6105,
+  FIGHTER_FEMALE_HUMAN = 0x6110,
+  FIGHTER_FEMALE_ELF = 0x6111,
+  FIGHTER_FEMALE_DWARF = 0x6112,
+  FIGHTER_FEMALE_HALFLING = 0x6113,
+  FIGHTER_FEMALE_GNOME = 0x6114,
+  FIGHTER_FEMALE_HALFORC = 0x6115,
+  MAGE_MALE_HUMAN = 0x6200,
+  MAGE_MALE_ELF = 0x6201,
+  MAGE_MALE_DWARF = 0x6202,
+  MAGE_MALE_GNOME = 0x6204,
+  MAGE_MALE_HALFORC = 0x6205,
+  MAGE_FEMALE_HUMAN = 0x6210,
+  MAGE_FEMALE_ELF = 0x6211,
+  MAGE_FEMALE_DWARF = 0x6212,
+  MAGE_FEMALE_GNOME = 0x6214,
+  MAGE_FEMALE_HALFORC = 0x6215,
+  THIEF_MALE_HUMAN = 0x6300,
+  THIEF_MALE_ELF = 0x6301,
+  THIEF_MALE_DWARF = 0x6302,
+  THIEF_MALE_HALFLING = 0x6303,
+  THIEF_MALE_GNOME = 0x6304,
+  THIEF_MALE_HALFORC = 0x6305,
+  THIEF_FEMALE_HUMAN = 0x6310,
+  THIEF_FEMALE_ELF = 0x6311,
+  THIEF_FEMALE_DWARF = 0x6312,
+  THIEF_FEMALE_HALFLING = 0x6313,
+  THIEF_FEMALE_GNOME = 0x6314,
+  THIEF_FEMALE_HALFORC = 0x6315,
+  MONK_MALE_HUMAN = 0x6500,
+  MONK_FEMALE_HUMAN = 0x6510,
+  DRIZZT = 0x6400,
+  ELMINSTER = 0x6401,
+  MONK = 0x6402,
+  SKELETON = 0x6403,
+  SAREVOK = 0x6404,
+  DOOM_GUARD = 0x6405,
+  DOOM_GUARD_LARGER = 0x6406,
+  HALF_OGRE = 0x7000,
+  OGRILLON = 0x7001,
+  BASILISK = 0x7100,
+  BASILISK_GREATER = 0x7101,
+  BEAR_BLACK = 0x7200,
+  BEAR_BROWN = 0x7201,
+  BEAR_CAVE = 0x7202,
+  BEAR_POLAR = 0x7203,
+  ELEMENTAL_EARTH = 0x7300,
+  ELEMENTAL_EARTH_SMALL = 0x7301,
+  SHAMBLING_MOUND = 0x7302,
+  ELEMENTAL_FIRE = 0x7310,
+  ELEMENTAL_FIRE_SMALL = 0x7311,
+  ELEMENTAL_FIRE_PURPLE = 0x7312,
+  ELEMENTAL_FIRE_SMALL_PURPLE = 0x7313,
+  BURNING_MAN = 0x7314,
+  ELEMENTAL_AIR = 0x7320,
+  ELEMENTAL_AIR_SMALL = 0x7321,
+  DOG_WILD = 0x7400,
+  DOG_WAR = 0x7401,
+  DOG_MOON = 0x7402,
+  DOPPLEGANGER = 0x7500,
+  DOPPLEGANGER_GREATER = 0x7501,
+  ETTERCAP = 0x7600,
+  GHOUL = 0x7700,
+  REVEANT = 0x7701,
+  GHAST = 0x7702,
+  SHADOW = 0x7703,
+  GIBBERLING = 0x7800,
+  SLIME_GREEN = 0x7900,
+  SLIME_OLIVE = 0x7901,
+  SLIME_MUSTARD = 0x7902,
+  SLIME_OCHRE = 0x7903,
+  GRAY_OOZE = 0x7904,
+  SPIDER_GIANT = 0x7a00,
+  SPIDER_HUGE = 0x7a01,
+  SPIDER_PHASE = 0x7a02,
+  SPIDER_SWORD = 0x7a03,
+  SPIDER_WRAITH = 0x7a04,
+  WOLF = 0x7b00,
+  WOLF_WORG = 0x7b01,
+  WOLF_DIRE = 0x7b02,
+  WOLF_WINTER = 0x7b03,
+  WOLF_VAMPIRE = 0x7b04,
+  WOLF_DREAD = 0x7b05,
+  WOLF_SHADOW = 0x7b06,
+  KOBOLD_XVART = 0x7c00,
+  KOBOLD_TASLOI = 0x7c01,
+  ZOMBIE = 0x7d00,
+  WEREWOLF = 0x7e00,
+  WEREWOLF_GREATER = 0x7e01,
+  TROLL = 0x7f00,
+  MINDFLAYER = 0x7f01,
+  BEHOLDER = 0x7f02,
+  IMP = 0x7f03,
+  GOLEM_IRON = 0x7f04,
+  DJINNI = 0x7f05,
+  DJINNI_LEGS = 0x7f06,
+  GOLEM_CLAY = 0x7f07,
+  OTYUGH = 0x7f08,
+  SAHAUGIN = 0x7f09,
+  GREATCAT_PANTHER = 0x7f0a,
+  GREATCAT_LEOPARD = 0x7f0b,
+  // KUO-TOA = 0x7f0c -- invalid identifier, skipped
+  LICH = 0x7f0d,
+  DEMILICH = 0x7f0e,
+  TROLL_SMALL = 0x7f0f,
+  RAKSHASA = 0x7f10,
+  UMBER_HULK = 0x7f11,
+  VAMPIRE = 0x7f12,
+  SNAKE = 0x7f13,
+  GITHYANKI = 0x7f14,
+  BEHOLDER_SMALL = 0x7f15,
+  MOOSE = 0x7f16,
+  RABBIT = 0x7f17,
+  DEER = 0x7f18,
+  DANCING_SWORD = 0x7f19,
+  GROUNDHOG = 0x7f20,
+  PHEASANT = 0x7f21,
+  VAMPIRE_FEMALE = 0x7f22,
+  SAHAUGIN_LARGE = 0x7f23,
+  PIRATE = 0x7f24,
+  DROW = 0x7f27,
+  // KUO-TOA_LARGE = 0x7f28 -- invalid identifier, skipped
+  DROW_FEMALE = 0x7f29,
+  SAILOR_MAN = 0x7f2a,
+  MDK2_MAX = 0x7f2b,
+  AMISH_SOLDIER = 0x7f2c,
+  WYVERN_FAMILIAR = 0x7f2d,
+  RAVER = 0x7f2e,
+  SPIDER_SMALL = 0x7f2f,
+  BODHI = 0x7f30,
+  ELLESIME = 0x7f31,
+  SLAYER = 0x7f32,
+  MDK2_KURT = 0x7f33,
+  MDK2_DOCTOR = 0x7f34,
+  MIST_CREATURE = 0x7f35,
+  SHADOW_THIEF = 0x7f36,
+  JON_IRENICUS = 0x7f37,
+  // WIZARD_EYE = 0x7f38 -- commented out in source
+  BLOB_MIST_CREATURE = 0x7f39,
+  HULA_WIZARD = 0x7f3a,
+  SOLAR = 0x7f3b,
+  ANTISOLAR = 0x7f3c,
+  MELISSAN = 0x7f3d,
+  FIRE_GIANT = 0x7f3e,
+  GNOLL = 0x8000,
+  HOBGOBLIN = 0x8100,
+  KOBOLD = 0x8200,
+  OGRE = 0x9000,
+  WYVERN = 0xa000,
+  CARRION_CRAWLER = 0xa100,
+  COW = 0xb000,
+  HORSE = 0xb100,
+  STATIC_BEGGAR_MAN = 0xb200,
+  STATIC_HARLOT_WOMAN = 0xb210,
+  STATIC_BOY = 0xb300,
+  STATIC_GIRL = 0xb310,
+  STATIC_FAT_MAN = 0xb400,
+  STATIC_FAT_WOMAN = 0xb410,
+  STATIC_PEASANT_MAN = 0xb500,
+  STATIC_PEASANT_WOMAN = 0xb510,
+  STATIC_NOBLE_MAN = 0xb600,
+  STATIC_NOBLE_WOMAN = 0xb610,
+  STATIC_SLAVE = 0xb700,
+  BAT_INSIDE = 0xc000,
+  CAT = 0xc100,
+  CHICKEN = 0xc200,
+  RAT = 0xc300,
+  SQUIRREL = 0xc400,
+  BAT_OUTSIDE = 0xc500,
+  BEGGAR_MAN = 0xc600,
+  HARLOT_WOMAN = 0xc610,
+  BOY = 0xc700,
+  GIRL = 0xc710,
+  FAT_MAN = 0xc800,
+  FAT_WOMAN = 0xc810,
+  PEASANT_MAN = 0xc900,
+  PEASANT_WOMAN = 0xc910,
+  NOBLE_MAN = 0xca00,
+  NOBLE_WOMAN = 0xca10,
+  SLAVE = 0xcb00,
+  EAGLE = 0xd000,
+  SEAGULL = 0xd100,
+  VULTURE = 0xd200,
+  BIRD = 0xd300,
+  BIRD_INSIDE = 0xd400,
+  IC_ETTIN = 0xe010,
+  DONOT_USE = 0xe020,
+  IC_LICHBLACK = 0xe050,
+  IC_MINOTAUR = 0xe070,
+  IC_MUMMY = 0xe080,
+  IC_MERILITH = 0xe090,
+  IC_TROLL1 = 0xe0b0,
+  IC_CORNUGONSKI = 0xe0e0,
+  IC_ICE_GOLEM = 0xe0f0,
+  IC_GLAB = 0xe0f1,
+  IC_WAILING_VIRGIN = 0xe0f2,
+  IC_GOBLIN_AXE = 0xe400,
+  IC_GOBLIN_BOW = 0xe410,
+  IC_GOBLINELITE_AXE = 0xe420,
+  IC_GOBLINELITE_BOW = 0xe430,
+  IC_LIZARDCASTER1 = 0xe500,
+  IC_MYCONID = 0xe600,
+  IC_MYCONID2 = 0xe610,
+  IC_OROG1 = 0xe700,
+  IC_OROG2 = 0xe710,
+  IC_OROG3 = 0xe720,
+  IC_ORC_MELEE1 = 0xe800,
+  IC_ORC_RANGE2 = 0xe810,
+  IC_ORC_MELEE3 = 0xe820,
+  IC_ORC_RANGE4 = 0xe830,
+  IC_ORC_SHAMAN = 0xe840,
+  IC_SALAMANDER = 0xe900,
+  IC_SALAMANDER2 = 0xe910,
+  IC_SHROOM = 0xea00,
+  IC_SKELETON0 = 0xeb00,
+  IC_SKELETONA = 0xeb10,
+  IC_SKELETONB = 0xeb20,
+  IC_YUANTI = 0xed00,
+  IC_YUANTI2 = 0xed10,
+  IC_YUANTI3 = 0xed20,
+}

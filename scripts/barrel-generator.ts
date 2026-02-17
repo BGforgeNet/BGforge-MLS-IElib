@@ -66,7 +66,7 @@ export function extractExportedNames(fileContent: string): ModuleExports {
     if ((match = line.match(/^export declare type (\w+)/))) {
       const name = match[1];
       if (name) types.add(name);
-    } else if ((match = line.match(/^export declare (?:const|function) (\w+)/))) {
+    } else if ((match = line.match(/^export declare (?:const|function|enum) (\w+)/))) {
       const name = match[1];
       if (name) values.add(name);
     } else if ((match = line.match(/^export (?:enum|const) (\w+)/))) {

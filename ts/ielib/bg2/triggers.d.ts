@@ -3,7 +3,7 @@ import type { AreRef, ItmRef, ObjectPtr, Scope, SplRef, SpellID } from "../index
 import type { Align } from "./align.ids";
 import type { AreaTypeID as AreaType } from "./areatype.ids";
 import type { AStyles } from "./astyles.ids";
-import type { ClassID as Class } from "./class.ids";
+import type { CLASS } from "./class.ids";
 import type { Damages } from "./damages.ids";
 import type { DiffLev } from "./difflev.ids";
 import type { EA } from "./ea.ids";
@@ -79,7 +79,7 @@ export declare function Allegiance(object: ObjectPtr, allegiance: EA): boolean;
 /**
  * Returns true only if the Class of the specified object matches that in the second parameter.
  */
-export declare function Class(object: ObjectPtr, classID: Class): boolean;
+export declare function Class(object: ObjectPtr, classID: CLASS): boolean;
 
 /**
  * Returns true only if the specified object exists in the current area (note that dead creatures can still be counted as existing).

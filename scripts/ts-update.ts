@@ -19,13 +19,16 @@ import { generateBarrelFile } from "./barrel-generator.js";
 // Constants
 const SKIP_FUNCTION_NAMES = ["Help"]; // Help is both action and trigger
 
+/** IESDP param names that are reserved keywords or need normalization in TypeScript. */
 const RESERVED_PARAM_NAMES: Readonly<Record<string, string>> = {
   GLOBAL: "global",
-  class: "classID",
+  class: "classID", // `class` is a reserved keyword in TypeScript
   iD: "id",
 };
 
 const TYPE_ALIASES: Readonly<Record<string, string>> = {
+  Animate: "ANIMATE",
+  Class: "CLASS",
   Spell: "SpellID",
   Weather: "WeatherID",
   ShoutIDS: "ShoutID",
@@ -55,10 +58,10 @@ const ACTION_FILE_HEADER = `import type { Action, AreRef, CreRef, ItmRef, Object
 
 import type { Direction } from "./dir.ids";
 import type { Align } from "./align.ids";
-import type { Animate } from "./animate.ids";
+import type { ANIMATE } from "./animate.ids";
 import type { AreaFlag } from "./areaflag.ids";
 import type { AreaTypeID as AreaType } from "./areatype.ids";
-import type { ClassID as Class } from "./class.ids";
+import type { CLASS } from "./class.ids";
 import type { DMGtype } from "./dmgtype.ids";
 import type { EA } from "./ea.ids";
 import type { GenderID as Gender } from "./gender.ids";
@@ -86,7 +89,7 @@ const TRIGGER_FILE_HEADER = `import type { AreRef, ItmRef, ObjectPtr, Scope, Spl
 import type { Align } from "./align.ids";
 import type { AreaTypeID as AreaType } from "./areatype.ids";
 import type { AStyles } from "./astyles.ids";
-import type { ClassID as Class } from "./class.ids";
+import type { CLASS } from "./class.ids";
 import type { Damages } from "./damages.ids";
 import type { DiffLev } from "./difflev.ids";
 import type { EA } from "./ea.ids";

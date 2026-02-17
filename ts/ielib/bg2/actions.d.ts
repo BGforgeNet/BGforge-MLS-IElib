@@ -2,10 +2,10 @@ import type { Action, AreRef, CreRef, ItmRef, ObjectPtr, Point, Scope, SpellID, 
 
 import type { Direction } from "./dir.ids";
 import type { Align } from "./align.ids";
-import type { Animate } from "./animate.ids";
+import type { ANIMATE } from "./animate.ids";
 import type { AreaFlag } from "./areaflag.ids";
 import type { AreaTypeID as AreaType } from "./areatype.ids";
-import type { ClassID as Class } from "./class.ids";
+import type { CLASS } from "./class.ids";
 import type { DMGtype } from "./dmgtype.ids";
 import type { EA } from "./ea.ids";
 import type { GenderID as Gender } from "./gender.ids";
@@ -900,7 +900,7 @@ export declare function PickLock(object: ObjectPtr): Action;
   END
 ```
  */
-export declare function Polymorph(animationtype: Animate): Action;
+export declare function Polymorph(animationtype: ANIMATE): Action;
 
 /**
  * 
@@ -1070,7 +1070,7 @@ export declare function ChangeRace(object: ObjectPtr, value: Race): Action;
   END
 ```
  */
-export declare function ChangeClass(object: ObjectPtr, value: Class): Action;
+export declare function ChangeClass(object: ObjectPtr, value: CLASS): Action;
 
 /**
  * This action changes the specific status of the target creature to the specified value. Values are from [specific.ids]({{ ids }}/specific.htm). The action produces inconsistent results when used on player characters in multiplayer games. The specific value is represented by one byte, and so is limited to values 0-255. The example script assigns a script to a newly created simulacrum.

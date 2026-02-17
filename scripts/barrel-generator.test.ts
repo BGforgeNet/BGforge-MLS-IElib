@@ -57,6 +57,13 @@ describe("extractExportedNames", () => {
     expect(result.values).toEqual(["Direction"]);
   });
 
+  it("extracts declare enum exports", () => {
+    const content = `export declare enum Animate {\n  FIRE_RING = 0x0000,\n  CHUNKS = 0x0100,\n}`;
+    const result = extractExportedNames(content);
+    expect(result.types).toEqual([]);
+    expect(result.values).toEqual(["Animate"]);
+  });
+
   it("extracts const exports (non-declare)", () => {
     const content = `export const NearestEnemyOf = DefaultSelf;`;
     const result = extractExportedNames(content);
