@@ -27,8 +27,9 @@ const RESERVED_PARAM_NAMES: Readonly<Record<string, string>> = {
 };
 
 const TYPE_ALIASES: Readonly<Record<string, string>> = {
-  Animate: "ANIMATE",
+  Animate: "Animate",
   Class: "CLASS",
+  Race: "RACE",
   Spell: "SpellID",
   Weather: "WeatherID",
   ShoutIDS: "ShoutID",
@@ -58,7 +59,7 @@ const ACTION_FILE_HEADER = `import type { Action, AreRef, CreRef, ItmRef, Object
 
 import type { Direction } from "./dir.ids";
 import type { Align } from "./align.ids";
-import type { ANIMATE } from "./animate.ids";
+import type { Animate } from "./animate.ids";
 import type { AreaFlag } from "./areaflag.ids";
 import type { AreaTypeID as AreaType } from "./areatype.ids";
 import type { CLASS } from "./class.ids";
@@ -70,7 +71,7 @@ import type { GTimes } from "./gtimes.ids";
 import type { MFlags } from "./mflags.ids";
 import type { JourType } from "./jourtype.ids";
 import type { KitID as Kit } from "./kit.ids";
-import type { RaceID as Race } from "./race.ids";
+import type { RACE } from "./race.ids";
 import type { ScrLev } from "./scrlev.ids";
 import type { Scroll } from "./scroll.ids";
 import type { Seq } from "./seq.ids";
@@ -100,7 +101,7 @@ import type { HotKeyID as HotKey } from "./hotkey.ids";
 import type { KitID as Kit } from "./kit.ids";
 import type { NPC } from "./npc.ids";
 import type { Modal } from "./modal.ids";
-import type { RaceID as Race } from "./race.ids";
+import type { RACE } from "./race.ids";
 import type { ReactionID as Reaction } from "./reaction.ids";
 import type { ShoutID } from "./shoutids.ids";
 import type { Slots } from "./slots.ids";

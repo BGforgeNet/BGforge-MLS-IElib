@@ -350,7 +350,7 @@ export {
 
 // --- IDS types and constants ---
 export type { Align } from './align.ids.d';
-export { ANIMATE } from './animate.ids.d';
+export { Animate } from './animate.ids.d';
 export type { AreaFlag } from './areaflag.ids.d';
 export type { AreaTypeID } from './areatype.ids.d';
 export type { AStyles } from './astyles.ids.d';
@@ -477,7 +477,7 @@ export {
 } from './object.d';
 
 // --- More IDS types and constants ---
-export type { RaceID } from './race.ids.d';
+export { RACE } from './race.ids.d';
 export type { ReactionID } from './reaction.ids.d';
 export type { ScrLev } from './scrlev.ids.d';
 export type { Scroll } from './scroll.ids.d';

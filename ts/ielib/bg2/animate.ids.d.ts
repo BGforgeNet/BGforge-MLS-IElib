@@ -1,5 +1,5 @@
 /** Animate.ids */
-export declare enum ANIMATE {
+export declare enum Animate {
   FIRE_RING = 0x0000,
   CHUNKS = 0x0100,
   EXPLODING_ARM = 0x0200,
@@ -202,7 +202,8 @@ export declare enum ANIMATE {
   SAHAUGIN = 0x7f09,
   GREATCAT_PANTHER = 0x7f0a,
   GREATCAT_LEOPARD = 0x7f0b,
-  // KUO-TOA = 0x7f0c -- invalid identifier, skipped
+  /** Originally KUO-TOA in the IDS file; hyphen replaced with underscore for a valid identifier. */
+  KUO_TOA = 0x7f0c,
   LICH = 0x7f0d,
   DEMILICH = 0x7f0e,
   TROLL_SMALL = 0x7f0f,
@@ -222,7 +223,8 @@ export declare enum ANIMATE {
   SAHAUGIN_LARGE = 0x7f23,
   PIRATE = 0x7f24,
   DROW = 0x7f27,
-  // KUO-TOA_LARGE = 0x7f28 -- invalid identifier, skipped
+  /** Originally KUO-TOA_LARGE in the IDS file; hyphen replaced with underscore for a valid identifier. */
+  KUO_TOA_LARGE = 0x7f28,
   DROW_FEMALE = 0x7f29,
   SAILOR_MAN = 0x7f2a,
   MDK2_MAX = 0x7f2b,

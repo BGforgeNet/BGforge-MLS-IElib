@@ -14,7 +14,7 @@ import type { HotKeyID as HotKey } from "./hotkey.ids";
 import type { KitID as Kit } from "./kit.ids";
 import type { NPC } from "./npc.ids";
 import type { Modal } from "./modal.ids";
-import type { RaceID as Race } from "./race.ids";
+import type { RACE } from "./race.ids";
 import type { ReactionID as Reaction } from "./reaction.ids";
 import type { ShoutID } from "./shoutids.ids";
 import type { Slots } from "./slots.ids";
@@ -134,7 +134,7 @@ export declare function MoraleLT(object: ObjectPtr, morale: number): boolean;
 /**
  * Returns true only if the Race of the specified object is the same as that specified by the 2nd parameter.
  */
-export declare function Race(object: ObjectPtr, race: Race): boolean;
+export declare function Race(object: ObjectPtr, race: RACE): boolean;
 
 /**
  * Returns true only if the specified object is within distance given (in feet) of the active CRE. Range seems limited to the default visual range (30), and does not bypass objects. Range is affected by foot circle size (e.g. the minimum range for a huge foot circle creature (Dragon) is 8). Melee range is 4.

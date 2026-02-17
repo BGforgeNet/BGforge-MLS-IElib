@@ -2,7 +2,7 @@ import type { Action, AreRef, CreRef, ItmRef, ObjectPtr, Point, Scope, SpellID, 
 
 import type { Direction } from "./dir.ids";
 import type { Align } from "./align.ids";
-import type { ANIMATE } from "./animate.ids";
+import type { Animate } from "./animate.ids";
 import type { AreaFlag } from "./areaflag.ids";
 import type { AreaTypeID as AreaType } from "./areatype.ids";
 import type { CLASS } from "./class.ids";
@@ -14,7 +14,7 @@ import type { GTimes } from "./gtimes.ids";
 import type { MFlags } from "./mflags.ids";
 import type { JourType } from "./jourtype.ids";
 import type { KitID as Kit } from "./kit.ids";
-import type { RaceID as Race } from "./race.ids";
+import type { RACE } from "./race.ids";
 import type { ScrLev } from "./scrlev.ids";
 import type { Scroll } from "./scroll.ids";
 import type { Seq } from "./seq.ids";
@@ -900,7 +900,7 @@ export declare function PickLock(object: ObjectPtr): Action;
   END
 ```
  */
-export declare function Polymorph(animationtype: ANIMATE): Action;
+export declare function Polymorph(animationtype: Animate): Action;
 
 /**
  * 
@@ -1055,7 +1055,7 @@ export declare function ChangeGeneral(object: ObjectPtr, value: General): Action
   END
 ```
  */
-export declare function ChangeRace(object: ObjectPtr, value: Race): Action;
+export declare function ChangeRace(object: ObjectPtr, value: RACE): Action;
 
 /**
  * This action changes the class of the target creature to the specified value. Values are from [class.ids]({{ ids }}/class.htm).
