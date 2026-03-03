@@ -29,6 +29,6 @@ export default tseslint.config(
     files: ["scripts/**/*.ts"],
   },
   {
-    ignores: ["node_modules", "external", "ts", "docs", "**/*.js"],
+    ignores: ["node_modules", "external", "docs", "**/*.js"],
   }
 );

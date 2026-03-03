@@ -4,8 +4,7 @@
 	"type": "module",
 	"scripts": {
 		"lint": "eslint scripts/",
-		"typecheck": "tsc --noEmit && tsc --noEmit -p ts/ielib/tsconfig.json",
-		"ts-update": "tsx scripts/ts-update.ts external/iesdp/_data/actions ts/ielib/bg2/actions.d.ts external/iesdp/scripting/triggers/bg2triggers.htm ts/ielib/bg2/triggers.d.ts",
+		"typecheck": "tsc --noEmit",
 		"iesdp-update": "bash scripts/iesdp-update.sh",
 		"test": "vitest run",
 		"build-site": "tsx scripts/jsdoc-to-yaml.ts && cd docs && bundle install && bundle exec jekyll build",
